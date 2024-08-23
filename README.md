@@ -1,32 +1,15 @@
-# Mintlify Starter Kit
+# Altera Documentation
 
-Click on `Use this template` to copy the Mintlify starter kit. The starter kit contains examples including
+This is the official documentation repository for Altera. It is a collection of guides, tutorials, and references to help you get started with Altera.
 
-- Guide pages
-- Navigation
-- Customizations
-- API Reference pages
-- Use of popular components
+## What is Altera?
+Our main focus is assisting SMEs in their growth by providing them with the necessary tools and resources to succeed.
+We created our application [Altera.app](https://app.altera.co) to help you manage your company's daily tasks in a more efficient way.
 
-### Development
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the documentation changes locally. To install, use the following command
+## Hosting
+This documentation is hosted on [a dedicated website](https://docs.altera.co/).
 
-```
-npm i -g mintlify
-```
 
-Run the following command at the root of your documentation (where mint.json is)
-
-```
-mintlify dev
-```
-
-### Publishing Changes
-
-Install our Github App to auto propagate changes from your repo to your deployment. Changes will be deployed to production automatically after pushing to the default branch. Find the link to install on your dashboard. 
-
-#### Troubleshooting
-
-- Mintlify dev isn't running - Run `mintlify install` it'll re-install dependencies.
-- Page loads as a 404 - Make sure you are running in a folder with `mint.json`
+## Contributing
+We are using [Mintlify](https://mintlify.com) to generate the documentation, easily change and host it while retaining the aspect of readability and ease of use.
