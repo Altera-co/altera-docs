@@ -23,7 +23,7 @@
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "/"
   },
   "tabs": [
     {
@@ -35,7 +35,7 @@
       "url": "changelog"
     },
     {
-      "name": "API Reference",
+      "name": "Open API",
       "url": "api-reference"
     }
   ],
@@ -44,17 +44,26 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "about-us"
+        "aboutus"
       ]
     },
     {
-      "group": "API Documentation",
+      "group": "OpenAPI - Configure your company",
+      "pages": [
+        "api-reference/config/create",
+        "api-reference/sales",
+        "api-reference/expenses",
+        "api-reference/dataexport"
+      ]
+    },
+    {
+      "group": "OpenAPI Documentation",
       "pages": [
         "api-reference/quickstart",
         "api-reference/config",
         "api-reference/sales",
         "api-reference/expenses",
-        "api-reference/data-export"
+        "api-reference/dataexport"
       ]
     }
   ],
