@@ -44,13 +44,38 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "aboutus"
+        "about us"
       ]
     },
     {
-      "group": "OpenAPI - Configure your company",
+      "group": "OpenAPI Documentation",
       "pages": [
-        "api-reference/config/create",
+        "api-reference/config",
+        {
+          "group": "Configure your company",
+          "pages": ["api-reference/configs/create", "api-reference/configs/update", "api-reference/configs/delete"]
+        },
+        "api-reference/sale",
+        {
+          "group": "Manage Sales",
+          "pages": ["api-reference/sales/create", "api-reference/sales/update", "api-reference/sales/delete"]
+        },
+        "api-reference/expense",
+        {
+          "group": "Manage Expenses",
+          "pages": ["api-reference/config/create", "api-reference/config/update", "api-reference/config/delete"]
+        },
+        "api-reference/data-export",
+        {
+          "group": "Export data",
+          "pages": ["api-reference/dataexport/create", "api-reference/dataexport/update", "api-reference/dataexport/delete"]
+        }
+      ]
+    },
+    {
+      "group": "Sales",
+      "pages": [
+        "api-reference/sales/create",
         "api-reference/sales",
         "api-reference/expenses",
         "api-reference/dataexport"
