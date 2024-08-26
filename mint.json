@@ -39,7 +39,8 @@
     },
     {
       "name": "OpenAPI",
-      "url": "openapi"
+      "url": "openapi",
+      "openapi": "/openapi/openapi.json"
     }
   ],
   "navigation": [
@@ -72,7 +73,7 @@
         },
         {
           "group": "Manage Sales",
-          "pages": ["openapi/sales/create", "openapi/sales/update", "openapi/sales/delete"]
+          "pages": ["openapi/sales/invoice", "openapi/sales/pdfUrl", "openapi/sales/send"]
         },
         {
           "group": "Manage Expenses",
