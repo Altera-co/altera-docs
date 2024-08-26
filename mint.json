@@ -54,13 +54,15 @@
     {
       "group": "Roadmap",
       "pages": [
-        "roadmap/roadmap"
+        "roadmap/pl",
+        "roadmap/en"
       ]
     },
     {
       "group": "Changelog",
       "pages": [
-        "changelog/changelog"
+        "changelog/pl",
+        "changelog/en"
       ]
     },
     {
