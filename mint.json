@@ -25,6 +25,9 @@
     "name": "Dashboard",
     "url": "/"
   },
+  "primaryTab": {
+    "name": "Home"
+  },
   "tabs": [
     {
       "name": "Roadmap",
@@ -35,8 +38,8 @@
       "url": "changelog"
     },
     {
-      "name": "Open API",
-      "url": "api-reference"
+      "name": "OpenAPI",
+      "url": "openapi"
     }
   ],
   "navigation": [
@@ -44,51 +47,41 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "about us"
+        "about-us"
+      ]
+    },
+    {
+      "group": "Roadmap",
+      "pages": [
+        "roadmap"
+      ]
+    },
+    {
+      "group": "Changelog",
+      "pages": [
+        "changelog"
       ]
     },
     {
       "group": "OpenAPI Documentation",
       "pages": [
-        "api-reference/config",
+        "openapi/quickstart",
         {
           "group": "Configure your company",
-          "pages": ["api-reference/configs/create", "api-reference/configs/update", "api-reference/configs/delete"]
+          "pages": ["openapi/configs/create", "openapi/configs/update", "openapi/configs/delete"]
         },
-        "api-reference/sale",
         {
           "group": "Manage Sales",
-          "pages": ["api-reference/sales/create", "api-reference/sales/update", "api-reference/sales/delete"]
+          "pages": ["openapi/sales/create", "openapi/sales/update", "openapi/sales/delete"]
         },
-        "api-reference/expense",
         {
           "group": "Manage Expenses",
-          "pages": ["api-reference/config/create", "api-reference/config/update", "api-reference/config/delete"]
+          "pages": ["openapi/config/create", "openapi/config/update", "openapi/config/delete"]
         },
-        "api-reference/data-export",
         {
           "group": "Export data",
-          "pages": ["api-reference/dataexport/create", "api-reference/dataexport/update", "api-reference/dataexport/delete"]
+          "pages": ["openapi/dataexport/create", "openapi/dataexport/update", "openapi/dataexport/delete"]
         }
-      ]
-    },
-    {
-      "group": "Sales",
-      "pages": [
-        "api-reference/sales/create",
-        "api-reference/sales",
-        "api-reference/expenses",
-        "api-reference/dataexport"
-      ]
-    },
-    {
-      "group": "OpenAPI Documentation",
-      "pages": [
-        "api-reference/quickstart",
-        "api-reference/config",
-        "api-reference/sales",
-        "api-reference/expenses",
-        "api-reference/dataexport"
       ]
     }
   ],
