@@ -66,23 +66,7 @@
     {
       "group": "OpenAPI Documentation",
       "pages": [
-        "openapi/quickstart",
-        {
-          "group": "Configure your company",
-          "pages": ["openapi/configs/create", "openapi/configs/update", "openapi/configs/delete"]
-        },
-        {
-          "group": "Manage Sales",
-          "pages": ["openapi/sales/invoice", "openapi/sales/pdfUrl", "openapi/sales/send"]
-        },
-        {
-          "group": "Manage Expenses",
-          "pages": ["openapi/config/create", "openapi/config/update", "openapi/config/delete"]
-        },
-        {
-          "group": "Export data",
-          "pages": ["openapi/dataexport/create", "openapi/dataexport/update", "openapi/dataexport/delete"]
-        }
+        "openapi/quickstart"
       ]
     }
   ],
