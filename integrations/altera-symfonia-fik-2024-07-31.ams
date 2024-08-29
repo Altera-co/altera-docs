@@ -1,0 +1,132 @@
+#FORMAT  "SDF"  //
+#DATA  "RRRR-MM-DD"  //
+#NAZWY_POL  "TAK"  //
+
+// This script has been created based on Symfonia Faktura i Księga 2024.1 Import Specjalny functionality (https://pomoc.symfonia.pl/data/fk/ERP/2024_1_a/data/impo0160.htm)
+Section("", "dokument", "REPEAT") {
+
+  // Document header
+  $klucz = CAT([type], " (", [invoiceType], ")")
+  $rodzaj_dok = [type]
+  IF (EQUAL([type], "zakupu")) {
+    $obslugujJak = "FVZ"
+  } ELSE {
+    $obslugujJak = "FVS"
+  }
+  $nazwa = [invoiceNumber]
+  $tresc = [additionalDetails]
+  $datadok = DATE([saleDate])
+  $dataoper = DATE([bookedDate])
+  $datawpl = DATE([receiptDate])
+  $dataokr = DATE([receiptDate])
+
+  //$atrJpkV7   = [JPK_V7]
+  $naliczenie_VAT = "1"
+  $mppFlags = [splitPayment]
+  $waluta = [currency]
+  @foreignCurrency = NOT(EQUAL([Currency], "PLN"))
+  IF (@@foreignCurrency) {
+    wkwota = [grossPrice]
+    $tabela = 0
+    $typkursu = 3
+
+    MAKESEC("AtrybutWaluta") {
+        $kurs = [exchangeRate]
+        $dane = "kurs VAT"
+        $opis = [exchangeRateTable]
+        $data = [exchangeRateDate]
+    }
+    MAKESEC("AtrybutWaluta") {
+            $kurs = [exchangeRate]
+            $dane = "kurs CIT/PIT"
+            $opis = [exchangeRateTable]
+            $data = [exchangeRateDate]
+        }
+    }
+
+  // Contractor info
+  MAKESEC("kontrahent") {
+      $klucz = CAT([taxId], " ", [contractorName])
+      $nip = [taxId]
+      $skrot = [contractorName]
+      $nazwa = [contractorName]
+      $krajKod = [contractorCountry]
+      $miejscowosc = [contractorCity]
+      $ulica = [contractorStreet]
+      $numerDomu = [contractorHouse]
+      $numerMieszk = [contractorFlat]
+      $kod = [contractorPostCode]
+      $rachunek1 = [bankAccount]
+  }
+
+  // Create registry entries for each invoice position
+  @counter = 0
+  @productName = CAT("ProductName", @counter)
+  WHILE (EXIST(@@productName)) {
+    MAKESEC("rejestr") {
+        @vat = FIELD(CAT("vat", @@counter))
+        SWITCH(@vat) {
+          CASE "23%"
+            $stawka = 23.00
+            BREAK
+          CASE "8%"
+            $stawka = 8.00
+            BREAK
+            CASE "7%"
+            $stawka = 7.00
+            BREAK
+          CASE "5%"
+            $stawka = 5.00
+            BREAK
+          CASE "0%"
+            $stawka = 0.00
+            BREAK
+          CASE "zw."
+            $stawka = -1
+            BREAK
+          CASE "np."
+            $stawka = -2
+            BREAK
+          CASE ELSE
+            ERROR("Nieobsługiwana stawka VAT: ", @vat, ", dla dokumentu: ", $$nazwa)
+        }
+        $opis = FIELD(CAT("productName", @@counter))
+        @isService = EQUAL(FIELD(CAT("productType", @@counter), "service"))
+        IF (@isService) {
+            $usluga = 1
+        } ELSE {
+            $usluga = 0
+        }
+        @isUE = NOT(EQUAL(["contractorRegion"], "OUTSIDE_OF_EU")))
+        $ue = @isUE
+        $netto = FIELD(CAT("priceNetPLN", @@counter))
+        $brutto = FIELD(CAT("priceGrossPLN", @@counter))
+        $vat = FIELD(CAT("vatPLN", @@counter))
+        if (@@foreignCurrency) {
+            $nettoWaluta = FIELD(CAT("priceNet", @@counter))
+            $bruttoWaluta = FIELD(CAT("priceGross", @@counter))
+            $vatWaluta = FIELD(CAT("vatAmt", @@counter))
+        }
+        $atrJpkV7 = FIELD(CAT("gtu", @@counter))
+        $ABC = FIELD(CAT("abc", @@counter))
+        $rozbicie = "0"
+
+        @productType = [productType]
+        IF(EQUAL(FIELD(CAT("reverseCharge", @@counter), "1")){
+            @reverseChargeInfo = " o.o."
+        } ELSE {
+            @reverseChargeInfo = ""
+        }
+
+        IF(EQUAL(FIELD(CAT("deductible", @@counter), "1")){
+            @deductible = " BEZ ODLICZENIA(!)"
+        } ELSE {
+            @deductible = ""
+        }
+
+        $klucz = CAT($$klucz, " ", @productType, " ", $stawka, @deductible, @reverseChargeInfo)
+    }
+    @counter = SUM0(@counter, 1)
+    @productName = CAT("ProductName", @@counter)
+  }
+}

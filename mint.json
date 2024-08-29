@@ -73,6 +73,12 @@
       "pages": [
         "openapi/quickstart"
       ]
+    },
+    {
+      "group": "Integrations",
+      "pages": [
+        "integrations/symfonia-fk"
+      ]
     }
   ],
   "footerSocials": {

@@ -1,0 +1,61 @@
+---
+title: Symfonia FK
+description: Poniżej znajdziesz instrukcję jak skonfigurować program Symfonia FK do współpracy z eksportami z systemu Altera.
+---
+Aby prawidłowo przeprowadzić import specjalny do Symfonia FK, konieczne jest najpierw odpowiednie skonfigurowanie programu, a następnie poprawne wykonanie samych importów. Poniżej znajdziesz szczegółowe kroki, które pomogą Ci w tym procesie.
+
+### Przygotowanie programu Symfonia Finanse i Księgowość - Konfiguracja Profilu importu
+Przed przystąpieniem do importu danych, musisz przygotować program Symfonia FK poprzez odpowiednią konfigurację formatów importu. Zapewni to, że dane będą wprowadzane do systemu w sposób spójny i bezbłędny.
+1. Pobierz aktualny plik konfiguracyjny
+- [Szablon importu z dnia 31.07.2024](https://docs.altera.co/integrations/altera-symfonia-fik-2024-07-31.ams)
+- Skopiuj szablon do katalogu z Szablonami Symfonia FK (domyślnie `C:\Program Files\SymfoniaFK\szablon\`)
+
+2. Stwórz katalog w którym będą przechowywane pliki eksportu z systemu Altera i pliki archiwalne
+- Katalog importu może znajdować się gdziekolwiek na dysku, ważne abyśmy mogli go łatwo zidentyfikować i podać jego ścieżkę w konfiguracji programu Symfonia FK.
+- Katalog archiwum będzie zawierał przetworzone pliki, sugerujemy aby był to podkatalog katalogu importu.
+
+3. Uruchom Symfonia FK i zaloguj się na swoje konto.
+
+4. Przejdź do ustawień profili importu:
+- Wybierz polecenie "Dokumenty import" (Ctrl + Shift + 1) z bocznego paska programu.
+- Wybierz "Import specjalny"
+- Wybierz "Profil importu"
+
+5. Stwórz nowy profil importu:
+- W oknie "Katalogi wymiany danych" kliknij przycisk "Nowy".
+- W polu "Nazwa" wpisz "Altera" aby łatwo zidentyfikować profil na liście.
+- W polu "Katalog" wybierz ścieżkę do katalogu, w którym będą zapisywane pliki eksportu z systemu Altera (stworzyliśmy go w punkcie 2).
+- Pole "maska pliku" pozostaw z ustawieniem standardowym `*.* (Wszystkie pliki)`. Możesz też wyszukać tylko rozszerzenia plików eksportu, np. `*.csv`.
+- W polu "Szablon" wybierz plik szablonu importu, który został wcześniej skopiowany do katalogu z szablonami Symfonia FK.
+- W polu "Katalog archiwum" wybierz ścieżkę katalogu, do którego będą przenoszone pliki, dla których import został ukończony (stworzyliśmy go w punkcie 2).
+- Pole "Katalog danych zwrotnych" pozostaw puste.
+- Zatwierdź pole "Ja będę importował dane dla tego profilu".
+
+6. Zapisz ustawienia:
+- Kliknij "Zapisz" aby potwierdzić dane nowego profilu.
+
+### Wykonywanie importu danych
+Po odpowiednim skonfigurowaniu programu, możesz przystąpić do wykonywania importów danych.
+
+1. Uruchom system Altera i zaloguj się na swoje konto.
+2. Przejdź do odpowiedniego modułu, z którego chcesz wykonać eksport danych (w naszym przypadku Koszty).
+3. Wybierz odpowiednie filtry i kryteria, aby wyeksportować tylko te dane, które chcesz zaimportować do Symfonii FK.
+4. Wykonaj eksport danych z systemu Altera.
+- Naciśnij przycisk "Eksportuj"
+- Upewnij się, że filtry spełniają Twoje oczekiwania.
+- Wybierz rodzaj eksportu - **Symfonia FK**
+- Zatwierdź klikając przycisk "Eksportuj plik"
+- Po przetworzeniu przez system pobierz gotowy plik z danymi
+5. Przenieś plik eksportu do katalogu, który został wcześniej skonfigurowany w profilu importu Symfonii FK.
+6. Uruchom program Symfonia FK i zaloguj się na swoje konto.
+7. Przejdź do ustawień profili importu:
+- Wybierz polecenie "Dokumenty import" (Ctrl + Shift + 1) z bocznego paska programu.
+- Wybierz "Import specjalny"
+- Wybierz "Profil importu"
+8. Wybierz odpowiedni profil importu ("Altera") z listy i kliknij przycisk "Użyj".
+9. Jeżeli wszystko zostało poprawnie skonfigurowane, a plik znajduje się w katalogu wymiany danych, program Symfonia FK wyświetli go na liście w oknie "Dane oczekujące na wczytanie".
+10. Kliknij przycisk "Wczytaj" aby rozpocząć proces importu danych do systemu.
+11. Jeśli w trakcie importu system napotka na nowe dane, może Cię poprosić o uzgodnienie ich z istniejącymi rekordami. Postępuj zgodnie z instrukcjami na ekranie.
+12. Po zakończeniu importu dane zostaną wczytane do bufora systemu Symfonia FK a plik przeniesiony do Archiwum.
+- W zależności od sposobu instalacji i przypisanych dostępów do katalogów, możesz zobaczyć komunikat informujący o błędzie tworzenia katalogu archiwum. Możesz go zignorować, katalog już istnieje - stworzyliśmy go w pierwszych krokach.
+
