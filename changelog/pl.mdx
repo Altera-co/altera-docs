@@ -2,11 +2,41 @@
 title: PL - Dziennik Zmian
 description: Sprawdź najważniejsze aktualizacje i wydania naszej aplikacji.
 ---
+### 2.22.0 - 2024-12-06 - Zarządzaj swoimi danymi
+- Weryfikacja dwuetapowa:
+    - Teraz możesz jeszcze lepiej zabezpieczyć swoje dane przez włączenie na koncie dwustopniowej autoryzacji.
+    - Obsługiwane autoryzowanie poprzez kody jednorazowe e-mail oraz aplikacje autoryzacyjne.
+    - Ustawienie dostępne jest w [sekcji Ustawienia > Ogólne > Weryfikacja dwuetapowa](https://app.altera.co/c/null/settings/general/mfa)
+- Przycisk zgłaszania błędów/sugestii zawsze dostępny na ekranie
+    - Od teraz przycisk "robaka" jest widoczny w każdej chwili, również na warstwach wysuwanych, co pozwoli Ci szybko zgłosić problem, wskazując dokładnie na miejsce, w którym wystąpił.
+    - Dla ułatwienia możesz też zawsze użyć skrótu `F8` na klawiaturze.
+    - Wprowadziliśmy też możliwość rysowania na przekazywanym zrzucie ekranu, co pozwoli Ci jeszcze dokładniej określić swoje potrzeby,
+    - Informacje od naszych klientów są dla nas bardzo ważne, dlatego zależy nam na tym, abyś mógł je przekazywać w jak najwygodniejszy sposób.
+- Migracja FAQ do nowej strony z dokumentacją:
+    - W najbliższych miesiącach będziemy wprowadzać szereg nowych artykułów i instrukcji, dostępnych na [naszej nowej stronie Wsparcia Klienta](https://docs.altera.co)
+    - Baza wiedzy będzie aktywnie uzupełniana a nowe funkcje łatwego wyszukiwania pozwolą Ci zapoznać się z niezbędnymi informacjami bez opóźnień
+- Nowe uprawnienia i ograniczenia w module Sprzedaż:
+    - Od dzisiaj możesz ograniczyć dostęp pracowników wyłącznie do faktur sprzedaży, które sami wystawili
+    - Udostępniona zmiana w łatwy sposób daje Ci kontrolę nad danymi w systemie,
+    - Funkcjonalność działa analogicznie jak w module Koszty — wystarczy zacząć tworzyć nową fakturę a zostanie przypisana do Ciebie jako twórcy.
+- Zmiany w dodawaniu plików do systemu:
+    - Wprowadziliśmy dodatkową weryfikację zabezpieczeń przesyłanych plików — daliście nam znać, że co raz częściej otrzymujecie pliki chronione hasłem bądź zabezpieczone przed edycją - postaraliśmy się aby system lepiej radził sobie z takimi sytuacjami.
+    - W momencie, gdy system nie będzie w stanie automatycznie poradzić sobie z danym plikiem otrzymasz jasną informację na interfejsie, że należy podjąć dodatkowe działania
+    - Uprościliśmy proces pracy z plikami wielostronicowymi - masz teraz do dyspozycji więcej szybkich akcji, pozwalających na obsłużenie większości przypadków pracy z fakturami.
+- Zmiany w ustawieniach kategorii kosztów i elektronicznego obiegu dokumentów:
+    - Rozdzieliliśmy procesy zarządzania kategoriami kosztów oraz przypisaniami eObiegu, aby ułatwić pracę użytkownikom wykorzystującym pełen potencjał aplikacji.
+    - Jeżeli jeszcze nie skorzystałeś z możliwości systemu eObiegu, teraz jest najlepsza chwila by spróbować - [skontaktuj się z naszymi specjalistami, a na krótkim spotkaniu przeanalizujemy i zoptymalizujemy Twoje procesy zarządzania fakturami](https://calendly.com/a_lewandowski/altera)
+    - Aby lepiej wspierać szereg różnych programów księgowych, wprowadziliśmy do systemu łatwe mapowanie kont księgowych dla każdej kategorii. Możesz zdecydować się na wpisywanie swoich własnych kont księgowych lub skorzystać z domyślnych ustawień globalnych kont Altera dla enova365.
+    - Przygotowaliśmy nowe projekty eksportu danych dla szeregu systemów księgowych:
+        - Symfonia FiK,
+        - Optima ERP,
+        - enova365
+- Zaktualizowaliśmy wiele funkcji w systemie, aby zapewnić Ci jeszcze lepsze doświadczenia z korzystania z aplikacji. Rdzeń naszej aplikacji, framework Flutter został zaktualizowany do najnowszej, bezpiecznej wersji, co zapewnia większą stabilność i poprawę wydajności.
 
 ### 2.21.2 - 2024-09-17 - Wersja poprawkowa
 - Dodaliśmy kilka brakujących funkcji:
     - Odblokowaliśmy samouczki dotyczące poszczególnych modułów w aplikacji
-    - W module Płatności dodaliśmy weryfikacji rachunku bankowego (w widoku szczegółowym, jak i na liście) kontrahenta z Białą Listą
+    - W module Płatności dodaliśmy weryfikację rachunku bankowego (w widoku szczegółowym, jak i na liście) kontrahenta z Białą Listą
     - Teraz każda faktura z odpowiednimi danymi pozwoli na weryfikację rachunku prosto z widoku listy (Kosztów/Płatności)
     - W module Koszty pokazujemy teraz bazowo datę dodania dokumentu do systemu
     - Lista kosztów jest teraz bazowo posortowana zgodnie z datą dodania dokumentu
