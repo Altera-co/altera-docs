@@ -33,13 +33,22 @@
   },
   "tabs": [
     {
-      "name": "Roadmap",
-      "url": "roadmap"
+      "name": "FAQ",
+      "url": "faq"
+    },
+    {
+      "name": "Integrations",
+      "url": "integrations"
     },
     {
       "name": "Changelog",
       "url": "changelog"
     },
+    {
+      "name": "Roadmap",
+      "url": "roadmap"
+    },
+
     {
       "name": "OpenAPI",
       "url": "openapi",
@@ -78,6 +87,15 @@
       "group": "Integrations",
       "pages": [
         "integrations/symfonia-fk"
+      ]
+    },
+    {
+      "group": "FAQ",
+      "pages": [
+        "faq/manual",
+        "faq/doc-export",
+        "faq/module-files",
+        "faq/update-expenses"
       ]
     }
   ],
