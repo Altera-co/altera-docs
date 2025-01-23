@@ -93,7 +93,12 @@
       "group": "FAQ",
       "pages": [
         "faq/manual",
+        "faq/module-expenses",
+        "faq/eobieg",
+        "faq/module-payments",
+        "faq/module-sales",
         "faq/doc-export",
+        "faq/module-finance",
         "faq/module-files",
         "faq/update-expenses"
       ]
