@@ -2,6 +2,26 @@
 title: EN - Changelog
 description: Discover the Most Important Updates and Releases for Our Application.
 ---
+
+### 2.24.0 - 2025-05-20 - Open Banking, Working with Accountants and New Features
+- Open Banking:
+  - As part of preparation for implementing the new Settlements module, we introduced Open Banking integration supported by EasyCheck, our partner licensed by the Polish Financial Supervision Authority.
+  - This integration will enable automatic retrieval of transaction data from banks, allowing for easy transaction reconciliation and simplified access to transaction reports in MT940 format.
+- Changes in the Messages module:
+  - We introduced new filter views that will make it easier to search and manage conversations.
+- Create your "quick filters":
+  - Now after filtering data in the most important tables in the system, you'll have the ability to save current filter settings as your own configuration.
+  - Simply click the "Save filter view" button and give it a name.
+  - With this change, you can quickly switch between different views and customize the application to your needs.
+- Improvements in the Expenses module:
+  - We introduced additional OCR document verification steps to improve processing quality.
+  - We expanded the scope of information regarding processing issues. Error messages now include more data, and in the next release, we'll indicate specific fields that require attention.
+  - As part of our work on data mapping, we introduced a fallback model for mapping items to VAT rates only, which activates automatically when the system detects discrepancies between items and totals on the invoice.
+  - We added automatically saved information about whether a file has been exported from the system.
+  - To facilitate data searching in the system, we added a new column indicating the number of pages in the document.
+
+
+
 ### 2.23.0 - 2025-03-29 - Changes, changes, changes
 - Invoice History (Sales, Expenses):
     - All changes made to invoices are now permanently saved in the history.

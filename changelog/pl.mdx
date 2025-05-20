@@ -2,6 +2,24 @@
 title: PL - Dziennik Zmian
 description: Sprawdź najważniejsze aktualizacje i wydania naszej aplikacji.
 ---
+
+### 2.24.0 - 2025-05-20 - Open Banking, praca z księgowym i nowe funkcje
+- Open Banking:
+    - W ramach przygotowania do wdrożenia nowego modułu Rozliczenia wprowadziliśmy integrację Open Banking wspieraną przez EasyCheck, naszego partnera posiadającego licencję KNF.
+    - Integracja ta umożliwi automatyczne pobieranie danych transakcji z banków, co pozwoli na łatwe uzgadnianie transakcji oraz uprości dostęp do raportów transakcji w formacie MT940.
+- Zmiany w module Wiadomości:
+    - Wprowadziliśmy nowe widoki filtrów, które pozwolą na łatwiejsze wyszukiwanie konwersacji i zarządzanie nimi.
+- Twórz swoje "szybkie filtry":
+    - Teraz po odfiltrowaniu danych w najważniejszych tabelach w systemie będziesz mieć możliwość zapisania obecnych ustawień filtrów jako własnej konfiguracji.
+    - Wystarczy kliknąć przycisk "Zapisz widok filtr" i nadać mu nazwę.
+    - Dzięki tej zmianie możesz szybko przełączać się między różnymi widokami i dostosowywać aplikację do swoich potrzeb.
+- Poprawki w module Koszty:
+    - Wprowadziliśmy dodatkowe kroki weryfikacji dokumentów OCR, aby poprawić jakość przetwarzania.
+    - Rozszerzyliśmy zakres informacji dotyczących problemów z przetwarzaniem. Komunikaty błędów uwzględniają teraz więcej danych a w kolejnym wydaniu będziemy wskazywać poszczególne pola, na które powinno się zwrócić uwagę
+    - W ramach prac nad mapowaniem danych wprowadziliśmy zastępczy model mapowania pozycji tylko do stawek VAT, który uruchamia się automatycznie gdy system wykryje różnice między pozycjami i sumami na fakturze.
+    - Dodaliśmy automatycznie zapisywane informacje o tym, czy dany plik został wyeksportowany z systemu
+    - Aby ułatwić przeszukiwanie danych w systemie, dodaliśmy nową kolumnę, wskazującą na ilość stron w dokumencie
+
 ### 2.23.0 - 2025-03-29 - Zmiany, zmiany, zmiany
 - Historia Faktury (Sprzedaż, Koszty):
     - Wszystkie zmiany w fakturach są teraz na stałe zapisywane w historii
