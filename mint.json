@@ -92,15 +92,38 @@
     {
       "group": "FAQ",
       "pages": [
-        "faq/manual",
-        "faq/module-expenses",
-        "faq/eobieg",
-        "faq/module-payments",
-        "faq/module-sales",
-        "faq/doc-export",
-        "faq/module-finance",
-        "faq/module-files",
-        "faq/update-expenses"
+        {
+          "group": "Pierwsze Kroki w Altera",
+          "pages": [
+            "faq/intro/welcome",
+            "faq/intro/creating-company",
+            "faq/intro/first-invoice",
+            "faq/intro/your-dashboard",
+            "faq/intro/advanced-settings"
+          ]
+        },
+        {
+          "group": "Poznaj Moduły Altera",
+            "pages": [
+              "faq/modules/sales",
+              "faq/modules/expenses",
+              "faq/modules/payments",
+              "faq/modules/files",
+              "faq/modules/finance"
+            ]
+        },
+        {
+          "group": "Praktyczne Poradniki (Jak to zrobić?)",
+          "pages": [
+            "faq/howto/ksef",
+            "faq/howto/email",
+            "faq/howto/eobieg",
+            "faq/howto/openBanking",
+            "faq/howto/invoice-export",
+            "faq/howto/doc-export",
+            "faq/howto/notifications"
+          ]
+        }
       ]
     }
   ],
