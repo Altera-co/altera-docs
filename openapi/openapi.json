@@ -2892,8 +2892,8 @@
                                         "Example 1": {
                                             "result": "OK",
                                             "data": {
-                                                "uploadURL": "https://dev-altera-stack-altera-alterabucket37643c33-10cnlsbxvjnti.s3.eu-central-1.amazonaws.com/tmp/expense/pending/11/2023/3/2_10_2022-kCsizgeU66UwKCn.pdf?Content-Type=application%2Fpdf&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAX3I6YW7PGDIS6M7M%2F20230316%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20230316T070405Z&X-Amz-Expires=120&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEcaDGV1LWNlbnRyYWwtMSJHMEUCIQD0O2KlIUmsoIpHajIpsYh0HEP8HslH3rxQdxmtBV4TzgIgN8mQpodBXAs4UWI0E9mwhrrTMKTZDlb2VrSLuJVozVAq0gMIEBACGgw1Mzk2MTk4MDEwNTQiDPE%2BgemeHivrQZ%2B7eiqvA6Mc0LVPon8X32guntOfGWBwbmrV6pPj1Jm%2Fa1sdtkFtz%2F4VuP4GgLWfw85e%2F1USmnQ9ARj1Zxl1w%2BPhhFkW3Bi40SUjvoou7N6q%2FDoSnCIKqfvPP4OkV4Bfjne4UJE%2B4bpK5eta2qWXOpKl7uUGlFr8hEqvtXBfvGL0viqGWZC8kWJzu1ribEP2wGplxQuIoniGAkjqpFvi88Qf8g%2FUF%2BVYKDQzDrgw%2B%2B2naWLSDkIBPEVMCpcIHoUoAX79fgb8imjKLq1%2BT%2BK1j7IWuyBndFCz0utIUo3pS%2BdwiWEK3WIOjusS%2BmEnUpIwn7vcNDBO5f%2BxUNu1uYQUYQMtl5C16VDuznjvRA8x%2FoMEIeJDbVU8ZU0Pj15198n636pwFOS7g6ViebhEoJ6ZqfL5mHgRHzanjBdvjGzyCQkdz4DLXIBnHT8JN%2F2OcAFurviHAd5qbJyZyogTuvsM7JzNbGDYJw9cSetecWG5voRPnGPYjbJfsMTSC%2BE5WF2xuxP1WcABcZuMaql%2BwSmAD4LGGdTpJGaQM1u8D%2BKl7woBjArShTWEiJr9jpchMJuzX6xuvXxIMP79yqAGOp4BFWbXm5QJlyuND9972BdYVBIL9F99LgXITwHOwvkNSPHC5yvycCSsFMG6or5QZGY1yOeQOWDzxDot6GxtIxQJbBVYfgY9YeP5SN2oZ0VX%2F%2FYY5Wf%2B5r16jsRAL4GQs%2BTwDguEz5UANEWqRhH3yLKKHXVahIfF469iMe8htz9HeA%2FKK%2FxY1KAXw%2F3CZ6eCtvqU1rD2XfXcIkKsXyD2iEU%3D&X-Amz-Signature=d94cd5d84789ea35d0a3104cddb5251de73e6ea6e7ecdb2ee1a78dccd31610c2&X-Amz-SignedHeaders=host%3Bx-amz-meta-companyid%3Bx-amz-meta-nanoid&x-amz-meta-companyid=11&x-amz-meta-nanoid=kCsizgeU66UwKCn",
-                                                "fileId": 1595
+                                                "uploadURL": "https://dev-altera-stack-altera-alterabucket37643c33-10cnlsbxvjnti.s3.eu-central-1.amazonaws.com/expense/manual/11/2023/3/2_10_2022-kCsizgeU66UwKCn.pdf?Content-Type=application%2Fpdf&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAX3I6YW7PGDIS6M7M%2F20230316%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20230316T070405Z&X-Amz-Expires=120&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEcaDGV1LWNlbnRyYWwtMSJHMEUCIQD0O2KlIUmsoIpHajIpsYh0HEP8HslH3rxQdxmtBV4TzgIgN8mQpodBXAs4UWI0E9mwhrrTMKTZDlb2VrSLuJVozVAq0gMIEBACGgw1Mzk2MTk4MDEwNTQiDPE%2BgemeHivrQZ%2B7eiqvA6Mc0LVPon8X32guntOfGWBwbmrV6pPj1Jm%2Fa1sdtkFtz%2F4VuP4GgLWfw85e%2F1USmnQ9ARj1Zxl1w%2BPhhFkW3Bi40SUjvoou7N6q%2FDoSnCIKqfvPP4OkV4Bfjne4UJE%2B4bpK5eta2qWXOpKl7uUGlFr8hEqvtXBfvGL0viqGWZC8kWJzu1ribEP2wGplxQuIoniGAkjqpFvi88Qf8g%2FUF%2BVYKDQzDrgw%2B%2B2naWLSDkIBPEVMCpcIHoUoAX79fgb8imjKLq1%2BT%2BK1j7IWuyBndFCz0utIUo3pS%2BdwiWEK3WIOjusS%2BmEnUpIwn7vcNDBO5f%2BxUNu1uYQUYQMtl5C16VDuznjvRA8x%2FoMEIeJDbVU8ZU0Pj15198n636pwFOS7g6ViebhEoJ6ZqfL5mHgRHzanjBdvjGzyCQkdz4DLXIBnHT8JN%2F2OcAFurviHAd5qbJyZyogTuvsM7JzNbGDYJw9cSetecWG5voRPnGPYjbJfsMTSC%2BE5WF2xuxP1WcABcZuMaql%2BwSmAD4LGGdTpJGaQM1u8D%2BKl7woBjArShTWEiJr9jpchMJuzX6xuvXxIMP79yqAGOp4BFWbXm5QJlyuND9972BdYVBIL9F99LgXITwHOwvkNSPHC5yvycCSsFMG6or5QZGY1yOeQOWDzxDot6GxtIxQJbBVYfgY9YeP5SN2oZ0VX%2F%2FYY5Wf%2B5r16jsRAL4GQs%2BTwDguEz5UANEWqRhH3yLKKHXVahIfF469iMe8htz9HeA%2FKK%2FxY1KAXw%2F3CZ6eCtvqU1rD2XfXcIkKsXyD2iEU%3D&X-Amz-Signature=d94cd5d84789ea35d0a3104cddb5251de73e6ea6e7ecdb2ee1a78dccd31610c2&X-Amz-SignedHeaders=host%3Bx-amz-meta-companyid%3Bx-amz-meta-nanoid&x-amz-meta-companyid=11&x-amz-meta-nanoid=kCsizgeU66UwKCn",
+                                                "invoiceId": 1595
                                             }
                                         }
                                     },
@@ -2908,7 +2908,7 @@
                                                 "uploadURL": {
                                                     "type": "string"
                                                 },
-                                                "fileId": {
+                                                "invoiceId": {
                                                     "type": "integer",
                                                     "example": 1500
                                                 }
@@ -2921,8 +2921,8 @@
                                         "value": {
                                             "result": "OK",
                                             "data": {
-                                                "uploadURL": "https://dev-altera-stack-altera-alterabucket37643c33-10cnlsbxvjnti.s3.eu-central-1.amazonaws.com/tmp/expense/pending/11/2023/3/2_10_2022-kCsizgeU66UwKCn.pdf?Content-Type=application%2Fpdf&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAX3I6YW7PGDIS6M7M%2F20230316%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20230316T070405Z&X-Amz-Expires=120&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEcaDGV1LWNlbnRyYWwtMSJHMEUCIQD0O2KlIUmsoIpHajIpsYh0HEP8HslH3rxQdxmtBV4TzgIgN8mQpodBXAs4UWI0E9mwhrrTMKTZDlb2VrSLuJVozVAq0gMIEBACGgw1Mzk2MTk4MDEwNTQiDPE%2BgemeHivrQZ%2B7eiqvA6Mc0LVPon8X32guntOfGWBwbmrV6pPj1Jm%2Fa1sdtkFtz%2F4VuP4GgLWfw85e%2F1USmnQ9ARj1Zxl1w%2BPhhFkW3Bi40SUjvoou7N6q%2FDoSnCIKqfvPP4OkV4Bfjne4UJE%2B4bpK5eta2qWXOpKl7uUGlFr8hEqvtXBfvGL0viqGWZC8kWJzu1ribEP2wGplxQuIoniGAkjqpFvi88Qf8g%2FUF%2BVYKDQzDrgw%2B%2B2naWLSDkIBPEVMCpcIHoUoAX79fgb8imjKLq1%2BT%2BK1j7IWuyBndFCz0utIUo3pS%2BdwiWEK3WIOjusS%2BmEnUpIwn7vcNDBO5f%2BxUNu1uYQUYQMtl5C16VDuznjvRA8x%2FoMEIeJDbVU8ZU0Pj15198n636pwFOS7g6ViebhEoJ6ZqfL5mHgRHzanjBdvjGzyCQkdz4DLXIBnHT8JN%2F2OcAFurviHAd5qbJyZyogTuvsM7JzNbGDYJw9cSetecWG5voRPnGPYjbJfsMTSC%2BE5WF2xuxP1WcABcZuMaql%2BwSmAD4LGGdTpJGaQM1u8D%2BKl7woBjArShTWEiJr9jpchMJuzX6xuvXxIMP79yqAGOp4BFWbXm5QJlyuND9972BdYVBIL9F99LgXITwHOwvkNSPHC5yvycCSsFMG6or5QZGY1yOeQOWDzxDot6GxtIxQJbBVYfgY9YeP5SN2oZ0VX%2F%2FYY5Wf%2B5r16jsRAL4GQs%2BTwDguEz5UANEWqRhH3yLKKHXVahIfF469iMe8htz9HeA%2FKK%2FxY1KAXw%2F3CZ6eCtvqU1rD2XfXcIkKsXyD2iEU%3D&X-Amz-Signature=d94cd5d84789ea35d0a3104cddb5251de73e6ea6e7ecdb2ee1a78dccd31610c2&X-Amz-SignedHeaders=host%3Bx-amz-meta-companyid%3Bx-amz-meta-nanoid&x-amz-meta-companyid=11&x-amz-meta-nanoid=kCsizgeU66UwKCn",
-                                                "fileId": 1595
+                                                "uploadURL": "https://dev-altera-stack-altera-alterabucket37643c33-10cnlsbxvjnti.s3.eu-central-1.amazonaws.com/expense/manual/11/2023/3/2_10_2022-kCsizgeU66UwKCn.pdf?Content-Type=application%2Fpdf&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAX3I6YW7PGDIS6M7M%2F20230316%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20230316T070405Z&X-Amz-Expires=120&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEcaDGV1LWNlbnRyYWwtMSJHMEUCIQD0O2KlIUmsoIpHajIpsYh0HEP8HslH3rxQdxmtBV4TzgIgN8mQpodBXAs4UWI0E9mwhrrTMKTZDlb2VrSLuJVozVAq0gMIEBACGgw1Mzk2MTk4MDEwNTQiDPE%2BgemeHivrQZ%2B7eiqvA6Mc0LVPon8X32guntOfGWBwbmrV6pPj1Jm%2Fa1sdtkFtz%2F4VuP4GgLWfw85e%2F1USmnQ9ARj1Zxl1w%2BPhhFkW3Bi40SUjvoou7N6q%2FDoSnCIKqfvPP4OkV4Bfjne4UJE%2B4bpK5eta2qWXOpKl7uUGlFr8hEqvtXBfvGL0viqGWZC8kWJzu1ribEP2wGplxQuIoniGAkjqpFvi88Qf8g%2FUF%2BVYKDQzDrgw%2B%2B2naWLSDkIBPEVMCpcIHoUoAX79fgb8imjKLq1%2BT%2BK1j7IWuyBndFCz0utIUo3pS%2BdwiWEK3WIOjusS%2BmEnUpIwn7vcNDBO5f%2BxUNu1uYQUYQMtl5C16VDuznjvRA8x%2FoMEIeJDbVU8ZU0Pj15198n636pwFOS7g6ViebhEoJ6ZqfL5mHgRHzanjBdvjGzyCQkdz4DLXIBnHT8JN%2F2OcAFurviHAd5qbJyZyogTuvsM7JzNbGDYJw9cSetecWG5voRPnGPYjbJfsMTSC%2BE5WF2xuxP1WcABcZuMaql%2BwSmAD4LGGdTpJGaQM1u8D%2BKl7woBjArShTWEiJr9jpchMJuzX6xuvXxIMP79yqAGOp4BFWbXm5QJlyuND9972BdYVBIL9F99LgXITwHOwvkNSPHC5yvycCSsFMG6or5QZGY1yOeQOWDzxDot6GxtIxQJbBVYfgY9YeP5SN2oZ0VX%2F%2FYY5Wf%2B5r16jsRAL4GQs%2BTwDguEz5UANEWqRhH3yLKKHXVahIfF469iMe8htz9HeA%2FKK%2FxY1KAXw%2F3CZ6eCtvqU1rD2XfXcIkKsXyD2iEU%3D&X-Amz-Signature=d94cd5d84789ea35d0a3104cddb5251de73e6ea6e7ecdb2ee1a78dccd31610c2&X-Amz-SignedHeaders=host%3Bx-amz-meta-companyid%3Bx-amz-meta-nanoid&x-amz-meta-companyid=11&x-amz-meta-nanoid=kCsizgeU66UwKCn",
+                                                "invoiceId": 1595
                                             }
                                         }
                                     }
@@ -2933,7 +2933,7 @@
                 },
                 "operationId": "get-expenses-uploadUrl",
                 "parameters": [],
-                "description": "Creates a reference for the new expense to be imported into the system\nReturns a pre-signed url that allows you to send the expense file directly to the system's storage.\n\nIn order to finish the job you need to use the pre-signed link from response (`data.uploadURL` in another PUT command, attaching the file in question.",
+                "description": "Creates a reference for the new expense to be imported into the system\nReturns a pre-signed url that allows you to send the expense file directly to the system's storage.\n\nIn order to finish the job you need to use the pre-signed link from response (`data.uploadURL`) in another PUT command, attaching the file in question.\n\nNote: The response now returns `invoiceId` instead of `fileId` to align with the expense creation workflow.",
                 "security": [
                     {
                         "Authorization": []
@@ -2947,6 +2947,8 @@
                                 "properties": {
                                     "name": {
                                         "type": "string",
+                                        "minLength": 3,
+                                        "maxLength": 255,
                                         "x-stoplight": {
                                             "id": "yyhrz2rgk0nz8"
                                         },
@@ -2961,6 +2963,7 @@
                                     },
                                     "md5": {
                                         "type": "string",
+                                        "pattern": "^[a-f0-9]{32}$",
                                         "x-stoplight": {
                                             "id": "lpghwmhmqyiic"
                                         },
@@ -2972,6 +2975,10 @@
                                             "id": "9b28itdkpfgw1"
                                         },
                                         "description": "Override if a duplicate was found?"
+                                    },
+                                    "private": {
+                                        "type": "boolean",
+                                        "description": "Whether the file should be marked as private"
                                     }
                                 },
                                 "required": [
@@ -2986,7 +2993,8 @@
                                         "name": "foto.jpg",
                                         "mime": "image/jpeg",
                                         "md5": "d41d8cd98f00b204e9800998ecf8427e",
-                                        "override": true
+                                        "override": true,
+                                        "private": false
                                     }
                                 }
                             }
