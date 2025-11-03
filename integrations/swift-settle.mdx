@@ -1,0 +1,50 @@
+---
+title: Integracja EasyCheck i Altera
+---
+
+<Tabs>
+    <Tab title='PL'>
+        ## Jak OpenBanking od EasyCheck pomaga klientom Altera?
+
+        ### Dlaczego warto podłączyć konto bankowe?
+        - **Automatyczne raporty MT940** – po jednorazowym podłączeniu konta nie musisz już wysyłać plików do biura księgowego. System pobierze dane na żądanie.
+        - **Swift Settle** – transakcje bankowe są na bieżąco porównywane z fakturami w Altera i oznaczane jako opłacone (w całości lub częściowo).
+
+        ### Jak działa proces?
+        1. **Logowanie** – zaloguj się do aplikacji Altera.
+        2. **Nawigacja** – przejdź do `Ustawienia → Konta bankowe` i wybierz przycisk `Połącz konto przez EasyCheck`.
+        3. **Wybór banku** – w wyświetlonej liście wskaż swój bank i zatwierdź.
+        4. **Autoryzacja EasyCheck** – zostaniesz przekierowany na stronę EasyCheck, gdzie jednym kliknięciem potwierdzasz udzielenie dostępu do historii rachunku (tylko do odczytu).
+        5. **Powrót do Altera** – po udanej autoryzacji EasyCheck przekieruje Cię z powrotem do aplikacji; zobaczysz komunikat o pomyślnym dodaniu konta.
+        6. **Pierwsza synchronizacja** – w tle uruchomi się pobranie ostatnich transakcji oraz konfiguracja automatycznego odświeżania (maks. co godzinę w zadanym oknie czasowym).
+        7. **Status i zarządzanie** – w sekcji kont bankowych widzisz status zgody, datę wygaśnięcia oraz możesz ręcznie wywołać synchronizację.
+
+        ### Najczęstsze pytania
+        - **Czy mogę dodać kilka kont?** Tak, powtórz kroki 2–6 dla każdego rachunku firmowego. Każda zgoda obowiązuje 90 dni – system przypomni o jej odnowieniu.
+        - **Czy Altera ma dostęp do wykonywania przelewów?** Nie. EasyCheck udziela wyłącznie dostępu do historii transakcji (read-only).
+        - **Czy mogę odłączyć konto?** W każdej chwili możesz w Ustawieniach zatrzymać synchronizację lub usunąć konfigurację – przestaniemy pobierać nowe transakcje.
+
+    </Tab>
+    <Tab title='EN'>
+        ## How OpenBanking integration from EasyCheck helps Altera clients?
+
+        ### Why connect your bank account?
+        - **Automatic MT940 exports** – once the account is linked, monthly statements are available on demand for your accountant without manual uploads.
+        - **Swift Settle** – bank transactions are continuously matched with invoices in Altera and marked as fully or partially paid.
+
+        ### Step-by-step flow
+        1. **Log in** – sign in to the Altera web app.
+        2. **Navigate** – go to `Settings → Bank accounts` and click `Connect via EasyCheck`.
+        3. **Select your bank** – choose your bank from the list and continue.
+        4. **EasyCheck authorization** – you are redirected to EasyCheck where a single confirmation grants read-only access to your transaction history.
+        5. **Return to Altera** – after successful authorization you are redirected back and see a confirmation banner.
+        6. **Initial sync** – the platform pulls recent transactions and schedules automatic refreshes (up to hourly within your preferred time window).
+        7. **Monitor & manage** – the banking page shows consent status, expiry date, and lets you trigger manual syncs.
+
+        ### FAQ
+        - **Multiple accounts?** Yes. Repeat the flow for each corporate account. Every consent lasts 90 days; Altera reminds you to renew it on time.
+        - **Payment permissions?** No. EasyCheck exposes read-only data only; we cannot initiate transfers.
+        - **Can I disconnect?** You can pause or remove the configuration anytime in Settings. Once disabled, no new transactions are fetched.
+
+    </Tab>
+</Tabs>

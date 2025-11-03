@@ -86,6 +86,7 @@
     {
       "group": "Integrations",
       "pages": [
+        "integrations/swift-settle",
         "integrations/symfonia-fk"
       ]
     },
