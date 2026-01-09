@@ -5,24 +5,61 @@ description: Sprawdź najważniejsze aktualizacje i wydania naszej aplikacji.
 
 ### 2.25.0 - 2026-01-08 - Onboarding, KSEF, Open Banking, Faktury Cykliczne
 - Onboarding
-  - Wdrożyliśmy zupełnie nowy moduł rejestracji firmy, wspierający użytkownika w pełnej konfiguracji firmy w prostych krokach
+  - Wdrożyliśmy zupełnie nowy moduł rejestracji firmy, wspierający użytkownika w pełnej konfiguracji w prostych krokach
+  - Nowy interfejs z animacjami i płynnymi przejściami
+  - Proces konfiguracji podzielony na logiczne kroki: wprowadzenie NIP → dane firmy → konta bankowe → personalizacja → konfiguracja
+  - Możliwość wznowienia konfiguracji w dowolnym momencie, jeśli proces został przerwany
+  - Wsparcie dla firm z krajów UE i spoza UE
 - KSEF
   - W ramach przygotowania do oficjalnego startu systemu KSEF *01.02.2026r* dodaliśmy do systemu niezbędne akcje i rozszerzenia
   - Dodatkowe opcje powiązane z KSEF zostaną włączone w momencie startu produkcyjnego systemu KSEF 2.0
 - Open Banking:
+  - Możesz teraz łączyć konta bankowe bezpośrednio przez Easy Check
   - W ramach przygotowania do wdrożenia nowego modułu Rozliczenia wprowadziliśmy integrację Open Banking wspieraną przez EasyCheck, naszego partnera posiadającego licencję KNF.
   - Integracja ta umożliwi automatyczne pobieranie danych transakcji z banków, co pozwoli na łatwe uzgadnianie transakcji oraz uprości dostęp do raportów transakcji w formacie MT940.
 - Faktury cykliczne
   - W ramach modułu Sprzedaż dodaliśmy możliwość tworzenia faktur, które będą powtarzać się w określonych odstępach
   - Fakturę taką utworzysz od początku lub w oparciu o wystawiony już wcześniej dokument
   - Ty decydujesz od kiedy, do kiedy i jak często generować fakturę do swojego kontrahenta. Możesz też wybrać czy faktura powinna być automatycznie wysłana na zapisany adres e-mail.
+  - Osobny edytor dla reguł faktur cyklicznych, ułatwiający zarządzanie harmonogramami
+- Podgląd plików i dokumentów
+  - Nowa, ulepszona przeglądarkę dokumentów PDF opartą na Mozilla pdf.js dla lepszego wyświetlania dokumentów
+  - Rozszerzone wsparcie dla czytelniejszych plików XML
+  - Na komputerach stacjonarnych możesz zmieniać rozmiar okna podglądu
+- Ulepszenia dla Faktur Sprzedaży
+  - Obsługa nowych języków faktur: hiszpański, arabski, angielsko-polski, niemiecko-polski
+  - Dodaliśmy możliwość duplikowania faktur z możliwością wyboru konkretnej daty dla kopii
+  - Ustawienia domyślne: możesz skonfigurować domyślny język faktury oraz typ ceny (netto/brutto)
+  - Ulepszona historia faktur z lepszą wizualizacją zmian oraz oznaczeniami księgowych
+  - Jasne oznaczenie faktur poufnych w podglądzie szczegółów
+- Nowy wygląd ekranów logowania i autoryzacji
+  - Całkowicie odnowiliśmy ekrany logowania, rejestracji, weryfikacji dwuetapowej oraz resetowania hasła
+  - Nowoczesny, przejrzysty design z animowanymi efektami tła
+  - Ulepszone układy na urządzeniach mobilnych
 - Pełna historia dla kosztów otrzymywanych drogą mailową
   - Rozszerzyliśmy zakładkę [Integracje/E-mail](https://qa.altera.co/c/null/settings/integrations/mail-document-import) aby dać Ci pełen wgląd w otrzymane przez nas w Twoim imieniu wiadomości z dokumentami kosztowymi
   - Każda przesłana na dedykowany adres wiadomość jest teraz osobnym zapisem, z informacją ile otrzymaliśmy załączników, ile faktycznie zostało przetworzone
-  - Historia jest ograniczona do ostatniego miesiąca
+  - Historia jest ograniczona do ostatniego miesiąca, ładuje się dynamicznie podczas przeglądania
+- Ulepszenia w module Wiadomości
+  - Automatyczne zapisywanie niezapisanych wiadomości - jeśli przypadkowo opuścisz stronę, Twoja wiadomość zostanie zachowana
+  - Przywracanie wcześniej rozpoczętych wiadomości - gdy wrócisz do tworzenia wątku, będziesz mógł odzyskać wcześniej rozpoczętą wiadomość
+- Ulepszenia kont bankowych
+  - Konta bankowe wyświetlają teraz logo banku dla łatwiejszej identyfikacji
+  - Ulepszone zarządzanie kontami bankowymi z lepszą walidacją numerów IBAN
+  - Automatyczne dodawanie prefiksu kraju dla kont bankowych z krajów UE
+- Ulepszenia widoku płatności
+  - Na komputerach stacjonarnych możesz teraz zmieniać rozmiar okna szczegółów płatności
+  - Dodaliśmy przycisk odświeżania oraz bezpośredni link do powiązanych kosztów
+- Ulepszenia interfejsu użytkownika
+  - Kompleksowa obsługa nawigacji klawiaturą z wskaźnikami fokusa we wszystkich komponentach
+  - Możliwość wklejania wielu adresów e-mail jednocześnie w polu adresu e-mail
+  - Ulepszone animacje: ekrany ładowania, przejścia nawigacyjne, animacje tła
+  - Lepsza walidacja: automatyczne przewijanie do błędów walidacji, informacje zwrotne w czasie rzeczywistym
 - Nowy, lepszy i szybszy model przetwarzania kosztów
   - Cały czas rozwijamy nasz moduł OCR o nowe warunki i weryfikacje
   - Obecna zmiana wprowadza nowszy silnik systemowy oraz wykonuje sporo operacji równocześnie, aby wynik przetwarzania pojawił się jeszcze szybciej
+- Optymalizacje wydajności
+  - Wprowadziliśmy optymalizacje w tle oraz poprawiliśmy czasy ładowania aplikacji
 
 ### 2.24.2 - 2025-06-18 - Wersja poprawkowa
 - Poprawiliśmy kilka błędów związanych z nowym sposobem przechowywania filtrów w aplikacji, które mogły powodować problemy z dawnymi sugerowanymi filtrami.

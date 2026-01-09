@@ -2,6 +2,64 @@
 title: EN - Changelog
 description: Discover the Most Important Updates and Releases for Our Application.
 ---
+### 2.25.0 - 2026-01-08 - Onboarding, KSEF, Open Banking, Recurring Invoices
+- Onboarding
+  - We've implemented a completely new company registration module, supporting users in full company configuration through simple steps
+  - New interface with animations and smooth transitions
+  - Configuration process divided into logical steps: TIN/NIP entry → Company data → Bank accounts → Personalization → Configuration
+  - Ability to resume configuration at any time if the process was interrupted
+  - Support for EU and non-EU countries
+- KSEF
+  - As part of preparation for the official launch of the KSEF system *01.02.2026*, we've added necessary actions and extensions to the system
+  - Additional KSEF-related options will be enabled at the time of the KSEF 2.0 production launch
+- Open Banking:
+  - You can now connect bank accounts directly through Easy Check
+  - As part of preparation for implementing the new Settlements module, we introduced Open Banking integration supported by EasyCheck, our partner licensed by the Polish Financial Supervision Authority.
+  - This integration will enable automatic retrieval of transaction data from banks, allowing for easy transaction reconciliation and simplified access to transaction reports in MT940 format.
+- Recurring Invoices
+  - In the Sales module, we've added the ability to create invoices that will repeat at specified intervals
+  - You can create such an invoice from scratch or based on a previously issued document
+  - You decide when to start, when to end, and how often to generate the invoice for your contractor. You can also choose whether the invoice should be automatically sent to the saved email address.
+  - Separate editor for recurring invoice rules, making schedule management easier
+- File & Document Preview
+  - New, improved PDF document viewer based on Mozilla pdf.js for better document rendering
+  - Extended support for more readable XML files
+  - On desktop, you can resize the preview window
+- Sales Invoice Improvements
+  - New invoice language support: Spanish, Arabic, English-Polish, German-Polish
+  - Invoice duplication: Generate invoice copies with specific dates
+  - Default settings: Configure default invoice language and price type (net/gross)
+  - Enhanced invoice history with better visualization of changes and accountant badges
+  - Clear marking of confidential invoices in the details view
+- New Authentication Screens Design
+  - Completely redesigned login, registration, two-factor authentication, and password reset screens
+  - Modern, clean design with animated background effects
+  - Improved mobile layouts
+- Complete History for Expense Emails
+  - We've expanded the [Integrations/Email](https://qa.altera.co/c/null/settings/integrations/mail-document-import) tab to give you full insight into messages with expense documents received on your behalf
+  - Each message sent to the dedicated address is now a separate record, with information about how many attachments we received and how many were actually processed
+  - History is limited to the last month, loads dynamically while browsing
+- Messages Module Improvements
+  - Auto-save for unsaved messages - if you accidentally navigate away from the page, your message will be saved
+  - Restore previously drafted messages - when you return to creating a thread, you'll be able to recover your previously started message
+- Bank Account Improvements
+  - Bank accounts now display bank logos for easier identification
+  - Enhanced bank account management with improved IBAN number validation
+  - Automatic country prefix handling for EU bank accounts
+- Payment View Improvements
+  - On desktop, you can now resize the payment details window
+  - Added refresh button and direct link to related expenses
+- UI/UX Enhancements
+  - Comprehensive keyboard navigation support with focus indicators across all components
+  - Ability to paste multiple email addresses at once in the email field
+  - Improved animations: loading screens, navigation transitions, background animations
+  - Better validation: auto-scroll to validation errors, real-time feedback
+- New, Better, and Faster Cost Processing Model
+  - We're constantly developing our OCR module with new conditions and verifications
+  - The current change introduces a newer system engine and performs many operations simultaneously, so processing results appear even faster
+- Performance Optimizations
+  - We've introduced background optimizations and improved application loading times
+
 ### 2.24.2 - 2025-06-18 - Bugfix Version
 - We fixed issue with the way the new "quick filters" feature was saving and displaying filter views.
 - We implemented additional processing steps for OCR documents to improve the quality of data extraction.
