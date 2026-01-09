@@ -3,15 +3,33 @@ title: PL - Dziennik Zmian
 description: Sprawdź najważniejsze aktualizacje i wydania naszej aplikacji.
 ---
 
+### 2.25.0 - 2026-01-08 - Onboarding, KSEF, Open Banking, Faktury Cykliczne
+- Onboarding
+  - Wdrożyliśmy zupełnie nowy moduł rejestracji firmy, wspierający użytkownika w pełnej konfiguracji firmy w prostych krokach
+- KSEF
+  - W ramach przygotowania do oficjalnego startu systemu KSEF *01.02.2026r* dodaliśmy do systemu niezbędne akcje i rozszerzenia
+  - Dodatkowe opcje powiązane z KSEF zostaną włączone w momencie startu produkcyjnego systemu KSEF 2.0
+- Open Banking:
+  - W ramach przygotowania do wdrożenia nowego modułu Rozliczenia wprowadziliśmy integrację Open Banking wspieraną przez EasyCheck, naszego partnera posiadającego licencję KNF.
+  - Integracja ta umożliwi automatyczne pobieranie danych transakcji z banków, co pozwoli na łatwe uzgadnianie transakcji oraz uprości dostęp do raportów transakcji w formacie MT940.
+- Faktury cykliczne
+  - W ramach modułu Sprzedaż dodaliśmy możliwość tworzenia faktur, które będą powtarzać się w określonych odstępach
+  - Fakturę taką utworzysz od początku lub w oparciu o wystawiony już wcześniej dokument
+  - Ty decydujesz od kiedy, do kiedy i jak często generować fakturę do swojego kontrahenta. Możesz też wybrać czy faktura powinna być automatycznie wysłana na zapisany adres e-mail.
+- Pełna historia dla kosztów otrzymywanych drogą mailową
+  - Rozszerzyliśmy zakładkę [Integracje/E-mail](https://qa.altera.co/c/null/settings/integrations/mail-document-import) aby dać Ci pełen wgląd w otrzymane przez nas w Twoim imieniu wiadomości z dokumentami kosztowymi
+  - Każda przesłana na dedykowany adres wiadomość jest teraz osobnym zapisem, z informacją ile otrzymaliśmy załączników, ile faktycznie zostało przetworzone
+  - Historia jest ograniczona do ostatniego miesiąca
+- Nowy, lepszy i szybszy model przetwarzania kosztów
+  - Cały czas rozwijamy nasz moduł OCR o nowe warunki i weryfikacje
+  - Obecna zmiana wprowadza nowszy silnik systemowy oraz wykonuje sporo operacji równocześnie, aby wynik przetwarzania pojawił się jeszcze szybciej
+
 ### 2.24.2 - 2025-06-18 - Wersja poprawkowa
 - Poprawiliśmy kilka błędów związanych z nowym sposobem przechowywania filtrów w aplikacji, które mogły powodować problemy z dawnymi sugerowanymi filtrami.
 - Wprowadziliśmy poprawki w module Koszty, które powinny poprawić działanie mapowania OCR i przetwarzania.
 - Dodaliśmy kolumny powiązane z nowymi filtrami w Sprzedaży i Kosztach - teraz oprócz informacji czy dany dokument został wyeksportowany, możesz zobaczyć również datę eksportu.
 
 ### 2.24.0 - 2025-05-20 - Open Banking, praca z księgowym i nowe funkcje
-- Open Banking:
-    - W ramach przygotowania do wdrożenia nowego modułu Rozliczenia wprowadziliśmy integrację Open Banking wspieraną przez EasyCheck, naszego partnera posiadającego licencję KNF.
-    - Integracja ta umożliwi automatyczne pobieranie danych transakcji z banków, co pozwoli na łatwe uzgadnianie transakcji oraz uprości dostęp do raportów transakcji w formacie MT940.
 - Zmiany w module Wiadomości:
     - Wprowadziliśmy nowe widoki filtrów, które pozwolą na łatwiejsze wyszukiwanie konwersacji i zarządzanie nimi.
 - Twórz swoje "szybkie filtry":
