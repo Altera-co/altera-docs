@@ -4,16 +4,18 @@ description: "Wiemy, że KSeF budzi wiele pytań. Spokojnie, z nami to proste. Z
 ---
 
 <Note>
-    WAŻNA INFORMACJA O KSEF: Nasze przygotowania do integracji z KSeF są już zakończone. Obecnie czekamy na uruchomienie środowiska testowego przez Ministerstwo Finansów, co pozwoli nam rozpocząć finalną weryfikację pod koniec września. Z tego powodu funkcjonalność w aplikacji planujemy udostępnić dla wszystkich klientów pod koniec listopada 2025.
+    WAŻNA INFORMACJA O KSEF: Nasze przygotowania do integracji z KSeF są już zakończone. Oficjalny start działania KSEF planowany jest przez MF na 1.02.2025.
+    Do tego momentu nie ma możliwości działania na produkcyjnym KSEF. Wszystkie rozwiązania związane z systemem e-faktur zostaną z tego powodu odblokowane po naszej stronie 1.02.2025, zaraz po weryfikacji działania bramki KSEF.
+
 </Note>
 
 Krajowy System e-Faktur (KSeF) to duże wyzwanie dla przedsiębiorców, ale z odpowiednimi narzędziami staje się prostym elementem firmowej codzienności. Altera oferuje pełną, bezpieczną integrację z platformą Ministerstwa Finansów.
 
 Po jednorazowej konfiguracji Altera zajmie się resztą. **Ty wystawiasz faktury jak zwykle, a my automatycznie wysyłamy je do KSeF i pobieramy Twoje faktury kosztowe**. Ten przewodnik poprowadzi Cię przez cały proces.
 
-### Zanim zaczniesz: Co przygotować?
+## Zanim zaczniesz: Co przygotować?
 
-Proces połączenia konta jest jednorazowy i kluczowy dla dalszej współpracy. Zanim go rozpoczniesz, upewnij się, że masz pod ręką odpowiednie dane.
+Proces połączenia konta jest jednorazowy i kluczowy dla dalszej współpracy. Zanim go rozpoczniesz, upewnij się, że masz pod ręką odpowiednie dane. Pamiętaj, że działania produkcyjne w KSeF będą możliwe dopiero od 1.02.2025.
 
 <Columns cols={2}>
     <Card title="Dla jednoosobowej działalności (JDG)" >
@@ -23,15 +25,34 @@ Proces połączenia konta jest jednorazowy i kluczowy dla dalszej współpracy. 
     </Card>
     <Card title="Dla spółek (z o.o., S.A., etc.)">
             Proces jest podobny, ale wymaga jednego dodatkowego kroku:
-                    - **Wyznaczenie przedstawiciela:** Należy złożyć w Urzędzie Skarbowym zawiadomienie **ZAW-FA**, aby wskazać osobę uprawnioną do obsługi KSeF w imieniu spółki. Można to zrobić tradycyjnie (pocztą) lub przez ePUAP.
+                    - **Wyznaczenie przedstawiciela:** Należy złożyć w Urzędzie Skarbowym zawiadomienie **ZAW-FA**, aby wskazać osobę uprawnioną do obsługi KSeF w imieniu spółki (szczegóły poniżej).
                     - **Narzędzie do autoryzacji przedstawiciela:** Profil Zaufany lub Certyfikat kwalifikowany.
                     - **NIP spółki**.
     </Card>
 </Columns>
 
+### ZAW-FA: najważniejsze informacje
+
+ZAW-FA(2) to **zawiadomienie o nadaniu lub odebraniu uprawnień do korzystania z KSeF**. Druk znajdziesz tutaj: https://www.podatki.gov.pl/media/0pqh102d/zaw-fa-02-08.pdf. Pamiętaj, że działania produkcyjne w KSeF będą możliwe dopiero od 1.02.2025.
+
+Najczęstsze punkty, o których warto pamiętać:
+* **Cel złożenia:** w części A wybierasz, czy nadajesz uprawnienia, odbierasz je, czy zgłaszasz dane unikalne kwalifikowanego podpisu bez NIP/PESEL (gdy dotyczy).
+* **Dane podmiotu:** część B zawiera NIP, nazwę/imiona i nazwisko, adres oraz **obowiązkowy e-mail** podmiotu, który nadaje lub odbiera uprawnienia.
+* **Dane osoby uprawnionej:** część C to NIP/PESEL (albo brak identyfikatora np. u nierezydenta), dane osobowe, adres oraz **obowiązkowy e-mail** osoby uprawnionej.
+* **Pierwsza osoba vs. kolejne:** ZAW-FA służy do wskazania pierwszej osoby uprawnionej. Dalsze uprawnienia nadaje się już elektronicznie w KSeF po pierwszym logowaniu.
+* **Gdzie złożyć:** do właściwego naczelnika urzędu skarbowego, osobiście, pocztą lub przez skrzynkę e-doręczeń.
+
+### Pierwsze logowanie właściciela lub osoby wskazanej w ZAW-FA
+
+1. **Zaloguj się do KSeF** (Profil Zaufany lub podpis kwalifikowany). Ta czynność zadziała produkcyjnie dopiero od 1.02.2025.
+2. **Nadaj sobie pełne uprawnienia administracyjne** (zarządzanie uprawnieniami, wystawianie i dostęp do faktur). To także będzie działało produkcyjnie dopiero od 1.02.2025.
+3. **Przekaż uprawnienia dalej**: dodaj kolejnych użytkowników (np. księgowość, pracownicy). Produkcyjnie będzie to możliwe dopiero od 1.02.2025.
+
+## Uprawnienia przekazywane ALTERA
+
 ### Krok 1: Wybierz sposób połączenia z KSeF
 
-Nadajesz nam uprawnienia tylko raz. Później działamy w Twoim imieniu, nie używając więcej Twoich danych do logowania. Masz dwie drogi do wyboru.
+Nadajesz nam uprawnienia tylko raz. Później działamy w Twoim imieniu, nie używając więcej Twoich danych do logowania. Masz dwie drogi do wyboru. Pamiętaj, że działania produkcyjne w KSeF będą możliwe dopiero od 1.02.2025.
 
 **Opcja A: Podpis jednorazowy (Zalecane i najprostsze)**
 
@@ -44,7 +65,7 @@ I to wszystko. Resztą operacji niezbędnych do połączenia z KSeF zajmujemy si
 
 **Opcja B: Własny token KSeF (Dla zaawansowanych)**
 
-Jeśli masz już doświadczenie z KSeF i wygenerowałeś wcześniej własny token autoryzacyjny, możesz go po prostu wkleić w odpowiednie pole w aplikacji Altera. To idealne rozwiązanie dla firm, które chcą zachować pełną kontrolę nad swoimi certyfikatami.
+Jeśli masz już doświadczenie z KSeF i wygenerowałeś wcześniej własny token autoryzacyjny, możesz go po prostu wkleić w odpowiednie pole w aplikacji Altera. To idealne rozwiązanie dla firm, które chcą zachować pełną kontrolę.
 
 ### Krok 2: Usiądź wygodnie, Altera zajmie się resztą
 
