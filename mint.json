@@ -33,6 +33,10 @@
   },
   "tabs": [
     {
+      "name": "KSEF",
+      "url": "faq/howto/ksef"
+    },
+    {
       "name": "FAQ",
       "url": "faq"
     },
