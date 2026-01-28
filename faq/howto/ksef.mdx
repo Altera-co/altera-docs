@@ -4,9 +4,8 @@ description: "Wiemy, że KSeF budzi wiele pytań. Spokojnie, z nami to proste. Z
 ---
 
 <Note>
-    WAŻNA INFORMACJA O KSeF: Nasze przygotowania do integracji z KSeF są zakończone.
-    Oficjalny start działania KSeF planowany jest przez MF na 1.02.2026.
-    Do tego momentu nie ma możliwości działania na produkcyjnym KSeF. Wszystkie rozwiązania związane z systemem e‑faktur zostaną po naszej stronie odblokowane 2.02.2026, zaraz po weryfikacji działania bramki KSeF.
+    WAŻNA INFORMACJA O KSeF: Oficjalny start działania KSeF planowany jest przez MF na 1.02.2026.
+    <p>Do tego momentu nie ma możliwości działania na produkcyjnym KSeF. Wszystkie rozwiązania związane z systemem e‑faktur zostaną po naszej stronie odblokowane 2.02.2026, zaraz po weryfikacji działania bramki KSeF.</p>
 </Note>
 
 Krajowy System e‑Faktur (KSeF) to duże wyzwanie dla przedsiębiorców, ale z odpowiednimi narzędziami staje się prostym elementem firmowej codzienności. Altera oferuje pełną, bezpieczną integrację z platformą Ministerstwa Finansów.
@@ -16,8 +15,9 @@ Po jednorazowej konfiguracji Altera zajmie się resztą. **Ty wystawiasz faktury
 ## Jak działa integracja z KSeF w Altera (w skrócie)
 
 - **Jednorazowa autoryzacja** – potwierdzasz, że Altera może działać w Twoim imieniu.
-- **Dokument do podpisu** – podpisujesz go Profilem Zaufanym lub certyfikatem kwalifikowanym.
-- **Token KSeF = tylko do nadania uprawnień** – nie używamy go do codziennej pracy.
+- **Dwie opcje:**
+    - **Dokument do podpisu** – podpisujesz go Profilem Zaufanym lub certyfikatem kwalifikowanym.
+    - **Twój Token KSeF** - tylko do nadania uprawnień, nie używamy go do codziennej pracy.
 - **Wysyłka faktur naszym certyfikatem** – po autoryzacji działa to automatycznie.
 - **Pełna kontrola** – w każdej chwili możesz cofnąć nam uprawnienia w KSeF.
 
@@ -33,13 +33,14 @@ Po jednorazowej konfiguracji Altera zajmie się resztą. **Ty wystawiasz faktury
 ### Potwierdzenie transakcji – kiedy i po co?
 Gdy faktura została wystawiona, ale nie została jeszcze przesłana do KSeF, możesz przekazać kontrahentowi **potwierdzenie transakcji**.
 To nie jest faktura — to dokument informacyjny, który kieruje odbiorcę do KSeF.
+Po wysłaniu faktury do KSEF i nadaniu oficjalnego numeru masz już możliwość przesłać standardową wizualizację faktury.
 
-Więcej: [Potwierdzenie transakcji w KSeF](https://ksef.podatki.gov.pl/informacje-ogolne-ksef-20/potwierdzenie-transakcji/)
+Więcej informacji o potwierdzeniach znajdziesz na stronie Ministerstwa Finansów: [Potwierdzenie transakcji w KSeF](https://ksef.podatki.gov.pl/informacje-ogolne-ksef-20/potwierdzenie-transakcji/)
 
-### Koszty i bezpieczeństwo
-Po uruchomieniu KSeF w koszty mogą pojawić się faktury zewnętrzne – także od nieznanych kontrahentów.
-W Altera wprowadzamy **listę zaufanych kontrahentów**, aby chronić firmy przed potencjalnymi oszustwami i fałszywymi dokumentami.
-Dzięki temu łatwiej odróżnisz realnych dostawców od podejrzanych źródeł.
+### Dokumenty kosztowe i bezpieczeństwo
+Po uruchomieniu KSeF w zakładce Koszty zaczną pojawiać się faktury zewnętrzne – także od nieznanych kontrahentów.
+W Altera wprowadzamy **listę zaufanych kontrahentów** oraz metody automatycznej weryfikacji i autoryzacji, aby chronić firmy przed potencjalnymi oszustwami i fałszywymi dokumentami.
+W ten sposób łatwiej odróżnisz realnych dostawców od podejrzanych źródeł.
 
 ---
 
@@ -75,7 +76,7 @@ Najważniejsze punkty:
 
 ### Pierwsze logowanie właściciela lub osoby wskazanej w ZAW‑FA
 
-1. **Zaloguj się do KSeF** (Profil Zaufany lub podpis kwalifikowany).
+1. **[Zaloguj się do KSeF](https://ksef.mf.gov.pl/web/login)** (Profil Zaufany lub podpis kwalifikowany).
 2. **Nadaj sobie pełne uprawnienia administracyjne** (zarządzanie uprawnieniami, wystawianie i dostęp do faktur).
 3. **Przekaż uprawnienia dalej**: dodaj kolejnych użytkowników (np. księgowość, pracownicy).
 
