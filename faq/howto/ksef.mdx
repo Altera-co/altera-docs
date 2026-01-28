@@ -1,96 +1,160 @@
 ---
-title: "Jak połączyć Alterę z KSeF? Przewodnik krok po kroku"
+title: "Jak połączyć Altera z KSeF? Przewodnik krok po kroku"
 description: "Wiemy, że KSeF budzi wiele pytań. Spokojnie, z nami to proste. Zobacz, jak w kilku krokach zintegrować Twoją firmę z Krajowym Systemem e-Faktur i zautomatyzować pracę."
 ---
 
 <Note>
-    WAŻNA INFORMACJA O KSEF: Nasze przygotowania do integracji z KSeF są już zakończone. Oficjalny start działania KSEF planowany jest przez MF na 1.02.2025.
-    Do tego momentu nie ma możliwości działania na produkcyjnym KSEF. Wszystkie rozwiązania związane z systemem e-faktur zostaną z tego powodu odblokowane po naszej stronie 1.02.2025, zaraz po weryfikacji działania bramki KSEF.
-
+    WAŻNA INFORMACJA O KSeF: Nasze przygotowania do integracji z KSeF są zakończone.
+    Oficjalny start działania KSeF planowany jest przez MF na 1.02.2026.
+    Do tego momentu nie ma możliwości działania na produkcyjnym KSeF. Wszystkie rozwiązania związane z systemem e‑faktur zostaną po naszej stronie odblokowane 2.02.2026, zaraz po weryfikacji działania bramki KSeF.
 </Note>
 
-Krajowy System e-Faktur (KSeF) to duże wyzwanie dla przedsiębiorców, ale z odpowiednimi narzędziami staje się prostym elementem firmowej codzienności. Altera oferuje pełną, bezpieczną integrację z platformą Ministerstwa Finansów.
+Krajowy System e‑Faktur (KSeF) to duże wyzwanie dla przedsiębiorców, ale z odpowiednimi narzędziami staje się prostym elementem firmowej codzienności. Altera oferuje pełną, bezpieczną integrację z platformą Ministerstwa Finansów.
 
-Po jednorazowej konfiguracji Altera zajmie się resztą. **Ty wystawiasz faktury jak zwykle, a my automatycznie wysyłamy je do KSeF i pobieramy Twoje faktury kosztowe**. Ten przewodnik poprowadzi Cię przez cały proces.
+Po jednorazowej konfiguracji Altera zajmie się resztą. **Ty wystawiasz faktury jak zwykle, a my automatycznie wysyłamy je do KSeF i pobieramy Twoje faktury kosztowe.** Ten przewodnik poprowadzi Cię przez cały proces.
 
-## Zanim zaczniesz: Co przygotować?
+## Jak działa integracja z KSeF w Altera (w skrócie)
 
-Proces połączenia konta jest jednorazowy i kluczowy dla dalszej współpracy. Zanim go rozpoczniesz, upewnij się, że masz pod ręką odpowiednie dane. Pamiętaj, że działania produkcyjne w KSeF będą możliwe dopiero od 1.02.2025.
+- **Jednorazowa autoryzacja** – potwierdzasz, że Altera może działać w Twoim imieniu.
+- **Dokument do podpisu** – podpisujesz go Profilem Zaufanym lub certyfikatem kwalifikowanym.
+- **Token KSeF = tylko do nadania uprawnień** – nie używamy go do codziennej pracy.
+- **Wysyłka faktur naszym certyfikatem** – po autoryzacji działa to automatycznie.
+- **Pełna kontrola** – w każdej chwili możesz cofnąć nam uprawnienia w KSeF.
+
+---
+
+## Co możesz robić w Altera po integracji z KSeF?
+
+### Wystawianie faktur i wysyłka do KSeF
+- Wystawiasz faktury normalnie w Altera.
+- Możesz wybrać **wysyłkę od razu** albo **zbiorczo na koniec dnia**.
+- Po wysyłce faktura dostaje **numer KSeF i UPO**, a Ty widzisz status na liście i w szczegółach.
+
+### Potwierdzenie transakcji – kiedy i po co?
+Gdy faktura została wystawiona, ale nie została jeszcze przesłana do KSeF, możesz przekazać kontrahentowi **potwierdzenie transakcji**.
+To nie jest faktura — to dokument informacyjny, który kieruje odbiorcę do KSeF.
+
+Więcej: [Potwierdzenie transakcji w KSeF](https://ksef.podatki.gov.pl/informacje-ogolne-ksef-20/potwierdzenie-transakcji/)
+
+### Koszty i bezpieczeństwo
+Po uruchomieniu KSeF w koszty mogą pojawić się faktury zewnętrzne – także od nieznanych kontrahentów.
+W Altera wprowadzamy **listę zaufanych kontrahentów**, aby chronić firmy przed potencjalnymi oszustwami i fałszywymi dokumentami.
+Dzięki temu łatwiej odróżnisz realnych dostawców od podejrzanych źródeł.
+
+---
+
+## Zanim zaczniesz: co przygotować?
+
+Proces połączenia konta jest jednorazowy i kluczowy dla dalszej współpracy. Zanim go rozpoczniesz, upewnij się, że masz pod ręką odpowiednie dane.
 
 <Columns cols={2}>
     <Card title="Dla jednoosobowej działalności (JDG)" >
-            Potrzebujesz tylko dwóch rzeczy:
-                    - **Narzędzie do autoryzacji:** Profil Zaufany lub Certyfikat kwalifikowany.
-                    - **NIP Twojej firmy**.
+        Potrzebujesz tylko dwóch rzeczy:
+        - **Narzędzie do autoryzacji:** Profil Zaufany lub certyfikat kwalifikowany.
+        - **NIP Twojej firmy**.
     </Card>
     <Card title="Dla spółek (z o.o., S.A., etc.)">
-            Proces jest podobny, ale wymaga jednego dodatkowego kroku:
-                    - **Wyznaczenie przedstawiciela:** Należy złożyć w Urzędzie Skarbowym zawiadomienie **ZAW-FA**, aby wskazać osobę uprawnioną do obsługi KSeF w imieniu spółki (szczegóły poniżej).
-                    - **Narzędzie do autoryzacji przedstawiciela:** Profil Zaufany lub Certyfikat kwalifikowany.
-                    - **NIP spółki**.
+        Proces jest podobny, ale wymaga jednego dodatkowego kroku:
+        - **Wyznaczenie przedstawiciela:** należy złożyć w Urzędzie Skarbowym zawiadomienie **ZAW‑FA**, aby wskazać osobę uprawnioną do obsługi KSeF w imieniu spółki (szczegóły poniżej).
+        - **Narzędzie do autoryzacji przedstawiciela:** Profil Zaufany lub certyfikat kwalifikowany.
+        - **NIP spółki**.
     </Card>
 </Columns>
 
-### ZAW-FA: najważniejsze informacje
+### ZAW‑FA: najważniejsze informacje
 
-ZAW-FA(2) to **zawiadomienie o nadaniu lub odebraniu uprawnień do korzystania z KSeF**. Druk znajdziesz tutaj: https://www.podatki.gov.pl/media/0pqh102d/zaw-fa-02-08.pdf.
+ZAW‑FA(2) to **zawiadomienie o nadaniu lub odebraniu uprawnień do korzystania z KSeF**.
+Formularz: [ZAW‑FA(2) – PDF](https://www.podatki.gov.pl/media/0pqh102d/zaw-fa-02-08.pdf)
 
-Najczęstsze punkty, o których warto pamiętać:
-* **Cel złożenia:** w części A wybierasz, czy nadajesz uprawnienia, odbierasz je, czy zgłaszasz dane unikalne kwalifikowanego podpisu bez NIP/PESEL (gdy dotyczy).
-* **Dane podmiotu:** część B zawiera NIP, nazwę/imiona i nazwisko, adres oraz **obowiązkowy e-mail** podmiotu, który nadaje lub odbiera uprawnienia.
-* **Dane osoby uprawnionej:** część C to NIP/PESEL (albo brak identyfikatora np. u nierezydenta), dane osobowe, adres oraz **obowiązkowy e-mail** osoby uprawnionej.
-* **Pierwsza osoba vs. kolejne:** ZAW-FA służy do wskazania pierwszej osoby uprawnionej. Dalsze uprawnienia nadaje się już elektronicznie w KSeF po pierwszym logowaniu.
-* **Gdzie złożyć:** do właściwego naczelnika urzędu skarbowego, osobiście, pocztą lub przez skrzynkę e-doręczeń.
+Najważniejsze punkty:
+* **Cel złożenia:** w części A wybierasz, czy nadajesz uprawnienia, odbierasz je, czy zgłaszasz dane unikalne podpisu (gdy dotyczy).
+* **Dane podmiotu:** część B zawiera NIP, nazwę/imiona i nazwisko, adres oraz **obowiązkowy e‑mail** podmiotu, który nadaje lub odbiera uprawnienia.
+* **Dane osoby uprawnionej:** część C to NIP/PESEL (albo brak identyfikatora), dane osobowe, adres oraz **obowiązkowy e‑mail** osoby uprawnionej.
+* **Pierwsza osoba vs. kolejne:** ZAW‑FA służy do wskazania pierwszej osoby uprawnionej. Dalsze uprawnienia nadaje się już elektronicznie w KSeF po pierwszym logowaniu.
+* **Gdzie złożyć:** do właściwego naczelnika urzędu skarbowego, osobiście, pocztą lub przez skrzynkę e‑doręczeń.
 
-### Pierwsze logowanie właściciela lub osoby wskazanej w ZAW-FA
+### Pierwsze logowanie właściciela lub osoby wskazanej w ZAW‑FA
 
-1. **Zaloguj się do KSeF** (Profil Zaufany lub podpis kwalifikowany). Ta czynność zadziała produkcyjnie dopiero od 1.02.2025.
-2. **Nadaj sobie pełne uprawnienia administracyjne** (zarządzanie uprawnieniami, wystawianie i dostęp do faktur). To także będzie działało produkcyjnie dopiero od 1.02.2025.
-3. **Przekaż uprawnienia dalej**: dodaj kolejnych użytkowników (np. księgowość, pracownicy). Produkcyjnie będzie to możliwe dopiero od 1.02.2025.
+1. **Zaloguj się do KSeF** (Profil Zaufany lub podpis kwalifikowany).
+2. **Nadaj sobie pełne uprawnienia administracyjne** (zarządzanie uprawnieniami, wystawianie i dostęp do faktur).
+3. **Przekaż uprawnienia dalej**: dodaj kolejnych użytkowników (np. księgowość, pracownicy).
+
+---
 
 ## Uprawnienia przekazywane ALTERA
 
 ### Krok 1: Wybierz sposób połączenia z KSeF
 
-Nadajesz nam uprawnienia tylko raz. Później działamy w Twoim imieniu, nie używając więcej Twoich danych do logowania. Masz dwie drogi do wyboru. Pamiętaj, że działania produkcyjne w KSeF będą możliwe dopiero od 1.02.2025.
+Nadajesz nam uprawnienia tylko raz. Później działamy w Twoim imieniu, nie używając więcej Twoich danych do logowania.
 
-**Opcja A: Podpis jednorazowy (Zalecane i najprostsze)**
+**Opcja A: Podpis jednorazowy (zalecane i najprostsze)**
+1. W panelu integracji KSeF w Altera **generujemy dla Ciebie plik XML**.
+2. **Podpisujesz plik** Profilem Zaufanym lub certyfikatem kwalifikowanym.
+3. **Wgrywasz podpisany plik** z powrotem do Altera.
 
-To najszybsza i najwygodniejsza metoda.
-1.  W aplikacji Altera, w panelu integracji z KSeF, **generujemy dla Ciebie plik XML**.
-2.  **Podpisujesz ten plik** za pomocą swojego Profilu Zaufanego lub certyfikatu kwalifikowanego.
-3.  **Wgrywasz podpisany plik z powrotem** do Altera w tym samym oknie.
+**Opcja B: Własny token KSeF (dla zaawansowanych)**
+Jeśli masz już token autoryzacyjny, możesz wkleić go w aplikacji. To dobre rozwiązanie dla firm, które chcą pełnej kontroli nad autoryzacją.
 
-I to wszystko. Resztą operacji niezbędnych do połączenia z KSeF zajmujemy się my.
+### Krok 2: Altera zajmie się resztą
 
-**Opcja B: Własny token KSeF (Dla zaawansowanych)**
+Po pomyślnej integracji system działa automatycznie:
 
-Jeśli masz już doświadczenie z KSeF i wygenerowałeś wcześniej własny token autoryzacyjny, możesz go po prostu wkleić w odpowiednie pole w aplikacji Altera. To idealne rozwiązanie dla firm, które chcą zachować pełną kontrolę.
+**Automatyczna wysyłka faktur sprzedaży**
+* Wszystkie faktury wystawione w Altera są **automatycznie przesyłane do KSeF**.
+* Możesz wybrać tryb wysyłki: **natychmiast** lub **zbiorczo na koniec dnia**.
+* System pobiera i zapisuje **numer KSeF oraz UPO**.
 
-### Krok 2: Usiądź wygodnie, Altera zajmie się resztą
+**Automatyczne pobieranie faktur kosztowych**
+* Regularnie **sprawdzamy Twoje konto KSeF** i pobieramy nowe faktury kosztowe.
+* Dokumenty trafiają prosto do modułu **Koszty** i są wstępnie analizowane.
+* Weryfikujemy kontrahentów i rachunki bankowe, aby zwiększyć bezpieczeństwo.
 
-Po pomyślnej integracji nasza aplikacja zaczyna automatycznie pracować dla Ciebie.
+---
 
-**Automatyczna wysyłka faktur sprzedaży:**
-* Wszystkie faktury, które wystawisz w Altera, są **automatycznie przesyłane do KSeF**.
-* Możesz wybrać, czy mają być wysyłane **natychmiast**, czy **zbiorczo na koniec dnia**.
-* System sam pobiera i przypisuje do faktury **numer KSeF oraz UPO** (Urzędowe Poświadczenie Odbioru).
+## Najczęstsze pytania (FAQ)
 
-**Automatyczne pobieranie faktur kosztowych:**
-* Regularnie **sprawdzamy Twoje konto KSeF i pobieramy nowe faktury kosztowe**, które się na nim pojawiły.
-* Dokumenty trafiają prosto do modułu **Koszty** w Altera, gdzie są automatycznie przetwarzane i weryfikowane.
-* System sprawdza kontrahentów i analizuje rachunki bankowe, ostrzegając o ewentualnych nowościach.
+**1) Kto musi wykonać autoryzację?**
+Autoryzację musi wykonać osoba z uprawnieniami do nadawania dalszych dostępów.
+W praktyce: właściciel w JDG lub osoba wskazana w ZAW‑FA.
 
-### Dlaczego integracja z Altera jest wygodna i bezpieczna?
+**2) Nie mam uprawnień – co mam zrobić?**
+W spółkach najpierw trzeba wskazać pierwszą osobę uprawnioną przez ZAW‑FA.
+Dopiero ta osoba może nadać kolejne uprawnienia w KSeF.
+
+**3) Czy token KSeF jest potrzebny na stałe?**
+Nie. Token służy tylko do jednorazowego nadania uprawnień.
+Po autoryzacji Altera działa na własnych certyfikatach.
+
+**4) Co się stanie, jeśli cofnę uprawnienia w KSeF?**
+Altera przestanie wysyłać faktury do KSeF i pobierać koszty.
+Możesz ponowić autoryzację w dowolnym momencie.
+
+**5) Czym jest potwierdzenie transakcji?**
+To dokument informacyjny, który kieruje kontrahenta do KSeF.
+Nie jest to faktura – używamy go, gdy faktura nie została jeszcze wysłana do KSeF.
+
+**6) Faktura ma status „oczekuje” – co to znaczy?**
+To oznacza, że została wystawiona, ale nie została jeszcze wysłana do KSeF.
+Możesz wysłać ją od razu albo poczekać na wysyłkę zbiorczą.
+
+**7) Czy Altera pobiera faktury kosztowe automatycznie?**
+Tak. Po autoryzacji Altera regularnie pobiera dokumenty z KSeF i dodaje je do modułu Koszty.
+
+**8) Dlaczego wprowadziliśmy listę zaufanych kontrahentów?**
+Aby chronić firmy przed potencjalnymi oszustwami i fałszywymi fakturami, które mogą pojawić się w KSeF.
+
+---
+
+## Dlaczego integracja z Altera jest wygodna i bezpieczna?
 
 <AccordionGroup>
     <Accordion title="Bezpieczeństwo">
-        Cała komunikacja z KSeF jest **szyfrowana od początku do końca**. Działamy zgodnie z wymogami Ministerstwa Finansów i RODO, a do podpisywania faktur używamy bezpiecznych tokenów offline.
+        Cała komunikacja z KSeF jest **szyfrowana od początku do końca**. Działamy zgodnie z wymogami Ministerstwa Finansów i RODO, a do podpisywania faktur używamy bezpiecznych certyfikatów.
     </Accordion>
     <Accordion title="Wygoda">
         Proces integracji jest prosty i prowadzimy Cię przez niego krok po kroku. Po konfiguracji system działa samodzielnie, a w razie błędów (np. awarii serwerów KSeF) **automatycznie ponawia operacje** i informuje Cię o wszystkim w czytelnych komunikatach.
     </Accordion>
     <Accordion title="Elastyczność i wsparcie">
-        Nasze rozwiązanie wspiera różne typy firm (JDG i spółki) i różne metody autoryzacji. Zapewniamy też pełne wsparcie techniczne na każdym etapie – od wdrożenia po codzienną pracę.
+        Obsługujemy JDG i spółki, różne metody autoryzacji oraz pełne wsparcie wdrożeniowe i powdrożeniowe.
     </Accordion>
 </AccordionGroup>
