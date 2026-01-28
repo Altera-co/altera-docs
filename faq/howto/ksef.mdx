@@ -26,20 +26,32 @@ Po jednorazowej konfiguracji Altera zajmie się resztą. **Ty wystawiasz faktury
 ## Co możesz robić w Altera po integracji z KSeF?
 
 ### Wystawianie faktur i wysyłka do KSeF
-- Wystawiasz faktury normalnie w Altera.
-- Możesz wybrać **wysyłkę od razu** albo **zbiorczo na koniec dnia**.
-- Po wysyłce faktura dostaje **numer KSeF i UPO**, a Ty widzisz status na liście i w szczegółach.
+W Altera wystawiasz faktury normalnie, ale masz trzy ścieżki działania — wybierasz je w zależności od tego, czy wszystko jest już gotowe do wysyłki:
+- **Zapis szkicu** – gdy chcesz wrócić do dokumentu później (np. brakuje danych od kontrahenta).
+- **Wystawienie bez wysyłki do KSeF** – faktura jest gotowa, ale czeka na Twoją decyzję o wysyłce.
+- **Wystawienie i wysyłka do KSeF od razu** – po potwierdzeniu, że wszystkie dane się zgadzają.
+
+Możesz wybrać tryb wysyłki: **natychmiast** albo **zbiorczo na koniec dnia**. Jeśli dokument jest na liście oczekujących, w każdej chwili możesz wysłać go szybciej.
+Po wysyłce faktura dostaje **numer KSeF i UPO**, a Ty widzisz status na liście i w szczegółach.
+Ważne: po wysyłce do KSeF lub po pobraniu **potwierdzenia transakcji** (dla faktur bez numeru KSeF) faktura przechodzi w tryb **tylko do odczytu** — od tej chwili wszelkie zmiany wprowadzasz wyłącznie przez **korekty**.
 
 ### Potwierdzenie transakcji – kiedy i po co?
-Gdy faktura została wystawiona, ale nie została jeszcze przesłana do KSeF, możesz przekazać kontrahentowi **potwierdzenie transakcji**.
-To nie jest faktura — to dokument informacyjny, który kieruje odbiorcę do KSeF.
-Po wysłaniu faktury do KSEF i nadaniu oficjalnego numeru masz już możliwość przesłać standardową wizualizację faktury.
+Gdy faktura jest już wystawiona, ale **nie ma jeszcze numeru KSeF** (oczekuje na wysyłkę lub jest przetwarzana przez KSeF), możesz przekazać kontrahentowi **potwierdzenie transakcji**.
+To krótki dokument informacyjny: potwierdza Twoją intencję wystawienia faktury o danej treści i kieruje odbiorcę do KSeF, ale **nie jest fakturą** i nie zastępuje jej w rozliczeniach.
+Przydaje się wtedy, gdy kontrahent potrzebuje od razu dokumentu „do ręki” (np. przy sprzedaży stacjonarnej), a numer KSeF pojawi się dopiero po chwili.
+To ważne także dlatego, że w potwierdzeniu transakcji znajdują się już linki/kody QR prowadzące do pełnych danych faktury w KSeF.
+Po nadaniu numeru KSeF możesz już przesłać standardową wizualizację faktury.
 
 Więcej informacji o potwierdzeniach znajdziesz na stronie Ministerstwa Finansów: [Potwierdzenie transakcji w KSeF](https://ksef.podatki.gov.pl/informacje-ogolne-ksef-20/potwierdzenie-transakcji/)
 
 ### Dokumenty kosztowe i bezpieczeństwo
 Po uruchomieniu KSeF w zakładce Koszty zaczną pojawiać się faktury zewnętrzne – także od nieznanych kontrahentów.
-W Altera wprowadzamy **listę zaufanych kontrahentów** oraz metody automatycznej weryfikacji i autoryzacji, aby chronić firmy przed potencjalnymi oszustwami i fałszywymi dokumentami.
+W Altera wprowadzamy nową funkcję: **listę zaufanych kontrahentów**. Możesz dodać firmę do zaufanych, a wtedy dokumenty od niej, które spełniają określone parametry (m.in. zgodność z zapisanymi rachunkami bankowymi), nie będą w obiegu Kosztów wymagać dodatkowych działań.
+Dla pozostałych faktur konieczne będzie potwierdzenie, że ufasz tej firmie i że dokument rzeczywiście ma sens biznesowy.
+Nie musisz się martwić dodatkowymi procesami — weryfikację kontrahenta i jego autoryzację dodaliśmy bezpośrednio do zapisu faktury kosztowej. Jeśli kontrahent nie spełni wymaganych parametrów, dostaniesz od razu informację przy zapisie, z opcją:
+- dodać go do zaufanych,
+- zaufać jednorazowo,
+- wstrzymać się z dalszymi krokami.
 W ten sposób łatwiej odróżnisz realnych dostawców od podejrzanych źródeł.
 
 ---
@@ -131,8 +143,8 @@ Altera przestanie wysyłać faktury do KSeF i pobierać koszty.
 Możesz ponowić autoryzację w dowolnym momencie.
 
 **5) Czym jest potwierdzenie transakcji?**
-To dokument informacyjny, który kieruje kontrahenta do KSeF.
-Nie jest to faktura – używamy go, gdy faktura nie została jeszcze wysłana do KSeF.
+To dokument informacyjny dla kontrahenta, gdy faktura jest już wystawiona, ale nie ma jeszcze numeru KSeF (oczekuje na wysyłkę lub przetworzenie).
+Potwierdza zamiar wystawienia faktury o danej treści i kieruje odbiorcę do KSeF, ale nie jest fakturą i nie służy do rozliczeń.
 
 **6) Faktura ma status „oczekuje” – co to znaczy?**
 To oznacza, że została wystawiona, ale nie została jeszcze wysłana do KSeF.
