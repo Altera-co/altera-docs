@@ -30,11 +30,12 @@ W Altera wystawiasz faktury normalnie, ale masz trzy ścieżki działania — wy
 - **Zapis szkicu** – gdy chcesz wrócić do dokumentu później (np. brakuje danych od kontrahenta).
 - **Wystawienie bez wysyłki do KSeF** – faktura jest gotowa, ale czeka na Twoją decyzję o wysyłce.
 - **Wystawienie i wysyłka do KSeF od razu** – po potwierdzeniu, że wszystkie dane się zgadzają.
-
+<img alt="Akcje wystawiania faktury" src="/images/ksef/actions.png"></img>
 Możesz wybrać tryb wysyłki: **natychmiast** albo **zbiorczo na koniec dnia**. Jeśli dokument jest na liście oczekujących, w każdej chwili możesz wysłać go szybciej.
+<img alt="Faktura oczekuje na wysyłkę" src="/images/ksef/pending.png"></img>
 Po wysyłce faktura dostaje **numer KSeF i UPO**, a Ty widzisz status na liście i w szczegółach.
 Ważne: po wysyłce do KSeF lub po pobraniu **potwierdzenia transakcji** (dla faktur bez numeru KSeF) faktura przechodzi w tryb **tylko do odczytu** — od tej chwili wszelkie zmiany wprowadzasz wyłącznie przez **korekty**.
-
+<img alt="Faktura odebrana przez KSEF" src="/images/ksef/accepted.png"></img>
 ### Potwierdzenie transakcji – kiedy i po co?
 Gdy faktura jest już wystawiona, ale **nie ma jeszcze numeru KSeF** (oczekuje na wysyłkę lub jest przetwarzana przez KSeF), możesz przekazać kontrahentowi **potwierdzenie transakcji**.
 To krótki dokument informacyjny: potwierdza Twoją intencję wystawienia faktury o danej treści i kieruje odbiorcę do KSeF, ale **nie jest fakturą** i nie zastępuje jej w rozliczeniach.
@@ -53,7 +54,7 @@ Nie musisz się martwić dodatkowymi procesami — weryfikację kontrahenta i je
 - zaufać jednorazowo,
 - wstrzymać się z dalszymi krokami.
 W ten sposób łatwiej odróżnisz realnych dostawców od podejrzanych źródeł.
-
+<img alt="Weryfikacja kontrahenta" src="/images/ksef/contractor-confirmation.png"></img>
 ---
 
 ## Zanim zaczniesz: co przygotować?
@@ -99,6 +100,8 @@ Najważniejsze punkty:
 ### Krok 1: Wybierz sposób połączenia z KSeF
 
 Nadajesz nam uprawnienia tylko raz. Później działamy w Twoim imieniu, nie używając więcej Twoich danych do logowania.
+    <img alt="Gdzie konfigurować" src="/images/ksef/ksef-config-1.png"></img>
+    <img alt="Konfiguracja" src="/images/ksef/ksef-config-2.png"></img>
 
 **Opcja A: Podpis jednorazowy (zalecane i najprostsze)**
 1. W panelu integracji KSeF w Altera **generujemy dla Ciebie plik XML**.
@@ -109,6 +112,7 @@ Nadajesz nam uprawnienia tylko raz. Później działamy w Twoim imieniu, nie uż
 Jeśli masz już token autoryzacyjny, możesz wkleić go w aplikacji. To dobre rozwiązanie dla firm, które chcą pełnej kontroli nad autoryzacją.
 
 ### Krok 2: Altera zajmie się resztą
+    <img alt="Pomyślnie zatwierdzono" src="/images/ksef/ksef-config-3.png"></img>
 
 Po pomyślnej integracji system działa automatycznie:
 
