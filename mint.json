@@ -68,6 +68,12 @@
       ]
     },
     {
+      "group": "News",
+      "pages": [
+        "news/2025-02-09"
+      ]
+    },
+    {
       "group": "Roadmap",
       "pages": [
         "roadmap/pl",
