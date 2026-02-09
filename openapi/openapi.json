@@ -3983,6 +3983,40 @@
                             }
                         }
                     },
+                    "ksef": {
+                        "type": "object",
+                        "properties": {
+                            "ksefId": {
+                                "type": "string"
+                            },
+                            "ksefSubmissionDate": {
+                                "type": "string"
+                            },
+                            "ksefStatus": {
+                                "type": "string",
+                                "enum": [
+                                    "ACCEPTED",
+                                    "PENDING",
+                                    "ERROR"
+                                ]
+                            },
+                            "ksefErrorMessage": {
+                                "type": "string"
+                            },
+                            "ksefRetryCount": {
+                                "type": "integer"
+                            },
+                            "ksefSourceXmlKey": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "offlineMode": {
+                        "type": "boolean"
+                    },
+                    "offlineModeReason": {
+                        "type": "string"
+                    },
                     "invoicePosition": {
                         "type": "array",
                         "items": {
@@ -4174,6 +4208,7 @@
                     {
                         "modelType": "INVOICE",
                         "override": false,
+                        "sendToKSEF": true,
                         "basicInformation": {
                             "invoiceId": 2069,
                             "invoiceType": "SALES",
@@ -4236,6 +4271,11 @@
                         "type": "boolean",
                         "default": false,
                         "description": "Defines whether we wish to override split payments warning, in Machine-machine integrations should be set to `true`"
+                    },
+                    "sendToKSEF": {
+                        "type": "boolean",
+                        "description": "Submit the invoice to KSeF during save.",
+                        "default": false
                     },
                     "basicInformation": {
                         "type": "object",
