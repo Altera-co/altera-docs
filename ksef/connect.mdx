@@ -1,0 +1,76 @@
+---
+title: "Połączenie Altera z KSeF"
+description: "Krok po kroku: co przygotować (JDG vs. spółka), ZAW‑FA, pierwsze logowanie do KSeF oraz nadanie uprawnień Altera."
+---
+
+Proces połączenia konta jest jednorazowy i kluczowy dla dalszej współpracy. **Nie udostępniasz nam hasła ani loginu do KSeF – tylko jednorazowo zatwierdzasz zakres uprawnień (wysyłka faktur sprzedaży, odczyt faktur kosztowych).** Dalsza praca z KSeF odbywa się po naszej stronie, bez użycia Twoich danych. Szczegóły: [Co tak naprawdę autoryzujesz](/ksef/permissions).
+
+## Zanim zaczniesz: co przygotować?
+
+Upewnij się, że masz pod ręką odpowiednie dane.
+
+<Columns cols={2}>
+    <Card title="Dla jednoosobowej działalności (JDG)" >
+        Potrzebujesz tylko dwóch rzeczy:
+        - **Narzędzie do autoryzacji:** Profil Zaufany lub certyfikat kwalifikowany.
+        - **NIP Twojej firmy**.
+    </Card>
+    <Card title="Dla spółek (z o.o., S.A., etc.)">
+        Proces jest podobny, ale wymaga jednego dodatkowego kroku:
+        - **Wyznaczenie przedstawiciela:** należy złożyć w Urzędzie Skarbowym zawiadomienie **ZAW‑FA**, aby wskazać osobę uprawnioną do obsługi KSeF w imieniu spółki (szczegóły poniżej).
+        - **Narzędzie do autoryzacji przedstawiciela:** Profil Zaufany lub certyfikat kwalifikowany.
+        - **NIP spółki**.
+    </Card>
+</Columns>
+
+### ZAW‑FA: najważniejsze informacje
+
+ZAW‑FA(2) to **zawiadomienie o nadaniu lub odebraniu uprawnień do korzystania z KSeF**.
+Formularz: [ZAW‑FA(2) – PDF](https://www.podatki.gov.pl/media/0pqh102d/zaw-fa-02-08.pdf)
+
+Najważniejsze punkty:
+* **Cel złożenia:** w części A wybierasz, czy nadajesz uprawnienia, odbierasz je, czy zgłaszasz dane unikalne podpisu (gdy dotyczy).
+* **Dane podmiotu:** część B zawiera NIP, nazwę/imiona i nazwisko, adres oraz **obowiązkowy e‑mail** podmiotu, który nadaje lub odbiera uprawnienia.
+* **Dane osoby uprawnionej:** część C to NIP/PESEL (albo brak identyfikatora), dane osobowe, adres oraz **obowiązkowy e‑mail** osoby uprawnionej.
+* **Pierwsza osoba vs. kolejne:** ZAW‑FA służy do wskazania pierwszej osoby uprawnionej. Dalsze uprawnienia nadaje się już elektronicznie w KSeF po pierwszym logowaniu.
+* **Gdzie złożyć:** do właściwego naczelnika urzędu skarbowego, osobiście, pocztą lub przez skrzynkę e‑doręczeń.
+
+### Pierwsze logowanie właściciela lub osoby wskazanej w ZAW‑FA
+
+1. **[Zaloguj się do KSeF](https://ksef.mf.gov.pl/web/login)** (Profil Zaufany lub podpis kwalifikowany).
+2. **Nadaj sobie pełne uprawnienia administracyjne** (zarządzanie uprawnieniami, wystawianie i dostęp do faktur).
+3. **Przekaż uprawnienia dalej**: dodaj kolejnych użytkowników (np. księgowość, pracownicy), jeśli potrzeba.
+
+---
+
+## Uprawnienia przekazywane Altera
+
+### Krok 1: Wybierz sposób połączenia z KSeF
+
+<img alt="Gdzie konfigurować" src="/images/ksef/ksef-config-1.png"></img>
+<img alt="Konfiguracja" src="/images/ksef/ksef-config-2.png"></img>
+
+**Opcja A: Podpis jednorazowy (zalecane i najprostsze)**
+1. W panelu integracji KSeF w Altera **generujemy dla Ciebie plik XML**.
+2. **Podpisujesz plik** Profilem Zaufanym lub certyfikatem kwalifikowanym.
+3. **Wgrywasz podpisany plik** z powrotem do Altera.
+
+**Opcja B: Własny token KSeF (dla zaawansowanych)**
+Jeśli masz już token autoryzacyjny, możesz wkleić go w aplikacji. To dobre rozwiązanie dla firm, które chcą pełnej kontroli nad autoryzacją. Token służy tylko do jednorazowego nadania uprawnień – później nie jest używany.
+
+### Krok 2: Altera zajmie się resztą
+
+<img alt="Pomyślnie zatwierdzono" src="/images/ksef/ksef-config-3.png"></img>
+
+Po pomyślnej integracji system działa automatycznie:
+
+**Automatyczna wysyłka faktur sprzedaży**
+* Wszystkie faktury wystawione w Altera są **automatycznie przesyłane do KSeF** (w trybie natychmiast lub zbiorczo na koniec dnia – według Twojego wyboru).
+* System pobiera i zapisuje **numer KSeF oraz UPO**.
+
+**Automatyczne pobieranie faktur kosztowych**
+* Regularnie **sprawdzamy Twoje konto KSeF** (w ramach nadanych uprawnień) i pobieramy nowe faktury kosztowe.
+* Dokumenty trafiają prosto do modułu **Koszty** i są wstępnie analizowane.
+* Weryfikujemy kontrahentów i rachunki bankowe, aby zwiększyć bezpieczeństwo.
+
+Cała komunikacja z KSeF jest **szyfrowana**. Do podpisywania faktur używamy własnych, bezpiecznych certyfikatów. W razie błędów (np. awarii serwerów KSeF) system **automatycznie ponawia operacje** i informuje Cię w czytelnych komunikatach.

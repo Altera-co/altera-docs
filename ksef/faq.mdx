@@ -1,0 +1,34 @@
+---
+title: "KSeF – najczęstsze pytania"
+description: "Odpowiedzi na typowe pytania o integrację Altera z KSeF, autoryzację, wystawianie faktur i faktury kosztowe."
+---
+
+## Autoryzacja i połączenie
+
+**Kto musi wykonać autoryzację?**  
+Autoryzację musi wykonać osoba z uprawnieniami do nadawania dalszych dostępów. W praktyce: właściciel w JDG lub osoba wskazana w ZAW‑FA.
+
+**Nie mam uprawnień – co mam zrobić?**  
+W spółkach najpierw trzeba wskazać pierwszą osobę uprawnioną przez ZAW‑FA. Dopiero ta osoba może nadać kolejne uprawnienia w KSeF.
+
+**Czy token KSeF jest potrzebny na stałe?**  
+Nie. Token służy tylko do jednorazowego nadania uprawnień. Po autoryzacji Altera działa na własnych certyfikatach i nie używa Twojego tokenu ani danych do logowania.
+
+**Co się stanie, jeśli cofnę uprawnienia w KSeF?**  
+Altera przestanie wysyłać faktury do KSeF i pobierać koszty. Możesz ponowić autoryzację w dowolnym momencie.
+
+---
+
+## Faktury sprzedaży i koszty
+
+**Czym jest potwierdzenie transakcji?**  
+To dokument informacyjny dla kontrahenta, gdy faktura jest już wystawiona, ale nie ma jeszcze numeru KSeF (oczekuje na wysyłkę lub przetworzenie). Potwierdza zamiar wystawienia faktury o danej treści i kieruje odbiorcę do KSeF, ale nie jest fakturą i nie służy do rozliczeń.
+
+**Faktura ma status „oczekuje” – co to znaczy?**  
+To oznacza, że została wystawiona, ale nie została jeszcze wysłana do KSeF. Możesz wysłać ją od razu albo poczekać na wysyłkę zbiorczą.
+
+**Czy Altera pobiera faktury kosztowe automatycznie?**  
+Tak. Po autoryzacji Altera regularnie pobiera dokumenty z KSeF (w ramach nadanych uprawnień) i dodaje je do modułu Koszty.
+
+**Dlaczego wprowadziliście listę zaufanych kontrahentów?**  
+Aby chronić firmy przed potencjalnymi oszustwami i fałszywymi fakturami, które mogą pojawić się w KSeF. Dzięki niej łatwiej odróżnić realnych dostawców od podejrzanych źródeł.

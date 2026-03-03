@@ -1,0 +1,27 @@
+---
+title: "Co tak naprawdę autoryzujesz – i czego nam nie dajesz"
+description: "Wyjaśnienie uprawnień przy połączeniu Altera z KSeF. Nie przekazujesz nam loginu ani hasła – tylko jednorazowo nadajesz określony zakres uprawnień."
+---
+
+Wiele osób obawia się, że „połączenie z KSeF” oznacza przekazanie nam swoich danych logowania lub stały dostęp do swojego konta. **Tak nie jest.**
+
+## Czego nam nie przekazujesz
+
+- **Hasła ani loginu do KSeF** – nie mamy i nie potrzebujemy Twoich danych do logowania.
+- **Stałego dostępu do Twojego konta w KSeF** – nie logujemy się w KSeF w Twoim imieniu.
+- **Możliwości wykonywania dowolnych operacji w KSeF** – zakres jest ograniczony do tego, o co Cię prosimy przy autoryzacji.
+
+## Co przekazujesz nam jednorazowo (uprawnienia)
+
+Przy połączeniu z KSeF nadajesz nam **tylko dwa rodzaje uprawnień**:
+
+1. **Wysyłanie do KSeF** – faktur sprzedaży wystawionych w Altera (w Twoim imieniu, z użyciem naszych certyfikatów).
+2. **Odczytywanie z KSeF** – faktur kosztowych przypisanych do Twojej firmy, aby zapisać je w module Koszty.
+
+Te uprawnienia nadajesz **raz** – podpisując dokument (Profil Zaufany lub certyfikat kwalifikowany) albo używając tokenu KSeF. **Po tej autoryzacji Altera nie używa już Twojego tokenu ani Twoich danych do logowania.** Wszystkie kolejne połączenia z KSeF realizujemy **własnymi certyfikatami**, w granicach tych samych uprawnień.
+
+W każdej chwili możesz **cofnąć nam te uprawnienia** w portalu KSeF – wtedy przestaniemy wysyłać i pobierać faktury do momentu ponownej autoryzacji.
+
+<Card title="Dalej" icon="arrow-right">
+  Gdy już wiesz, na czym polega autoryzacja, przejdź do kroków połączenia: **[Połączenie Altera z KSeF](/ksef/connect)**.
+</Card>

@@ -34,7 +34,7 @@
   "tabs": [
     {
       "name": "KSEF",
-      "url": "faq/howto/ksef"
+      "url": "ksef"
     },
     {
       "name": "FAQ",
@@ -60,6 +60,17 @@
     }
   ],
   "navigation": [
+    {
+      "group": "KSeF",
+      "pages": [
+        "ksef/overview",
+        "ksef/permissions",
+        "ksef/connect",
+        "ksef/invoices",
+        "ksef/costs",
+        "ksef/faq"
+      ]
+    },
     {
       "group": "Get Started",
       "pages": [
@@ -126,7 +137,6 @@
         {
           "group": "Praktyczne Poradniki (Jak to zrobić?)",
           "pages": [
-            "faq/howto/ksef",
             "faq/howto/email",
             "faq/howto/eobieg",
             "faq/howto/openBanking",
@@ -136,6 +146,36 @@
           ]
         }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/faq/ksef",
+      "destination": "/ksef/overview"
+    },
+    {
+      "source": "/faq/ksef/overview",
+      "destination": "/ksef/overview"
+    },
+    {
+      "source": "/faq/ksef/permissions",
+      "destination": "/ksef/permissions"
+    },
+    {
+      "source": "/faq/ksef/connect",
+      "destination": "/ksef/connect"
+    },
+    {
+      "source": "/faq/ksef/invoices",
+      "destination": "/ksef/invoices"
+    },
+    {
+      "source": "/faq/ksef/costs",
+      "destination": "/ksef/costs"
+    },
+    {
+      "source": "/faq/ksef/faq",
+      "destination": "/ksef/faq"
     }
   ],
   "footerSocials": {
