@@ -150,6 +150,10 @@
   ],
   "redirects": [
     {
+      "source": "/faq/howto/ksef",
+      "destination": "/ksef/overview"
+    },
+    {
       "source": "/faq/ksef",
       "destination": "/ksef/overview"
     },
