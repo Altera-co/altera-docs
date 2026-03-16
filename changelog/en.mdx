@@ -3,6 +3,34 @@ title: EN - Changelog
 description: Discover the Most Important Updates and Releases for Our Application.
 ---
 
+### 2.28.1 - 2026-03-16 - KSeF, document previews and easier filtering
+- Smart search
+  - We expanded quick filtering in Sales, Expenses, Payments, and Contractors.
+  - We added suggestions for projects, categories, KSeF statuses, and new date/amount ranges.
+  - Now, when you start typing in the "Search" field, the system will automatically suggest matching filters.
+- KSeF and work in the Expenses module
+  - We added the KSeF ID field and new filters: KSeF status and KSeF submission date.
+  - We improved screen layout and field readability on smaller windows.
+  - We improved error handling and authorization flow for the KSeF integration.
+- Document preview
+  - We improved the PDF viewer (including support for older browsers).
+  - We introduced better handling of JPG/PNG files and MT940 file preview.
+- New preview generator in Sales
+  - Invoice preview is now generated 100% based on our current template, so data between visualization and the final PDF should now be even more consistent.
+  - We also included language selection, so from now on the preview is available in English and German too.
+- Themes and app appearance
+  - We released a new theme system: light, dark, and black, plus additional color variants.
+  - We added theme personalization settings and improved PDF preview consistency in dark mode.
+- Daily work improvements
+  - We added an option to sync contractor email changes to already issued invoices directly in the Contractors section.
+  - In Open Banking, we added an active integrations counter, sync range visibility, and better validation for bulk actions.
+  - We expanded available exports (including Symfonia FK v2) and improved export data quality.
+  - We added invitation link validation before password setup to reduce issues with expired invitations.
+  - We added attachment support in expense details.
+- KSeF
+  - We continuously analyze incoming data in the system to better align with formats used by other integrators.
+  - Next week, we will deploy another series of KSeF-related changes, including fuller XML document visualization and a new document type - Order.
+
 ### 2.28.0 - 2026-02-18 - Maintenance and integration fixes
 - A maintenance release focused on stability and third‑party integrations (KSeF, Open Banking).
 - **KSeF:** FA(3) preview in Sales and Expenses, fixes for download and refresh after sending to KSeF, duplicate signature file fix in settings, improved button labels and status column. KSeF is now enabled by default; KSeF terms added under Integrations settings and sections reordered.

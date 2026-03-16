@@ -3,6 +3,34 @@ title: PL - Dziennik Zmian
 description: Sprawdź najważniejsze aktualizacje i wydania naszej aplikacji.
 ---
 
+### 2.28.1 - 2026-03-16 - KSeF, podgląd dokumentów i wygodniejsze filtrowanie
+- Inteligentne wyszukiwanie
+  - Rozszerzyliśmy szybkie filtrowanie w Sprzedaży, Kosztach, Płatnościach i Kontrahentach.
+  - Dodaliśmy sugestie dla projektów, kategorii, statusów KSeF oraz nowych zakresów dat i kwot.
+  - Teraz gdy zaczniesz coś pisać w polu "Wyszukaj" system sam zacznie proponować dopasowane filtry
+- KSeF i praca w module Koszty
+  - Dodaliśmy pole KSeF ID oraz nowe filtry: status KSeF i data wysłania do KSeF.
+  - Poprawiliśmy układ ekranu i czytelność pól na mniejszych oknach.
+  - Usprawniliśmy obsługę błędów i autoryzacji po stronie integracji KSeF.
+- Podgląd dokumentów
+  - Ulepszyliśmy przeglądarkę PDF (w tym wsparcie dla starszych przeglądarek).
+  - Wprowadziliśmy lepszą obsługę plików JPG/PNG oraz podgląd plików MT940.
+- Nowy generator podglądu w Sprzedaży
+  - Podgląd faktury jest teraz generowany w 100% w oparciu o nasz aktualny szablon - dane pomiędzy wizualizacją a faktycznym PDF powinny być teraz jeszcze bardziej spójne.
+  - Uwzględniliśmy też wybór języka więc od dziś wizualizacja będzie się pojawiać również w angielskim i niemieckim.
+- Motywy i wygląd aplikacji
+  - Udostępniliśmy nowy system motywów: jasny, ciemny i czarny oraz dodatkowe warianty kolorystyczne.
+  - Dodaliśmy ustawienia personalizacji motywu i poprawiliśmy spójność podglądu PDF w trybie ciemnym.
+- Ułatwienia w codziennej pracy
+  - Dodaliśmy opcję synchronizacji zmiany e-maila kontrahenta do już wystawionych faktur bezpośrednio w sekcji Kontrahenci.
+  - W Open Banking dodaliśmy licznik aktywnych integracji, zakres synchronizacji i lepszą walidację akcji zbiorczych.
+  - Rozszerzyliśmy dostępne eksporty (w tym Symfonia FK v2) i poprawiliśmy jakość danych eksportowych.
+  - Dodaliśmy walidację linku zaproszeniowego przed ustawieniem hasła, by ograniczyć problemy z wygasłymi zaproszeniami.
+  - W szczegółach kosztu dodaliśmy obsługę załączników.
+- KSeF
+  - Cały czas analizujemy spływającę do systemu dane aby dopasować się do formatu innych integratorów.
+  - W przyszłym tygodniu wdrożymy kolejną serię zmian związanych z KSeF, m.in. pełniejszą wizualizację danych z dokumentu XML oraz nowy rodzaj dokumentu - Zamówienie
+
 ### 2.28.0 - 2026-02-18 - Wersja przejściowa, poprawki integracji
 - Wersja przejściowa skupiona na stabilności i integracjach z zewnętrznymi systemami (Obsługa PDF, KSeF, Open Banking).
 - **KSeF:** podgląd FA(3) w Sprzedaży i Kosztach, poprawki pobierania i odświeżania po wysłaniu do KSeF, naprawa duplikatu pliku podpisu w ustawieniach, ulepszenia przycisków i kolumny statusu. KSeF jest teraz włączony domyślnie; w ustawieniach Integracje dodano regulamin KSeF oraz zmieniono kolejność sekcji.
