@@ -3,6 +3,32 @@ title: PL - Dziennik Zmian
 description: Sprawdź najważniejsze aktualizacje i wydania naszej aplikacji.
 ---
 
+### 2.30.0 - 2026-04-24 - Logowanie, podglądy plików i wygodniejsza praca z fakturami
+- Nowości
+  - Dodaliśmy wygodniejsze logowanie przez Google, Apple i Microsoft w aplikacjach natywnych. Logowanie korzysta teraz z systemowych okien autoryzacji, dzięki czemu cały proces jest bardziej spójny z telefonem lub komputerem.
+  - Dodaliśmy kolumnę "Pozycje faktury" w tabelach Sprzedaży i Kosztów. Możesz szybciej podejrzeć, czego dotyczy dokument, bez otwierania jego szczegółów.
+  - W Kosztach dodaliśmy przycisk generowania kodu QR do przelewu dla nieopłaconych faktur z uzupełnionym numerem rachunku bankowego, który możesz szybko zeskanować w aplikacji bankowej.
+  - Dodaliśmy podgląd informacji o kontrahencie po najechaniu na jego nazwę, razem z podstawowymi danymi i statusem zaufania.
+- KSeF i zamówienia
+  - Usprawniliśmy obsługę faktur zaliczkowych i końcowych powiązanych z zamówieniami, w tym rozliczanie zaliczek oraz prezentację danych na dokumentach.
+  - Dodaliśmy filtrowanie zamówień według statusu rozliczenia.
+  - Dopracowaliśmy obsługę danych z KSeF, w tym adresów, kursów walut, numerów KSeF oraz dokumentów wymagających ponowienia wysyłki lub pobrania.
+- Podgląd plików
+  - Ulepszyliśmy podgląd plików DOC i DOCX: poprawiliśmy skalowanie, kontrast tła, ładowanie oraz obsługę wybranych znaków.
+  - Dodaliśmy nowy podgląd arkuszy Excel oraz poprawiliśmy podgląd plików PPT i PPTX.
+  - Poprawiliśmy masowe dodawanie plików: błędny plik nie przerywa już całego procesu, a system pokazuje jasne podsumowanie dodanych i odrzuconych plików.
+- Usprawnienia
+  - Rozszerzyliśmy filtrowanie w Sprzedaży i Kosztach o pochodzenie faktury oraz dodaliśmy brakujące podpowiedzi filtrów w Płatnościach.
+  - Ulepszyliśmy zapisywanie Ustawień: większość zmian zapisuje się automatycznie, a w pozostałych sekcjach system wyraźniej informuje o niezapisanych zmianach.
+  - Dodaliśmy możliwość wyboru opcji strzałkami w polach rozwijanych oraz poprawiliśmy działanie podpowiedzi w polach typu Autocomplete.
+  - W Wiadomościach dodaliśmy przycisk szybkiego przewinięcia do najnowszej wiadomości, gdy użytkownik czyta starsze wpisy w rozmowie.
+  - Dodaliśmy nowe jasne motywy, podgląd kolorów w menu motywów oraz dopracowaliśmy wybrane elementy interfejsu na mniejszych ekranach.
+- Poprawki
+  - Poprawiliśmy domyślną stawkę VAT przy tworzeniu nowej faktury sprzedaży.
+  - Przywróciliśmy wyszukiwanie danych kontrahenta dla kontrahentów z Unii Europejskiej.
+  - Poprawiliśmy otwieranie plików z pustą kategorią przez link oraz nawigację do ustawień numeracji faktur.
+  - Dopracowaliśmy obsługę zmiany firmy, komunikaty i wybrane elementy zgłaszania opinii.
+
 ### 2.29.0 - 2026-03-31 - KSeF, KSeF i jeszcze więcej KSeFu: Zamówienia, eksporty i usprawnienia codziennej pracy
 - Poprawiliśmy ostatnio wprowadzony inteligentny filtr Wyszukiwania — teraz bazowo wyszukuje szeroko, z pomocą "Wyszukaj".
 - Od 1.04.2026 blokujemy możliwość wyboru Daty Wystawienia na fakturach dla wszystkich firm, które mają aktywną wysyłkę danych do KSeF

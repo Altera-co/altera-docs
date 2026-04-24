@@ -3,6 +3,32 @@ title: EN - Changelog
 description: Discover the Most Important Updates and Releases for Our Application.
 ---
 
+### 2.30.0 - 2026-04-24 - Login, file previews, and easier invoice work
+- New
+  - We improved Google, Apple, and Microsoft login in native apps. Authentication now uses system authorization windows, making the flow more consistent with your phone or computer.
+  - We added an "Invoice items" column in Sales and Expenses tables, so you can quickly see what a document contains without opening its details.
+  - In Expenses, we added a button for generating a bank transfer QR code for unpaid invoices with a completed bank account number.
+  - We added a contractor quick-info preview shown when hovering over a contractor name, including basic data and trust status.
+- KSeF and orders
+  - We improved handling of advance and final invoices linked to orders, including advance settlement and clearer document presentation.
+  - We added order filtering by settlement status.
+  - We refined KSeF data handling, including addresses, exchange rates, KSeF numbers, and documents that need resubmission or redownload.
+- File preview
+  - We improved DOC and DOCX previews with better scaling, background contrast, loading behavior, and selected character handling.
+  - We added a new Excel preview and improved PPT and PPTX previews.
+  - We improved bulk file upload: one invalid file no longer stops the whole process, and the system now shows a clear summary of added and rejected files.
+- Improvements
+  - We expanded filtering in Sales and Expenses with invoice origin and added missing filter suggestions in Payments.
+  - We improved saving in Settings: most changes now save automatically, and the remaining sections show clearer unsaved-change feedback.
+  - We added arrow-key selection in dropdown fields and improved Autocomplete behavior.
+  - In Messages, we added a quick "Scroll to latest message" button when reading older messages in a conversation.
+  - We added new light themes, color previews in the theme menu, and refined selected UI elements on smaller screens.
+- Fixes
+  - We fixed the default VAT rate when creating a new sales invoice.
+  - We restored contractor data lookup for contractors from the European Union.
+  - We fixed opening files with an empty category by link and navigation to invoice numbering settings.
+  - We refined company switching, messages, and selected feedback-reporting elements.
+
 ### 2.29.0 - 2026-03-31 - Orders, exports, and day-to-day improvements
 - We improved the recently introduced Smart Search filter - by default it now searches broadly, with help from the "Search" option.
 - New
