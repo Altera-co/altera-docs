@@ -1,6 +1,6 @@
 ---
 title: "Połączenie Altera z KSeF"
-description: "Połącz Altera z KSeF krok po kroku: przygotowanie JDG lub spółki, formularz ZAW-FA, pierwsze logowanie i nadanie uprawnień przez podpis XML."
+description: "Połącz Altera z KSeF krok po kroku: przygotowanie JDG lub spółki, formularz ZAW-FA, pierwsze logowanie, nadanie uprawnień przez podpis XML albo ręcznie w aplikacji podatnika KSeF."
 ---
 
 Proces połączenia konta jest jednorazowy i kluczowy dla dalszej współpracy. **Nie udostępniasz nam hasła ani loginu do KSeF – tylko jednorazowo zatwierdzasz zakres uprawnień (wysyłka faktur sprzedaży, odczyt faktur kosztowych).** Dalsza praca z KSeF odbywa się po naszej stronie, bez użycia Twoich danych. Szczegóły: [Co tak naprawdę autoryzujesz](/ksef/permissions).
@@ -55,8 +55,32 @@ Najważniejsze punkty:
 2. **Podpisujesz plik** Profilem Zaufanym lub certyfikatem kwalifikowanym.
 3. **Wgrywasz podpisany plik** z powrotem do Altera.
 
-**Opcja B: Własny token KSeF (dla zaawansowanych)**
-Jeśli masz już token autoryzacyjny, możesz wkleić go w aplikacji. To dobre rozwiązanie dla firm, które chcą pełnej kontroli nad autoryzacją. Token służy tylko do jednorazowego nadania uprawnień – później nie jest używany.
+**Opcja B: Ręczne nadanie uprawnień dla Altera w KSeF**
+
+Jeśli chcesz dopilnować całego procesu możesz **samodzielnie nadać Altera uprawnienia w [aplikacji podatnika KSeF](https://ap.ksef.mf.gov.pl/web/)**. Po zalogowaniu się na konto swojej firmy wykonaj kolejno:
+
+1. W menu po lewej stronie rozwiń sekcję **Uprawnienia** i wybierz **Nadaj uprawnienie**. Rozpoczniesz od sekcji *Rodzaj uprawnień* — otwórz listę **Rodzaj uprawnienia**.
+
+<img alt="KSeF: Nadaj uprawnienie – wybór rodzaju uprawnienia" src="/images/ksef/ksef-manual-permission-01.png"></img>
+
+2. Na liście wybierz **Podmiotowi do wystawiania i przeglądania faktur**.
+
+<img alt="KSeF: lista rodzaju uprawnienia – wystawianie i przeglądanie faktur" src="/images/ksef/ksef-manual-permission-02.png"></img>
+
+3. W sekcji **Dane podmiotu uprawnionego** podaj **NIP: 7010978165** oraz pełną nazwę **Altera sp. z o.o.**
+4. W sekcji **Zakres uprawnień** zaznacz **wystawiania faktur** oraz **przeglądania faktur**. Opcji *z prawem do dalszego przekazywania uprawnienia* nie musisz zaznaczać.
+
+<img alt="KSeF: formularz – NIP Altera, nazwa i zakres uprawnień" src="/images/ksef/ksef-manual-permission-03.png"></img>
+
+5. Kliknij **Nadaj uprawnienia** i poczekaj na potwierdzenie pomyślnego zakończenia.
+
+<img alt="KSeF: potwierdzenie nadania uprawnień" src="/images/ksef/ksef-manual-permission-04.png"></img>
+
+6. (Opcjonalnie) Wejdź w **Uprawnienia → Zarządzaj uprawnieniami** i upewnij się, że dla **Altera sp. z o.o.** widoczne są aktywne uprawnienia do wystawiania i przeglądania faktur.
+
+<img alt="KSeF: Zarządzaj uprawnieniami – aktywne uprawnienia dla Altera" src="/images/ksef/ksef-manual-permission-05.png"></img>
+
+Nadanie uprawnień w KSeF to tylko część procesu: **wróć do Altera i dokończ konfigurację po swojej stronie** (w tym użyj przycisku **Odśwież** w panelu integracji KSeF, jeśli go widzisz). Wkrótce dodamy tu zrzuty ekranu z pierwszego etapu w aplikacji Altera oraz z kliknięcia **Odśwież**.
 
 ### Krok 2: Altera zajmie się resztą
 
