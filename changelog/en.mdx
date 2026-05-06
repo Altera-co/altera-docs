@@ -3,6 +3,37 @@ title: EN - Changelog
 description: Track every Altera release with detailed notes on new features, improvements, KSeF updates, and bug fixes shipped across web and mobile apps.
 ---
 
+### 2.31.0 - 2026-05-06 - New Dashboard, better orders, and clearer KSeF
+- New Dashboard module
+  - We released a new Dashboard that brings the most important company information into one place and helps you move faster through daily work.
+  - We added quick actions, so you can jump straight into creating documents, contractors, and other frequently used actions.
+  - We added a "To do" section that highlights tasks requiring attention and helps you get back to pending work.
+  - We added a Calendar with company events, tax deadlines, and accounting-period information. Selected tax payments can be marked as paid directly from the Dashboard.
+  - We added a Cash Flow section with period selection and a preview of key income and expense changes.
+  - We added recent activity, making it easier to quickly review the latest company changes.
+  - The Dashboard adapts visible sections to user permissions, so each person only sees areas they can access.
+- Sales, orders, and advance invoices
+  - We improved the Orders tab with default views, open/closed order filtering, and better filter behavior when switching between tabs.
+  - We improved advance invoice creation: search now leads directly to orders, and the related-order list is limited to the selected contractor.
+  - We fixed percentage-based advance amount calculation so it uses the gross order value.
+  - We cleaned up the order creation form and disabled actions that are not needed for orders, including export from the Orders tab.
+  - We improved additional contractors on invoices: better read-only layout, defaults, and contractor lookup.
+- KSeF and documents
+  - We added earlier validation before saving and issuing documents to KSeF, so problems that need correction are shown sooner.
+  - We improved KSeF error messages: they are clearer, describe the cause more directly, and are more often shown in Polish.
+  - We improved status recovery for pending KSeF documents and handling for documents that need another check.
+  - We expanded support for additional document parties and their roles, including KSeF-compliant documents.
+  - We improved handling of expense corrections and final invoices linked to other documents in the system.
+- Improvements
+  - We added a "Select all" option when closing an accounting period.
+  - We improved saving and restoring table settings, including older saved view configurations.
+  - We improved Windows UI scaling and table-menu positioning when resizing the window.
+  - We refined navigation and dialog opening so invoice-related windows do not overlap unexpectedly.
+- Fixes
+  - We fixed the confirmation button label in Expenses in cases where the wrong text was shown.
+  - We fixed selected order and advance invoice dialogs, including cancel, save, and mode-switching behavior.
+  - We refined invoice origin filtering and visibility of VAT exemption fields.
+
 ### 2.30.0 - 2026-04-24 - Login, file previews, and easier invoice work
 - New
   - We improved Google, Apple, and Microsoft login in native apps. Authentication now uses system authorization windows, making the flow more consistent with your phone or computer.

@@ -3,6 +3,37 @@ title: PL - Dziennik Zmian
 description: "Pełna historia wydań Altera: nowe funkcje, usprawnienia KSeF, integracje bankowe, poprawki w aplikacji webowej i mobilnej. Sprawdź, co się zmieniło."
 ---
 
+### 2.31.0 - 2026-05-06 - Nowy Pulpit, lepsze zamówienia i czytelniejsze KSeF
+- Nowy moduł Pulpit
+  - Udostępniliśmy nowy Pulpit, który zbiera najważniejsze informacje o firmie w jednym miejscu i pomaga szybciej przejść do codziennych zadań.
+  - Dodaliśmy sekcję szybkich akcji, dzięki której możesz od razu przejść do tworzenia dokumentów, kontrahentów i innych najczęściej używanych działań.
+  - Dodaliśmy listę "Do zrobienia", która pokazuje zadania wymagające uwagi i pozwala szybciej wrócić do zaległych spraw.
+  - Dodaliśmy Kalendarz z wydarzeniami firmowymi, terminami podatkowymi i informacjami o okresach rozliczeniowych. Wybrane płatności podatkowe możesz oznaczyć jako opłacone bez wychodzenia z Pulpitu.
+  - Dodaliśmy sekcję Przepływów pieniężnych z wyborem okresu oraz podglądem najważniejszych zmian w przychodach i kosztach.
+  - Dodaliśmy widok ostatniej aktywności, który ułatwia szybkie sprawdzenie najnowszych zmian w firmie.
+  - Pulpit dopasowuje widoczne sekcje do uprawnień użytkownika, dzięki czemu pokazuje tylko te obszary, do których dana osoba ma dostęp.
+- Sprzedaż, zamówienia i zaliczki
+  - Usprawniliśmy pracę z zakładką Zamówienia: dodaliśmy domyślne widoki, filtrowanie otwartych i zamkniętych zamówień oraz lepsze zachowanie filtrów po przełączaniu zakładek.
+  - Poprawiliśmy tworzenie faktur zaliczkowych: wyszukiwanie kieruje teraz bezpośrednio do zamówień, a lista powiązanych zamówień jest zawężana do wybranego kontrahenta.
+  - Poprawiliśmy wyliczanie kwoty zaliczki z przycisków procentowych, tak aby bazowała na wartości brutto zamówienia.
+  - Uporządkowaliśmy formularz tworzenia zamówienia i wyłączyliśmy opcje, które nie są potrzebne przy pracy z zamówieniami, m.in. eksport z tej zakładki.
+  - Usprawniliśmy obsługę dodatkowych kontrahentów na fakturze: poprawiliśmy widok tylko do odczytu, domyślne ustawienia oraz wyszukiwanie danych.
+- KSeF i dokumenty
+  - Dodaliśmy wcześniejszą walidację dokumentów przed zapisem i wystawieniem do KSeF, aby szybciej pokazywać problemy wymagające poprawy.
+  - Poprawiliśmy komunikaty błędów KSeF: są teraz bardziej czytelne, lepiej opisują przyczynę problemu i częściej pojawiają się po polsku.
+  - Usprawniliśmy odzyskiwanie statusów dokumentów oczekujących w KSeF oraz obsługę dokumentów wymagających ponownego sprawdzenia.
+  - Rozszerzyliśmy obsługę dodatkowych podmiotów dokumentu i ich ról, także w dokumentach zgodnych z KSeF.
+  - Ulepszyliśmy obsługę korekt kosztowych i faktur końcowych powiązanych z innymi dokumentami w systemie.
+- Usprawnienia
+  - Dodaliśmy opcję "Zaznacz wszystko" przy zamykaniu okresu rozliczeniowego.
+  - Poprawiliśmy zapamiętywanie i odtwarzanie ustawień tabel, także dla starszych konfiguracji widoków.
+  - Ulepszyliśmy skalowanie interfejsu na Windowsie oraz położenie menu tabel przy zmianie szerokości okna.
+  - Poprawiliśmy wybrane elementy nawigacji i otwierania okien, aby nie nakładały się na siebie podczas pracy z fakturami.
+- Poprawki
+  - Poprawiliśmy etykietę przycisku zatwierdzania w Kosztach w przypadkach, w których pojawiał się niewłaściwy tekst.
+  - Poprawiliśmy wybrane zachowania w dialogach zamówień i faktur zaliczkowych, w tym przyciski anulowania, zapisu i przełączania trybu.
+  - Dopracowaliśmy obsługę pochodzenia faktury w filtrach oraz widoczność pól związanych ze zwolnieniem z VAT.
+
 ### 2.30.0 - 2026-04-24 - Logowanie, podglądy plików i wygodniejsza praca z fakturami
 - Nowości
   - Dodaliśmy wygodniejsze logowanie przez Google, Apple i Microsoft w aplikacjach natywnych. Logowanie korzysta teraz z systemowych okien autoryzacji, dzięki czemu cały proces jest bardziej spójny z telefonem lub komputerem.
