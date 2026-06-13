@@ -3,6 +3,41 @@ title: PL - Dziennik Zmian
 description: "Pełna historia wydań Altera: nowe funkcje, usprawnienia KSeF, integracje bankowe, poprawki w aplikacji webowej i mobilnej. Sprawdź, co się zmieniło."
 ---
 
+### 2.32.0 - 2026-06-13 - Pakiety, płatności walutowe i wygodniejsza praca z fakturami
+- Płatności
+  - Rozszerzyliśmy paczki płatności o przelewy krajowe walutowe, SEPA i zagraniczne. Wszystkie typy płatności są teraz obsługiwane na jednej liście.
+  - Dodaliśmy kolumnę i filtr typu paczki oraz widok płatności wymagających uzupełnienia danych.
+  - Przy generowaniu płatności ISO 20022 aplikacja pokazuje tylko brakujące pola wymagane dla danej płatności i nie pozwala wygenerować pliku, dopóki dane nie zostaną uzupełnione.
+  - Uporządkowaliśmy generowanie plików: paczki ELIXIR zachowują wybór kodowania, a paczki ISO 20022 są generowane jako XML UTF-8.
+  - Doprecyzowaliśmy działanie kodu QR płatności w Kosztach: jest dostępny dla polskich rachunków NRB w PLN i korzysta ze standardu 2D.
+- Sprzedaż i faktury
+  - Przebudowaliśmy formularz faktury zaliczkowej: sekcje są czytelniejsze, dane zaliczki mają osobny obszar, a samouczek lepiej prowadzi przez wybór lub utworzenie zamówienia.
+  - Dodaliśmy ręczne wpisywanie procentu bieżącej zaliczki oraz poprawiliśmy powiązywanie faktur i zamówień z wybranym kontrahentem.
+  - Dodaliśmy masową akcję zmiany kategorii produktu na liście faktur sprzedaży.
+  - Usprawniliśmy historię zmian faktury: więcej akcji pokazuje, co dokładnie zmieniło się na dokumencie, m.in. odrzucenie kosztu, usunięcie dokumentu, wysyłka e-maila, przypomnienie oraz operacje KSeF.
+  - Poprawiliśmy faktury korygujące, w tym prezentację ceny brutto przed korektą oraz wymaganie podstawy prawnej przy stawce VAT "ZW".
+- Wiadomości e-mail i ustawienia
+  - Przebudowaliśmy reguły przypomnień o płatności w Ustawieniach Sprzedaży. Reguły systemowe są zawsze widoczne, a dodatkowe przypomnienia po terminie możesz dodawać z własną liczbą dni i treścią.
+  - Dodaliśmy podgląd banera informacyjnego w Ustawieniach Księgowości, aktualizowany na żywo podczas konfiguracji.
+  - Usprawniliśmy zapisywanie ustawień e-mail oraz obsługę dodawania i usuwania adresów.
+  - Dodaliśmy osobne zapraszanie księgowego i oddzielną sekcję księgowego na liście użytkowników firmy.
+- KSeF, eksporty i integracje
+  - Usprawniliśmy obsługę limitów i komunikatów KSeF, odzyskiwanie statusów oraz wykrywanie duplikatów dokumentów.
+  - Poprawiliśmy generowanie dokumentów KSeF i obsługę kodów QR zgodnych z wymaganiami KSeF.
+  - Dodaliśmy eksport wyciągów bankowych w wielu formatach, z możliwością podziału miesięcznego.
+  - Ulepszyliśmy eksporty i dane bankowe, w tym obsługę kursów walut oraz wybrane przypadki faktur powiązanych.
+- Pakiety i subskrypcje
+  - Dodaliśmy nowy proces wyboru pakietu podczas tworzenia firmy. Użytkownik widzi rekomendowany pakiet, uzasadnienie wyboru, cenę po okresie próbnym, cykl rozliczeń oraz liczbę użytkowników.
+  - Przebudowaliśmy ekran zarządzania pakietem w Ustawieniach: łatwiej porównać pakiety, zmienić konfigurację, sprawdzić aktualny dostęp i wrócić z płatności.
+  - Dodaliśmy obsługę firm przechodzących ze starszego modelu rozliczeń na aktualne pakiety, razem z czytelniejszymi komunikatami, banerami i ekranem decyzji.
+  - Usprawniliśmy powroty z płatności Stripe: aplikacja odtwarza właściwą firmę, pokazuje status zmiany i blokuje kolejne zmiany do czasu zakończenia przetwarzania.
+  - Dodaliśmy obsługę anulowanego odnowienia oraz wznowienia subskrypcji bez szukania ukrytych akcji.
+- Poprawki
+  - Naprawiliśmy dodawanie plików kosztowych z dysku w wersji przeglądarkowej oraz błąd po wyczyszczeniu daty w Kosztach.
+  - Poprawiliśmy ustawianie hasła z linku zaproszeniowego oraz komunikat przy próbie resetu hasła dla konta, które nie zostało jeszcze aktywowane.
+  - Poprawiliśmy nawigację po zmianie firmy i zamykaniu wybranych okien.
+  - Ulepszyliśmy zrzuty ekranu w zgłoszeniach, aby obejmowały także podgląd dokumentów osadzony w aplikacji.
+
 ### 2.31.0 - 2026-05-06 - Nowy Pulpit, lepsze zamówienia i czytelniejsze KSeF
 - Nowy moduł Pulpit
   - Udostępniliśmy nowy Pulpit, który zbiera najważniejsze informacje o firmie w jednym miejscu i pomaga szybciej przejść do codziennych zadań.

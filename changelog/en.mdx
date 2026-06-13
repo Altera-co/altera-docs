@@ -3,6 +3,41 @@ title: EN - Changelog
 description: Track every Altera release with detailed notes on new features, improvements, KSeF updates, and bug fixes shipped across web and mobile apps.
 ---
 
+### 2.32.0 - 2026-06-13 - Plans, foreign payments, and easier invoice work
+- Payments
+  - We expanded payment packages with domestic foreign-currency, SEPA, and foreign transfers. All payment types are now handled in one list.
+  - We added a package type column and filter, plus a view for payments that still need missing data.
+  - When generating ISO 20022 payments, the app shows only the fields required for a given payment and blocks file generation until they are completed.
+  - We cleaned up file generation: ELIXIR packages keep encoding selection, while ISO 20022 packages are generated as UTF-8 XML.
+  - We refined payment QR codes in Expenses: they are available for Polish NRB accounts in PLN and use the 2D standard.
+- Sales and invoices
+  - We rebuilt the advance invoice form: sections are clearer, advance data has its own area, and the tutorial better guides users through selecting or creating an order.
+  - We added manual entry for the current advance percentage and improved linking invoices and orders to the selected contractor.
+  - We added a bulk action for changing product category on the sales invoice list.
+  - We improved invoice change history: more actions now show what changed on the document, including expense rejection, document deletion, email sending, reminders, and KSeF operations.
+  - We fixed corrective invoices, including gross unit price before correction and legal-basis requirements for the "ZW" VAT rate.
+- Email and settings
+  - We rebuilt payment reminder rules in Sales Settings. System rules are always visible, and additional overdue reminders can be added with custom day offsets and content.
+  - We added a live preview for the informational banner in Accounting Settings.
+  - We improved saving email settings and handling added or removed email addresses.
+  - We added separate accountant invitations and a dedicated accountant section in the company user list.
+- KSeF, exports, and integrations
+  - We improved KSeF rate-limit handling, messages, status recovery, and duplicate document detection.
+  - We improved KSeF document generation and QR code handling aligned with KSeF requirements.
+  - We added multi-format bank statement export with monthly splitting.
+  - We improved exports and bank data handling, including exchange rates and selected related-invoice cases.
+- Plans and subscriptions
+  - We added a new plan-selection step when creating a company. Users now see a recommended plan, the reason for the recommendation, the post-trial price, billing cycle, and user count.
+  - We redesigned plan management in Settings, making it easier to compare plans, change configuration, check current access, and return from payment.
+  - We added support for companies moving from the older billing model to current plans, with clearer messages, banners, and decision screens.
+  - We improved Stripe payment returns: the app restores the correct company, shows change status, and blocks additional changes until processing is complete.
+  - We added support for canceled renewals and renewing a subscription without searching for hidden actions.
+- Fixes
+  - We fixed adding expense files from disk in the web app and a crash after clearing a date in Expenses.
+  - We fixed password setup from invitation links and added a clearer message when resetting a password for an account that has not been activated yet.
+  - We fixed navigation after company switching and closing selected dialogs.
+  - We improved screenshots in feedback reports so they include document previews embedded in the app.
+
 ### 2.31.0 - 2026-05-06 - New Dashboard, better orders, and clearer KSeF
 - New Dashboard module
   - We released a new Dashboard that brings the most important company information into one place and helps you move faster through daily work.
