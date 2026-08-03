@@ -3,6 +3,40 @@ title: EN - Changelog
 description: Track every Altera release with detailed notes on new features, improvements, KSeF updates, and bug fixes shipped across web and mobile apps.
 ---
 
+### 2.33.0 - 2026-08-03 - Debit notes, Podmiot 3, and easier actions
+- Debit notes and Sales
+  - We added debit note support: manual issuing, issuing from an overdue invoice, preview, editing, and linking to the source invoice.
+  - We added debit note support in lists, document details, OCR, and finance analytics.
+  - Sales invoice drafts now save automatically in the background, with a discreet save status shown in the editor.
+  - We added an unsaved-changes confirmation when closing an issued sales invoice editor.
+  - We improved Sales and Expenses change history: entries are clearer, draft-phase edits are collapsed, and additional-party changes show specific field-level differences.
+- Podmiot 3 and reverse charge
+  - We added ID-Wew support for Podmiot 3 in KSeF FA(3) invoices, including validation for the 5-digit identifier and showing it in invoice preview.
+  - We added reverse charge marking for foreign invoices. The note appears in invoice preview, printed documents, and supported accounting exports.
+  - We improved the additional parties form: an entered VAT ID is no longer cleared when GUS does not find the contractor, and changing ID-Wew no longer suggests an unnecessary contractor record update.
+- Actions, tables, and messages
+  - We redesigned actions on document lists. When rows are selected, a floating selection dock now shows key actions, totals, and the selected row count.
+  - We organized the actions menu with categories, search, better keyboard handling, and unavailable actions hidden behind a reveal control.
+  - We improved pickers for projects, product categories, cost centers, message participants, and adding invoice payments.
+  - We rebuilt app messages as a toast layer that works better with tables, bottom navigation, and longer-running operations.
+  - We added pull-to-refresh on more mobile screens and automatic list refresh when returning to the app.
+- Settings and daily work
+  - We added account email changes from profile settings, confirmed with a code sent to the new address.
+  - We added an invoice logo section, including support for a separate logo on documents.
+  - We added CSV bank statement generation in bank account settings.
+  - We improved indicators for features that require a higher plan and the related upgrade screens.
+  - The language selected in the app is now saved on the user account, so system notifications can use the selected language.
+- KSeF, payments, and integrations
+  - We added a clear KSeF invoice sync status with the last full sync date and planned automatic resume information.
+  - We improved KSeF metadata recovery, rate-limit handling, and durable incoming document synchronization.
+  - We improved invoice validation, numbering, and accounting exports, including reverse charge and selected VAT data handling.
+  - In Payments, we enabled selecting an account in any currency and improved validation messages for bank-required fields.
+- Notifications and fixes
+  - We added a support tickets tab in Notifications and expandable notification content.
+  - Ticket notifications now open the ticket inside the notifications dialog instead of navigating to a separate full-screen view.
+  - We improved expenses waiting only for contractor verification, single-page document splitting, and missing cost history translations.
+  - We fixed selected issues with navigation, file previews opened from links, dropdown option selection, and background errors.
+
 ### 2.32.0 - 2026-06-13 - Plans, foreign payments, and easier invoice work
 - Payments
   - We expanded payment packages with domestic foreign-currency, SEPA, and foreign transfers. All payment types are now handled in one list.

@@ -13,3 +13,6 @@
 /.idea/modules.xml
 /.idea/vcs.xml
 /.idea/workspace.xml
+
+# Local Python deps for one-off image scripts
+/.pypack/
