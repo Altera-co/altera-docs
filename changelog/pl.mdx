@@ -13,16 +13,19 @@ W 2.33 porządkujemy codzienną pracę z dokumentami: od pełnego obiegu not obc
   - Włączyliśmy automatyczny zapis szkiców faktur sprzedaży w tle wraz z dyskretnym statusem zapisu.
   - Dodaliśmy ostrzeżenie o niezapisanych zmianach przy zamykaniu edycji wystawionej faktury.
   - Uporządkowaliśmy historię zmian faktur i kosztów: wpisy są czytelniejsze, wersje robocze są zwijane, a zmiany dodatkowych podmiotów pokazujemy z podziałem na konkretne pola.
+<img alt="Nota obciążeniowa" src="/images/changelog/2-33-debit-note.png"></img>
 - Podmiot 3 i odwrotne obciążenie: gotowe na FA(3)
   - Dodaliśmy obsługę ID-Wew dla Podmiotu 3 w fakturach KSeF FA(3), w tym walidację 5-cyfrowego identyfikatora i pokazanie go w podglądzie faktury.
   - Dodaliśmy oznaczenie odwrotnego obciążenia dla faktur zagranicznych. Adnotacja trafia na podgląd i wydruk faktury oraz do obsługiwanych eksportów księgowych.
   - Usprawniliśmy formularz dodatkowych podmiotów: wpisany NIP nie znika, gdy GUS nie znajdzie kontrahenta, a zmiana ID-Wew nie sugeruje niepotrzebnej aktualizacji kartoteki kontrahenta.
+<img alt="Podmiot3" src="/images/changelog/2-33-podmiot3.png"></img>
 - Akcje na listach: mniej klikania, więcej działania
   - Przenieśliśmy najważniejsze akcje, sumy i licznik pozycji do pływającego panelu, który pojawia się od razu po zaznaczeniu wierszy.
   - Uporządkowaliśmy pełne menu akcji: dodaliśmy kategorie, wyszukiwarkę, lepszą obsługę klawiatury i możliwość pokazania akcji, które są chwilowo niedostępne.
   - Ulepszyliśmy okna wyboru projektu, kategorii produktu, miejsca powstawania kosztów, uczestników wiadomości oraz dodawania wpłaty do faktury.
   - Przebudowaliśmy komunikaty aplikacji w warstwę toastów, która lepiej współpracuje z tabelami, dolną nawigacją i dłuższymi operacjami.
   - Dodaliśmy gest "pociągnij, aby odświeżyć" na kolejnych ekranach mobilnych oraz automatyczne odświeżanie list po powrocie do aplikacji.
+<img alt="Nowe menu akcji" src="/images/changelog/2-33-actions-menu.gif"></img>
 - Ustawienia, które nadążają za firmą
   - Dodaliśmy zmianę adresu e-mail konta bezpośrednio w ustawieniach profilu, z potwierdzeniem kodem wysłanym na nowy adres.
   - Dodaliśmy osobną sekcję logo firmy na fakturach, także z możliwością użycia innego logo dla dokumentów.
@@ -34,13 +37,13 @@ W 2.33 porządkujemy codzienną pracę z dokumentami: od pełnego obiegu not obc
   - Usprawniliśmy odzyskiwanie metadanych KSeF, obsługę limitów oraz trwałą synchronizację dokumentów przychodzących.
   - Poprawiliśmy walidację faktur, numerację oraz eksporty księgowe, w tym obsługę odwrotnego obciążenia i wybranych danych VAT.
   - Umożliwiliśmy wybór rachunku w dowolnej walucie podczas tworzenia płatności i doprecyzowaliśmy komunikaty o polach wymaganych przez bank.
+<img alt="Konfiguracja KSeF" src="/images/changelog/2-33-ksef-sync.png"></img>
 - Powiadomienia: zgłoszenia pod ręką
   - Dodaliśmy zakładkę Zgłoszenia w powiadomieniach oraz rozwijany podgląd treści komunikatów.
   - Umożliwiliśmy otwieranie zgłoszeń bezpośrednio w oknie powiadomień, bez przechodzenia na osobny ekran.
   - Poprawiliśmy zachowanie kosztów oczekujących wyłącznie na weryfikację kontrahenta, dzielenie dokumentów jednostronicowych oraz brakujące tłumaczenia historii kosztów.
   - Naprawiliśmy wybrane problemy z nawigacją, podglądem plików z linku, wyborem opcji w listach rozwijanych i błędami pojawiającymi się w tle.
-
-<img alt="Nowa zakładka Zgłoszenia w centrum powiadomień" src="/images/changelog/2-33-notifications-tickets.gif"></img>
+<img alt="Nowa zakładka Zgłoszenia w centrum powiadomień" src="/images/changelog/2-33-notifications-ticket.png"></img>
 
 ### 2.32.0 - 2026-06-13 - Pakiety, płatności walutowe i wygodniejsza praca z fakturami
 - Płatności
