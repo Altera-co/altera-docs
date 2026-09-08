@@ -3,6 +3,52 @@ title: EN - Changelog
 description: Track every Altera release with detailed notes on new features, improvements, KSeF updates, and bug fixes shipped across web and mobile apps.
 ---
 
+### 2.35.0 - 2026-09-08 - Reconciliation, device management, and easier document handling
+In 2.35, we introduce Reconciliation, which links bank transactions to sales and expense invoices. We also add device management, clearer KSeF information, and improvements to documents and messages.
+
+- New Reconciliation module
+    - We added a list of transactions from connected bank accounts with suggested matches to sales and expense invoices. You can see which transactions are reconciled, need review, or are awaiting a match.
+    - We added a preview of matched documents, amounts, and differences without leaving the list. You can confirm suggestions individually or use advanced features to confirm them in bulk, with a summary of the results.
+    - We added manual document search and match editing, including partial reconciliation and splitting one transaction across several documents. The payment status of each document updates based on the reconciled amounts.
+    - We added an option to create an “Other cost” directly from an outgoing transaction when there is no expense invoice. You can add a description, category, note, and attachment.
+    - We added reconciliation reversal with a required reason and an operation history. The app warns you when a change will affect a manually set document payment status.
+    - We added optional automatic reconciliation for matches with high confidence, with settings for the confidence threshold and percentage tolerance. Ambiguous suggestions remain available for review.
+    - We added search and filters by status, account, date, amount, and transaction direction to help separate incoming and outgoing payments.
+    - The module shows the bank connection status and last synchronization. It also indicates when you need to renew consent for bank data access.
+
+- KSeF: clearer status and easier troubleshooting
+    - We organized the settings for sending and downloading documents. Each download scope has its own status, problem description, and suggested next steps.
+    - We added manual downloads, retries where available, and support reports with synchronization details attached.
+    - We added an option to stop sending new invoices for private individuals to KSeF, while preserving submissions already in progress and related corrections.
+    - We improved download recovery after interruptions and connection errors. Documents with inconsistent financial data or conflicts that need a decision are sent for review.
+    - We improved KSeF error messages in the app language and added support for selecting several KSeF statuses at once in Sales filters.
+
+- Sales, expenses, and exports
+    - We added InsERT EDI++ exports for sales and expense documents and fixed expense exports to Symfonia FK v2.
+    - We added downloads of multiple invoice PDFs in a single ZIP archive.
+    - We added VAT rate descriptions and search in the rate list. We also improved quick advance invoices and blocked combining advances from different orders into one final invoice.
+    - In Expenses, we now show a clear list of extracted document data that needs manual review, including uncertain fields and missing or reconstructed invoice items.
+    - Invoice history now shows more details of recorded payments and KSeF submissions: the paid amount, payment date, KSeF number and status, and submission errors.
+
+- Logged-in devices
+    - We added a logged-in devices screen in Settings. It shows the current session, last activity, operating system, browser, IP address, and approximate location.
+    - We added an option to sign out all devices at once. Signing out a session also applies to other browser tabs that use it.
+
+- Messages and support tickets
+    - We added actions to mark threads as read or closed directly from the list. On mobile, you can swipe or press and hold; on desktop, use the thread menu.
+    - We added a menu inside an open thread to close the conversation, save it, or remove it from saved threads. Changes appear immediately in the list.
+    - We added the option to post replies and additional information in the history of a support ticket.
+
+- Plans and subscriptions
+    - All plans now include unlimited users and access for accountants.
+    - Reconciliation with manual match confirmation is available from the Team plan. Automatic reconciliation and bulk confirmation require the Business plan and the appropriate permissions.
+
+- Fixes and improvements
+    - The unsaved changes dialog shows the changed fields and, for a small number of changes, their previous and new values. We also removed an unnecessary warning when closing an unchanged expense.
+    - Browser tabs and app windows show the open module name or document number, making multiple open views easier to identify.
+    - We fixed saving cleared file categories and document types, period updates after bulk edits, and tag suggestions after switching companies.
+    - We improved suggestion list and dialog positioning at reduced interface scales, text colors after theme changes, and activity, message, and notification dates in the local time zone.
+
 ### 2.34.0 - 2026-08-12 - Altera on mobile, faster advance invoices, and more stable daily work
 In 2.34, we are focusing on everyday work on mobile devices. Documents now open in consistent, more convenient dialogs, key actions remain within easy reach, and forms and navigation behave more predictably. We are also adding a faster way to issue advance invoices, better control over user seats, and stability improvements.
 

@@ -3,6 +3,52 @@ title: PL - Dziennik Zmian
 description: "Pełna historia wydań Altera: nowe funkcje, usprawnienia KSeF, integracje bankowe, poprawki w aplikacji webowej i mobilnej. Sprawdź, co się zmieniło."
 ---
 
+### 2.35.0 - 2026-09-08 - Rozrachunki, kontrola urządzeń i wygodniejsza obsługa dokumentów
+W 2.35 udostępniamy Rozrachunki, które łączą transakcje bankowe z fakturami sprzedażowymi i kosztowymi. Dodajemy też kontrolę zalogowanych urządzeń, czytelniejsze informacje o KSeF oraz usprawnienia pracy z dokumentami i wiadomościami.
+
+- Nowy moduł Rozrachunki
+    - Udostępniliśmy listę transakcji z połączonych rachunków bankowych wraz z propozycjami dopasowania do faktur sprzedażowych i kosztowych. Od razu widać, co jest już rozliczone, co wymaga sprawdzenia i co czeka na dopasowanie.
+    - Dodaliśmy podgląd dopasowanych dokumentów, kwot i różnic bez opuszczania listy. Propozycje można potwierdzać pojedynczo, a w ramach funkcji zaawansowanych także zbiorczo, z podsumowaniem wyniku.
+    - Umożliwiliśmy ręczne wyszukiwanie dokumentów i zmianę dopasowań, w tym rozliczenia częściowe oraz podział jednej transakcji między kilka dokumentów. Status płatności dokumentu aktualizuje się na podstawie rozliczonych kwot.
+    - Dodaliśmy tworzenie „Innego kosztu” bezpośrednio z transakcji wychodzącej, gdy nie ma faktury kosztowej. Można uzupełnić opis, kategorię, notatkę i załącznik.
+    - Dodaliśmy cofanie rozliczenia z podaniem powodu oraz historię operacji. Aplikacja ostrzega, gdy zmiana wpłynie na ręcznie ustawiony status płatności dokumentu.
+    - Dodaliśmy opcjonalne automatyczne rozliczanie bardzo pewnych dopasowań, z ustawianiem progu pewności i tolerancji procentowej. Niejednoznaczne propozycje pozostają do sprawdzenia.
+    - Dodaliśmy wyszukiwanie i filtry według statusu, rachunku, daty, kwoty oraz kierunku transakcji, aby łatwiej oddzielić wpływy od obciążeń.
+    - Moduł pokazuje stan połączenia z bankiem i ostatnią synchronizację oraz wskazuje, kiedy trzeba odnowić zgodę na pobieranie danych.
+
+- KSeF: czytelny status i łatwiejsze rozwiązywanie problemów
+    - Uporządkowaliśmy ustawienia wysyłania i pobierania dokumentów. Każdy zakres pobierania ma własny status, opis problemu i wskazówki dotyczące dalszego działania.
+    - Dodaliśmy ręczne uruchamianie pobierania, ponawianie operacji tam, gdzie jest to możliwe, oraz zgłoszenie problemu z dołączonym kontekstem synchronizacji.
+    - Dodaliśmy możliwość wyłączenia wysyłania nowych faktur dla osób prywatnych do KSeF, z zachowaniem obsługi rozpoczętych wysyłek i powiązanych korekt.
+    - Usprawniliśmy wznawianie pobierania po przerwach i błędach połączenia. Dokumenty z niespójnymi danymi finansowymi lub konfliktami wymagającymi decyzji trafiają do weryfikacji.
+    - Poprawiliśmy wyświetlanie błędów KSeF w języku aplikacji oraz dodaliśmy wybór kilku statusów KSeF jednocześnie w filtrach Sprzedaży.
+
+- Sprzedaż, koszty i eksporty
+    - Dodaliśmy eksport dokumentów sprzedażowych i kosztowych do InsERT EDI++ oraz poprawiliśmy eksport kosztów do Symfonia FK v2.
+    - Umożliwiliśmy pobieranie wielu faktur PDF jednocześnie w jednej paczce ZIP.
+    - Dodaliśmy opisy stawek VAT i wyszukiwanie na liście stawek. Poprawiliśmy też szybkie wystawianie zaliczek i zablokowaliśmy łączenie zaliczek z różnych zamówień w jedną fakturę końcową.
+    - W Kosztach pokazujemy czytelną listę danych rozpoznanych z dokumentu, które wymagają ręcznej weryfikacji, w tym niepewne pola oraz brakujące lub odtworzone pozycje faktury.
+    - Historia faktury pokazuje teraz więcej szczegółów dodanej wpłaty i wysyłki do KSeF: opłaconą kwotę, datę płatności, numer i status KSeF oraz przyczynę nieudanej wysyłki.
+
+- Zalogowane urządzenia
+    - Udostępniliśmy ekran zalogowanych urządzeń w Ustawieniach. Pokazuje bieżącą sesję, ostatnią aktywność, system, przeglądarkę, adres IP i przybliżoną lokalizację.
+    - Dodaliśmy możliwość wylogowania wszystkich urządzeń jednocześnie. Wylogowanie tej samej sesji jest uwzględniane również w pozostałych kartach przeglądarki.
+
+- Wiadomości i zgłoszenia
+    - Dodaliśmy oznaczanie wątków jako przeczytane lub zakończone bezpośrednio na liście. Na telefonie można korzystać z gestów przesunięcia i przytrzymania, a na komputerze z menu wątku.
+    - Dodaliśmy menu w otwartym wątku, które pozwala zakończyć rozmowę oraz dodać ją do zapisanych lub usunąć z zapisanych. Zmiany są od razu widoczne na liście.
+    - Umożliwiliśmy dopisywanie odpowiedzi i dodatkowych informacji w historii zgłoszenia do pomocy technicznej.
+
+- Pakiety i subskrypcje
+    - Wszystkie pakiety obejmują teraz nielimitowaną liczbę użytkowników i dostęp dla księgowych.
+    - Rozrachunki z ręcznym potwierdzaniem dopasowań są dostępne od pakietu Team. Automatyczne rozliczanie i zbiorcze potwierdzanie wymagają pakietu Business oraz odpowiednich uprawnień.
+
+- Poprawki i usprawnienia
+    - Okno ostrzegające o niezapisanych zmianach pokazuje zmienione pola, a przy niewielkiej liczbie zmian również ich poprzednie i nowe wartości. Usunęliśmy też niepotrzebne ostrzeżenie przy zamykaniu niezmienionego kosztu.
+    - Karty przeglądarki i okna aplikacji pokazują nazwę otwartego modułu lub numer dokumentu, dzięki czemu łatwiej rozróżnić kilka otwartych widoków.
+    - Poprawiliśmy zapisywanie wyczyszczonej kategorii i typu pliku, odświeżanie okresu po masowej edycji oraz podpowiedzi tagów po zmianie firmy.
+    - Dopracowaliśmy położenie list podpowiedzi i okien przy zmniejszonej skali interfejsu, kolory tekstu po zmianie motywu oraz daty aktywności, wiadomości i powiadomień w lokalnej strefie czasowej.
+
 ### 2.34.0 - 2026-08-12 - Mobilna Altera, szybsze zaliczki i bardziej stabilna praca
 W 2.34 skupiamy się na codziennej pracy na telefonie. Dokumenty otwierają się w spójnych i wygodniejszych oknach, najważniejsze akcje pozostają pod ręką, a formularze i nawigacja działają bardziej przewidywalnie. Dodajemy również szybsze wystawianie zaliczek, lepszą kontrolę miejsc dla użytkowników i poprawki stabilności.
 
