@@ -1862,7 +1862,7 @@
                 "operationId": "post-sales",
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Invoice saved. HTTP 200 confirms the save, not acceptance by KSeF. A failed immediate submission can be reported in optional data.ksefWarning, data.ksefErrorMessage and data.ksefReason fields.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1882,6 +1882,18 @@
                                                                 "id": "ng63zj0yg4qvv"
                                                             },
                                                             "example": 12413
+                                                        },
+                                                        "ksefWarning": {
+                                                            "type": "string",
+                                                            "description": "Optional warning when immediate KSeF submission returns an unsuccessful result after the invoice was saved."
+                                                        },
+                                                        "ksefErrorMessage": {
+                                                            "type": "string",
+                                                            "description": "Optional KSeF failure details. The invoice identified by invoiceId is already saved."
+                                                        },
+                                                        "ksefReason": {
+                                                            "type": "string",
+                                                            "description": "Optional machine-readable reason, for example KSEF_SUBMISSION_FAILED or KSEF_PRIVATE_PERSON_SEND_DISABLED. Treat this as an open set of values."
                                                         }
                                                     }
                                                 }
@@ -4078,6 +4090,30 @@
                                 }
                             }
                         }
+                    },
+                    "vatExemptionReason": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 50,
+                        "enum": [
+                            "Zwolnienie podmiotowe z art. 113 ust. 1 i 9",
+                            "Zwolnienie przedmiotowe z art. 43 ust. 1",
+                            "Zwolnienie przedmiotowe z art. 82 ust. 3"
+                        ],
+                        "description": "Legal basis for VAT exemption selected for an invoice containing a line with the `zw` VAT rate."
+                    },
+                    "vatExemptionReasonDetailed": {
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 500,
+                        "description": "Optional detailed wording shown on the invoice below the selected VAT exemption legal basis."
+                    },
+                    "additionalParties": {
+                        "type": "array",
+                        "description": "Additional parties, including a separate recipient (Podmiot3). Each entry is a snapshot; contractor continues to identify the buyer.",
+                        "items": {
+                            "$ref": "#/components/schemas/InvoiceAdditionalParty"
+                        }
                     }
                 },
                 "description": "Invoice model for objects returned from server"
@@ -4274,7 +4310,7 @@
                     },
                     "sendToKSEF": {
                         "type": "boolean",
-                        "description": "Submit the invoice to KSeF during save.",
+                        "description": "Request immediate KSeF submission after saving an eligible ISSUED or SENT invoice. Defaults to false; false does not disable normal automatic KSeF processing. Requires KSeF and outgoing submission enabled for the company and an eligible invoice. Does not issue a DRAFT or guarantee KSeF acceptance. Inspect data.ksefWarning, data.ksefErrorMessage and data.ksefReason even on HTTP 200, then check the saved invoice KSeF status. Not allowed for PRO_FORMA, ORDER or DEBIT_NOTE. See the endpoint guide for examples and retry handling.",
                         "default": false
                     },
                     "basicInformation": {
@@ -4493,6 +4529,21 @@
                         "type": "string",
                         "description": "Additional information regarding the reason behing correcting your invoice"
                     },
+                    "vatExemptionReason": {
+                        "type": "string",
+                        "maxLength": 50,
+                        "enum": [
+                            "Zwolnienie podmiotowe z art. 113 ust. 1 i 9",
+                            "Zwolnienie przedmiotowe z art. 43 ust. 1",
+                            "Zwolnienie przedmiotowe z art. 82 ust. 3"
+                        ],
+                        "description": "Required when at least one invoicePosition item uses the `zw` VAT rate. The selected value is used as the VAT exemption legal basis and is submitted to KSeF as P_19A."
+                    },
+                    "vatExemptionReasonDetailed": {
+                        "type": "string",
+                        "maxLength": 500,
+                        "description": "Optional detailed wording shown on the invoice below vatExemptionReason. It does not replace the required vatExemptionReason value."
+                    },
                     "payments": {
                         "type": "object",
                         "properties": {
@@ -4519,9 +4570,137 @@
                                 "type": "boolean"
                             }
                         }
+                    },
+                    "additionalParties": {
+                        "type": "array",
+                        "description": "Additional parties, including a separate recipient (Podmiot3). Each entry is a snapshot; contractor continues to identify the buyer.",
+                        "items": {
+                            "$ref": "#/components/schemas/InvoiceAdditionalParty"
+                        }
                     }
                 },
                 "description": ""
+            },
+            "InvoiceAdditionalParty": {
+                "type": "object",
+                "description": "Snapshot of an additional invoice party (Podmiot3). The buyer remains in contractor. Provide the party name, role, address and applicable tax identity for invoicing and KSeF export.",
+                "properties": {
+                    "semanticRole": {
+                        "type": "string",
+                        "enum": [
+                            "FACTOR",
+                            "RECIPIENT",
+                            "BRANCH",
+                            "ORIGINAL_ENTITY",
+                            "ADDITIONAL_BUYER",
+                            "ISSUER",
+                            "PAYEE",
+                            "JST_ISSUER",
+                            "JST_RECIPIENT",
+                            "VAT_GROUP_ISSUER",
+                            "VAT_GROUP_RECIPIENT",
+                            "EMPLOYEE",
+                            "OTHER"
+                        ],
+                        "description": "Role of this additional party (Podmiot3). Use RECIPIENT for a separate invoice recipient. JST_RECIPIENT has distinct KSeF semantics; do not select it solely because the recipient is a school."
+                    },
+                    "internalId": {
+                        "type": "string",
+                        "nullable": true,
+                        "pattern": "^[0-9]{5}$",
+                        "description": "Optional five-digit suffix, preserving leading zeros. KSeF export requires a Polish 10-digit NIP and Polish country and emits IDWew as NIP-internalId, for example 5260250274-00123."
+                    },
+                    "contractorType": {
+                        "type": "string",
+                        "enum": [
+                            "COMPANY",
+                            "PRIVATE_PERSON"
+                        ]
+                    },
+                    "contractorRegion": {
+                        "type": "string",
+                        "enum": [
+                            "POLAND",
+                            "EU",
+                            "OUTSIDE_OF_EU"
+                        ]
+                    },
+                    "contractorName": {
+                        "type": "string",
+                        "maxLength": 255
+                    },
+                    "taxIdentificationNumber": {
+                        "type": "string",
+                        "maxLength": 45
+                    },
+                    "city": {
+                        "type": "string",
+                        "maxLength": 100
+                    },
+                    "street": {
+                        "type": "string",
+                        "maxLength": 100
+                    },
+                    "houseNumber": {
+                        "type": "string",
+                        "maxLength": 20
+                    },
+                    "flatNumber": {
+                        "type": "string",
+                        "maxLength": 20
+                    },
+                    "postCode": {
+                        "type": "string",
+                        "maxLength": 10
+                    },
+                    "email": {
+                        "type": "string",
+                        "maxLength": 500
+                    },
+                    "phoneNumber": {
+                        "type": "string",
+                        "maxLength": 45
+                    },
+                    "areaNumber": {
+                        "type": "string",
+                        "maxLength": 5
+                    },
+                    "roleOther": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "description": "Description of the role when semanticRole is OTHER; exported as OpisRoli with RolaInna=1."
+                    },
+                    "extraInfo": {
+                        "type": "string",
+                        "maxLength": 255
+                    },
+                    "country": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 2
+                    },
+                    "tinCountry": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 2
+                    },
+                    "defaultCurrency": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 3
+                    },
+                    "partyOrder": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "description": "Optional display order; defaults to the zero-based position in additionalParties."
+                    },
+                    "sharePercent": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 100,
+                        "description": "Optional share percentage for the additional party."
+                    }
+                }
             },
             "InvoiceProduct": {
                 "x-examples": {

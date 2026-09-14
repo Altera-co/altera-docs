@@ -2,3 +2,145 @@
 openapi: post /sales/invoice
 description: "Create or update a sales invoice in Altera via the OpenAPI. Set basicInformation.statusId to ISSUED to issue, or save the document as a draft."
 ---
+
+## VAT-exempt invoices
+
+If at least one invoice item uses the `"vat": "zw"` rate, provide `vatExemptionReason` at the top level of the request, alongside `invoicePosition`, `additionalDetails`, and `payments`.
+
+The field accepts exactly one of these three values:
+
+- `Zwolnienie podmiotowe z art. 113 ust. 1 i 9`
+- `Zwolnienie przedmiotowe z art. 43 ust. 1`
+- `Zwolnienie przedmiotowe z art. 82 ust. 3`
+
+`vatExemptionReasonDetailed` is optional. It accepts up to 500 characters of additional wording displayed on the invoice below the selected legal basis. It does not replace `vatExemptionReason`. Altera submits `vatExemptionReason` to KSeF as P_19A.
+
+The following request fragment shows an invoice item using the `zw` rate:
+
+```json
+{
+  "invoicePosition": [
+    {
+      "productName": "VAT-exempt service",
+      "positionType": "SERVICE",
+      "quantity": 1,
+      "unit": "szt.",
+      "unitNetPrice": 100,
+      "unitGrossPrice": 100,
+      "vat": "zw",
+      "discount": 0
+    }
+  ],
+  "vatExemptionReason": "Zwolnienie przedmiotowe z art. 43 ust. 1",
+  "vatExemptionReasonDetailed": "Optional detailed wording of the legal basis"
+}
+```
+
+When updating an existing invoice, use the same fields and provide the document identifier in `basicInformation.invoiceId`. If the invoice has no item using the `zw` rate, omit both fields.
+
+## Separate recipients and other additional parties
+
+Keep the buyer in `contractor`. Add a separate recipient to the top-level `additionalParties` array, alongside `contractor`, `basicInformation` and `payments`. These are structured invoice parties (Podmiot3 in KSeF), rather than text in `additionalDetails` or `contractor.houseNumber`.
+
+The following request fragment adds a recipient. Replace the illustrative name, address and tax identity with the actual party data:
+
+```json
+{
+  "additionalParties": [
+    {
+      "semanticRole": "RECIPIENT",
+      "contractorName": "Example recipient",
+      "contractorType": "COMPANY",
+      "contractorRegion": "POLAND",
+      "country": "PL",
+      "taxIdentificationNumber": "5260250274",
+      "internalId": "00123",
+      "street": "Przykładowa",
+      "houseNumber": "28",
+      "city": "Warszawa",
+      "postCode": "00-001"
+    }
+  ]
+}
+```
+
+`semanticRole` accepts the following values:
+
+| Value | Meaning |
+| --- | --- |
+| `FACTOR` | Factor |
+| `RECIPIENT` | Recipient |
+| `BRANCH` | Branch / recipient |
+| `ORIGINAL_ENTITY` | Original entity |
+| `ADDITIONAL_BUYER` | Additional buyer |
+| `ISSUER` | Invoice issuer |
+| `PAYEE` | Party making the payment (KSeF role 6) |
+| `JST_ISSUER` | Local government unit issuer |
+| `JST_RECIPIENT` | Local government unit recipient |
+| `VAT_GROUP_ISSUER` | VAT group member issuing the invoice |
+| `VAT_GROUP_RECIPIENT` | VAT group member receiving the invoice |
+| `EMPLOYEE` | Employee |
+| `OTHER` | Other role; provide its description in `roleOther` |
+
+Use `RECIPIENT` for an ordinary separate recipient. Do not automatically select `JST_RECIPIENT` just because the recipient is a school: choose the role that matches the actual local government arrangement, because it changes the KSeF mapping.
+
+`internalId` is optional. When used, send a string containing exactly five digits, including any leading zeros. It is the suffix, not the complete KSeF identifier. For Podmiot3 export it requires a Polish 10-digit NIP and Polish country; the example produces `IDWew` equal to `5260250274-00123`. Omit `internalId` when the party does not use an internal identifier.
+
+Address fields belong to this additional party. `houseNumber` contains only the building number (maximum 20 characters), and `postCode` contains the postal code. Do not combine buyer and recipient addresses in one field.
+
+For an update, provide `basicInformation.invoiceId` together with the intended invoice data and additional parties. This does not retroactively correct previously issued documents; invoices already submitted to or accepted by KSeF have content-edit restrictions and may require a correction invoice. The legacy alias `additionalContractors` is also accepted; use `additionalParties` for new integrations and avoid sending both.
+
+## Immediate KSeF submission
+
+Set the top-level boolean `sendToKSEF` to `true` to request submission during the save flow, after the invoice has been persisted. To issue a new invoice and request immediate submission, use this fragment together with the remaining required buyer, line-item and payment data:
+
+```json
+{
+  "sendToKSEF": true,
+  "basicInformation": {
+    "invoiceType": "SALES",
+    "invoiceFormat": "%N/%M/%Y",
+    "statusId": "ISSUED",
+    "issueDate": "2026-09-14",
+    "saleDate": "2026-09-14",
+    "priceTypeId": "NET"
+  }
+}
+```
+
+- The default is `false`. Omitting the flag or sending `false` does not request immediate submission, but does not disable normal automatic KSeF processing. Eligible invoices can still enter the pending workflow.
+- The flag does not issue a draft. The invoice must be `ISSUED` or `SENT`; a draft is not submitted.
+- KSeF integration and outgoing submission must be enabled for the company. The flag does not override company settings, private-person invoice policy or KSeF validation. If the integration or outgoing submission is disabled, the save flow can skip submission without returning a KSeF warning.
+- `sendToKSEF: true` is rejected for `PRO_FORMA`, `ORDER` and `DEBIT_NOTE`.
+- The compatibility spelling `sendToKsef` is also accepted. Prefer `sendToKSEF`; if both are sent, their values must agree.
+
+### Save success is not KSeF acceptance
+
+A normal save returns HTTP `200` with the saved invoice identifier:
+
+```json
+{
+  "result": "OK",
+  "data": {
+    "invoiceId": 12413
+  }
+}
+```
+
+When immediate submission returns an unsuccessful result after saving, the endpoint still returns HTTP `200` and `result: "OK"`, with optional KSeF details. For example:
+
+```json
+{
+  "result": "OK",
+  "data": {
+    "invoiceId": 12413,
+    "ksefWarning": "Wysyłka faktur dla osób prywatnych do KSeF jest wyłączona w ustawieniach firmy.",
+    "ksefErrorMessage": "Wysyłka faktur dla osób prywatnych do KSeF jest wyłączona w ustawieniach firmy.",
+    "ksefReason": "KSEF_PRIVATE_PERSON_SEND_DISABLED"
+  }
+}
+```
+
+Inspect `ksefWarning`, `ksefErrorMessage` and `ksefReason` even on HTTP `200`. Reason codes are an open set; another possible value is `KSEF_SUBMISSION_FAILED`. Absence of these fields is not proof of KSeF acceptance. Retrieve the saved invoice through [Get invoice data](/openapi/sales/get-invoice-data) and inspect `ksef.ksefStatus`, `ksef.ksefId` and any `ksef.ksefErrorMessage`.
+
+Keep the returned `invoiceId`. Do not create the same invoice again because KSeF submission failed. Resolve the KSeF issue and use the existing invoice's submission/retry workflow. For request validation errors, correct the input before retrying; do not repeatedly resend the same invalid payload. This warning response describes unsuccessful submission results after save; other validation or processing failures can still return an error response.
