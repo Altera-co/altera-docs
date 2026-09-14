@@ -90,6 +90,35 @@ Address fields belong to this additional party. `houseNumber` contains only the 
 
 For an update, provide `basicInformation.invoiceId` together with the intended invoice data and additional parties. This does not retroactively correct previously issued documents; invoices already submitted to or accepted by KSeF have content-edit restrictions and may require a correction invoice. The legacy alias `additionalContractors` is also accepted; use `additionalParties` for new integrations and avoid sending both.
 
+## Assigning a project to an invoice
+
+Use the singular top-level `project` object in `POST /sales/invoice`, alongside `basicInformation`, `contractor` and `payments`. One project is assigned to the invoice. The following fragment must be combined with the remaining invoice data:
+
+```json
+{
+  "project": {
+    "tagId": 161,
+    "name": "Website implementation",
+    "enabled": true,
+    "color": 4286963618
+  }
+}
+```
+
+Use the actual project object from the same company. `tagId` identifies the existing project; `name`, `enabled` and `color` are also required by invoice validation. Sending only `{ "tagId": 161 }` is insufficient. The name must be nonempty, `enabled` is a boolean, and `color` is the project's numeric ARGB value (4278190080–4294967295).
+
+Saving an invoice does not create a project from its name. If necessary, first create the project using [Add/modify a project](/openapi/configuration/addmodify-a-project) (`POST /company/projects`), then use the returned project data including its `tagId` when saving the invoice.
+
+For an existing invoice, include `basicInformation.invoiceId` and the intended invoice data:
+
+- To retain the assignment, send the current `project` again.
+- To change it, send the new project object.
+- To remove it, omit `project` from the update payload. This endpoint is not a partial PATCH that preserves every omitted field. `project: null` is not accepted.
+
+The sales save flow copies the header project to all invoice line items, replacing line-level project values. Removing the header project also clears line-level assignments. Set the project at the invoice level rather than trying to assign different projects per sales line.
+
+Do not send `projects: []`, an array of projects, or a project name as a plain string. The current request validator expects `project` to be an object and rejects the unknown top-level field `projects`.
+
 ## Immediate KSeF submission
 
 Set the top-level boolean `sendToKSEF` to `true` to request submission during the save flow, after the invoice has been persisted. To issue a new invoice and request immediate submission, use this fragment together with the remaining required buyer, line-item and payment data:

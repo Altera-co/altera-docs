@@ -1990,7 +1990,12 @@
                                             "bankAccountNumber": "10 1010 1062 5565 1561 5615 1516",
                                             "isSplitPayment": false
                                         },
-                                        "projects": []
+                                        "project": {
+                                            "tagId": 161,
+                                            "name": "Website implementation",
+                                            "enabled": true,
+                                            "color": 4286963618
+                                        }
                                     }
                                 }
                             }
@@ -4179,7 +4184,12 @@
                             "bankAccountNumber": "10 1010 1062 5565 1561 5615 1516",
                             "isSplitPayment": false
                         },
-                        "projects": []
+                        "project": {
+                            "tagId": 161,
+                            "name": "Website implementation",
+                            "enabled": true,
+                            "color": 4286963618
+                        }
                     }
                 },
                 "examples": [
@@ -4576,6 +4586,44 @@
                         "description": "Additional parties, including a separate recipient (Podmiot3). Each entry is a snapshot; contractor continues to identify the buyer.",
                         "items": {
                             "$ref": "#/components/schemas/InvoiceAdditionalParty"
+                        }
+                    },
+                    "project": {
+                        "description": "Single project assigned to the invoice. Pass an existing project from the same company, including tagId, name, enabled and color. Assignment is persisted by tagId; saving an invoice does not create a project. On update, resend project to retain the assignment; omitting it removes the assignment. The header project is propagated to sales line items. Use project, not projects.",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/InvoiceTag"
+                            },
+                            {
+                                "type": "object",
+                                "required": [
+                                    "tagId",
+                                    "name",
+                                    "enabled",
+                                    "color"
+                                ],
+                                "properties": {
+                                    "tagId": {
+                                        "type": "integer",
+                                        "minimum": 1
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "minLength": 1
+                                    },
+                                    "color": {
+                                        "type": "number",
+                                        "minimum": 4278190080,
+                                        "maximum": 4294967295
+                                    }
+                                }
+                            }
+                        ],
+                        "example": {
+                            "tagId": 161,
+                            "name": "Website implementation",
+                            "enabled": true,
+                            "color": 4286963618
                         }
                     }
                 },
