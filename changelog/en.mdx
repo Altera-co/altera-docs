@@ -3,6 +3,37 @@ title: EN - Changelog
 description: Track every Altera release with detailed notes on new features, improvements, KSeF updates, and bug fixes shipped across web and mobile apps.
 ---
 
+### 2.35.3 - 2026-09-14 - Invoice, reconciliation, and payment fixes
+This maintenance release focuses on correct document reconciliation, reliable data saving, and easier daily work.
+
+- Sales and expenses
+    - We fixed how final invoices for advance payments are filled in. For advances linked to an order, the form uses its items and shows the remaining amount instead of copying the first advance invoice value.
+    - Invoices created from other documents now use company defaults for the payment method, language, and VAT exemption basis. If the source document has no bank account, the form suggests the default account.
+    - We fixed saving and displaying the reason for issuing a debit note when editing it.
+    - We improved adding a seller to trusted contractors directly from an expense, even without an existing contractor record. Data differences and missing GUS records require confirmation. The selected payment method and terms, including 0 days, now save correctly.
+    - We standardized the product category name limit at 45 characters, including categories on invoice items. We also improved item name length checks before draft autosave, including after pasting a table.
+    - We improved contractor type recognition when extracting data from documents.
+
+- Reconciliation
+    - We separated selected matches from alternative and rejected suggestions. Alternatives no longer increase the reconciled total or get confirmed automatically.
+    - We fixed foreign currency reconciliation: amounts in the transaction currency and document currency remain separate. We also aligned how filters and matches identify incoming and outgoing transactions.
+    - We fixed reversing an “Other cost” reconciliation so that the other matches for the transaction remain intact.
+
+- Payments, banks, and KSeF
+    - We fixed payment filters for package type and data completeness. The list no longer omits matching payments whose package type is determined automatically.
+    - Recipient fields show a character counter as the limit approaches. Values that are too long are flagged next to the field before the payment file is generated.
+    - We improved operation type codes in MT940 bank statement exports, including bank fees, SORBNET transfers, and VAT account operations.
+    - We fixed the start of KSeF invoice downloads after the integration is activated.
+
+- Plans and subscriptions
+    - We simplified the subscription view and comparison of Solo, Team, and Business plans. We clarified that Business includes Team features plus additional automation and analytics.
+    - We removed misleading user, bank, and OCR document limits from the plan comparison. The OCR usage counter remains visible with information about the soft limit.
+
+- Fixes and improvements
+    - When a remembered account session expires, the sign-in screen keeps the email address to make signing in again easier.
+    - Expanding a group in Settings no longer switches the open page automatically. Changes to your own permissions immediately update the available modules and actions.
+    - We hid the Back button when there is no previous view and added error code copying from messages and notifications to make reporting problems easier.
+
 ### 2.35.0 - 2026-09-08 - Reconciliation, device management, and easier document handling
 In 2.35, we introduce Reconciliation, which links bank transactions to sales and expense invoices. We also add device management, clearer KSeF information, and improvements to documents and messages.
 

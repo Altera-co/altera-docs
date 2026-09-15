@@ -3,6 +3,37 @@ title: PL - Dziennik Zmian
 description: "Pełna historia wydań Altera: nowe funkcje, usprawnienia KSeF, integracje bankowe, poprawki w aplikacji webowej i mobilnej. Sprawdź, co się zmieniło."
 ---
 
+### 2.35.3 - 2026-09-14 - Poprawki faktur, rozrachunków i płatności
+Wydanie poprawkowe skupione na prawidłowym rozliczaniu dokumentów, zapisywaniu danych i wygodniejszej codziennej pracy.
+
+- Sprzedaż i koszty
+    - Naprawiliśmy wypełnianie faktur końcowych do zaliczek. Dla zaliczek powiązanych z zamówieniem formularz korzysta z jego pozycji i pokazuje pozostałą kwotę do rozliczenia, zamiast kopiować wartość pierwszej zaliczki.
+    - Faktury tworzone z innych dokumentów uwzględniają teraz firmowe ustawienia formy płatności, języka i podstawy zwolnienia z VAT. Jeśli dokument źródłowy nie wskazuje rachunku bankowego, formularz podpowiada rachunek domyślny.
+    - Poprawiliśmy zapisywanie i wyświetlanie powodu wystawienia noty obciążeniowej podczas edycji.
+    - Usprawniliśmy dodawanie sprzedawcy do zaufanych bezpośrednio z kosztu, także bez wcześniejszego wpisu w kartotece. Różnice danych i brak wpisu w GUS wymagają potwierdzenia, a wybrana metoda płatności i termin, również 0 dni, zapisują się poprawnie.
+    - Ujednoliciliśmy limit nazw kategorii produktów do 45 znaków, także przy pozycjach faktury. Poprawiliśmy kontrolę długości nazw pozycji przed automatycznym zapisem szkicu, również po wklejeniu tabeli.
+    - Poprawiliśmy rozpoznawanie rodzaju kontrahenta podczas odczytywania danych z dokumentów.
+
+- Rozrachunki
+    - Oddzieliliśmy wybrane dopasowania od propozycji alternatywnych i odrzuconych. Alternatywy nie zwiększają już sumy rozliczenia ani nie są automatycznie potwierdzane.
+    - Poprawiliśmy rozliczenia walutowe: kwota w walucie transakcji i kwota w walucie dokumentu są zachowywane osobno. Ujednoliciliśmy również rozpoznawanie wpływów i obciążeń w filtrach i dopasowaniach.
+    - Poprawiliśmy cofanie rozliczenia „Innego kosztu”, tak aby zachować pozostałe dopasowania tej transakcji.
+
+- Płatności, banki i KSeF
+    - Naprawiliśmy filtrowanie płatności według typu paczki i kompletności danych. Lista nie pomija już pasujących płatności, dla których typ paczki jest ustalany automatycznie.
+    - Pola danych odbiorcy pokazują licznik znaków przy zbliżaniu się do limitu. Zbyt długie wartości są wskazywane przy polu przed wygenerowaniem paczki płatności.
+    - Poprawiliśmy oznaczanie rodzajów operacji w eksportach wyciągów MT940, w tym opłat bankowych, przelewów SORBNET i operacji na rachunkach VAT.
+    - Poprawiliśmy uruchamianie pobierania faktur z KSeF po aktywacji integracji.
+
+- Pakiety i subskrypcje
+    - Uprościliśmy widok subskrypcji i porównanie pakietów Solo, Team i Business. Doprecyzowaliśmy, że Business obejmuje funkcje Team oraz dodatkowe automatyzacje i analizy.
+    - Usunęliśmy z porównania pakietów mylące informacje o limitach użytkowników, banków i liczbie dokumentów OCR. Pozostawiliśmy licznik wykorzystania OCR z informacją o miękkim limicie.
+
+- Poprawki i usprawnienia
+    - Po wygaśnięciu sesji zapamiętanego konta ekran logowania zachowuje adres e-mail, aby ułatwić ponowne zalogowanie.
+    - Rozwijanie grup w Ustawieniach nie przełącza już samoczynnie otwartej strony. Zmiana własnych uprawnień od razu odświeża dostępne moduły i akcje.
+    - Ukryliśmy przycisk Wstecz, gdy nie ma poprzedniego widoku, oraz umożliwiliśmy kopiowanie kodu błędu z komunikatów i powiadomień, aby ułatwić zgłoszenie problemu.
+
 ### 2.35.0 - 2026-09-08 - Rozrachunki, kontrola urządzeń i wygodniejsza obsługa dokumentów
 W 2.35 udostępniamy Rozrachunki, które łączą transakcje bankowe z fakturami sprzedażowymi i kosztowymi. Dodajemy też kontrolę zalogowanych urządzeń, czytelniejsze informacje o KSeF oraz usprawnienia pracy z dokumentami i wiadomościami.
 
