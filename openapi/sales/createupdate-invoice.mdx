@@ -107,6 +107,8 @@ Use the singular top-level `project` object in `POST /sales/invoice`, alongside 
 
 Use the actual project object from the same company. `tagId` identifies the existing project; `name`, `enabled` and `color` are also required by invoice validation. Sending only `{ "tagId": 161 }` is insufficient. The name must be nonempty, `enabled` is a boolean, and `color` is the project's numeric ARGB value (4278190080–4294967295).
 
+Fetch existing projects using [List projects](/openapi/configuration/list-projects) (`GET /company/projects`, or `GET /company/projects?onlyActive=1` for active projects), find the desired project by name in `data`, and use its complete object as `project`.
+
 Saving an invoice does not create a project from its name. If necessary, first create the project using [Add/modify a project](/openapi/configuration/addmodify-a-project) (`POST /company/projects`), then use the returned project data including its `tagId` when saving the invoice.
 
 For an existing invoice, include `basicInformation.invoiceId` and the intended invoice data:

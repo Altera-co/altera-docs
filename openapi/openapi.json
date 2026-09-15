@@ -3382,6 +3382,82 @@
             }
         },
         "/company/projects": {
+            "get": {
+                "summary": "List projects",
+                "operationId": "get-company-projects",
+                "description": "List projects belonging to the company identified by the Authorization API key. Returns active and disabled projects by default. Use onlyActive=1 to return only active projects. Find the desired project by name in data and pass its complete object as project when saving a sales invoice; tagId is the project identifier. No companyId parameter is needed.",
+                "tags": [
+                    "Configuration"
+                ],
+                "parameters": [
+                    {
+                        "name": "onlyActive",
+                        "in": "query",
+                        "required": false,
+                        "description": "Set to 1 to return only active projects. Omit or set to 0 to include disabled projects.",
+                        "schema": {
+                            "type": "integer",
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "default": 0
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Company projects. data is an empty array when no projects match.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "result",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "result": {
+                                            "type": "string",
+                                            "enum": [
+                                                "OK"
+                                            ]
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/InvoiceTag"
+                                            }
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "Projects": {
+                                        "value": {
+                                            "result": "OK",
+                                            "data": [
+                                                {
+                                                    "tagId": 123,
+                                                    "name": "Grow",
+                                                    "enabled": true,
+                                                    "color": 4286963618
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "No projects": {
+                                        "value": {
+                                            "result": "OK",
+                                            "data": []
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "summary": "Add/modify a project",
                 "operationId": "post-company-projects",

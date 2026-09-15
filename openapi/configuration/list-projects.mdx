@@ -1,0 +1,35 @@
+---
+openapi: get /company/projects
+description: "List company projects and obtain the project object needed to assign a sales invoice."
+---
+
+The endpoint returns projects for the company associated with your `Authorization` API key. You do not need to send a `companyId`.
+
+## List projects
+
+`GET /company/projects` returns active and disabled projects. Use `GET /company/projects?onlyActive=1` to return only active projects; omitting the filter or using `onlyActive=0` includes disabled projects.
+
+Each item in `data` contains `tagId`, `name`, `enabled` and `color`. `tagId` identifies the project, and `color` is its numeric ARGB value. When no projects match, the response is `{ "result": "OK", "data": [] }`.
+
+## Assign Grow to a draft invoice
+
+1. Fetch the projects and find the item whose `name` is `Grow` in `data`. There is no server-side name filter.
+2. Copy that complete object into the top-level `project` field of your `POST /sales/invoice` request.
+3. Set `basicInformation.statusId` to `DRAFT` to save a draft. For an existing draft, also include `basicInformation.invoiceId` and the intended invoice data.
+
+The following fragment must be combined with the remaining invoice data. Replace the illustrative values with the project returned for your company:
+
+```json
+{
+  "project": {
+    "tagId": 123,
+    "name": "Grow",
+    "enabled": true,
+    "color": 4286963618
+  }
+}
+```
+
+Invoice validation requires `name`, `enabled` and `color` in addition to the existing project's `tagId`. Sending only an ID, a name, or a `projects` array is insufficient. Include `project` again on subsequent saves to retain the assignment; omitting it removes the assignment.
+
+See [Create/update an invoice](/openapi/sales/createupdate-invoice) for the full invoice contract. If the project does not exist, create it using [Add/modify a project](/openapi/configuration/addmodify-a-project) before assigning it to an invoice.
