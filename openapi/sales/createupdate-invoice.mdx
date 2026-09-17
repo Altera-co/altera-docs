@@ -3,6 +3,16 @@ openapi: post /sales/invoice
 description: "Create or update a sales invoice in Altera via the OpenAPI. Set basicInformation.statusId to ISSUED to issue, or save the document as a draft."
 ---
 
+## Calendar dates
+
+Send `basicInformation.issueDate`, `basicInformation.saleDate`, `payments.dueDate` and optional `payments.paymentDate` as strings in `YYYY-MM-DD` format, for example `"2026-09-14"`. These fields represent calendar dates without a time or time zone. Do not convert them to UTC or serialize them with `toISOString()`.
+
+For example, if the invoice date is September 15, send `"2026-09-15"`, rather than `"2026-09-14T22:00:00Z"`. Use the same date regardless of the client's time zone. Timestamps representing an event time have different semantics and can include a time zone.
+
+Legacy date-time inputs may still be accepted for compatibility. Non-midnight values can be converted to the calendar date in `Europe/Warsaw`; the save response does not include a warning about that conversion. With strict date validation enabled, non-midnight date-time values are rejected with HTTP 400 and `validationErrors[].code = "DATE_REQUIRES_LOCAL_DATE"`. Legacy midnight values are still accepted without changing their written date. Always send `YYYY-MM-DD` for new integrations.
+
+Validation errors include an English description in `errorMessage`, a Polish description in `errorMessagePL`, and the affected field in `validationErrors[].field`.
+
 ## VAT-exempt invoices
 
 If at least one invoice item uses the `"vat": "zw"` rate, provide `vatExemptionReason` at the top level of the request, alongside `invoicePosition`, `additionalDetails`, and `payments`.

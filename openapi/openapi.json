@@ -1916,6 +1916,23 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "Calendar date required": {
+                                        "summary": "A date-time value rejected by strict date validation",
+                                        "value": {
+                                            "result": "Error",
+                                            "errorMessage": "Enter a date in YYYY-MM-DD format, without a time or time zone, for example 2026-09-14.",
+                                            "errorMessagePL": "Podaj datę w formacie RRRR-MM-DD, bez godziny i strefy czasowej, np. 2026-09-14.",
+                                            "validationErrors": [
+                                                {
+                                                    "field": "basicInformation.issueDate",
+                                                    "message": "DATE_REQUIRES_LOCAL_DATE",
+                                                    "code": "DATE_REQUIRES_LOCAL_DATE"
+                                                }
+                                            ]
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -1939,8 +1956,8 @@
                                             "invoiceId": 2069,
                                             "invoiceType": "SALES",
                                             "invoiceFormat": "%N/%M/%Y",
-                                            "saleDate": "2022-10-11T00:00:00.000Z",
-                                            "issueDate": "2022-10-11T00:00:00.000Z",
+                                            "saleDate": "2022-10-11",
+                                            "issueDate": "2022-10-11",
                                             "isReceipt": false,
                                             "relatedInvoicesIds": [],
                                             "priceTypeId": "NET"
@@ -1986,7 +2003,7 @@
                                         "payments": {
                                             "isPaid": false,
                                             "paymentMethod": "TRANSFER",
-                                            "dueDate": "2022-10-25T00:00:00.000Z",
+                                            "dueDate": "2022-10-25",
                                             "bankAccountNumber": "10 1010 1062 5565 1561 5615 1516",
                                             "isSplitPayment": false
                                         },
@@ -3813,6 +3830,26 @@
                     },
                     "errorMessagePL": {
                         "type": "string"
+                    },
+                    "validationErrors": {
+                        "type": "array",
+                        "description": "Optional field-level validation details. Use code for programmatic error handling.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "field": {
+                                    "type": "string",
+                                    "example": "basicInformation.issueDate"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "code": {
+                                    "type": "string",
+                                    "example": "DATE_REQUIRES_LOCAL_DATE"
+                                }
+                            }
+                        }
                     }
                 },
                 "description": "Default error message format in Altera API\nDepending on particular reason, different HTTP Status codes will be employed"
@@ -4209,8 +4246,8 @@
                             "invoiceId": 2069,
                             "invoiceType": "SALES",
                             "invoiceFormat": "%N/%M/%Y",
-                            "saleDate": "2022-10-11T00:00:00.000Z",
-                            "issueDate": "2022-10-11T00:00:00.000Z",
+                            "saleDate": "2022-10-11",
+                            "issueDate": "2022-10-11",
                             "isReceipt": false,
                             "relatedInvoicesIds": [],
                             "priceTypeId": "NET"
@@ -4256,7 +4293,7 @@
                         "payments": {
                             "isPaid": false,
                             "paymentMethod": "TRANSFER",
-                            "dueDate": "2022-10-25T00:00:00.000Z",
+                            "dueDate": "2022-10-25",
                             "bankAccountNumber": "10 1010 1062 5565 1561 5615 1516",
                             "isSplitPayment": false
                         },
@@ -4275,8 +4312,8 @@
                         "basicInformation": {
                             "invoiceType": "SALES",
                             "invoiceFormat": "%N/%M/%Y",
-                            "saleDate": "2022-10-11T00:00:00.000Z",
-                            "issueDate": "2022-10-11T00:00:00.000Z",
+                            "saleDate": "2022-10-11",
+                            "issueDate": "2022-10-11",
                             "isReceipt": false,
                             "relatedInvoicesIds": [],
                             "priceTypeId": "NET",
@@ -4322,7 +4359,7 @@
                         "payments": {
                             "isPaid": false,
                             "paymentMethod": "TRANSFER",
-                            "dueDate": "2022-10-25T00:00:00.000Z",
+                            "dueDate": "2022-10-25",
                             "bankAccountNumber": "10 1010 1062 5565 1561 5615 1516",
                             "isSplitPayment": false
                         }
@@ -4335,8 +4372,8 @@
                             "invoiceId": 2069,
                             "invoiceType": "SALES",
                             "invoiceFormat": "%N/%M/%Y",
-                            "saleDate": "2022-10-11T00:00:00.000Z",
-                            "issueDate": "2022-10-11T00:00:00.000Z",
+                            "saleDate": "2022-10-11",
+                            "issueDate": "2022-10-11",
                             "isReceipt": false,
                             "relatedInvoicesIds": [],
                             "priceTypeId": "NET",
@@ -4382,7 +4419,7 @@
                         "payments": {
                             "isPaid": false,
                             "paymentMethod": "TRANSFER",
-                            "dueDate": "2022-10-25T00:00:00.000Z",
+                            "dueDate": "2022-10-25",
                             "bankAccountNumber": "10 1010 1062 5565 1561 5615 1516",
                             "isSplitPayment": false
                         }
@@ -4431,10 +4468,16 @@
                                 "description": "Defines the Invoice numbering format that will be used; Altera providesa set of pre-defined formats right after company creation. They can be reviewed in the UI"
                             },
                             "saleDate": {
-                                "type": "string"
+                                "type": "string",
+                                "format": "date",
+                                "description": "Sale date as a calendar date in YYYY-MM-DD format, without a time or time zone. Do not convert it to a UTC timestamp.",
+                                "example": "2026-09-14"
                             },
                             "issueDate": {
-                                "type": "string"
+                                "type": "string",
+                                "format": "date",
+                                "description": "Issue date as a calendar date in YYYY-MM-DD format, without a time or time zone. Do not convert it to a UTC timestamp.",
+                                "example": "2026-09-14"
                             },
                             "isReceipt": {
                                 "type": "boolean",
@@ -4646,7 +4689,10 @@
                                 "example": "TRANSFER"
                             },
                             "dueDate": {
-                                "type": "string"
+                                "type": "string",
+                                "format": "date",
+                                "description": "Payment due date as a calendar date in YYYY-MM-DD format, without a time or time zone. Do not convert it to a UTC timestamp.",
+                                "example": "2026-09-28"
                             },
                             "bankAccountNumber": {
                                 "type": "string",
@@ -4654,6 +4700,12 @@
                             },
                             "isSplitPayment": {
                                 "type": "boolean"
+                            },
+                            "paymentDate": {
+                                "type": "string",
+                                "format": "date",
+                                "description": "Payment date (optional) as a calendar date in YYYY-MM-DD format, without a time or time zone. Do not convert it to a UTC timestamp.",
+                                "example": "2026-09-14"
                             }
                         }
                     },
