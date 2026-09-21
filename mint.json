@@ -117,7 +117,8 @@
           "group": "Wybierz zadanie",
           "pages": [
             "faq/index",
-            "faq/howto/search-filters"
+            "faq/howto/search-filters",
+            "faq/howto/missing-document"
           ]
         },
         {
@@ -134,6 +135,7 @@
           "pages": [
             "faq/modules/expenses",
             "faq/intro/add-expense",
+            "faq/howto/cost-to-settlement",
             "faq/modules/payments",
             "faq/howto/eobieg"
           ]
@@ -142,6 +144,7 @@
           "group": "Finanse",
           "pages": [
             "faq/modules/finance",
+            "faq/howto/project-result",
             "faq/howto/openBanking"
           ]
         },
@@ -157,6 +160,7 @@
         {
           "group": "Start i ustawienia",
           "pages": [
+            "faq/intro/onboarding",
             "faq/intro/welcome",
             "faq/intro/creating-company",
             "faq/intro/your-dashboard",

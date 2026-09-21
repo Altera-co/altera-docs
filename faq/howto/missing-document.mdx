@@ -1,0 +1,50 @@
+---
+title: "Nie widzę dokumentu. Co sprawdzić?"
+description: "Sprawdź firmę, zakładkę, filtry i wynik importu, zanim dodasz fakturę ponownie."
+---
+
+Brak dokumentu na bieżącej liście nie oznacza, że trzeba przesłać go jeszcze raz. Zacznij od poniższych kroków, aby uniknąć drugiej kopii tej samej faktury.
+
+<Note>Sprawdzono 21.09.2026 w QA, Altera 2.36.0+1574: dokumenty oczekujące na weryfikację, import e-mailem oraz wyszukiwanie i reset filtrów. Dane na zrzutach są demonstracyjne.</Note>
+
+## 1. Sprawdź firmę i miejsce dodania
+
+Sprawdź nazwę firmy przy swoim profilu. Faktury kosztowej szukaj w **Kosztach**, wystawionej faktury w **Sprzedaży**, a dokumentu przesłanego do modułu **Pliki** właśnie w tym module. Plik dodany do Plików nie jest tym samym co zatwierdzona faktura kosztowa.
+
+W Kosztach zwróć uwagę na zakładki nad tabelą: **Faktury**, **Do weryfikacji**, **Odrzucone** i **Usunięte**.
+
+<img src="/images/instructions-20260921/missing-document-start.png" alt="Koszty przed wyborem zakładki: Faktury, Do weryfikacji, Odrzucone i Usunięte oraz nazwa firmy przy profilu" />
+
+## 2. Otwórz Do weryfikacji
+
+Kliknij **Do weryfikacji**. Dokument może być już w Altera, ale czekać na sprawdzenie danych odczytanych z pliku. W przykładzie odnajdujemy tutaj fakturę przesłaną e-mailem **DEMO/EMAIL/2026/001**, 123,00 zł brutto, oraz dokument dodany ręcznie.
+
+<img src="/images/instructions-20260921/missing-document-verification.png" alt="Do weryfikacji: dwie odnalezione faktury i komunikaty o weryfikacji kontrahenta" />
+
+Komunikat **Błąd danych kontrahenta** nie oznacza braku pliku. Otwórz dokument, porównaj dane z podglądem i wyjaśnij wskazany problem. Nie zatwierdzaj błędnego dokumentu tylko po to, aby przenieść go na listę Faktury. Dalej prowadzi [instrukcja sprawdzenia OCR](/faq/intro/add-expense).
+
+## 3. Usuń ograniczenia listy i wyszukaj numer
+
+Jeżeli widzisz aktywne etykiety filtrów, kliknij **Wyczyść filtry**. Sprawdź również zakres dat: w Kosztach to **Data dodania**, a nie data wystawienia faktury.
+
+<img src="/images/instructions-20260921/filter-cost-empty.png" alt="Przykład pustej listy z dwoma warunkami i przyciskiem Wyczyść filtry" />
+
+Wpisz numer dokumentu w **Wyszukaj**, a następnie wybierz podpowiedź **Wyszukaj: [numer]**. Samo wpisanie numeru nie stosuje filtra. Sprawdź wynik we właściwej zakładce.
+
+<img src="/images/instructions-20260921/filter-cost-search-action.png" alt="Wpisany numer faktury i podpowiedź Wyszukaj, którą należy wybrać" />
+
+Jeśli wynik nadal jest pusty, sprawdź też **Odrzucone** i **Usunięte**. W Sprzedaży zajrzyj do **Szkiców**, gdy faktura nie została jeszcze wystawiona. Szczegółowe kroki zawiera [instrukcja filtrów](/faq/howto/search-filters).
+
+## 4. Jeśli dokument wysłano e-mailem
+
+Porównaj adres odbiorcy z adresem w **Ustawienia → Integracje → E-mail** właściwej firmy. Sprawdź w wysłanej wiadomości, czy zawierała załącznik. Następnie sprawdź Koszty i powiadomienia w aplikacji.
+
+<img src="/images/instructions-20260921/email-notification.png" alt="Powiadomienie o dokumencie przesłanym e-mailem, wymagającym weryfikacji" />
+
+Pusta **Historia dostarczonych dokumentów** nie rozstrzyga wyniku importu. W sprawdzonym przykładzie historia była pusta, a faktura znajdowała się już w Kosztach. [Pełna instrukcja importu e-mailem](/faq/howto/email).
+
+## 5. Zanim dodasz plik ponownie
+
+Porównaj numer, sprzedawcę, datę i kwotę z odnalezionym dokumentem. Te same kwoty nie wystarczają do rozpoznania duplikatu. Jeśli widzisz dwie kopie, ustal z osobą odpowiedzialną za dokumenty, która jest właściwa, zanim wykonasz płatność lub usuniesz którąkolwiek z nich.
+
+Jeśli dokumentu nadal nie ma, przygotuj dla wsparcia nazwę firmy, numer faktury, przybliżony czas i sposób dodania oraz widoczny komunikat błędu. Przy imporcie e-mailem podaj czas wysłania i adres importu. Nie przesyłaj haseł ani kodów logowania. Kontakt: [wsparcie Altera](mailto:wsparcie@altera.co).

@@ -28,3 +28,15 @@ Dziewięć odświeżonych stron klienta: desktop i 390 px, po jednym H1, wszystk
 - Widoki księgowości, organizacja i role: odłożone na prośbę użytkownika do potwierdzenia ukończenia przebudowy.
 - Dawne instrukcje e-Obiegu i eksportu sprzedaży: osobny przegląd; nie są potwierdzone przez test pobierania z Plików.
 - Rozbieżność historii importu e-mail: zgłoszenie i sprawdzenie przyczyny oddzielnie od redakcji instrukcji.
+
+## Extension batch: verified client workflows
+
+- New guides: missing document troubleshooting, onboarding task map, project result.
+- QA 565: DEMO/OCR/2026/002 category changed from empty to Projektowanie; saved and independently seen on list and finance totals. No project assigned.
+- The same demo invoice passed Opisz fakturę, Zaakceptuj koszt, Zaakceptuj do płatności. QR showed exact 1230 PLN and document number. Manual paid-state test is simulated QA data, no money transfer. Final independent UI readback: OPŁACONA. Replay on DEMO/OCR/2026/003 passed category save, describe, cost approval, payment approval and paid marking from the list. First run used QR paid marking. Both demo documents remain paid, category Projektowanie, no project. No bank transfer occurred.
+- Onboarding dry-run in private workspace, synthetic NIP chosen by user. New write set awaiting confirmation; no account/company created. Registration password and final submit require user handoff.
+
+- Critical distinction: e-Obieg zakończony appears after payment approval while the cost is still unpaid. Guide explicitly separates workflow completion and settlement.
+- New guides and hub: desktop and 390 px render checks passed, one H1, all images loaded, no horizontal overflow. Local links and image paths checked; git diff --check passed.
+- Project report: month September 2026, Rebranding Forma revenue 25000, costs 22060, difference 2940; all-project cost total 24060. New costs remain without project. Category edits do not change project totals.
+- No new account/company, subscription, Stripe, bank consent, KSeF or production publication in this batch. Full new-account onboarding remains pending write-set approval and user password/registration handoff.
