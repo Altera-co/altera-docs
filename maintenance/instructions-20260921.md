@@ -40,3 +40,10 @@ Dziewięć odświeżonych stron klienta: desktop i 390 px, po jednym H1, wszystk
 - New guides and hub: desktop and 390 px render checks passed, one H1, all images loaded, no horizontal overflow. Local links and image paths checked; git diff --check passed.
 - Project report: month September 2026, Rebranding Forma revenue 25000, costs 22060, difference 2940; all-project cost total 24060. New costs remain without project. Category edits do not change project totals.
 - No new account/company, subscription, Stripe, bank consent, KSeF or production publication in this batch. Full new-account onboarding remains pending write-set approval and user password/registration handoff.
+
+
+## Onboarding: potwierdzenie zakończenia w QA
+
+Studio Początek QA (577): użytkownik zatwierdził checkout Stripe w piaskownicy. Zweryfikowano powrót na pulpit oraz Ustawienia → Subskrypcje → Aplikacja: aktywny Team, OKRES PRÓBNY, miesięcznie. Zapisano zrzuty pulpitu i statusu bez adresu e-mail. Instrukcja zawiera etapy kreatora i potwierdzenie aktywacji. Użytkownik zaakceptował dotychczasową weryfikację bez niezależnego replayu; rejestrację, potwierdzenie e-maila i końcowe zatwierdzenie checkoutu wykonał użytkownik. Brak publikacji produkcyjnej.
+
+Zdjęcie e-maila dostarczone przez użytkownika dodano po zamaskowaniu odbiorcy i całego linku aktywacyjnego. Redakcję wykonano narzędziem imagegen, wizualnie sprawdzono brak widocznego adresu i kodu. Oryginał nie wchodzi do commita.

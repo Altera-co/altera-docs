@@ -1,32 +1,100 @@
 ---
-title: "Gdzie dodać firmę i sprawdzić jej dane?"
-description: "Znajdź formularz nowej firmy oraz ustawienia danych i rachunków istniejącej firmy."
+title: "Jak przejść kreator nowej firmy?"
+description: "Od potwierdzenia e-maila przez konfigurację firmy do aktywnego okresu próbnego i pulpitu."
 ---
 
-## Rozpocznij dodawanie nowej firmy
+Po rejestracji potwierdź adres linkiem z e-maila i zaloguj się. W sprawdzonym scenariuszu nowego konta aplikacja otworzyła kreator konfiguracji firmy.
 
-Kliknij selektor firmy i użytkownika w prawym górnym rogu. W menu wybierz **Dodaj nową firmę**.
+<Note>Test QA z 21.09.2026, Altera 2.36.0+1574. Dane firmy Studio Początek QA są fikcyjne. Rejestrację, potwierdzenie e-maila i pierwsze logowanie wykonał użytkownik. Kreator przeszedł do checkoutu Stripe w piaskownicy. Użytkownik zatwierdził testową subskrypcję; sprawdzono powrót na pulpit i status okresu próbnego Team.</Note>
 
-<img src="/images/instructions-20260921/company-add-entry.png" alt="Menu firmy z akcją Dodaj nową firmę" />
+## Przed konfiguracją: potwierdź adres e-mail
 
-Pierwszy ekran prosi o wybór **Kraju** oraz **NIP**. Przycisk **Wyszukaj i uzupełnij** służy do pobrania danych wskazanej firmy. Sprawdź je przed dalszymi krokami. **Anuluj** pozwala opuścić formularz.
+Po rejestracji otwórz wiadomość **Altera: Potwierdzenie adresu** od **no-reply@altera.co** i kliknij **Zweryfikuj**. Jeśli przycisk nie działa, skopiuj link pod nim do przeglądarki. Po potwierdzeniu adresu zaloguj się do Altera.
 
-<img src="/images/instructions-20260921/company-add-start.png" alt="Pierwszy krok dodania firmy: kraj, NIP i Wyszukaj i uzupełnij" />
+<img src="/images/instructions-20260921/onboarding-00-verification-email.png" alt="Mail potwierdzający adres e-mail z przyciskiem Zweryfikuj; odbiorca i link aktywacyjny są zamaskowane" />
 
-<Note>
-Opis obejmuje wejście do formularza. Kolejne etapy tworzenia firmy i uruchomienia jej usług wymagają osobnej instrukcji; nie zakładaj, że samo podanie NIP-u kończy konfigurację.
-</Note>
+*Zdjęcie otrzymanej wiadomości z zamaskowanym adresem odbiorcy i linkiem aktywacyjnym.*
 
-## Sprawdź dane istniejącej firmy
+## 1. Podaj kraj i NIP
 
-Wybierz właściwą firmę. Otwórz **Ustawienia → Firma → Dane firmy**. Porównaj nazwę, adres, status VAT i dane kontaktowe z rzeczywistymi danymi firmy. Nie zmieniaj ich wyłącznie po to, aby przejść dalej w innym formularzu.
+Po pierwszym logowaniu kreator prosi o kraj i NIP firmy. Sprawdź kraj, wpisz NIP i kliknij **Wyszukaj i uzupełnij**.
 
-<img src="/images/instructions-20260921/company-settings.png" alt="Ustawienia danych firmy: NIP, nazwa, adres, status VAT i dane kontaktowe" />
+<img src="/images/instructions-20260921/onboarding-01-nip.png" alt="Kreator nowej firmy: Podaj kraj i NIP" />
 
-Pole NIP jest zablokowane do samodzielnej edycji; ekran wskazuje kontakt ze wsparciem w sprawie jego zmiany.
+## 2. Sprawdź dane firmy
 
-## Sprawdź rachunki
+Porównaj nazwę, NIP i adres. W naszym teście fikcyjnego NIP-u nie znaleziono w rejestrze. Kreator pozwolił wpisać dane ręcznie, ale pole NIP wymagało ponownego uzupełnienia. Nie traktuj nagłówka „Znaleźliśmy następujące informacje” jako potwierdzenia poprawności wszystkich pól.
 
-Przejdź do **Firma → Rachunki bankowe**. Sprawdź numer, walutę i oznaczenie rachunku domyślnego. [Zobacz ekran rachunków i stan Open Banking](/faq/howto/openBanking).
+Sprawdź również ustawienie **Jestem czynnym płatnikiem VAT** zgodnie ze stanem swojej firmy. Kliknięcie **Dalej** na tym ekranie tworzy firmę.
 
-Następnie możesz przejść do [wystawienia faktury](/faq/intro/first-invoice) lub [przeglądu ustawień](/faq/intro/advanced-settings).
+<img src="/images/instructions-20260921/onboarding-02-company.png" alt="Kreator nowej firmy: Sprawdź dane firmy" />
+
+## 3. Opisz działalność
+
+Wpisz kilka zdań o tym, czym zajmuje się firma, i kliknij **Dalej**. W przykładzie opisujemy studio projektowania graficznego.
+
+<img src="/images/instructions-20260921/onboarding-03-business-profile.png" alt="Kreator nowej firmy: Opisz działalność" />
+
+## 4. Wybierz wielkość zespołu
+
+Uwzględnij siebie i osoby współpracujące na B2B lub zleceniu. W przykładzie wybieramy **2-5**, następnie **Dalej**.
+
+<img src="/images/instructions-20260921/onboarding-04-team.png" alt="Kreator nowej firmy: Wybierz wielkość zespołu" />
+
+## 5. Odpowiedz na opcjonalne pytanie o przychody
+
+Możesz wskazać przedział albo wybrać **Wolę nie podawać**. W przykładzie korzystamy z drugiej opcji i klikamy **Dalej**.
+
+<img src="/images/instructions-20260921/onboarding-05-revenue.png" alt="Kreator nowej firmy: Odpowiedz na opcjonalne pytanie o przychody" />
+
+## 6. Określ rozliczenia zagraniczne
+
+Wybierz **Tak** lub **Nie** zgodnie z działalnością firmy. W przykładzie wybieramy **Nie**, potem **Dalej**.
+
+<img src="/images/instructions-20260921/onboarding-06-international.png" alt="Kreator nowej firmy: Określ rozliczenia zagraniczne" />
+
+## 7. Wybierz sposób kontroli finansów
+
+Przeczytaj opisy opcji **Podstawowo**, **Standardowo** i **Dokładnie**. W przykładzie wybieramy **Standardowo**, następnie **Zakończ personalizację**. To odpowiedź do personalizacji, a nie zakup pakietu.
+
+<img src="/images/instructions-20260921/onboarding-07-tracking.png" alt="Kreator nowej firmy: Wybierz sposób kontroli finansów" />
+
+## 8. Sprawdź rachunki bankowe
+
+Ekran pokazuje opcje **Dodaj rachunek** i **Open Banking**. W sprawdzonym wariancie pozostawiamy pustą listę i klikamy **Tak, pasuje!**. Dodanie rachunku i zgoda na dostęp bankowy to osobne czynności, których ten test nie obejmował.
+
+<img src="/images/instructions-20260921/onboarding-08-bank-accounts.png" alt="Kreator nowej firmy: Sprawdź rachunki bankowe" />
+
+## 9. Przejrzyj proponowaną konfigurację
+
+Sprawdź sugerowany e-Obieg oraz kategorie produktów i kosztów. W naszym przebiegu ekran proponował obieg **Prosty**, mimo wcześniejszego wyboru standardowej kontroli finansów. Nie zakładaj, że poprzednia odpowiedź gwarantuje konkretny obieg. Odczytaj propozycję na tym ekranie, a następnie kliknij **Akceptuj konfigurację**, jeśli odpowiada procesowi firmy.
+
+<img src="/images/instructions-20260921/onboarding-09-configuration.png" alt="Kreator nowej firmy: Przejrzyj proponowaną konfigurację" />
+
+## 10. Sprawdź rekomendowany pakiet i warunki
+
+W przykładzie kreator rekomenduje **Team** na podstawie zespołu 2-5 osób i standardowej kontroli finansów. Sprawdź zakres, sposób rozliczania oraz warunki widoczne przed rozpoczęciem okresu próbnego.
+
+Wersja QA w dniu testu pokazywała 14 dni okresu próbnego i późniejszą opłatę. Nie traktuj zrzutu jako aktualnej oferty cenowej.
+
+Kliknij **Rozpocznij okres próbny**, aby przejść do formularza Stripe. Sprawdź wybrany pakiet, kwotę do zapłaty dziś i warunki po zakończeniu próby. W naszym teście checkout był oznaczony jako **Piaskownica** i użyto wyłącznie fikcyjnych danych oraz karty testowej. Danych testowych nie używaj przy zakupie w środowisku produkcyjnym.
+
+Po zatwierdzeniu formularza Stripe aplikacja powinna otworzyć firmę. W tym przebiegu końcowe zatwierdzenie wykonał użytkownik.
+
+<img src="/images/instructions-20260921/onboarding-10-subscription-boundary.png" alt="Kreator nowej firmy:  Sprawdź rekomendowany pakiet i warunki" />
+
+## 11. Sprawdź pulpit nowej firmy
+
+Po powrocie ze Stripe sprawdź nazwę firmy w górnym pasku. W naszym przebiegu otworzył się pulpit **Studio Początek QA** z szybkimi akcjami, m.in. **Nowa faktura**, **Dodaj koszt** i **Dodaj plik**. Nowa firma nie ma jeszcze dokumentów, dlatego wartości na pulpicie wynoszą zero.
+
+<img src="/images/instructions-20260921/onboarding-12-dashboard.png" alt="Pulpit nowej firmy po zatwierdzeniu testowej subskrypcji" />
+
+## 12. Potwierdź aktywację pakietu
+
+Otwórz **Ustawienia → Subskrypcje → Aplikacja**. Sprawdź nazwę aktywnego pakietu i status. W przykładzie widzimy **Aktywny pakiet: Team** oraz **OKRES PRÓBNY**. Samo otwarcie checkoutu nie potwierdza aktywacji; potwierdzenie odczytaj po powrocie do Altera.
+
+<img src="/images/instructions-20260921/onboarding-13-trial-active.png" alt="Ustawienia subskrypcji: aktywny pakiet Team i status okres próbny" />
+
+## Po uzyskaniu dostępu do firmy
+
+Dalsze zadania znajdziesz w [mapie pierwszych kroków](/faq/intro/onboarding): wystawienie faktury, dodanie kosztu, praca z plikami i sprawdzenie finansów.
