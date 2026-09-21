@@ -47,3 +47,28 @@ Dziewięć odświeżonych stron klienta: desktop i 390 px, po jednym H1, wszystk
 Studio Początek QA (577): użytkownik zatwierdził checkout Stripe w piaskownicy. Zweryfikowano powrót na pulpit oraz Ustawienia → Subskrypcje → Aplikacja: aktywny Team, OKRES PRÓBNY, miesięcznie. Zapisano zrzuty pulpitu i statusu bez adresu e-mail. Instrukcja zawiera etapy kreatora i potwierdzenie aktywacji. Użytkownik zaakceptował dotychczasową weryfikację bez niezależnego replayu; rejestrację, potwierdzenie e-maila i końcowe zatwierdzenie checkoutu wykonał użytkownik. Brak publikacji produkcyjnej.
 
 Zdjęcie e-maila dostarczone przez użytkownika dodano po zamaskowaniu odbiorcy i całego linku aktywacyjnego. Redakcję wykonano narzędziem imagegen, wizualnie sprawdzono brak widocznego adresu i kodu. Oryginał nie wchodzi do commita.
+
+
+## Usunięcie publicznych notatek redakcyjnych
+
+Potwierdzenie e-maila przeniesiono do instrukcji logowania i rejestracji. Usunięto infoboksy o QA i akceptacji z 10 stron FAQ. Zachowano informacje o uprawnieniach, zakresie funkcji i demonstracyjnych danych. Dotychczasowe notatki weryfikacyjne zachowane poniżej jako dokumentacja wewnętrzna:
+
+- faq/intro/partial-payment.mdx: Materiał roboczy do akceptacji. Zrzuty pochodzą z danych demonstracyjnych w QA. Dodanie wpłaty rejestruje kwotę w aplikacji; nie wykonuje przelewu bankowego.
+
+- faq/intro/creating-company.mdx: Test QA z 21.09.2026, Altera 2.36.0+1574. Dane firmy Studio Początek QA są fikcyjne. Rejestrację, potwierdzenie e-maila i pierwsze logowanie wykonał użytkownik. Kreator przeszedł do checkoutu Stripe w piaskownicy. Użytkownik zatwierdził testową subskrypcję; sprawdzono powrót na pulpit i status okresu próbnego Team.
+
+- faq/intro/first-invoice.mdx: Materiały robocze do akceptacji. Proces sprawdzany w środowisku QA. Zrzuty przedstawiają dane demonstracyjne.
+
+- faq/intro/welcome.mdx: Rejestrację, potwierdzenie e-maila i pierwsze logowanie sprawdzono z udziałem użytkownika w QA 21.09.2026. Instrukcja nie obejmuje wszystkich wariantów logowania przez dostawców zewnętrznych.
+
+- faq/intro/onboarding.mdx: Wersja do akceptacji. Poniższa mapa łączy instrukcje sprawdzone w QA 21.09.2026. Użytkownik wykonał rejestrację, weryfikację e-maila i pierwsze logowanie. Kreator nowej firmy sprawdzono do powrotu na pulpit po testowym checkoutcie Stripe zatwierdzonym przez użytkownika. Potwierdzono aktywny okres próbny Team. Dostępność czynności zależy od uprawnień i pakietu firmy.
+
+- faq/howto/missing-document.mdx: Sprawdzono 21.09.2026 w QA, Altera 2.36.0+1574: dokumenty oczekujące na weryfikację, import e-mailem oraz wyszukiwanie i reset filtrów. Dane na zrzutach są demonstracyjne.
+
+- faq/howto/project-result.mdx: Sprawdzono 21.09.2026 w QA, Altera 2.36.0+1574, na projekcie Rebranding Forma. Przykład pokazuje wynik dokumentów ujętych w raporcie. Nie obejmuje budżetu projektu, ewidencji czasu pracy ani pełnego wyniku księgowego.
+
+- faq/howto/cost-to-settlement.mdx: Sprawdzono 21.09.2026 w QA, Altera 2.36.0+1574. Przykład DEMO/OCR/2026/002 to fikcyjna faktura na 1230 zł. Zrzut pól opisu pochodzi z powtórzenia na dokumencie DEMO/OCR/2026/003. Zapis zapłaty jest symulacją na danych demonstracyjnych; nie wykonano przelewu. Nie przelewaj pieniędzy na rachunki ze zrzutów.
+
+- faq/modules/finance.mdx: Materiał roboczy do akceptacji. Zrzuty i przykłady pochodzą z firmy demonstracyjnej w QA.
+
+- faq/modules/payments.mdx: Wersja do akceptacji. Zrzuty pokazują syntetyczne dane QA. Nie wykonuj przelewów na rachunki z przykładów. Sprawdzono akceptację kosztu, przygotowanie pliku i oba wejścia do QR. Import i wykonanie przelewu w banku pozostają poza testem.
