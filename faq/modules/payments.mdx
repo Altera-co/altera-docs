@@ -1,31 +1,137 @@
 ---
-title: "Moduł Płatności: paczka przelewów do banku w 3 krokach"
-description: "Masz dość ręcznego wklepywania przelewów? Zobacz, jak za pomocą Modułu Płatności możesz opłacić kilkanaście faktur naraz, generując paczkę przelewów do banku."
+title: "Jak zapłacić za koszt: kod QR czy moduł Płatności?"
+description: "Zacznij w Kosztach: wybierz szybkie przygotowanie przelewu kodem QR albo akceptację kosztu i paczkę przelewów w Płatnościach."
 ---
 
-Pod koniec miesiąca czeka na Ciebie kilkanaście faktur kosztowych do opłacenia? Logowanie się do banku, kopiowanie numerów kont, kwot i tytułów przelewów to strata cennego czasu.
+## Zacznij w Kosztach i wybierz sposób płatności
 
-Moduł **Płatności** w Altera to rozwiązanie tego problemu. Pozwala Ci **zbiorczo opłacić wiele faktur naraz**, generując jeden plik (paczkę przelewów), który importujesz do swojego banku. Prosto, szybko i bez pomyłek.
+Otwórz **Koszty** we właściwej firmie. Sprawdź dokument, odbiorcę, rachunek, pozostałą kwotę i termin płatności. Następnie wybierz sposób zgodny z procesem w Twojej firmie i tym, jak szybko potrzebujesz zlecić przelew:
 
-### Bezpieczeństwo przede wszystkim: Weryfikacja z Białą Listą
+- **Kod QR do szybkiej płatności za pojedynczy koszt:** gdy chcesz od razu przygotować przelew w aplikacji bankowej. Otwórz kod w szczegółach kosztu albo z paska zaznaczonego wiersza, zeskanuj go i sprawdź dane w banku.
+- **Akceptacja kosztu i moduł Płatności:** gdy rozdzielacie zatwierdzanie wydatków od realizacji przelewów albo przygotowujecie je zbiorczo, w ustalonych terminach. Zaakceptuj koszt do płatności, przejdź do Płatności i przygotuj plik do banku.
 
-Zanim zapłacisz, Altera pomoże Ci upewnić się, że wysyłasz pieniądze na właściwe konto. **Automatycznie weryfikujemy numer rachunku Twojego kontrahenta z rządową Białą Listą podatników VAT.** Stosowną informację zobaczysz bezpośrednio na liście faktur w module Płatności oraz Koszty.
+QR przyspiesza wprowadzenie danych, ale nie zastępuje wymaganej w firmie akceptacji. Czas wykonania i zaksięgowania przelewu zależy od wybranego trybu oraz zasad banku. Moduł Płatności także pozwala przygotować pojedynczy przelew; wybór ścieżki zależy od organizacji pracy, nie tylko liczby dokumentów.
 
-### Jak opłacić faktury w 3 krokach?
+<img src="/images/instructions-20260921/cost-payments-costs-start.png" alt="Wspólny punkt wejścia: lista Koszty, dokumenty i checkboxy wierszy" />
 
-**Krok 1: Zaakceptuj faktury do płatności**
-* W module **"Koszty"** znajdź nieopłacone faktury i kliknij **"Zaakceptuj do płatności"**.
-* Faktury automatycznie trafią do modułu **"Płatności"**.
+Dane na zrzutach są demonstracyjne. Nie wykonuj przelewów na rachunki z przykładów.
 
-**Krok 2: Utwórz paczkę przelewów**
-* Przejdź do modułu **"Płatności"**.
-* W zakładce **"Do płatności"** zaznacz faktury, które chcesz teraz opłacić i kliknij **"Utwórz płatność"**.
-* Ustaw daty przelewów i pobierz plik z paczką na dysk.
+Potrzebujesz dostępu do kosztu. Do drugiej ścieżki potrzebne są także uprawnienie do akceptacji płatności, dostęp do modułu **Płatności** i rachunek źródłowy firmy. Sprawdzony przykład wykonano jako właściciel firmy. Przy podziale obowiązków w zespole akceptację i przygotowanie pliku mogą wykonywać różne uprawnione osoby.
 
-**Krok 3: Zaimportuj plik do banku**
-* Zaloguj się do swojej bankowości i znajdź opcję importu przelewów.
-* Wgraj pobrany z Altera plik `.txt` i zatwierdź przelewy jednym kodem.
+## A. Kod QR: szybkie przygotowanie pojedynczego przelewu
 
-### Jak dodać płatności, które nie są fakturami?
+Możesz otworzyć ten sam rodzaj kodu z dwóch miejsc. Wybierz jeden sposób. W przykładzie używamy kosztu **FV/09/2026/019**, Pracownia Kivo, **1205,40 zł**.
 
-Chcesz za pomocą paczki opłacić pensje lub inne wydatki, na które nie masz faktury w systemie? Żaden problem. **Możesz dodać płatności ręczne za pomocą formatki Excel**, a następnie dołączyć je do paczki przelewów.
+### Sposób 1: ze szczegółów kosztu
+
+Otwórz **Koszty** i kliknij wiersz właściwego dokumentu.
+
+<img src="/images/instructions-20260921/cost-payments-costs-start.png" alt="Lista Koszty przed otwarciem dokumentu lub zaznaczeniem checkboxa" />
+
+W szczegółach odszukaj **Numer rachunku**. Kliknij ikonę QR po prawej stronie tego pola. Jej podpowiedź brzmi **Pokaż kod QR płatności**.
+
+<img src="/images/instructions-20260921/cost-payments-details-qr-action.png" alt="Ikona QR po prawej stronie numeru rachunku w szczegółach kosztu" />
+
+Pojawi się okno **Kod QR płatności**. Porównaj odbiorcę, rachunek, kwotę i tytuł z dokumentem.
+
+<img src="/images/instructions-20260921/cost-payments-details-qr-dialog.png" alt="Kod QR otwarty ze szczegółów, odbiorca Kivo, kwota i tytuł" />
+
+### Sposób 2: z paska wyboru na liście
+
+Na liście **Koszty** zaznacz checkbox przy jednym dokumencie. Nie klikaj jego numeru, bo to otworzy szczegóły. Na dolnym pasku sprawdź **Zaznaczonych elementów: 1** i kliknij **Kod QR płatności**.
+
+<img src="/images/instructions-20260921/cost-payments-list-qr-action.png" alt="Jeden zaznaczony koszt i akcja Kod QR płatności na dolnym pasku" />
+
+Otrzymasz okno z kodem oraz tymi samymi danymi odbiorcy, kwoty i tytułu.
+
+<img src="/images/instructions-20260921/cost-payments-list-qr-dialog.png" alt="Kod QR otwarty z listy kosztów z danymi przelewu" />
+
+### Zeskanuj kod w aplikacji bankowej
+
+Otwórz skaner płatności w aplikacji banku obsługującej taki kod. W IKO jest to **Płatności → Zeskanuj i zapłać** ([instrukcja PKO Bank Polski](https://www.pkobp.pl/klient-indywidualny/bankowosc-elektroniczna/zeskanuj-i-zaplac)). Zeskanuj kod wyświetlony na komputerze, sprawdź uzupełnione dane i ustaw datę przelewu w banku. Nie zakładaj, że QR przenosi termin płatności.
+
+Sam kod nie wykonuje przelewu. Przycisku **Oznacz jako opłacone** w Altera użyj dopiero po potwierdzeniu rzeczywistej zapłaty. Jeśli tylko sprawdzasz dane lub rezygnujesz, zamknij okno krzyżykiem (**Anuluj**).
+
+## B. Zaakceptuj koszt i przygotuj płatność w module Płatności
+
+### 1. Zaznacz koszt i zaakceptuj go do płatności
+
+W **Kosztach** odszukaj sprawdzony dokument i zaznacz checkbox przy jego wierszu. W przykładzie prowadzimy fakturę **FZ/09/2026/014**, Studio Nivaro, **2952,00 zł**, od akceptacji aż do pliku bankowego.
+
+Na dolnym pasku sprawdź **Zaznaczonych elementów: 1** i kliknij **Zaakceptuj do płatności**.
+
+<img src="/images/instructions-20260921/acceptance-action.png" alt="Koszty: zaznaczona faktura FZ/09/2026/014 i przycisk Zaakceptuj do płatności na dolnym pasku" />
+
+Poczekaj na komunikat **Faktura kosztowa została zaakceptowana**. Akceptacja przekazuje dokument do przygotowania płatności; nie wykonuje przelewu i nie oznacza kosztu jako opłacony.
+
+<img src="/images/instructions-20260921/acceptance-result.png" alt="Potwierdzenie akceptacji kosztu do płatności" />
+
+Jeśli przycisk nie jest dostępny, nie zastępuj go **Oznacz jako opłaconą**. Sprawdź uprawnienia i etap obiegu dokumentu z osobą odpowiedzialną za akceptację. W firmie z podziałem ról dalsze kroki wykonuje osoba realizująca płatności.
+
+### 2. Przejdź do Płatności i odszukaj ten sam dokument
+
+Z menu po lewej wybierz **Płatności**, a następnie zakładkę **Do płatności**. Odszukaj zaakceptowaną fakturę po numerze i sprawdź kontrahenta oraz **2952,00 zł** do zapłaty.
+
+<img src="/images/instructions-20260921/acceptance-in-payments.png" alt="Ta sama faktura FZ/09/2026/014 na 2952 zł widoczna w Płatności, Do płatności" />
+
+Zaznacz checkbox dokumentu i kliknij na dolnym pasku **Utwórz płatność do kontrahenta**. Dla większej paczki zaznacz kolejne sprawdzone dokumenty.
+
+<img src="/images/instructions-20260921/acceptance-selection.png" alt="Zaakceptowana faktura zaznaczona w Płatnościach oraz przycisk Utwórz płatność do kontrahenta" />
+
+### 3. Sprawdź rachunek, dokumenty i kwotę
+
+W oknie **Zapłać** sprawdź kontrahenta oraz listę faktur. W polu **Z jakiego rachunku wykonać przelew** wybierz rachunek Twojej firmy, który ma zostać obciążony. Nie jest to pole rachunku odbiorcy.
+
+<img src="/images/instructions-20260921/acceptance-form.png" alt="Okno Zapłać: dokument, rachunek źródłowy, data, kodowanie i przycisk utworzenia" />
+
+### 4. Ustal datę wykonania
+
+Bez zaznaczenia **Własna data wykonania przelewu** aplikacja przyjmuje termin płatności faktury. W przykładzie termin faktury to **21.09.2026**, ale wybieramy własną datę przelewu **25.09.2026**.
+
+Aby wybrać inną datę, zaznacz **Własna data wykonania przelewu** i uzupełnij **Datę płatności**. Kliknij pole daty i wybierz dzień w kalendarzu. Sprawdź ją przed utworzeniem pliku, szczególnie dla dokumentów po terminie.
+
+<img src="/images/instructions-20260921/acceptance-calendar.png" alt="Kalendarz wyboru własnej daty przelewu, z dostępnym 25 września 2026" />
+
+<img src="/images/instructions-20260921/acceptance-date.png" alt="Zaznaczona własna data przelewu i pole Data płatności" />
+
+### 5. Wybierz kodowanie pliku
+
+Otwórz pole **Kodowanie**. W sprawdzonej wersji aplikacji dostępne są **UTF-8**, **ISO-8859-2** i **CP852**, wraz z podpowiedziami banków. Dopasuj kodowanie do wymagań używanego serwisu i szablonu importu. Sama nazwa banku przy opcji nie zastępuje kontroli zgodności formatu.
+
+<img src="/images/instructions-20260921/acceptance-encoding.png" alt="Rozwinięty wybór kodowania UTF-8, ISO-8859-2 i CP852" />
+
+### 6. Utwórz plik i sprawdź pobranie
+
+Kliknij **Utwórz płatność do kontrahenta** dla wybranego kontrahenta. Przycisk **Utwórz wszystkie płatności** dotyczy całego przygotowanego zestawu. Użyj go dopiero po sprawdzeniu wszystkich odbiorców i ustawień.
+
+<img src="/images/instructions-20260921/acceptance-ready.png" alt="Okno Zapłać: dokument, rachunek źródłowy, data, kodowanie i przycisk utworzenia" />
+
+Po utworzeniu pojawia się komunikat **Pomyślnie utworzono płatność**. Aplikacja uruchamia pobranie pliku. Sprawdź listę pobrań przeglądarki i folder docelowy: potrzebujesz pliku tekstowego paczki, a nie PDF faktury. W sprawdzonym przykładzie nazwa zaczynała się od `platnosci-`, a rozszerzenie to `.txt`.
+
+### 7. Sprawdź zakładkę Wygenerowane
+
+Przejdź do **Wygenerowane** i odszukaj dokument. Ten stan oznacza przygotowanie eksportu, a nie wykonanie przelewu.
+
+<img src="/images/instructions-20260921/acceptance-generated.png" alt="Zakładka Wygenerowane i akcje Utwórz ponownie oraz Pobierz dokument" />
+
+<Warning>Przycisk **Pobierz** na dolnym pasku pobiera dokument kosztowy. Nie jest przyciskiem pobierania paczki przelewów. Jeśli nie masz pliku paczki, sprawdź pobrania po jego utworzeniu. Akcja **Utwórz ponownie** pozwala ponownie przejść generowanie; przed kolejnym importem upewnij się, że pierwotnych dyspozycji nie zlecono już w banku.</Warning>
+
+## Gdzie zaimportować plik i co dzieje się dalej?
+
+W bankowości internetowej wybierz import przelewów. Nazwy zależą od konkretnego serwisu:
+
+- **mBank, serwis dla firm:** **Import plików z przelewami**, związany z koszykiem przelewów. Sprawdź wynik importu i komunikaty o błędach. [Instrukcja mBank](https://www.mbank.pl/firmy/uslugi-serwis-transakcyjny/import-przelewow/).
+- **PKO Bank Polski, iPKO biznes:** **Transakcje → Import z pliku**. Operacje lub paczka wymagają dalszego podpisania i obsługi. [Przewodnik iPKO biznes](https://www.pkobp.pl/media_files/72ef1739-0285-44af-a8e9-53a87b102e82.pdf).
+- **ING Business:** **Administracja i Narzędzia → Import/Export**. Wybierz szablon i kodowanie, dołącz plik, sprawdź poprawne i błędne pozycje, a następnie zakończ import. [Instrukcja ING Business](https://www.ing.pl/_fileserver/item/by9mfag).
+
+To miejsca importu opisane przez banki, nie potwierdzenie przetestowanej zgodności pliku Altera z każdym serwisem. Po imporcie porównaj liczbę pozycji, sumę, rachunki, tytuły i daty, następnie wykonaj wymaganą autoryzację oraz przekazanie zleceń do realizacji.
+
+**Przyszła data:** po poprawnym zleceniu bank może przechowywać dyspozycję do wskazanej daty realizacji. Sam import może pozostawić ją w stanie oczekiwania na podpis lub wysłanie. Sprawdź status oraz datę po imporcie. iPKO biznes rozróżnia oczekiwanie na podpis, wysłanie i realizację ([opis statusów](https://www.pkobp.pl/media_files/dd39d308-b5b7-47e2-8123-bff54ea73572.pdf)).
+
+Zapewnij środki i sprawdź wynik w planowanym dniu. Nie zakładaj automatycznego ponawiania: ING wskazuje, że przyszłe zlecenia ING Business niewykonane z powodu braku środków są widoczne jako odrzucone ([informacja ING](https://www.ing.pl/spolki/lp/spolki-przeniesienie)). Oczekiwanie dyspozycji na termin nie jest potwierdzeniem zapłaty.
+
+## Po wykonaniu przelewu: rozlicz koszt
+
+Dla obu ścieżek sprawdź w banku, czy przelew został **wykonany**, a nie tylko zapisany lub zaplanowany. Dopiero po potwierdzeniu pełnej zapłaty oznacz koszt jako opłacony w Altera. W oknie QR służy do tego **Oznacz jako opłacone**, a na pasku listy **Oznacz jako opłaconą**. Przy częściowej zapłacie nie oznaczaj całego kosztu jako opłaconego.
+
+Jeżeli płatność ma przyszłą datę, pozostaw koszt nierozliczony do potwierdzenia wykonania. Nie zlecaj ponownie tej samej płatności drugim sposobem tylko dlatego, że nie została jeszcze wykonana.

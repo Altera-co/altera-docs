@@ -1,0 +1,77 @@
+---
+title: "Jak znaleźć fakturę i korzystać z filtrów?"
+description: "Wyszukaj dokument w Sprzedaży lub Kosztach, zawęź listę i usuń filtry, gdy nie widzisz oczekiwanego wyniku."
+---
+
+Wybierz właściwą firmę, otwórz **Sprzedaż** albo **Koszty** i sprawdź zakładkę nad tabelą. Poniższe przykłady wykonujemy w **Fakturach**. Dokument kosztowy czekający na sprawdzenie może być w **Do weryfikacji**, a niezapisana jako wystawiona faktura sprzedaży w **Szkicach**.
+
+## 1. Wpisz numer i wybierz sposób wyszukiwania
+
+Kliknij **Wyszukaj** nad listą i wpisz numer faktury. Następnie wybierz podpowiedź **Wyszukaj: [wpisany numer]**. Samo wpisanie tekstu nie kończy ustawiania filtra.
+
+W Kosztach pokazujemy numer **DEMO/OCR/2026/002**. Podpowiedzi pozwalają też wybrać inne kryterium, np. sprzedawcę. Zwracaj uwagę na nazwę wybieranej opcji.
+
+<img src="/images/instructions-20260921/filter-cost-search-action.png" alt="Koszty: wpisany numer faktury i rozwinięta lista sposobów wyszukiwania" />
+
+Po zastosowaniu pod polem pojawi się etykieta **Wyszukaj: DEMO/OCR/2026/002**, a lista pokaże pasujący dokument. Porównaj numer i sprzedawcę. Kliknięcie wiersza otwiera szczegóły; checkbox zaznacza dokument do akcji na liście.
+
+<img src="/images/instructions-20260921/filter-cost-result.png" alt="Koszty: aktywny filtr numeru, jeden pasujący dokument i przycisk Wyczyść filtry" />
+
+### Ten sam krok w Sprzedaży
+
+W przykładzie wpisujemy **8/9/2026** i wybieramy **Wyszukaj: 8/9/2026**. Taki numer przypomina datę, dlatego aplikacja proponuje również filtry dat. Jeśli szukasz numeru faktury, wybierz opcję wyszukiwania, a nie **Data wystawienia od** czy **Data wystawienia do**.
+
+<img src="/images/instructions-20260921/filter-sales-search-action.png" alt="Sprzedaż: podpowiedź Wyszukaj obok alternatywnych filtrów dat" />
+
+Sprawdź etykietę zastosowanego warunku i wynik na liście.
+
+<img src="/images/instructions-20260921/filter-sales-result.png" alt="Sprzedaż: wynik wyszukiwania faktury 8/9/2026" />
+
+## 2. Zawęź listę według statusu płatności
+
+Przed rozpoczęciem tego przykładu kliknij **Wyczyść filtry**, aby usunąć wyszukiwanie numeru.
+
+W Kosztach wybierz **Wszystkie filtry**, rozwiń pole **Płatność** i wybierz **Po terminie**.
+
+<img src="/images/instructions-20260921/filter-cost-options.png" alt="Panel Wszystkie filtry z rozwiniętym wyborem statusu płatności" />
+
+Sprawdź wybraną wartość i kliknij **Zastosuj** na dole panelu.
+
+<img src="/images/instructions-20260921/filter-cost-apply.png" alt="Ustawiony filtr Płatność: Po terminie oraz przycisk Zastosuj" />
+
+Nad listą zobaczysz etykietę **Płatność: Po terminie**. W naszym przykładzie pozostały dwa koszty z przekroczonym terminem. Wynik zależy od dokumentów firmy i dnia, w którym sprawdzasz listę.
+
+<img src="/images/instructions-20260921/filter-cost-overdue.png" alt="Koszty po terminie z widocznym aktywnym filtrem" />
+
+### Szybki filtr w Sprzedaży
+
+Po wyczyszczeniu wcześniejszych warunków kliknij **Po terminie** bezpośrednio nad tabelą. Pojawi się etykieta filtra, a przycisk zostanie wyróżniony. W przykładzie widać również fakturę częściowo opłaconą: przekroczony termin może dotyczyć pozostałej należności.
+
+<img src="/images/instructions-20260921/filter-sales-overdue.png" alt="Sprzedaż: aktywny przycisk Po terminie, etykieta filtra i wyniki" />
+
+<Note>
+Zwracaj uwagę na rodzaj daty: nad listą Sprzedaży znajdują się pola **Data wystawienia**, a nad listą Kosztów **Data dodania**. Są to różne kryteria. Nie traktuj daty dodania pliku jako daty wystawienia dokumentu.
+</Note>
+
+## 3. Sprawdź, dlaczego lista jest pusta
+
+Warunki mogą działać jednocześnie. W Kosztach pozostaw **Po terminie**, a następnie wyszukaj numer **DEMO/OCR/2026/002** tak jak w pierwszym kroku. W przykładzie faktura ma przyszły termin płatności, więc nie spełnia obu kryteriów i lista jest pusta.
+
+Zwróć uwagę na dwie etykiety oraz licznik **Wszystkie filtry (2)**. Komunikat **Brak elementów do wyświetlenia** nie oznacza, że dokument został usunięty.
+
+<img src="/images/instructions-20260921/filter-cost-empty.png" alt="Pusta lista wynikająca z połączenia numeru faktury i filtra Po terminie; widoczne krzyżyki i Wyczyść filtry" />
+
+## 4. Usuń pojedynczy warunek lub wszystkie filtry
+
+Kliknij **×** na etykiecie **Płatność: Po terminie**, aby usunąć tylko ten warunek. Wyszukiwanie numeru pozostanie aktywne, a faktura z przykładu wróci na listę.
+
+Aby wrócić do listy bez tych ograniczeń, kliknij **Wyczyść filtry**. Sprawdź, czy zniknęły etykiety. Nie wystarczy usunąć tekst z pola wyszukiwania: zastosowany warunek jest widoczny jako osobna etykieta.
+
+Jeśli nadal nie widzisz dokumentu, ponownie sprawdź wybraną firmę i zakładkę, np. **Faktury**, **Do weryfikacji** albo **Szkice**.
+
+## Co dalej?
+
+- [Dodaj częściową wpłatę do faktury sprzedaży](/faq/intro/partial-payment).
+- [Dodaj koszt i sprawdź dane OCR](/faq/intro/add-expense).
+- [Przygotuj płatność za koszt](/faq/modules/payments).
+- [Wróć do Centrum pomocy](/faq/index).

@@ -1,0 +1,75 @@
+---
+title: "Jak dodać koszt i sprawdzić dane odczytane z faktury?"
+description: "Dodaj plik faktury, porównaj dane OCR z dokumentem i zatwierdź koszt przed dalszą pracą."
+---
+
+Masz fakturę od dostawcy w PDF? Dodaj ją w **Kosztach**, sprawdź rozpoznane dane i zapisz dokument. Następnie możesz opisać koszt zgodnie z procesem firmy oraz przygotować płatność.
+
+Przygotuj czytelny plik i wybierz właściwą firmę w prawym górnym rogu. W przykładzie używamy dokumentu demonstracyjnego **DEMO/OCR/2026/002** na **1 230,00 zł brutto**. Dane na zrzutach są fikcyjne.
+
+## 1. Otwórz Koszty i wybierz Nowy koszt
+
+W menu aplikacji kliknij **Koszty**, a następnie **Nowy koszt** na górze ekranu.
+
+<img src="/images/instructions-20260921/ocr-start.png" alt="Koszty: przycisk Nowy koszt na górze ekranu" />
+
+## 2. Wybierz plik i potwierdź dodanie
+
+W panelu **Nowy koszt** kliknij **Dodaj pliki z dysku** i wybierz fakturę. Możesz też przeciągnąć plik w oznaczone miejsce.
+
+<img src="/images/instructions-20260921/ocr-upload-empty.png" alt="Panel Nowy koszt z przyciskiem Dodaj pliki z dysku" />
+
+Sprawdź nazwę wybranego pliku. Następnie kliknij **Dodaj pliki** na dole panelu. Samo wskazanie pliku nie kończy tego kroku.
+
+<img src="/images/instructions-20260921/ocr-upload-selected-002.png" alt="Wybrany PDF oraz aktywny przycisk Dodaj pliki" />
+
+## 3. Poczekaj na odczyt i otwórz dokument
+
+Po przesłaniu aplikacja pokazuje potwierdzenie i przetwarza dokument. Poczekaj, aż wiersz pokaże dane faktury zamiast informacji o ładowaniu.
+
+Jeśli dokument wymaga sprawdzenia, przejdź do zakładki **Do weryfikacji**. Znajdź go po numerze i sprzedawcy, a następnie kliknij jego wiersz. Checkbox służy do zaznaczania dokumentów do akcji na liście.
+
+<img src="/images/instructions-20260921/ocr-recognized-002.png" alt="Zakładka Do weryfikacji z rozpoznaną fakturą DEMO/OCR/2026/002" />
+
+## 4. Porównaj dane z podglądem faktury
+
+Po lewej stronie masz dokument źródłowy, po prawej formularz. Przeczytaj komunikaty nad polami. Jeśli OCR wskazuje niepewny odczyt, sprawdź wskazane dane w dokumencie.
+
+Porównaj **numer faktury, datę wystawienia, datę sprzedaży oraz sprzedawcę i jego NIP**. Sprawdź też, czy nabywcą jest właściwa firma. Jeśli pole edytowalne zawiera błąd odczytu, kliknij je i wpisz wartość z dokumentu.
+
+<img src="/images/instructions-20260921/ocr-verify-top-002.png" alt="Podgląd PDF obok numeru, dat i danych sprzedawcy oraz komunikatu OCR" />
+
+<Note>
+Na zrzucie widoczny jest komunikat dotyczący fikcyjnego NIP-u nabywcy. W swojej firmie wyjaśnij każdą niezgodność przed zatwierdzeniem. Gdy błąd dotyczy danych firmy albo samej faktury, nie zastępuj ich przypadkową wartością tylko po to, aby zapisać dokument.
+</Note>
+
+Przewiń formularz po prawej i sprawdź **formę płatności, termin oraz numer rachunku**. Pole **Faktura jest już opłacona** zaznaczaj wyłącznie po potwierdzeniu rzeczywistej zapłaty.
+
+<img src="/images/instructions-20260921/ocr-verify-payment-002.png" alt="Dane nabywcy, termin płatności, rachunek i niezaznaczona opcja Faktura jest już opłacona" />
+
+Sprawdź **walutę, pozycje, stawki VAT i sumy netto, VAT oraz brutto**. W przykładzie są to: **1 000,00 zł netto + 230,00 zł VAT = 1 230,00 zł brutto**. Kategorię i projekt uzupełnij zgodnie z zasadami opisywania kosztów w firmie.
+
+<img src="/images/instructions-20260921/ocr-verify-amounts-002.png" alt="Pozycja faktury, kwoty netto, VAT i brutto oraz przycisk Zatwierdź" />
+
+## 5. Zatwierdź dane i sprawdź kontrahenta
+
+Po sprawdzeniu formularza kliknij **Zatwierdź**. Jeżeli aplikacja wskaże nieprawidłowe lub brakujące dane, popraw je zgodnie z dokumentem i ponownie sprawdź formularz.
+
+Może pojawić się panel **Weryfikacja kontrahenta** z dwiema opcjami:
+
+- **Zatwierdź jednorazowo** zapisuje tę fakturę bez dodawania dostawcy do listy zaufanych. Tę opcję wybraliśmy w przykładzie.
+- **Dodaj do zaufanych** dodaje kontrahenta do listy; zgodnie z komunikatem aplikacji przyszłe faktury będą zatwierdzane automatycznie. Wybierz tę opcję tylko zgodnie z procesem firmy.
+
+<img src="/images/instructions-20260921/ocr-contractor-confirm.png" alt="Weryfikacja kontrahenta: Zatwierdź jednorazowo oraz Dodaj do zaufanych" />
+
+## 6. Sprawdź zapisany koszt
+
+Po zapisie aplikacja może otworzyć kolejny dokument do weryfikacji. Użyj **Wstecz** na górze, aby wrócić do listy, i wybierz zakładkę **Faktury**.
+
+Odszukaj ten sam numer faktury i sprawdź dane. W naszym przykładzie dokument **DEMO/OCR/2026/002** znajduje się już w Fakturach ze statusem **Wystawiona, Nieopłacona**. Zatwierdzenie danych OCR nie oznacza wykonania przelewu.
+
+<img src="/images/instructions-20260921/ocr-result-002.png" alt="Zapisany koszt DEMO/OCR/2026/002 w zakładce Faktury" />
+
+## Co dalej?
+
+Dalszy krok zależy od obiegu dokumentów i podziału obowiązków w firmie. Przejdź do [instrukcji płatności kodem QR albo akceptacji kosztu i pracy w Płatnościach](/faq/modules/payments). Możesz też wrócić do [przeglądu zadań w Kosztach](/faq/modules/expenses).

@@ -1,0 +1,73 @@
+---
+title: "Od dodania kosztu do potwierdzenia zapłaty"
+description: "Sprawdź dane, opisz koszt, wykonaj wymagane akceptacje, przygotuj płatność i zakończ obieg po zapłacie."
+---
+
+Koszt przechodzi przez kilka różnych etapów. Zatwierdzenie danych OCR, opisanie faktury, akceptacja wydatku i zapis zapłaty mają inne znaczenie. Poniżej pokazujemy kolejność w firmie korzystającej z wieloetapowego obiegu.
+
+Przykłady przedstawiają dane demonstracyjne. Nie przelewaj pieniędzy na rachunki ze zrzutów. Zrzut pól opisu pokazuje dokument DEMO/OCR/2026/003, a pozostałe kroki dokument DEMO/OCR/2026/002.
+
+## 1. Dodaj dokument i sprawdź jego dane
+
+[Dodaj fakturę z pliku i sprawdź OCR](/faq/intro/add-expense) lub [prześlij ją e-mailem](/faq/howto/email). Porównaj numer, kontrahenta, daty, rachunek i kwoty z oryginałem. Zatwierdź dopiero poprawne dane.
+
+<img src="/images/instructions-20260921/ocr-verify-top-002.png" alt="Podgląd faktury i pola danych podczas weryfikacji OCR" />
+
+Odszukaj ten sam dokument w **Koszty → Faktury**. Jeśli go nie widzisz, [sprawdź zakładki i filtry](/faq/howto/missing-document).
+
+## 2. Uzupełnij kategorię i zapisz
+
+Kliknij wiersz dokumentu. W szczegółach przewiń do **Kategoria kosztu**, otwórz pole i wybierz kategorię odpowiadającą wydatkowi. W przykładzie jest to **Projektowanie**. Sprawdź także przypisanie projektu, jeśli koszt dotyczy konkretnego zlecenia. Kategoria i projekt to osobne pola.
+
+<img src="/images/instructions-20260921/cost-lifecycle-fields.png" alt="Pola Kategoria kosztu i Projekt w szczegółach oraz przycisk Zapisz" />
+
+Kliknij **Zapisz**, a następnie wróć do listy przyciskiem **Wstecz**. Sprawdź, czy kategoria widnieje przy dokumencie. Zapis danych nie kończy automatycznie etapu opisu w obiegu.
+
+## 3. Zakończ opisywanie faktury
+
+Zaznacz checkbox przy właściwym dokumencie. Na dolnym pasku sprawdź **Zaznaczonych elementów: 1**, a następnie kliknij **Opisz fakturę**.
+
+<img src="/images/instructions-20260921/cost-lifecycle-describe-action.png" alt="Zaznaczony koszt i akcja Opisz fakturę na dolnym pasku" />
+
+W sprawdzonym obiegu aplikacja potwierdza, że faktura została opisana i czeka na weryfikację kosztu. Jeśli nie ma kategorii, najpierw uzupełnij ją w szczegółach.
+
+## 4. Zaakceptuj wydatek
+
+Osoba uprawniona do oceny kosztu sprawdza jego zasadność i wybiera **Zaakceptuj koszt**. W przykładzie przycisk jest dostępny na pasku zaznaczonego dokumentu.
+
+<img src="/images/instructions-20260921/cost-lifecycle-approve-cost.png" alt="Akcja Zaakceptuj koszt po zakończeniu opisywania faktury" />
+
+Po tej akcji koszt czeka na akceptację do płatności. W Twojej firmie te czynności mogą być przypisane różnym osobom, a konfiguracja obiegu może obejmować mniej etapów. Brak przycisku nie jest powodem do pomijania wymaganej akceptacji.
+
+## 5. Zaakceptuj koszt do płatności
+
+Po sprawdzeniu dokumentu osoba uprawniona wybiera **Zaakceptuj do płatności**.
+
+<img src="/images/instructions-20260921/cost-lifecycle-approve-payment.png" alt="Osobna akcja Zaakceptuj do płatności po akceptacji kosztu" />
+
+Ta czynność pozwala przejść do przygotowania płatności. Nie wykonuje przelewu i nie oznacza faktury jako opłaconej. W tym obiegu już po akceptacji do płatności pojawia się **e-Obieg zakończony**, mimo że status płatności pozostaje **NIEOPŁACONA**. Sprawdzaj oba stany osobno.
+
+## 6. Przygotuj przelew zgodnie z procesem firmy
+
+Wybór zależy od organizacji pracy i pilności:
+
+- **Pojedynczy przelew w aplikacji bankowej:** zaznacz jeden dokument i kliknij **Kod QR płatności**. Porównaj dane przed zeskanowaniem.
+- **Przygotowanie płatności w ustalonym terminie lub paczki przelewów:** przejdź do **Płatności → Do płatności**, odszukaj dokument i przygotuj plik do banku.
+
+Oba warianty, wraz z akcjami i zrzutami, opisuje [instrukcja QR i modułu Płatności](/faq/modules/payments).
+
+<img src="/images/instructions-20260921/cost-lifecycle-qr.png" alt="Kod QR dla DEMO/OCR/2026/002 z kwotą 1230 zł i przyciskiem Oznacz jako opłacone" />
+
+## 7. Potwierdź rzeczywistą zapłatę i zapisz rozliczenie
+
+Sprawdź w banku, czy przelew został wykonany. Utworzenie pliku, import, zeskanowanie QR lub zaplanowanie przyszłej daty nie potwierdzają zapłaty.
+
+Po potwierdzeniu pełnej zapłaty wybierz **Oznacz jako opłacone** w oknie QR lub **Oznacz jako opłaconą** na pasku listy. W przykładzie po tej akcji lista pokazuje **OPŁACONA** oraz **e-Obieg zakończony**.
+
+<img src="/images/instructions-20260921/cost-lifecycle-paid.png" alt="Szczegóły tego samego kosztu: numer faktury, status OPŁACONA i zakończony e-Obieg" />
+
+Przy częściowej zapłacie nie oznaczaj całej faktury jako opłaconej. Wyjaśnij rozliczenie z osobą odpowiedzialną za płatności. Ta instrukcja pokazuje pełne rozliczenie pojedynczego kosztu.
+
+## Co sprawdzić na końcu?
+
+Porównaj numer dokumentu, kwotę, kategorię i status. Zespół powinien wiedzieć, kto zatwierdził koszt i czy zapłata została potwierdzona. Przypisane dokumenty możesz następnie wykorzystać do [sprawdzenia wyniku projektu](/faq/howto/project-result).
