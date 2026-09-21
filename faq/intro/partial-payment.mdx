@@ -1,0 +1,86 @@
+---
+title: "Jak dodać częściową wpłatę do faktury?"
+description: "Dodaj wpłatę ze szczegółów faktury lub z paska wyboru na liście i sprawdź pozostałą kwotę."
+---
+
+Klient zapłacił część faktury? Dodaj otrzymaną kwotę, aby widzieć, ile pozostaje do rozliczenia. Możesz zacząć od szczegółów dokumentu albo zaznaczenia faktury na liście.
+
+<Note>Materiał roboczy do akceptacji. Zrzuty pochodzą z danych demonstracyjnych w QA. Dodanie wpłaty rejestruje kwotę w aplikacji; nie wykonuje przelewu bankowego.</Note>
+
+## Zanim zaczniesz
+
+Potrzebujesz dostępu do faktury sprzedaży i potwierdzenia otrzymanej wpłaty. Sprawdź firmę, numer faktury, nabywcę i dotychczasowe wpłaty.
+
+Przykład: nieopłacona faktura na **1230 zł brutto** i otrzymana wpłata **500 zł**. Po zapisaniu pozostanie **730 zł**.
+
+**Wybierz tylko jeden z poniższych sposobów dla danej wpłaty.** Nie wykonuj obu po kolei na tym samym dokumencie, bo zapiszesz wpłatę dwukrotnie. Na zrzutach pokazujemy dwie różne faktury, aby zilustrować obie ścieżki.
+
+## Sposób A: ze szczegółów faktury
+
+### 1. Otwórz właściwy dokument
+
+Wejdź do **Sprzedaż** i kliknij wiersz faktury. Sprawdź numer, nabywcę, kwotę i status płatności. W przykładzie zaczynamy od statusu **NIEOPŁACONA**.
+
+<img src="/images/instructions-20260921/payment-list-before-selection.png" alt="Lista Sprzedaż: kliknięcie wiersza otwiera szczegóły faktury; checkbox po lewej służy do drugiego sposobu" />
+
+### 2. Otwórz menu i wybierz Dodaj wpłatę
+
+W szczegółach kliknij **Więcej akcji**, czyli przycisk z trzema pionowymi kropkami na dole, obok przycisku pobierania.
+
+<img src="/images/instructions-20260921/invoice-company-result.png" alt="Szczegóły faktury: przycisk z trzema kropkami znajduje się na dole, obok Pobierz i Wyślij fakturę" />
+
+W otwartym menu, w sekcji **Płatności**, kliknij **Dodaj wpłatę**.
+
+<img src="/images/instructions-20260921/payment-details-menu.png" alt="Otwarte menu Więcej akcji w szczegółach faktury z poleceniem Dodaj wpłatę" />
+
+### 3. Wpisz otrzymaną kwotę i zapisz
+
+Sprawdź **Kwotę do zapłaty**. Wpisz **500** i kliknij zielony przycisk **+** po prawej stronie pola. Wpisujesz wysokość tej wpłaty, a nie pełną wartość faktury ani kwotę, która ma pozostać.
+
+<img src="/images/instructions-20260921/payment-details-form.png" alt="Formularz w szczegółach: kwota do zapłaty 1230 zł, wpisana wpłata 500 i zielony przycisk plus" />
+
+Przejdź do kontroli wyniku opisanej poniżej.
+
+## Sposób B: z paska wyboru na liście
+
+### 1. Zaznacz jedną fakturę
+
+Wejdź do **Sprzedaż**. Odszukaj dokument i zaznacz **checkbox po lewej stronie jego wiersza**. Nie używaj pola zaznaczającego wszystkie faktury w nagłówku tabeli.
+
+<img src="/images/instructions-20260921/payment-list-before-selection.png" alt="Niezaznaczony checkbox po lewej stronie wiersza faktury 7/9/2026" />
+
+Na dole pojawi się pasek wyboru. Sprawdź komunikat **Zaznaczonych elementów: 1** i wartość zaznaczonej faktury.
+
+<img src="/images/instructions-20260921/payment-list-toolbar.png" alt="Pasek wyboru dla jednej faktury: licznik zaznaczenia oraz przycisk Więcej na dole" />
+
+### 2. Wybierz akcję z paska
+
+Na dolnym pasku kliknij **Więcej**, a następnie **Dodaj wpłatę** w sekcji **Płatności**.
+
+<img src="/images/instructions-20260921/payment-list-menu.png" alt="Menu Więcej otwarte z paska wyboru na liście, z widoczną akcją Dodaj wpłatę" />
+
+### 3. Wpisz otrzymaną kwotę i zapisz
+
+Sprawdź **Kwotę do zapłaty**, wpisz **500** i kliknij zielony **+**. To ten sam rodzaj zapisu co w szczegółach faktury.
+
+<img src="/images/instructions-20260921/payment-list-form.png" alt="Formularz nad paskiem wyboru: kwota wpłaty 500 i przycisk plus zapisujący wpłatę" />
+
+## Sprawdź wynik wybranego sposobu
+
+Zaczekaj na zamknięcie formularza. Otwórz ponownie szczegóły tej samej faktury i sprawdź:
+
+- status **CZĘŚCIOWO OPŁACONA**;
+- **Dokonane wpłaty: 500,00 zł**;
+- **Pozostało: 730,00 zł**.
+
+<img src="/images/instructions-20260921/payment-details-result.png" alt="Wynik wpłaty: faktura częściowo opłacona, dokonane wpłaty 500 zł, pozostało 730 zł" />
+
+## Gdy wynik jest inny
+
+Jeśli kwota pozostała do zapłaty nie zgadza się, sprawdź sumę dotychczasowych wpłat. Przy niepewnym wyniku zapisu najpierw ponownie otwórz dokument, zanim dodasz kolejną wpłatę.
+
+Nie wybieraj **Oznacz jako opłaconą**, gdy otrzymałeś tylko część należności. Ta instrukcja nie obejmuje cofania błędnej wpłaty.
+
+## Co dalej
+
+Po kolejnej wpłacie ponownie sprawdź dokument i jego rozliczenie. Do porównania przychodów i kosztów użyj [modułu Finanse](/faq/modules/finance).
