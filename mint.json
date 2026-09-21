@@ -37,7 +37,7 @@
       "url": "ksef"
     },
     {
-      "name": "FAQ",
+      "name": "Centrum pomocy",
       "url": "faq"
     },
     {
@@ -52,7 +52,6 @@
       "name": "Roadmap",
       "url": "roadmap"
     },
-
     {
       "name": "OpenAPI",
       "url": "openapi",
@@ -112,38 +111,56 @@
       ]
     },
     {
-      "group": "FAQ",
+      "group": "Centrum pomocy",
       "pages": [
         {
-          "group": "Pierwsze Kroki w Altera",
+          "group": "Wybierz zadanie",
           "pages": [
-            "faq/intro/welcome",
-            "faq/intro/creating-company",
-            "faq/intro/first-invoice",
-            "faq/intro/partial-payment",
-            "faq/intro/your-dashboard",
-            "faq/intro/advanced-settings"
+            "faq/index",
+            "faq/howto/search-filters"
           ]
         },
         {
-          "group": "Poznaj Moduły Altera",
-            "pages": [
-              "faq/modules/sales",
-              "faq/modules/expenses",
-              "faq/modules/payments",
-              "faq/modules/files",
-              "faq/modules/finance"
-            ]
+          "group": "Fakturowanie i należności",
+          "pages": [
+            "faq/modules/sales",
+            "faq/intro/first-invoice",
+            "faq/intro/partial-payment",
+            "faq/howto/invoice-export"
+          ]
         },
         {
-          "group": "Praktyczne Poradniki (Jak to zrobić?)",
+          "group": "Koszty i płatności",
           "pages": [
+            "faq/modules/expenses",
+            "faq/intro/add-expense",
+            "faq/modules/payments",
+            "faq/howto/eobieg"
+          ]
+        },
+        {
+          "group": "Finanse",
+          "pages": [
+            "faq/modules/finance",
+            "faq/howto/openBanking"
+          ]
+        },
+        {
+          "group": "Dokumenty i współpraca",
+          "pages": [
+            "faq/modules/files",
             "faq/howto/email",
-            "faq/howto/eobieg",
-            "faq/howto/openBanking",
-            "faq/howto/invoice-export",
-            "faq/howto/doc-export",
-            "faq/howto/notifications"
+            "faq/howto/notifications",
+            "faq/howto/doc-export"
+          ]
+        },
+        {
+          "group": "Start i ustawienia",
+          "pages": [
+            "faq/intro/welcome",
+            "faq/intro/creating-company",
+            "faq/intro/your-dashboard",
+            "faq/intro/advanced-settings"
           ]
         }
       ]

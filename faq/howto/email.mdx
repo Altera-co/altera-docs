@@ -1,26 +1,46 @@
 ---
-title: "Jak automatycznie dodawać faktury kosztowe z e-maila?"
-description: "Masz dość ręcznego pobierania faktur z załączników i wgrywania ich do programu? Wiemy, to strata czasu. Zobacz, jak to zautomatyzować."
+title: "Jak przesłać fakturę kosztową e-mailem?"
+description: "Znajdź adres importu swojej firmy, wyślij załącznik i sprawdź odczytany dokument w Kosztach."
 ---
-Dlatego w Altera **każda firma ma swój unikalny, dedykowany adres e-mail**. Wystarczy, że przekażesz na niego maila z fakturą, a dokument po chwili sam pojawi się w Twoich Kosztach. **Bez pobierania, bez klikania, bez przepisywania.**
 
-### Gdzie znaleźć swój adres do przesyłania faktur?
+Fakturę otrzymaną pocztą możesz przesłać na adres importu firmy w Altera. Po imporcie sprawdź dokument i dane OCR tak samo jak po ręcznym dodaniu pliku.
 
-To proste. Znajdziesz go w dwóch krokach:
+## 1. Otwórz ustawienia e-maila
 
-1.  W menu po lewej stronie kliknij **Ustawienia**.
-2.  Przejdź do sekcji **Integracje**, a następnie do zakładki **E-mail**.
+Sprawdź wybraną firmę. Kliknij ikonę **Ustawienia** na górze aplikacji, rozwiń **Integracje** i wybierz **E-mail**.
 
-### Jak to działa?
+Jeśli firma nie ma jeszcze adresu, zobaczysz **Wygeneruj dedykowany adres**. Opcja **Adres do wysyłki faktur poufnych** dotyczy osobnego zakresu dostępu. W przykładzie używamy zwykłego adresu, bez zaznaczania tej opcji.
 
-W tej sekcji znajdziesz swój indywidualny, losowo wygenerowany adres e-mail.
+<img src="/images/instructions-20260921/email-create-action.png" alt="Ustawienia Integracje E-mail oraz przycisk Wygeneruj dedykowany adres" />
 
-* **Skopiuj adres:** Kliknij ikonę kopiowania.
-* **Przekaż fakturę:** Wejdź na swoją skrzynkę mailową, znajdź wiadomość z fakturą i po prostu przekaż ją (forward) na skopiowany adres.
-* **Gotowe!** Po kilku chwilach faktura pojawi się w Twojej zakładce `Koszty`. Nasz system **sam odczyta z niej wszystkie dane**, takie jak NIP kontrahenta, kwoty i daty.
+## 2. Skopiuj adres właściwej firmy
 
-> **Pro-tip:** Ustaw w swojej skrzynce e-mail **automatyczne przekierowanie wiadomości** od stałych dostawców (np. za telefon, internet, leasing) na Twój adres w Altera. W ten sposób faktury będą dodawać się do systemu całkowicie bez Twojego udziału!
+Przy istniejącym adresie kliknij ikonę **Skopiuj do schowka**. Nie generuj kolejnego adresu, jeśli możesz użyć już dostępnego.
 
-### Chcesz mieć prostszy, firmowy adres e-mail?
+<img src="/images/instructions-20260921/email-address.png" alt="Wygenerowany adres importu firmy demonstracyjnej i przycisk kopiowania" />
 
-Standardowo adresy są losowe (np. `aBc12XyZ@fv.altera.co`), aby zapewnić maksymalne bezpieczeństwo. Jeśli jednak wolisz używać adresu, który łatwiej zapamiętać (np. `faktury.twojafirma@fv.altera.co`), możemy go dla Ciebie aktywować. **Skontaktuj się z nami**, a my uruchomimy dla Ciebie uproszczony adres.
+<Note>
+Zrzuty pochodzą ze środowiska demonstracyjnego. Nie przepisuj adresu ze zrzutu: skopiuj adres ze swojej firmy w aplikacji.
+</Note>
+
+## 3. Wyślij wiadomość z załącznikiem
+
+W swojej poczcie utwórz wiadomość lub przekaż otrzymaną fakturę. W polu odbiorcy wklej skopiowany adres, dodaj plik PDF i sprawdź, czy załącznik rzeczywiście znajduje się w wiadomości. Następnie wyślij wiadomość.
+
+Najpierw sprawdź pojedynczy dokument. Zanim ustawisz automatyczne przekazywanie wiadomości u swojego dostawcy poczty, ustal zakres i unikaj wielokrotnego wysyłania tych samych faktur.
+
+## 4. Sprawdź wynik w Altera
+
+Poczekaj na przetworzenie załącznika. Otwórz **Koszty** i sprawdź **Faktury** oraz **Do weryfikacji**. Szukaj numeru dokumentu i sprzedawcy. Powiadomienie o dokumencie wymagającym weryfikacji może też prowadzić bezpośrednio do jego szczegółów.
+
+<img src="/images/instructions-20260921/email-notification.png" alt="Powiadomienie o zaimportowanej fakturze demonstracyjnej DEMO/EMAIL/2026/001" />
+
+Porównaj podgląd z rozpoznanymi danymi. W przykładzie e-mailem przesłano fakturę **DEMO/EMAIL/2026/001** na **123,00 zł brutto**; dokument wymaga dalszej weryfikacji.
+
+<img src="/images/instructions-20260921/email-result.png" alt="Szczegóły faktury przesłanej e-mailem z podglądem PDF i danymi OCR" />
+
+Dokończ [sprawdzenie danych i zatwierdzenie kosztu](/faq/intro/add-expense). Wysłanie wiadomości nie oznacza akceptacji kosztu ani jego opłacenia.
+
+## Jeśli nie widzisz dokumentu
+
+Sprawdź adres odbiorcy, załącznik, wybraną firmę, zakładkę oraz filtry w Kosztach. W ustawieniach e-maila dostępna jest też **Historia dostarczonych dokumentów**, ale jej pusty wynik nie przesądza o nieudanym imporcie. W naszym teście dokument pojawił się w Kosztach mimo pustej historii. Przed ponowną wysyłką wyszukaj numer faktury, aby uniknąć duplikatu.
