@@ -1,27 +1,33 @@
 ---
-title: "Jak eksportować faktury z Altera?"
-description: "Potrzebujesz zestawienia faktur w Excelu, paczki PDF-ów dla księgowej, a może pliku JPK_FA dla urzędu? Zobacz, jak to zrobić w kilku kliknięciach."
+title: "Jak eksportować faktury sprzedaży?"
+description: "Wybierz faktury filtrem lub zaznaczeniem, sprawdź zakres i format, a potem zweryfikuj przygotowany plik."
 ---
 
-Czasami musisz wyciągnąć dane z aplikacji – aby przygotować raport, wysłać do księgowości lub spełnić wymogi urzędowe. W Altera jest to bardzo proste.
+Eksport przydaje się, gdy chcesz przekazać zestaw dokumentów lub przeanalizować sprzedaż poza Altera. Zacznij od ustalenia zakresu: możesz użyć filtrów albo zaznaczyć konkretne faktury.
 
-### Jak wyeksportować faktury?
+## Eksport według filtrów
 
-1.  Przejdź do modułu **Sprzedaż**.
-2.  Kliknij przycisk **"Eksportuj"** w prawym górnym rogu.
-3.  Wybierz format pliku:
-* **PDF:** Pobierzesz paczkę wszystkich faktur jako osobne pliki PDF.
-* **Excel:** Otrzymasz arkusz kalkulacyjny z listą wszystkich faktur i ich szczegółami.
-* **JPK_FA:** Wygenerujesz Jednolity Plik Kontrolny, którego może wymagać od Ciebie Urząd Skarbowy (tylko dla sprzedaży).
-* **JPK_KSEF:** Wygenerujesz zestaw faktur w formacie JPK_KSEF, który zgodny z systemem e-faktur Krajowego Systemu e-Faktur.
-* **Symfonia FK:** Przygotujesz plik do importu do programu Symfonia Finanse i Księgowość.
-* **enova365:** Przygotujesz plik do importu do programu enova365.
-* **Comarch Optima:** Przygotujesz plik do importu do programu Comarch Optima.
-4.  Kliknij **"Eksportuj plik"**.
+1. Otwórz **Sprzedaż → Faktury**. Sprawdź firmę w prawym górnym rogu.
+2. Ustaw zakres dat lub kliknij **Wszystkie filtry**, aby zawęzić listę. Sprawdź także aktywne filtry przed eksportem.
+3. Kliknij **Eksportuj**. Okno pokazuje, że dane zostaną wyeksportowane zgodnie z filtrami listy, i wyświetla aktywne filtry. Jeśli zakres jest nieprawidłowy, zamknij okno i popraw filtry albo użyj **Wyczyść filtry** w oknie eksportu.
 
-> **Ważne:** Eksport może chwilę potrwać. Nie musisz czekać. Gdy plik będzie gotowy, **otrzymasz powiadomienie** w dzwoneczku w prawym górnym rogu. Będziesz mógł go pobrać w dowolnym momencie przez 7 dni.
+<img src="/images/instructions-20260921/sales-export-dialog.jpg" alt="Okno Eksportuj Sprzedaż z aktywnymi filtrami i przyciskiem Eksportuj plik" />
 
-### Jak eksportować tylko wybrane faktury?
+## Eksport wybranych faktur
 
-* **Filtrowanie:** Użyj przycisku **"Wszystkie filtry"**, aby wyświetlić tylko faktury, które Cię interesują (np. z jednego miesiąca lub dla jednego klienta). Następnie kliknij "Eksportuj" – pobrane zostaną tylko widoczne na liście dokumenty.
-* **Ręczne zaznaczenie:** Zaznacz "ptaszkiem" na liście kilka konkretnych faktur. Na górze pojawi się przycisk **"Eksportuj wybrane"**.
+1. Na liście **Sprzedaż → Faktury** zaznacz pole przy każdej potrzebnej fakturze. Licznik na pasku pokazuje liczbę i wartość zaznaczonych dokumentów.
+2. Kliknij **Eksportuj wybrane**. Okno potwierdzi: **Zostaną wyeksportowane zaznaczone dokumenty**.
+
+<img src="/images/instructions-20260921/sales-export-selected.jpg" alt="Lista sprzedaży z zaznaczoną fakturą i przyciskiem Eksportuj wybrane" />
+
+<img src="/images/instructions-20260921/sales-export-selected-dialog.jpg" alt="Okno eksportu potwierdzające zakres zaznaczonych dokumentów" />
+
+## Wybór formatu i przygotowanie pliku
+
+W obu ścieżkach otwórz **Format eksportu**. Dostępne opcje obejmują **PDF**, **Excel**, **JPK_FA(4)** oraz formaty dla programów księgowych, między innymi **Symfonia FK**, **Comarch Optima**, **enova365**, **WAPRO XML** i **InsERT EDI++**. Na liście jest również **KSeF FA(3)**. Wybierz format wymagany przez odbiorcę, ponieważ samo pojawienie się opcji w Altera nie potwierdza poprawnego importu po jego stronie.
+
+<img src="/images/instructions-20260921/sales-export-formats.jpg" alt="Otwarta lista dostępnych formatów eksportu sprzedaży" />
+
+Kliknij **Eksportuj plik**. Altera potwierdza rozpoczęcie przygotowania eksportu i informuje, że plik otworzy się automatycznie, gdy będzie gotowy. Gdy plik się otworzy lub zostanie pobrany, sprawdź jego format, liczbę dokumentów, zakres dat i wybrane faktury. Dopiero ten odczyt potwierdza wynik eksportu. Jeśli przekazujesz plik do programu księgowego, sprawdź osobno wynik importu w tym programie.
+
+Jeśli potrzebujesz pojedynczej faktury, otwórz jej szczegóły i użyj przycisku **Pobierz** zamiast eksportu zbiorczego.

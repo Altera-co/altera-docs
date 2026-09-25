@@ -26,7 +26,7 @@ Dziewięć odświeżonych stron klienta: desktop i 390 px, po jednym H1, wszystk
 - Nowe konto, weryfikacja e-mail i pełne dodanie firmy: osobny scenariusz z ręcznym przyjęciem warunków.
 - Open Banking: kontrolowany rachunek testowy, autoryzacja, pobranie danych, odnowienie i rozłączenie.
 - Widoki księgowości, organizacja i role: odłożone na prośbę użytkownika do potwierdzenia ukończenia przebudowy.
-- Dawne instrukcje e-Obiegu i eksportu sprzedaży: osobny przegląd; nie są potwierdzone przez test pobierania z Plików.
+- Dawne instrukcje e-Obiegu i eksportu sprzedaży: sprawdzone ponownie 25.09.2026 w QA 577; wynik eksportu pliku wciąż wymaga odczytu pobranego pliku.
 - Rozbieżność historii importu e-mail: zgłoszenie i sprawdzenie przyczyny oddzielnie od redakcji instrukcji.
 
 ## Extension batch: verified client workflows
@@ -72,3 +72,11 @@ Potwierdzenie e-maila przeniesiono do instrukcji logowania i rejestracji. Usuni�
 - faq/modules/finance.mdx: Materiał roboczy do akceptacji. Zrzuty i przykłady pochodzą z firmy demonstracyjnej w QA.
 
 - faq/modules/payments.mdx: Wersja do akceptacji. Zrzuty pokazują syntetyczne dane QA. Nie wykonuj przelewów na rachunki z przykładów. Sprawdzono akceptację kosztu, przygotowanie pliku i oba wejścia do QR. Import i wykonanie przelewu w banku pozostają poza testem.
+
+## Uzupełnienie 25.09.2026: e-Obieg i eksport sprzedaży
+
+- QA 577, Altera 2.36.0+1602: odczytano ustawienie **Koszty → e-Obieg dokumentów** i trzy dostępne poziomy. Nie zmieniano konfiguracji firmy. Usunięto ze starej instrukcji twierdzenia o automatycznych powiadomieniach i przypisaniach, których nie sprawdzono.
+- W tej samej syntetycznej firmie wystawiono fakturę demonstracyjną za usługę 100 PLN, płatną gotówką. Nie wysyłano jej odbiorcy ani do KSeF.
+- Sprawdzono dwa wejścia do eksportu sprzedaży: **Eksportuj** według filtrów i **Eksportuj wybrane** po zaznaczeniu faktury. Odczytano aktualną listę formatów. Po uruchomieniu PDF aplikacja potwierdziła rozpoczęcie przygotowania eksportu, lecz nie potwierdzono otwarcia ani pobrania pliku. Instrukcja nie obiecuje retencji pliku ani wyniku importu księgowego.
+- Zrzuty przedstawiają pola i akcje, nie tylko wynik. Sprawdzono istnienie obrazów, ich rzeczywisty format JPEG, lokalne odnośniki i `git diff --check`. Mintlify `dev` nie ukończył pobrania lokalnego klienta; `validate` zgłosił brak dostępu do internetu. Pełny render pozostaje otwarty.
+- Test faktury cyklicznej utworzył regułę z pierwszą datą 25.10.2026 i bez automatycznej wysyłki. Akcja **Dezaktywuj** zwróciła błąd serwera. Regułę usunięto przez edycję; lista reguł była następnie pusta. Temat nie jest gotowy do instrukcji końcowej.
