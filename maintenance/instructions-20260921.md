@@ -86,3 +86,8 @@ Potwierdzenie e-maila przeniesiono do instrukcji logowania i rejestracji. Usuni�
 - QA 577, Altera 2.36.0+1602: z menu **Nowa faktura → Pro forma** wystawiono dwa syntetyczne dokumenty, PRO 1/9/2026 na 100 PLN i w powtórzeniu według tekstu PRO 2/9/2026 na 120 PLN. Oba są wystawione, nieopłacone, z formą płatności Gotówka. Nie wysyłano e-maila ani do KSeF. Podgląd PDF potwierdził typ, numer, pozycję i sumę.
 - Powtórzenie wykazało, że wpisanie kodu pocztowego bez myślnika w maskowanym polu dało niepełną wartość; dokument 2 początkowo zapisał się bez kodu. W edycji wpisano pełne `00-002`, zapisano i niezależnie otwarto dokument z listy. Lista, szczegóły i ponownie otwarty PDF pokazały pełny adres. Instrukcja nakazuje sprawdzenie pełnego adresu po wystawieniu.
 - Nowa instrukcja `faq/howto/proforma.mdx` używa zrzutów menu, początku formularza, danych nabywcy, akcji na pozycji, płatności i wyniku. Pozostałe typy dokumentów z C12, w tym korekta, zaliczka i końcowa, wymagają osobnych testów.
+
+## Uzupełnienie 25.09.2026: pełna płatność gotówką
+
+- QA 577: syntetyczna faktura sprzedaży 1/9/2026 na 100 PLN miała formę Gotówka i status NIEOPŁACONA. Ze szczegółów wybrano **Więcej akcji → Płatności → Oznacz jako opłaconą**. Po zapisie status był OPŁACONA, data płatności 25.09.2026; odświeżenie strony potwierdziło oba pola i aktualny PDF. To zapis symulacyjny, bez rzeczywistego przyjęcia pieniędzy.
+- Instrukcja `faq/howto/mark-paid-cash.mdx` pokazuje stan przed, otwarte menu z samą akcją i wynik. Częściowa wpłata pozostaje osobną ścieżką w `faq/intro/partial-payment.mdx`. Cofnięcia oznaczenia nie sprawdzano.
