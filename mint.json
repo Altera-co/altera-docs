@@ -126,9 +126,9 @@
           "pages": [
             "faq/modules/sales",
             "faq/intro/first-invoice",
+            "faq/howto/advance-invoice",
             "faq/howto/proforma",
             "faq/intro/partial-payment",
-            "faq/howto/mark-paid-cash",
             "faq/howto/invoice-export"
           ]
         },
@@ -173,6 +173,14 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/faq/howto/mark-paid",
+      "destination": "/faq/intro/partial-payment"
+    },
+    {
+      "source": "/faq/howto/mark-paid-cash",
+      "destination": "/faq/intro/partial-payment"
+    },
     {
       "source": "/faq/howto/ksef",
       "destination": "/ksef/overview"
