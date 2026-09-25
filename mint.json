@@ -126,6 +126,7 @@
           "pages": [
             "faq/modules/sales",
             "faq/intro/first-invoice",
+            "faq/howto/proforma",
             "faq/intro/partial-payment",
             "faq/howto/invoice-export"
           ]

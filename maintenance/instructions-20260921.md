@@ -80,3 +80,9 @@ Potwierdzenie e-maila przeniesiono do instrukcji logowania i rejestracji. Usuni�
 - Sprawdzono dwa wejścia do eksportu sprzedaży: **Eksportuj** według filtrów i **Eksportuj wybrane** po zaznaczeniu faktury. Odczytano aktualną listę formatów. Po uruchomieniu PDF aplikacja potwierdziła rozpoczęcie przygotowania eksportu, lecz nie potwierdzono otwarcia ani pobrania pliku. Instrukcja nie obiecuje retencji pliku ani wyniku importu księgowego.
 - Zrzuty przedstawiają pola i akcje, nie tylko wynik. Sprawdzono istnienie obrazów, ich rzeczywisty format JPEG, lokalne odnośniki i `git diff --check`. Mintlify `dev` nie ukończył pobrania lokalnego klienta; `validate` zgłosił brak dostępu do internetu. Pełny render pozostaje otwarty.
 - Test faktury cyklicznej utworzył regułę z pierwszą datą 25.10.2026 i bez automatycznej wysyłki. Akcja **Dezaktywuj** zwróciła błąd serwera. Regułę usunięto przez edycję; lista reguł była następnie pusta. Temat nie jest gotowy do instrukcji końcowej.
+
+## Uzupełnienie 25.09.2026: faktura pro forma
+
+- QA 577, Altera 2.36.0+1602: z menu **Nowa faktura → Pro forma** wystawiono dwa syntetyczne dokumenty, PRO 1/9/2026 na 100 PLN i w powtórzeniu według tekstu PRO 2/9/2026 na 120 PLN. Oba są wystawione, nieopłacone, z formą płatności Gotówka. Nie wysyłano e-maila ani do KSeF. Podgląd PDF potwierdził typ, numer, pozycję i sumę.
+- Powtórzenie wykazało, że wpisanie kodu pocztowego bez myślnika w maskowanym polu dało niepełną wartość; dokument 2 początkowo zapisał się bez kodu. W edycji wpisano pełne `00-002`, zapisano i niezależnie otwarto dokument z listy. Lista, szczegóły i ponownie otwarty PDF pokazały pełny adres. Instrukcja nakazuje sprawdzenie pełnego adresu po wystawieniu.
+- Nowa instrukcja `faq/howto/proforma.mdx` używa zrzutów menu, początku formularza, danych nabywcy, akcji na pozycji, płatności i wyniku. Pozostałe typy dokumentów z C12, w tym korekta, zaliczka i końcowa, wymagają osobnych testów.
