@@ -3,7 +3,7 @@ title: "Faktury sprzedaży i KSeF"
 description: "Wystawiaj faktury sprzedaży w Altera i wysyłaj je do KSeF natychmiast lub zbiorczo. Numer KSeF, UPO, potwierdzenie transakcji i tryb tylko do odczytu."
 ---
 
-W Altera wystawiasz faktury normalnie, ale masz trzy ścieżki działania — wybierasz je w zależności od tego, czy wszystko jest już gotowe do wysyłki do KSeF.
+W Altera wystawiasz faktury normalnie. Masz trzy ścieżki działania zależnie od tego, czy dokument jest już gotowy do wysyłki do KSeF.
 
 ## Wystawianie faktur i wysyłka do KSeF
 
@@ -19,9 +19,25 @@ Możesz wybrać tryb wysyłki: **natychmiast** (Wyślij do KSeF) albo **na konie
 
 Po wysyłce faktura dostaje **numer KSeF i UPO**, a Ty widzisz status na liście i w szczegółach.
 
-Ważne: po wysyłce do KSeF lub po pobraniu **potwierdzenia transakcji** (dla faktur bez numeru KSeF) faktura przechodzi w tryb **tylko do odczytu** — od tej chwili wszelkie zmiany wprowadzasz wyłącznie przez **korekty**.
+Ważne: po wysyłce do KSeF lub po pobraniu **potwierdzenia transakcji** (dla faktur bez numeru KSeF) faktura przechodzi w tryb **tylko do odczytu**. Od tej chwili wszelkie zmiany wprowadzasz wyłącznie przez **korekty**.
 
 <img alt="Faktura odebrana przez KSeF" src="/images/ksef/accepted.png"></img>
+
+## Jak sprawdzić status konkretnej faktury?
+
+Otwórz **Sprzedaż → Faktury**, odszukaj numer i nabywcę, a następnie odczytaj osobną kolumnę **KSeF: Status**. Po wystawieniu faktura może mieć stan **Oczekuje na wysłanie**. Nie oznacza to jeszcze przyjęcia dokumentu przez KSeF. W przykładzie faktura końcowa i korekta czekają na automatyczną wysyłkę w trybie offline24, a inna faktura ma już stan **Zaakceptowana**.
+
+<img alt="Lista Sprzedaż z osobnymi statusami Oczekuje na wysłanie i Zaakceptowana w kolumnie KSeF" src="/images/instructions-20260921/ksef-sales-status-list.jpg"></img>
+
+Kliknij wiersz faktury. W szczegółach dokumentu przyjętego przez KSeF zobaczysz stan **Zaakceptowana** oraz **numer KSeF**. Porównaj numer faktury i nabywcę z dokumentem, którego szukasz. Status płatności, na przykład **NIEOPŁACONA**, jest odrębną informacją.
+
+<img alt="Szczegóły przyjętej zaliczki z numerem KSeF i osobnym statusem płatności" src="/images/instructions-20260921/ksef-sales-accepted-detail.jpg"></img>
+
+Jeśli kolumna pokazuje **Błąd**, otwórz dokument i przeczytaj szczegółowy komunikat przed ponowieniem wysyłki. W przykładzie aplikacja wskazuje brak podstawy prawnej zwolnienia z VAT wymaganej do eksportu do KSeF. Taka faktura nie jest przyjęta w KSeF; akcja wystawienia powiązanej [faktury końcowej](/faq/howto/final-invoice) pozostaje niedostępna, dopóki dokument pierwotny nie zostanie wysłany.
+
+<img alt="Lista sprzedaży z zaliczką ZAL 1/9/2026 i czerwonym statusem Błąd w kolumnie KSeF" src="/images/instructions-20260921/ksef-sales-error-list.jpg"></img>
+
+<img alt="Szczegóły zaliczki ze statusem Błąd KSeF i komunikatem o brakującej podstawie zwolnienia z VAT" src="/images/instructions-20260921/ksef-sales-error-detail.jpg"></img>
 
 ## Potwierdzenie transakcji – kiedy i po co?
 
