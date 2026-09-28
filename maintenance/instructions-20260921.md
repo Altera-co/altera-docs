@@ -26,7 +26,7 @@ Dziewięć odświeżonych stron klienta: desktop i 390 px, po jednym H1, wszystk
 - Nowe konto, weryfikacja e-mail i pełne dodanie firmy: osobny scenariusz z ręcznym przyjęciem warunków.
 - Open Banking: kontrolowany rachunek testowy, autoryzacja, pobranie danych, odnowienie i rozłączenie.
 - Widoki księgowości, organizacja i role: odłożone na prośbę użytkownika do potwierdzenia ukończenia przebudowy.
-- Dawne instrukcje e-Obiegu i eksportu sprzedaży: sprawdzone ponownie 25.09.2026 w QA 577; wynik eksportu pliku wciąż wymaga odczytu pobranego pliku.
+- Dawne instrukcje e-Obiegu i eksportu sprzedaży: sprawdzone ponownie 25.09.2026 w QA 577; potwierdzić zakończenie eksportu i pobranie pliku, a następnie odczytać jego zawartość.
 - Rozbieżność historii importu e-mail: zgłoszenie i sprawdzenie przyczyny oddzielnie od redakcji instrukcji.
 
 ## Extension batch: verified client workflows
