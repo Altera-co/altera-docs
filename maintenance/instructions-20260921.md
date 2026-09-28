@@ -91,3 +91,23 @@ Potwierdzenie e-maila przeniesiono do instrukcji logowania i rejestracji. Usuni�
 
 - QA 577: syntetyczna faktura sprzedaży 1/9/2026 na 100 PLN miała formę Gotówka i status NIEOPŁACONA. Ze szczegółów wybrano **Więcej akcji → Płatności → Oznacz jako opłaconą**. Po zapisie status był OPŁACONA, data płatności 25.09.2026; odświeżenie strony potwierdziło oba pola i aktualny PDF. To zapis symulacyjny, bez rzeczywistego przyjęcia pieniędzy.
 - Instrukcja `faq/howto/mark-paid-cash.mdx` pokazuje stan przed, otwarte menu z samą akcją i wynik. Częściowa wpłata pozostaje osobną ścieżką w `faq/intro/partial-payment.mdx`. Cofnięcia oznaczenia nie sprawdzano.
+
+
+## Uzupełnienie 28.09.2026: korekta, cykl i podział PDF
+
+- QA Studio Początek QA (577), Altera 2.36.0+1602, jasny tryb interfejsu. Nie zmieniano ról, pakietu, konfiguracji produkcji ani listy zaufanych kontrahentów.
+- Niezależnie odczytano akceptację KSeF TEST faktury końcowej 150684 (ZAL-K 1/9/2026) i wcześniejszej korekty KOR 1/9/2026. Nowa korekta KOR 2/9/2026 (150842) dotyczy końcowej: jednostka u → szt., powód Pomyłka w opisie, różnica 0 PLN. Podgląd PDF potwierdził zmianę. Stan KSeF po wystawieniu: oczekuje. Nie wysłano e-maila klientowi.
+- Reguła cykliczna z faktury 150683: początek 28.10.2026, koniec 29.10.2026, co miesiąc, jedno wystąpienie, wysyłka i oba powiadomienia wyłączone. Dezaktywuj zakończyło się powodzeniem, odświeżenie listy potwierdziło Aktywna Nie. Błąd serwera z 25.09 nie został odtworzony; nie ustalono jego przyczyny. Automatycznego wystawienia w przyszłym terminie nie sprawdzono.
+- Dwa syntetyczne dokumenty w PDF rozdzielono opcją Podziel co stronę na 2 faktury, następnie jawnie przesłano oba pliki. OCR rozpoznał numery i kwoty 123/246 PLN, ale błędnie ustawił zapłatę i termin. Dokument DEMO/PDF/2026/001 (150865) poprawiono na Nieopłacona i 12.10.2026, zatwierdzono jednorazowo. Lista Faktury potwierdziła zapis. Drugi dokument pozostawał Do weryfikacji.
+- Na 150865 sprawdzono Odrzuć, wpisanie powodu, potwierdzenie w Odrzuconych, a następnie Odzyskaj. Lista Faktury ponownie potwierdziła ten sam dokument, 123 PLN i Nieopłacona. Nie użyto usunięcia.
+- Nowe instrukcje: correction, recurring-invoices, pdf-split, reject-cost. Zrzuty pokazują akcje i formularze w jasnym trybie. Nie wszystkie wcześniejsze obrazy zostały jeszcze odświeżone. Publiczne strony nie otrzymały infoboksów o QA/akceptacji.
+- Eksport zbiorczy: PDF 07:40 przerwany późniejszym przeładowaniem sesji; Excel 07:51 powtórzony bez przeładowania, dla faktur 1/9 i 2/9 (1330 PLN). Odczyt powiadomień Systemowe i Aplikacja potwierdzał wyłącznie rozpoczęcie. Pobranie pliku pozostaje niepotwierdzone. Ścieżkę dzwoneczka wskazał użytkownik; nie traktować jej jako pełnego testu E2E.
+- Kontrola lokalnych odnośników i mint.json oraz git diff --check przeszła. Pełnego renderu Mintlify nie wykonano, ponieważ wcześniejszy klient dev nie uruchomił się i walidacja sieciowa została zablokowana. Korektę i cykl wykonano raz z odczytem wyniku, bez niezależnego drugiego wykonania całego tekstu.
+
+- Duplikaty: ponownie przesłano wyłącznie pierwszą stronę syntetycznego PDF-a. Nowa kopia 150891 otrzymała DUPLIKAT i komunikat Uwaga! Dokument jest duplikatem. Usunięcie tej kopii pokazało Usunięto fakturę i wpis w Usuniętych. Oryginał 150865 zachowano. Instrukcja duplicate-cost nie obiecuje wykrycia każdej możliwej kopii.
+
+- Odrzucenie/Odzyskaj powtórzono według gotowego tekstu na 150865. Drugi powód był widoczny w Odrzuconych, po czym przywrócono dokument. Eksport Excel po ponad 16 minutach, bez przeładowania sesji, nie pokazał gotowego pliku ani nowej karty; obie zakładki powiadomień sprawdzono również bez filtra niezrobionych. Przyczyna nieustalona, brak zmiany kodu aplikacji.
+
+- Wiele zaliczek: ZAM3/9/2026 (150892) 1000 PLN, ZAL3/9 100 PLN i ZAL4/9 (150894) 200 PLN. Szybki formularz obu nie zapisał podstawy zwolnienia mimo jej obecności na zamówieniu; KSeF TEST zwrócił brak P_19A/P_19B/P_19C. Pełny edytor pokazywał podstawę już wybraną; zapis ZAL4 i Wyślij do KSeF teraz dały Zaakceptowana, numer 9900921007-20260928-39E565800000-0D. To obserwacja UI, nie pełna diagnoza przyczyny w kodzie.
+
+- ZAL3/9 (150893) po zapisie pełnych danych również przyjęto w KSeF TEST (9900921007-20260928-3A2774000000-A7). Faktura końcowa uruchomiona z ZAL3 zawierała tylko ten dokument; ręcznie dodano ZAL4 przez Numer powiązanej faktury. Podsumowanie 1000 - 300 = 700 PLN. ZAL-K2/9 (150896) przyjęta w TEST (9900921007-20260928-3A7B74000000-60), PDF potwierdza obie zaliczki i 700 PLN. Wszystkie trzy są Nieopłacone. Powtórzono zasadniczą ścieżkę zamówienie → zaliczka → końcowa na nowych dokumentach według wcześniejszych instrukcji, uzupełniając tekst o wiele zaliczek i kontrolę podstawy zwolnienia.

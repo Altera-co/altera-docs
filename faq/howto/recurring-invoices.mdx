@@ -1,0 +1,42 @@
+---
+title: "Jak ustawić i zatrzymać faktury cykliczne?"
+description: "Utwórz regułę z faktury źródłowej, wybierz harmonogram i sprawdź jej aktywność na liście."
+---
+
+Reguła cykliczna służy do wystawiania faktur według harmonogramu. Zacznij od sprawdzenia faktury źródłowej: nabywcy, pozycji, kwot i parametrów płatności. Formularz informuje, że kolejne faktury będą miały te same parametry co dokument źródłowy.
+
+## 1. Rozpocznij od faktury
+
+W **Sprzedaż → Faktury** otwórz właściwy dokument. Kliknij **Więcej akcji → Faktura cykliczna**.
+
+<img src="/images/instructions-20260921/recurring-action-light.jpg" alt="Menu faktury z akcją Faktura cykliczna" />
+
+## 2. Ustaw harmonogram
+
+1. W **Od kiedy wystawiać** wpisz datę pierwszego wystawienia.
+2. W **Co ile wystawiać** wybierz częstotliwość, na przykład **Co miesiąc**.
+3. W **Do kiedy wystawiać** wybierz **Do anulowania** albo **Do wybranej daty**. Dla drugiej opcji uzupełnij **Datę końcową** i sprawdź wyświetlaną liczbę wystąpień.
+4. Zdecyduj, czy włączyć **Wysyłaj fakturę automatycznie do klienta**, **Powiadamiaj o wystawianiu** i **Powiadamiaj o niepowodzeniu wystawienia**. Automatyczną wysyłkę włącz dopiero po sprawdzeniu odbiorcy i danych faktury.
+5. Kliknij **Zapisz**.
+
+<img src="/images/instructions-20260921/recurring-form-light.jpg" alt="Formularz miesięcznej reguły: początek 28.10.2026, koniec 29.10.2026, jedno wystąpienie i wyłączona wysyłka do klienta" />
+
+W przykładzie wybrano przyszłą datę, jedno wystąpienie i wyłączono wysyłkę do klienta. Przy ustawianiu własnego cyklu sprawdź informację o godzinach przetwarzania w formularzu. Zapisanie reguły nie oznacza natychmiastowego wystawienia faktury.
+
+## 3. Sprawdź regułę na liście
+
+Otwórz **Sprzedaż → Reguły cykliczne**. Sprawdź nabywcę, **Aktywna**, **Wysyłaj automatycznie**, częstotliwość oraz następną datę wystawienia. Gdy nie widzisz którejś kolumny, przewiń tabelę w poziomie.
+
+Po zaplanowanym terminie sprawdź także zakładkę **Faktury**. Otwórz wygenerowany dokument i skontroluj datę, numer, nabywcę, kwoty oraz osobno status wysyłki do klienta i [KSeF](/ksef/invoices). Sama obecność reguły nie potwierdza wygenerowania ani dostarczenia faktury.
+
+## 4. Zatrzymaj kolejne wystawienia
+
+Na liście **Reguły cykliczne** zaznacz właściwy wiersz i kliknij **Dezaktywuj** na pasku wyboru.
+
+<img src="/images/instructions-20260921/recurring-deactivate-action-light.jpg" alt="Zaznaczona aktywna reguła oraz przycisk Dezaktywuj" />
+
+Sprawdź komunikat **Dezaktywowano regułę cykliczną** i wartość **Aktywna: Nie**. Po wybraniu nieaktywnej reguły przycisk zmienia się na **Aktywuj**. Dezaktywacja dotyczy kolejnych wystawień; sprawdź osobno faktury, które już znajdują się na liście.
+
+<img src="/images/instructions-20260921/recurring-disabled-light.jpg" alt="Reguła po dezaktywacji: Aktywna Nie, przycisk Aktywuj i potwierdzenie zatrzymania" />
+
+Jeśli zatrzymanie zwróci błąd, odśwież listę i sprawdź rzeczywistą wartość **Aktywna**. Zgłoś problem, gdy nadal wynosi **Tak**. Nie uznawaj samego kliknięcia za potwierdzenie zatrzymania cyklu.

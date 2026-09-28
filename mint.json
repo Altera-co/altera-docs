@@ -127,8 +127,11 @@
             "faq/modules/sales",
             "faq/intro/first-invoice",
             "faq/howto/advance-invoice",
+            "faq/howto/multiple-advances",
             "faq/howto/final-invoice",
             "faq/howto/proforma",
+            "faq/howto/correction",
+            "faq/howto/recurring-invoices",
             "faq/intro/partial-payment",
             "faq/howto/invoice-export"
           ]
@@ -138,6 +141,9 @@
           "pages": [
             "faq/modules/expenses",
             "faq/intro/add-expense",
+            "faq/howto/pdf-split",
+            "faq/howto/reject-cost",
+            "faq/howto/duplicate-cost",
             "faq/howto/cost-to-settlement",
             "faq/modules/payments",
             "faq/howto/eobieg"
