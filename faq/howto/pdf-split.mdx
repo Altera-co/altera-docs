@@ -1,0 +1,50 @@
+---
+title: "Jak podzielić PDF na osobne faktury kosztowe?"
+description: "Rozdziel kilka faktur z jednego PDF-a przed importem i sprawdź każdy dokument po odczycie OCR."
+---
+
+Jeden PDF może zawierać kilka różnych faktur. Podziel go przed dodaniem do **Kosztów**, aby każda faktura miała osobny wpis. Nie rozdzielaj stron, które razem tworzą jedną fakturę.
+
+## 1. Wybierz plik
+
+Otwórz właściwą firmę, przejdź do **Koszty** i kliknij **Nowy koszt → Dodaj pliki z dysku**. Wskaż wielostronicowy PDF.
+
+Aplikacja otworzy panel **Wykryto dokument wielostronicowy**. Sprawdź podglądy stron. W przykładzie plik zawiera dwie różne, jednostronicowe faktury z fikcyjnymi danymi.
+
+<img src="/images/instructions-20260921/pdf-split-start-light.jpg" alt="Panel wykrytego dokumentu wielostronicowego z podglądami stron i opcjami podziału" />
+
+## 2. Ustaw granice dokumentów
+
+Jeśli każda strona to osobna faktura, kliknij **Podziel co stronę**. Jeśli faktury zajmują kilka stron, klikaj linie między stronami w miejscach, w których kończy się jeden dokument i zaczyna kolejny.
+
+Sprawdź planowany podział przed potwierdzeniem. Dla jednej faktury obejmującej cały PDF wybierz **Pozostaw dokument bez zmian**.
+
+<img src="/images/instructions-20260921/pdf-split-action-light.jpg" alt="Podział po każdej stronie i przycisk Podziel dokument na 2 osobne faktury" />
+
+Kliknij **Podziel dokument na 2 osobne faktury**. Liczba na przycisku zależy od wybranego podziału.
+
+## 3. Prześlij powstałe pliki
+
+W panelu **Nowy koszt** sprawdź nazwy i liczbę plików po podziale. Następnie kliknij **Dodaj pliki**. Sam podział nie przesyła dokumentów do firmy.
+
+<img src="/images/instructions-20260921/pdf-split-files-light.jpg" alt="Dwa osobne pliki po podziale i przycisk Dodaj pliki" />
+
+## 4. Sprawdź każdą fakturę po odczycie
+
+Poczekaj na odczyt OCR. W zakładce **Do weryfikacji** znajdź każdy dokument po jego numerze, sprzedawcy i kwocie.
+
+<img src="/images/instructions-20260921/pdf-split-result-light.jpg" alt="Dwie osobne faktury kosztowe po imporcie, o kwotach 123 zł i 246 zł brutto" />
+
+Otwórz fakturę i porównaj formularz z podglądem PDF-a. Sprawdź numer, dane stron, daty, pozycje, kwoty, termin i formę płatności. Opcję **Faktura jest już opłacona** ustaw zgodnie z rzeczywistą zapłatą. Odczyt OCR może wymagać poprawienia.
+
+<img src="/images/instructions-20260921/pdf-split-check-fields-light.jpg" alt="Porównanie osobnego PDF-a z formularzem, terminem płatności i niezaznaczoną opcją Faktura jest już opłacona" />
+
+Dalsze sprawdzanie i zapis opisuje [instrukcja dodania kosztu](/faq/intro/add-expense). Jeżeli pojawi się weryfikacja kontrahenta, wybierz opcję zgodną z zasadami firmy. **Zatwierdź jednorazowo** zapisuje dokument bez dodawania dostawcy do listy zaufanych.
+
+## 5. Potwierdź zapis każdego dokumentu
+
+Po zapisie aplikacja może przejść do następnej faktury. Wróć przyciskiem **Wstecz** do listy i wybierz **Faktury**. Sprawdź ten sam numer, kwotę, termin i status zapłaty. Powtórz kontrolę dla pozostałych dokumentów z pliku.
+
+<img src="/images/instructions-20260921/pdf-split-verified-light.jpg" alt="Pierwsza faktura po zatwierdzeniu: 123 zł brutto, termin 12.10.2026 i status Nieopłacona" />
+
+Zatwierdzenie danych nie oznacza akceptacji kosztu do płatności ani wykonania przelewu. [Wybierz następny krok w Kosztach](/faq/modules/expenses).

@@ -1,0 +1,44 @@
+---
+title: "Jak wystawić fakturę końcową po zaliczce?"
+description: "Otwórz zaliczkę powiązaną z zamówieniem, sprawdź rozliczenie i wystaw fakturę końcową."
+---
+
+Fakturę końcową wystawisz z **faktury zaliczkowej powiązanej z zamówieniem**. Jeśli dopiero przygotowujesz dokumenty, zacznij od [zamówienia i zaliczki](/faq/howto/advance-invoice). Poniższe zrzuty pokazują fikcyjnego nabywcę i kwoty testowe. W firmie korzystającej z KSeF najpierw sprawdź status zaliczki: gdy jej wysyłka zakończyła się błędem, akcja wystawienia faktury końcowej jest niedostępna i Altera prosi o wysłanie dokumentu pierwotnego.
+
+## 1. Otwórz zaliczkę
+
+W **Sprzedaż → Faktury** znajdź zaliczkę, sprawdź jej numer, nabywcę i kwotę, a następnie otwórz szczegóły. W przykładzie **ZAL 2/9/2026** na **100 zł** jest powiązana z zamówieniem **ZAM 2/9/2026** na **1000 zł**.
+
+W szczegółach kliknij **Więcej akcji → Wystaw fakturę końcową**.
+
+<img src="/images/instructions-20260921/final-invoice-action.jpg" alt="Szczegóły zaliczki ZAL 2/9/2026 z otwartym menu Więcej akcji i widoczną akcją Wystaw fakturę końcową" />
+
+## 2. Sprawdź dane i powiązanie
+
+Otworzy się pełny formularz z typem **ZAL. KOŃCOWA**. Sprawdź nabywcę, datę sprzedaży i pozycje zamówienia. Numer końcowej faktury zostanie nadany przy wystawieniu.
+
+<img src="/images/instructions-20260921/final-invoice-form-start.jpg" alt="Początek formularza faktury końcowej z wybranym typem ZAL. KOŃCOWA i danymi nabywcy" />
+
+W sekcji **Faktury powiązane** sprawdź, czy widnieje właściwa zaliczka. Formularz pozwala dodać kolejny powiązany dokument w polu **Numer powiązanej faktury**. Zanim go wybierzesz, sprawdź, czy dotyczy tego samego zamówienia. W pokazanym teście rozliczono jedną zaliczkę.
+
+<img src="/images/instructions-20260921/final-invoice-related.jpg" alt="Sekcja Faktury powiązane z zaliczką ZAL 2/9/2026 na 100 zł i polem dodania kolejnej faktury" />
+
+## 3. Porównaj kwoty i ustaw płatność
+
+W **Podsumowaniu** porównaj trzy wartości: wcześniejsze zaliczki, wartość całego zamówienia i **kwotę do zapłaty na fakturze końcowej**. W przykładzie **1000 zł − 100 zł = 900 zł**. Przy innej liczbie zaliczek sprawdź sumę wszystkich powiązanych dokumentów przed wystawieniem.
+
+<img src="/images/instructions-20260921/final-invoice-summary.jpg" alt="Podsumowanie faktury końcowej: zaliczka 100 zł, wartość 1000 zł i kwota do zapłaty 900 zł" />
+
+W sekcji **Płatności** wybierz formę i termin płatności. Przy **przelewie** formularz wymaga rachunku bankowego firmy. W przykładzie wybrano **gotówkę**, zgodnie z testowym zamówieniem; nie oznaczono faktury jako opłaconej.
+
+Kliknij **Wystaw fakturę**. Przed ponowieniem po niepewnym wyniku sprawdź listę faktur, żeby nie utworzyć duplikatu.
+
+## 4. Sprawdź wystawiony dokument
+
+W podglądzie potwierdź numer, nabywcę, powiązaną zaliczkę i kwotę końcową. W teście wystawiono **ZAL-K 1/9/2026** na **900 zł do zapłaty**, z powiązaną zaliczką **ZAL 2/9/2026**. Status **NIEOPŁACONA** pozostał osobny od rozliczenia zaliczki. Sama faktura końcowa nie potwierdza, że klient zapłacił zaliczkę lub resztę należności.
+
+<img src="/images/instructions-20260921/final-invoice-issued.jpg" alt="Wystawiona faktura końcowa ZAL-K 1/9/2026 z zaliczką 100 zł, kwotą 900 zł do zapłaty i statusem nieopłacona" />
+
+Jeśli firma korzysta z KSeF, sprawdź osobno jego status. Na zrzucie dokument ma stan **Zaakceptowana** oraz numer KSeF. Bezpośrednio po wystawieniu może mieć stan **Oczekuje na wysłanie**; sprawdź późniejsze potwierdzenie przyjęcia. [Zobacz, jak zapisać późniejszą wpłatę](/faq/intro/partial-payment).
+
+[Sprawdź przykład kilku zaliczek do jednego zamówienia i ich wspólnego rozliczenia](/faq/howto/multiple-advances).
