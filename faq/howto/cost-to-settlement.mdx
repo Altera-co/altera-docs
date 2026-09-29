@@ -5,7 +5,7 @@ description: "Sprawdź dane, opisz koszt, wykonaj wymagane akceptacje, przygotuj
 
 Koszt przechodzi przez kilka różnych etapów. Zatwierdzenie danych OCR, opisanie faktury, akceptacja wydatku i zapis zapłaty mają inne znaczenie. Poniżej pokazujemy kolejność w firmie korzystającej z wieloetapowego obiegu.
 
-Przykłady przedstawiają dane demonstracyjne. Nie przelewaj pieniędzy na rachunki ze zrzutów. Zrzut pól opisu pokazuje dokument DEMO/OCR/2026/003, a pozostałe kroki dokument DEMO/OCR/2026/002.
+Przykłady przedstawiają dane demonstracyjne. Nie przelewaj pieniędzy na rachunki ze zrzutów. Zrzuty pokazują dokumenty DEMO/OCR/2026/002 i DEMO/OCR/2026/003. Numer przy każdej akcji pozwala rozpoznać wybrany dokument.
 
 ## 1. Dodaj dokument i sprawdź jego dane
 
@@ -15,15 +15,43 @@ Przykłady przedstawiają dane demonstracyjne. Nie przelewaj pieniędzy na rachu
 
 Odszukaj ten sam dokument w **Koszty → Faktury**. Jeśli go nie widzisz, [sprawdź zakładki i filtry](/faq/howto/missing-document).
 
-## 2. Uzupełnij kategorię i zapisz
+## 2. Uzupełnij kategorię i projekt
 
-Kliknij wiersz dokumentu. W szczegółach przewiń do **Kategoria kosztu**, otwórz pole i wybierz kategorię odpowiadającą wydatkowi. W przykładzie jest to **Projektowanie**. Sprawdź także przypisanie projektu, jeśli koszt dotyczy konkretnego zlecenia. Kategoria i projekt to osobne pola.
+Kliknij wiersz dokumentu. W szczegółach przewiń do **Kategoria kosztu**, otwórz pole i wybierz kategorię odpowiadającą wydatkowi. W przykładzie jest to **Projektowanie**. Jeśli przypisanie jest już prawidłowe, zachowaj je. Jeżeli pojawi się ostrzeżenie o zmianie kategorii w pozycjach i resecie kategorii II poziomu, przeczytaj je przed potwierdzeniem. Potwierdź **Ok** tylko wtedy, gdy ten zakres zmiany odpowiada Twojej decyzji. Jeśli koszt dotyczy konkretnego zlecenia, otwórz **Projekt** i wybierz istniejący projekt z listy. Samo wpisanie nazwy w polu wyszukiwania nie zastępuje wyboru pozycji. Kategoria opisuje rodzaj wydatku, a projekt przypisuje go do konkretnej realizacji.
 
-<img src="/images/instructions-20260921/cost-lifecycle-fields.png" alt="Pola Kategoria kosztu i Projekt w szczegółach oraz przycisk Zapisz" />
+Jeśli projektu jeszcze nie ma, [dodaj go w ustawieniach firmy](/faq/howto/projects-create), a następnie wróć do kosztu. Przykładowo usługa graficzna może mieć kategorię **Projektowanie** i należeć do projektu **Rebranding Forma**.
 
-Kliknij **Zapisz**, a następnie wróć do listy przyciskiem **Wstecz**. Sprawdź, czy kategoria widnieje przy dokumencie. Zapis danych nie kończy automatycznie etapu opisu w obiegu.
+<img src="/images/instructions-20260928/cost-category-warning.jpg" alt="Ostrzeżenie przed zmianą kategorii w pozycjach i resetem kategorii II poziomu" />
 
-## 3. Zakończ opisywanie faktury
+<img src="/images/instructions-20260928/cost-category-options.jpg" alt="Otwarta lista kategorii kosztu z opcją Projektowanie" />
+
+Przy zmianie istniejącego projektu aplikacja może zapytać o ustawienie tego samego projektu we wszystkich pozycjach. Sprawdź zakres przed potwierdzeniem **Ok**.
+
+<img src="/images/instructions-20260928/cost-project-warning.jpg" alt="Ostrzeżenie o ustawieniu tego samego projektu we wszystkich pozycjach kosztu" />
+
+<img src="/images/instructions-20260928/cost-project-action.jpg" alt="Otwarty wybór istniejącego projektu Rebranding Forma w koszcie" />
+
+## 3. Zapisz i sprawdź przypisanie
+
+<img src="/images/instructions-20260928/cost-classification-save.jpg" alt="Wybrane Projektowanie i Rebranding Forma oraz przycisk Zapisz" />
+
+Kliknij **Zapisz**, a następnie wróć do listy przyciskiem **Wstecz**. Otwórz ponownie ten sam dokument i sprawdź zapisane wartości **Kategoria kosztu** i **Projekt**. Porównaj numer faktury, aby nie sprawdzić sąsiedniego dokumentu. Zapis danych nie kończy automatycznie etapu opisu w obiegu.
+
+<img src="/images/instructions-20260928/cost-classification-result.jpg" alt="Ponownie otwarty DEMO/OCR/2026/002 z zapisaną kategorią Projektowanie i projektem Rebranding Forma" />
+
+### Drugi sposób: przypisanie z listy
+
+Kategorię i projekt możesz również wybrać bez otwierania szczegółów. Zaznacz checkbox przy właściwym koszcie i sprawdź **Zaznaczonych elementów: 1**. Kliknij **Wybierz projekt** lub **Wybierz kategorię** na dolnym pasku, a następnie wybierz pozycję z listy.
+
+<img src="/images/instructions-20260928/cost-list-classify-action.jpg" alt="Jeden zaznaczony koszt i akcje Wybierz projekt oraz Wybierz kategorię" />
+
+<img src="/images/instructions-20260928/cost-list-project-options.jpg" alt="Lista projektów otwarta z paska zaznaczonego kosztu" />
+
+<img src="/images/instructions-20260928/cost-list-category-options.jpg" alt="Lista kategorii otwarta z paska zaznaczonego kosztu" />
+
+Po wyborze sprawdź komunikat oraz przypisanie przy tym samym numerze faktury. W tej ścieżce wyboru projektu nie musisz otwierać szczegółów i klikać ich przycisku Zapisz. Przy zaznaczeniu kilku kosztów decyzja obejmuje cały zaznaczony zakres.
+
+## 4. Zakończ opisywanie faktury
 
 Zaznacz checkbox przy właściwym dokumencie. Na dolnym pasku sprawdź **Zaznaczonych elementów: 1**, a następnie kliknij **Opisz fakturę**.
 
@@ -31,7 +59,7 @@ Zaznacz checkbox przy właściwym dokumencie. Na dolnym pasku sprawdź **Zaznacz
 
 W sprawdzonym obiegu aplikacja potwierdza, że faktura została opisana i czeka na weryfikację kosztu. Jeśli nie ma kategorii, najpierw uzupełnij ją w szczegółach.
 
-## 4. Zaakceptuj wydatek
+## 5. Zaakceptuj wydatek
 
 Osoba uprawniona do oceny kosztu sprawdza jego zasadność i wybiera **Zaakceptuj koszt**. W przykładzie przycisk jest dostępny na pasku zaznaczonego dokumentu.
 
@@ -39,7 +67,7 @@ Osoba uprawniona do oceny kosztu sprawdza jego zasadność i wybiera **Zaakceptu
 
 Po tej akcji koszt czeka na akceptację do płatności. W Twojej firmie te czynności mogą być przypisane różnym osobom, a konfiguracja obiegu może obejmować mniej etapów. Brak przycisku nie jest powodem do pomijania wymaganej akceptacji.
 
-## 5. Zaakceptuj koszt do płatności
+## 6. Zaakceptuj koszt do płatności
 
 Po sprawdzeniu dokumentu osoba uprawniona wybiera **Zaakceptuj do płatności**.
 
@@ -47,7 +75,7 @@ Po sprawdzeniu dokumentu osoba uprawniona wybiera **Zaakceptuj do płatności**.
 
 Ta czynność pozwala przejść do przygotowania płatności. Nie wykonuje przelewu i nie oznacza faktury jako opłaconej. W tym obiegu już po akceptacji do płatności pojawia się **e-Obieg zakończony**, mimo że status płatności pozostaje **NIEOPŁACONA**. Sprawdzaj oba stany osobno.
 
-## 6. Przygotuj przelew zgodnie z procesem firmy
+## 7. Przygotuj przelew zgodnie z procesem firmy
 
 Wybór zależy od organizacji pracy i pilności:
 
@@ -58,7 +86,7 @@ Oba warianty, wraz z akcjami i zrzutami, opisuje [instrukcja QR i modułu Płatn
 
 <img src="/images/instructions-20260921/cost-lifecycle-qr.png" alt="Kod QR dla DEMO/OCR/2026/002 z kwotą 1230 zł i przyciskiem Oznacz jako opłacone" />
 
-## 7. Potwierdź rzeczywistą zapłatę i zapisz rozliczenie
+## 8. Potwierdź rzeczywistą zapłatę i zapisz rozliczenie
 
 Sprawdź w banku, czy przelew został wykonany. Utworzenie pliku, import, zeskanowanie QR lub zaplanowanie przyszłej daty nie potwierdzają zapłaty.
 
@@ -70,4 +98,4 @@ Przy częściowej zapłacie nie oznaczaj całej faktury jako opłaconej. Wyjaśn
 
 ## Co sprawdzić na końcu?
 
-Porównaj numer dokumentu, kwotę, kategorię i status. Zespół powinien wiedzieć, kto zatwierdził koszt i czy zapłata została potwierdzona. Przypisane dokumenty możesz następnie wykorzystać do [sprawdzenia wyniku projektu](/faq/howto/project-result).
+Porównaj numer dokumentu, kwotę, kategorię, projekt i status. Zespół powinien wiedzieć, kto zatwierdził koszt i czy zapłata została potwierdzona. Przypisane dokumenty możesz następnie wykorzystać do [sprawdzenia wyniku projektu](/faq/howto/project-result).

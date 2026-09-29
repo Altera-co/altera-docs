@@ -1,23 +1,38 @@
 ---
 title: "Faktury kosztowe i lista zaufanych kontrahentów"
-description: "Altera automatycznie pobiera faktury kosztowe z KSeF i weryfikuje kontrahentów. Lista zaufanych firm chroni przed fałszywymi dokumentami i oszustwami."
+description: "Altera automatycznie pobiera faktury kosztowe z KSeF i weryfikuje kontrahentów. Sprawdź dokument i wybierz jednorazowe zatwierdzenie lub dodanie dostawcy do zaufanych."
 ---
 
-Po uruchomieniu KSeF w zakładce Koszty zaczną pojawiać się faktury zewnętrzne – także od nieznanych kontrahentów. W Altera wprowadziliśmy **listę zaufanych kontrahentów**, aby ułatwić codzienną pracę i zwiększyć bezpieczeństwo.
+Po uruchomieniu KSeF w zakładce Koszty zaczną pojawiać się faktury zewnętrzne, także od nieznanych kontrahentów. W Altera wprowadziliśmy **listę zaufanych kontrahentów**, aby ułatwić codzienną pracę i zwiększyć bezpieczeństwo.
 
-## Jak działa lista zaufanych kontrahentów
+## Najpierw sprawdź dokument
 
-- Możesz **dodać firmę do zaufanych** – wtedy dokumenty od niej, które spełniają określone parametry (m.in. zgodność z zapisanymi rachunkami bankowymi), nie będą w obiegu Kosztów wymagać dodatkowych działań.
-- Dla **pozostałych faktur** konieczne będzie potwierdzenie, że ufasz tej firmie i że dokument rzeczywiście ma sens biznesowy.
+Wybierz właściwą firmę i otwórz **Koszty**. Odszukaj fakturę po numerze dostawcy. Otwórz jej szczegóły i porównaj kontrahenta, daty, kwoty oraz dane płatności z rzeczywistym zakupem. Samo pobranie dokumentu z KSeF nie potwierdza zasadności wydatku.
 
-Weryfikację kontrahenta i jego autoryzację dodaliśmy bezpośrednio do zapisu faktury kosztowej. Jeśli kontrahent nie spełni wymaganych parametrów, dostaniesz od razu informację przy zapisie, z opcją:
+## Wybierz zakres zatwierdzenia
 
-- dodać go do zaufanych,
-- zaufać jednorazowo,
-- wstrzymać się z dalszymi krokami.
+Jeśli przy zapisie faktury pojawi się **Weryfikacja kontrahenta**, przeczytaj ostrzeżenie. Następnie wybierz opcję odpowiednią dla tego dostawcy i dokumentu.
 
-W ten sposób łatwiej odróżnisz realnych dostawców od podejrzanych źródeł.
+<img alt="Weryfikacja kontrahenta: akcje Zatwierdź jednorazowo, Dodaj do zaufanych oraz Anuluj" src="/images/ksef/contractor-confirmation.png"></img>
 
-<img alt="Weryfikacja kontrahenta" src="/images/ksef/contractor-confirmation.png"></img>
+### Zatwierdź jednorazowo
 
-Lista zaufanych kontrahentów chroni firmy przed potencjalnymi oszustwami i fałszywymi fakturami, które mogą pojawić się w KSeF.
+Wybierz **Zatwierdź jednorazowo**, aby zapisać tę fakturę bez dodawania kontrahenta do listy zaufanych. Decyzja dotyczy tego dokumentu i nie ustanawia zaufania dla kolejnych faktur dostawcy.
+
+### Dodaj do zaufanych
+
+Wybierz **Dodaj do zaufanych**, jeśli sprawdzony dostawca ma być obsługiwany według zapisanych ustawień listy zaufanych. Dokumenty spełniające te warunki, między innymi zgodność z zapisanymi rachunkami bankowymi, nie wymagają ponownego potwierdzania kontrahenta.
+
+Sprawdzaj rachunek na fakturze. Dodanie dostawcy do zaufanych nie oznacza, że każdy nowy rachunek jest poprawny ani że każdy jego dokument dotyczy rzeczywistego zakupu.
+
+### Anuluj
+
+Jeśli nie możesz potwierdzić kontrahenta lub zakupu, wybierz **Anuluj** i wyjaśnij dokument z osobą odpowiedzialną za zamówienie. Nie zatwierdzaj faktury tylko po to, aby zamknąć ostrzeżenie.
+
+## Co dalej z kosztem?
+
+Zatwierdzenie kontrahenta, akceptacja kosztu do płatności i wykonanie przelewu to osobne czynności. Lista zaufanych wspiera weryfikację, ale nie gwarantuje poprawności każdego dokumentu.
+
+Przejdź do [instrukcji obiegu kosztu](/faq/howto/cost-to-settlement), aby uzupełnić kategorię i projekt oraz wykonać wymagane akceptacje. [Instrukcja płatności](/faq/modules/payments) opisuje dwie ścieżki: szybki przelew przez kod QR oraz przygotowanie płatności w module Płatności.
+
+Jeśli brakuje konkretnego dokumentu, sprawdź [wskazówki w FAQ KSeF](/ksef/faq).
