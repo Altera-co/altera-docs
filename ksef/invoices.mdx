@@ -25,13 +25,29 @@ Ważne: po wysyłce do KSeF lub po pobraniu **potwierdzenia transakcji** (dla fa
 
 ## Jak sprawdzić status konkretnej faktury?
 
-Otwórz **Sprzedaż → Faktury**, odszukaj numer i nabywcę, a następnie odczytaj osobną kolumnę **KSeF: Status**. Po wystawieniu faktura może mieć stan **Oczekuje na wysłanie**. Nie oznacza to jeszcze przyjęcia dokumentu przez KSeF. W przykładzie faktura końcowa i korekta czekają na automatyczną wysyłkę w trybie offline24, a inna faktura ma już stan **Zaakceptowana**.
+### Znajdź fakturę w Sprzedaży
 
-<img alt="Lista Sprzedaż z osobnymi statusami Oczekuje na wysłanie i Zaakceptowana w kolumnie KSeF" src="/images/instructions-20260921/ksef-sales-status-list.jpg"></img>
+Sprawdź firmę i otwórz **Sprzedaż → Faktury**. Odszukaj dokument po numerze. [Wyszukiwanie i filtry](/faq/howto/search-filters) pomagają zawęzić listę.
 
-Kliknij wiersz faktury. W szczegółach dokumentu przyjętego przez KSeF zobaczysz stan **Zaakceptowana** oraz **numer KSeF**. Porównaj numer faktury i nabywcę z dokumentem, którego szukasz. Status płatności, na przykład **NIEOPŁACONA**, jest odrębną informacją.
+Odczytaj **Status** oraz **KSeF: Status**. Jeśli kolumna KSeF jest ukryta, włącz ją przez [Dostosuj kolumny](/faq/howto/table-columns).
 
-<img alt="Szczegóły przyjętej zaliczki z numerem KSeF i osobnym statusem płatności" src="/images/instructions-20260921/ksef-sales-accepted-detail.jpg"></img>
+<img src="/images/instructions-20260928/ksef-status-list.jpg" alt="Lista faktur z osobnymi statusami dokumentu, płatności i KSeF" />
+
+### Otwórz szczegóły i odczytaj potwierdzenie
+
+Kliknij właściwą fakturę. W sekcji **KSeF** sprawdź komunikat. W przykładzie faktura ma status **Zaakceptowana**, informację **Faktura przyjęta w KSeF** oraz **Numer KSeF**. Numer możesz skopiować widoczną ikoną.
+
+<img src="/images/instructions-20260928/ksef-accepted-details.jpg" alt="Szczegóły faktury z informacją Zaakceptowana, numerem KSeF i osobnym statusem NIEOPŁACONA" />
+
+Na tym samym ekranie status płatności pozostaje **NIEOPŁACONA**. Przyjęcie w KSeF nie zapisuje wpłaty. Otrzymaną pełną lub częściową zapłatę opisuje [osobna instrukcja](/faq/intro/partial-payment).
+
+### Odczytaj wyjaśnienie przy oczekiwaniu
+
+Status **Oczekuje na wysłanie** nie jest potwierdzeniem przyjęcia dokumentu. Otwórz jego szczegóły i przeczytaj komunikat zamiast od razu wystawiać kolejną fakturę.
+
+W pokazanym przykładzie aplikacja informuje o trybie **offline24** i planowanym automatycznym przekazaniu do KSeF na koniec dnia. To komunikat dotyczący tego dokumentu; nie utożsamiaj każdego oczekiwania z tym trybem.
+
+<img src="/images/instructions-20260928/ksef-waiting-details.jpg" alt="Faktura oczekująca na wysłanie z wyjaśnieniem trybu offline24 i przyciskiem Wyślij do KSeF teraz" />
 
 Jeśli kolumna pokazuje **Błąd**, otwórz dokument i przeczytaj szczegółowy komunikat przed ponowieniem wysyłki. W przykładzie aplikacja wskazuje brak podstawy prawnej zwolnienia z VAT wymaganej do eksportu do KSeF. Taka faktura nie jest przyjęta w KSeF; akcja wystawienia powiązanej [faktury końcowej](/faq/howto/final-invoice) pozostaje niedostępna, dopóki dokument pierwotny nie zostanie wysłany.
 

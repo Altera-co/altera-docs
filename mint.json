@@ -118,7 +118,8 @@
           "pages": [
             "faq/index",
             "faq/howto/search-filters",
-            "faq/howto/missing-document"
+            "faq/howto/missing-document",
+            "faq/howto/table-columns"
           ]
         },
         {
@@ -154,16 +155,21 @@
           "pages": [
             "faq/modules/finance",
             "faq/howto/project-result",
-            "faq/howto/openBanking"
+            "faq/howto/openBanking",
+            "faq/howto/projects-create",
+            "faq/howto/cost-category-summary"
           ]
         },
         {
           "group": "Dokumenty i współpraca",
           "pages": [
             "faq/modules/files",
+            "faq/howto/files-search-restore",
             "faq/howto/email",
             "faq/howto/notifications",
-            "faq/howto/doc-export"
+            "faq/howto/doc-export",
+            "faq/howto/files-metadata",
+            "faq/howto/files-confirm-read"
           ]
         },
         {
@@ -173,7 +179,9 @@
             "faq/intro/welcome",
             "faq/intro/creating-company",
             "faq/intro/your-dashboard",
-            "faq/intro/advanced-settings"
+            "faq/intro/advanced-settings",
+            "faq/howto/invoice-defaults-check",
+            "faq/howto/invoice-numbering-check"
           ]
         }
       ]
