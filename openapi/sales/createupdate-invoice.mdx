@@ -3,6 +3,101 @@ openapi: post /sales/invoice
 description: "Create or update a sales invoice in Altera via the OpenAPI. Set basicInformation.statusId to ISSUED to issue, or save the document as a draft."
 ---
 
+## Creation retries and invoice number
+
+The current endpoint has no idempotency key or company-unique `externalId`. The input validator rejects the unknown top-level field `externalId`. A timeout or lost response does not mean that saving failed: retrying creation can produce another invoice.
+
+Keep the returned `data.invoiceId`. To obtain the assigned number, call [Get invoice data](/openapi/sales/get-invoice-data) with `ref={invoiceId}` and read `data.invoice.basicInformation.invoiceNumber`. The save response does not include `invoiceNumber`.
+
+When the result of creation is unknown, reconcile existing invoices before issuing another creation request. [Sales search](/openapi/sales/list-available-invoices) includes `additionalDetails`, so an external reference stored there can help locate a document. It is substring search and does not enforce uniqueness or prevent concurrent duplicates.
+
+## Payment fields
+
+For a non-draft invoice, provide `payments`. Whenever the object is present, include all four required fields: `paymentMethod`, `dueDate`, `isSplitPayment` and `isPaid`. Send explicit `false` values when those flags do not apply:
+
+```json
+{
+  "payments": {
+    "paymentMethod": "TRANSFER",
+    "dueDate": "2026-10-19",
+    "isSplitPayment": false,
+    "isPaid": false
+  }
+}
+```
+
+## Corrections and full returns
+
+Each correction is a separate invoice with its own identifier and invoice number, linked to the document it corrects.
+
+For `basicInformation.invoiceType: "CORRECTION"`, supply line amounts representing the state after the correction, rather than the amount of the reduction. When no explicit before rows are supplied, Altera derives and subtracts the rows from the first invoice in `basicInformation.relatedInvoicesIds`.
+
+`quantity` must be greater than zero in OpenAPI, including on a correction. The application editor allows zero for an after-correction row with a source item; the current OpenAPI validator rejects it. For a full return, keep the original positive quantity and set the post-correction prices to zero. For example, a fully returned line that originally had quantity 1 has this post-correction state:
+
+```json
+{
+  "invoicePosition": [
+    {
+      "positionType": "SERVICE",
+      "productName": "Returned service",
+      "quantity": 1,
+      "unitNetPrice": 0,
+      "unitGrossPrice": 0,
+      "vat": "23%"
+    }
+  ]
+}
+```
+
+For a correction of a correction, reference the previous correction in `basicInformation.relatedInvoicesIds` and supply the new after-correction state. Altera stores the after-correction rows on each correction and keeps the financial difference in its totals. For example, if invoice A has a line worth 100 and correction B changes it to 80, correction C should reference B and provide 60 to reduce it further. B and C each have a difference of -20.
+
+`GET /sales/invoice?related={previousCorrectionId}&invoiceType=CORRECTION` therefore prepares the rows stored on that correction, such as 80 in this example. Referencing the original invoice A prepares its original rows, such as 100; it does not apply later corrections automatically. Select the document you actually intend to correct and provide the full state after the new correction. This describes the local invoice calculation; submission to KSeF remains subject to KSeF validation.
+
+## Currency and document language
+
+`basicInformation.currency` and `basicInformation.language` are supported on both create and update requests, including in production. These values are saved on the invoice and returned by [Get invoice data](/openapi/sales/get-invoice-data).
+
+| Field | Accepted value | When omitted |
+| --- | --- | --- |
+| `basicInformation.currency` | Three-letter currency code, for example `PLN`, `EUR` or `USD`. Input is trimmed and converted to uppercase. | Uses `contractor.defaultCurrency`, then `PLN`. |
+| `basicInformation.language` | `pl`, `en`, `de`, `es`, `en_pl` or `de_pl`. The last two select bilingual documents. | Uses `pl`. |
+
+The language controls the invoice document. It does not translate the email body or select an email template. On update, resend these fields to retain their values; omission applies the defaults above.
+
+The following request fragment sets an English invoice in EUR:
+
+```json
+{
+  "basicInformation": {
+    "currency": "EUR",
+    "language": "en"
+  }
+}
+```
+
+## Non-subject VAT rates and GTU
+
+`invoicePosition[].vat` supports the distinct values `np I` and `np II` in production. They remain distinct when saved and exported to KSeF: `np I` maps to the `P_13_8` summary bucket, and `np II` maps to `P_13_9`. The legacy value `np` maps to `np I`; use the explicit value for new invoices. Neither is the `zw` VAT-exemption rate described below.
+
+`invoicePosition[].gtu` is an optional string with a maximum of 10 characters. Use `"1"` through `"13"`, for example `"2"`. Zero-padded values such as `"02"` and KSeF values such as `"GTU_02"` are also supported. KSeF export converts the numeric value to `GTU_01` through `GTU_13`. Omit it, pass `null` or an empty string when no GTU applies. Set the classification separately on each applicable line.
+
+The following request fragment shows the field locations; select the VAT rate and GTU appropriate for the actual transaction:
+
+```json
+{
+  "invoicePosition": [
+    {
+      "positionType": "SERVICE",
+      "productName": "Example service",
+      "quantity": 1,
+      "unitNetPrice": 100,
+      "vat": "np II",
+      "gtu": "12"
+    }
+  ]
+}
+```
+
 ## Calendar dates
 
 Send `basicInformation.issueDate`, `basicInformation.saleDate`, `payments.dueDate` and optional `payments.paymentDate` as strings in `YYYY-MM-DD` format, for example `"2026-09-14"`. These fields represent calendar dates without a time or time zone. Do not convert them to UTC or serialize them with `toISOString()`.
@@ -16,6 +111,8 @@ Validation errors include an English description in `errorMessage`, a Polish des
 ## VAT-exempt invoices
 
 If at least one invoice item uses the `"vat": "zw"` rate, provide `vatExemptionReason` at the top level of the request, alongside `invoicePosition`, `additionalDetails`, and `payments`.
+
+Current save validation accepts a `zw` line without this field. When generating new KSeF XML, Altera resolves the basis from `vatExemptionReason` on the invoice, then from the company's VAT-exemption setting. If both are missing, new XML generation fails validation before submission. Submission can reuse previously stored XML; that path does not run the generation check again. A successful save alone therefore does not confirm a successful KSeF submission. Providing the invoice basis explicitly makes the intended basis independent of the company default.
 
 The field accepts exactly one of these three values:
 

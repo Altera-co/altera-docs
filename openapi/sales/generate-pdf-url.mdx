@@ -1,3 +1,27 @@
 ---
 openapi: post /sales/pdfUrl
 ---
+
+## Request one invoice
+
+Send the singular `invoiceId` field, rather than an `invoiceIds` array:
+
+```json
+{
+  "invoiceId": 12345
+}
+```
+
+The response contains the URL as the string `data`. The URL expires after **5 minutes**.
+
+## PDF readiness
+
+Altera generates the PDF asynchronously after saving. A newly created invoice can initially return HTTP `400` with `"One or more selected invoices are unavailable for download"`. There is no guaranteed one-second readiness window or `Retry-After` header.
+
+The same error can also indicate a document that is unavailable in the API key's company. Retry with bounded backoff only when you know that the invoice was just saved in this company. If it remains unavailable, investigate the document instead of retrying indefinitely.
+
+## Status change
+
+A successful call changes an `ISSUED` sales document to `SENT`, including pro formas. The status changes when the URL is returned, even if nobody downloads it. A `DRAFT` remains `DRAFT`.
+
+`SENT` does not prove an email was sent or received. The public endpoint currently has no option to suppress this status change, and no separate mark-as-sent endpoint is exposed.

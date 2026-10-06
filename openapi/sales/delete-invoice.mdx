@@ -1,0 +1,37 @@
+---
+openapi: post /sales/delete
+---
+
+## Remove a test draft
+
+The existing endpoint removes a `DRAFT` permanently from the API key's company. Confirm the invoice identifier and its status before calling it:
+
+```json
+{
+  "invoiceId": 12345,
+  "reason": "Removing a QA test draft"
+}
+```
+
+`reason` is optional; when supplied it must contain 5 to 400 characters. This route uses `POST`.
+
+A permanently deleted draft returns:
+
+```json
+{
+  "result": "OK",
+  "data": {
+    "fullDelete": 1,
+    "softDelete": 0,
+    "counterRollbackResult": "NOK"
+  }
+}
+```
+
+`fullDelete` counts removed invoice records, not related rows. A zero count means that no invoice was removed by the mutation. Verify cleanup using the company sales list. A later GET by identifier currently returns `403` for an absent invoice.
+
+## Restrictions and issued invoices
+
+An eligible issued invoice is soft-deleted rather than permanently removed. Related documents, read-only or accounting-approved documents, and invoices submitted to or accepted by KSeF cannot be deleted through this endpoint. A submitted invoice requires a correction.
+
+Deletion of issued invoices can attempt to roll back the invoice-number counter when possible. A `NOK` counter result is not itself a failed deletion. Use this endpoint for controlled test cleanup, rather than automatic removal of issued documents.

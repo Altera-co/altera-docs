@@ -22,8 +22,25 @@ All endpoints require authentication with the API key generated in the previous 
 <Note>
     Each key authorizes the user to perform actions within the company it was generated for. If you wish to perform actions in multiple companies, you need to generate a separate key for each of them.
 </Note>
-## Base URL
-The base URL for all endpoints is: https://api.altera.co/
+## Key expiration and authorization errors
+
+The application currently defaults a new key to 30 days and requires an expiration date in its key dialog. Record the selected date and rotate the key before it expires. The backend supports keys without expiration, but the current application dialog does not expose that option; coordinate this requirement with Altera support.
+
+Expired and invalid keys are rejected by the gateway with HTTP `403` and `{"message":"Forbidden"}`. The response does not provide `KEY_EXPIRED` or distinguish expiration from other authorization failures. The company also needs access to the OpenAPI feature in its subscription. An API key cannot manage API keys itself. Automatic expiration reminder emails are not currently available.
+
+Authorization decisions can be cached for up to 10 minutes, so expiry and revocation may not take effect immediately for a cached key. Treat the configured expiration time as the deadline for rotation, rather than waiting for a failed request.
+
+## Base URL and QA access
+
+The production base URL is `https://api.altera.co`.
+
+QA access is available directly from Altera after arranging a test company and API key. Contact Altera support for the QA endpoint and access details. Production and QA company data and keys are separate. QA filters external email recipients; see [invoice email testing](/openapi/sales/send-invoice-email-to-contractor).
+
+## Request limits and retries
+
+There is no published fixed per-company requests-per-second allowance. The gateway applies shared infrastructure limits; HTTP `429` means the request was throttled. Use bounded exponential backoff with jitter and avoid large bursts. See the [AWS HTTP API throttling documentation](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-throttling.html) for how the gateway applies these limits.
+
+Retry reads within a bounded budget. Invoice creation has no idempotency key: if a timeout leaves the save result unknown, reconcile the existing company invoices before creating another one. Free-text search does not enforce uniqueness. See [creation and ambiguous responses](/openapi/sales/createupdate-invoice).
 
 ## Try it out
 
@@ -42,7 +59,7 @@ This way the system will be able to properly aggregate your sales based on above
 ## So I've issued an invoice. What can I do next?
 
 ### Downloading the source file
-Using [POST /sales/pdfUrl](/openapi/sales/generate-pdf-url) endpoint you can retrieve a pre-signed url that gives you access to the file for 10 minutes
+Using [POST /sales/pdfUrl](/openapi/sales/generate-pdf-url) endpoint you can retrieve a pre-signed url that gives you access to the file for 5 minutes. PDF generation is asynchronous, so a newly saved invoice may initially return HTTP `400`. A successful URL request also changes `ISSUED` to `SENT`; see the endpoint documentation before using it to check readiness.
 
 ### Sending my invoice to recipient
 Using [POST /sales/invoice/send](/openapi/sales/send-invoice-email-to-contractor) endpoint you can order an e-mail to be sent to your contractor using either the data saved in the system (Contractor info saved along with the invoice) or using an e-mail address of your choice directly.
