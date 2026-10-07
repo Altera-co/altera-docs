@@ -1750,6 +1750,21 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
+                                }
+                            }
+                        }
                     }
                 },
                 "tags": [
@@ -1871,29 +1886,66 @@
                                             "type": "object",
                                             "properties": {
                                                 "data": {
-                                                    "type": "object",
-                                                    "x-stoplight": {
-                                                        "id": "81aw0gcdvcsye"
-                                                    },
-                                                    "properties": {
-                                                        "invoiceId": {
-                                                            "type": "number",
-                                                            "x-stoplight": {
-                                                                "id": "ng63zj0yg4qvv"
+                                                    "allOf": [
+                                                        {
+                                                            "$ref": "#/components/schemas/Invoice"
+                                                        },
+                                                        {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "invoiceId": {
+                                                                    "type": "number",
+                                                                    "x-stoplight": {
+                                                                        "id": "ng63zj0yg4qvv"
+                                                                    },
+                                                                    "example": 12413
+                                                                },
+                                                                "ksefWarning": {
+                                                                    "type": "string",
+                                                                    "description": "Optional warning when immediate KSeF submission returns an unsuccessful result after the invoice was saved."
+                                                                },
+                                                                "ksefErrorMessage": {
+                                                                    "type": "string",
+                                                                    "description": "Optional KSeF failure details. The invoice identified by invoiceId is already saved."
+                                                                },
+                                                                "ksefReason": {
+                                                                    "type": "string",
+                                                                    "description": "Optional machine-readable reason, for example KSEF_SUBMISSION_FAILED or KSEF_PRIVATE_PERSON_SEND_DISABLED. Treat this as an open set of values."
+                                                                },
+                                                                "statusId": {
+                                                                    "type": "string",
+                                                                    "description": "Current invoice status, also available in basicInformation.statusId."
+                                                                },
+                                                                "ksefProcessing": {
+                                                                    "type": "object",
+                                                                    "description": "Optional KSeF processing result, as in the application save response.",
+                                                                    "additionalProperties": true
+                                                                }
                                                             },
-                                                            "example": 12413
-                                                        },
-                                                        "ksefWarning": {
-                                                            "type": "string",
-                                                            "description": "Optional warning when immediate KSeF submission returns an unsuccessful result after the invoice was saved."
-                                                        },
-                                                        "ksefErrorMessage": {
-                                                            "type": "string",
-                                                            "description": "Optional KSeF failure details. The invoice identified by invoiceId is already saved."
-                                                        },
-                                                        "ksefReason": {
-                                                            "type": "string",
-                                                            "description": "Optional machine-readable reason, for example KSEF_SUBMISSION_FAILED or KSEF_PRIVATE_PERSON_SEND_DISABLED. Treat this as an open set of values."
+                                                            "required": [
+                                                                "invoiceId"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                "warnings": {
+                                                    "type": "array",
+                                                    "description": "Optional non-blocking validation warnings.",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "field": {
+                                                                "type": "string"
+                                                            },
+                                                            "code": {
+                                                                "type": "string"
+                                                            },
+                                                            "message": {
+                                                                "type": "string"
+                                                            },
+                                                            "messagePL": {
+                                                                "type": "string"
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -1933,6 +1985,21 @@
                                             ]
                                         }
                                     }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
                                 }
                             }
                         }
@@ -2019,7 +2086,7 @@
                         }
                     }
                 },
-                "description": "Create or update a sales invoice. No idempotency key or company-unique externalId is supported. A timed-out request can already have saved the invoice; do not blindly repeat creation. The response returns invoiceId, without invoiceNumber. Retrieve data.invoice.basicInformation.invoiceNumber with GET /sales/invoice?ref={invoiceId}."
+                "description": "Create or update a sales invoice. No idempotency key or company-unique externalId is supported. A timed-out request can already have saved the invoice; do not blindly repeat creation. The response returns the full saved invoice in data, including data.invoiceId and data.basicInformation.invoiceNumber, as in the application. It has no data.invoice wrapper. If reloading fails, the in-memory save result is returned."
             },
             "parameters": [],
             "get": {
@@ -2302,11 +2369,36 @@
                         }
                     },
                     "403": {
-                        "description": "UNAUTHORIZED: invoice not found within this company. This response does not distinguish an unknown invoice from one belonging to another company. Gateway authorization failures may instead return {\"message\":\"Forbidden\"}.",
+                        "description": "Gateway authorization failure. Invalid keys or companies without OpenAPI access may return {\"message\":\"Forbidden\"}.",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT_FOUND. Generic for missing, permanently deleted or other-company invoices; \"Invoice has been deleted\" only for a soft-deleted invoice owned by the key company.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
                                 }
                             }
                         }
@@ -2315,7 +2407,7 @@
                 "tags": [
                     "Sales"
                 ],
-                "description": "Retrieve data for a particular invoice available in the system\n\nThis endpoint may be used as a base for new invoice data that we wish to create based on a set of related invoices\n\nIf you wish to generate such object base you will need to provide both:\n* `related` parameter, listing the related invoices\n* `invoiceType` of the new invoice we wish to create\n\nThe return object will be a temporary invoice object you may further extend before saving it.\n\nAn unknown ref or an invoice outside the API key company currently returns HTTP 403 UNAUTHORIZED rather than 404. A soft-deleted invoice from the company can still be returned; inspect basicInformation.isDeleted. For CORRECTION, related={originalId} copies the referenced invoice rows, without calculating the cumulative state after earlier corrections. To correct a previous correction, reference that correction; its stored rows contain its after-correction state, while its totals contain the financial difference.",
+                "description": "Retrieve data for a particular invoice available in the system\n\nThis endpoint may be used as a base for new invoice data that we wish to create based on a set of related invoices\n\nIf you wish to generate such object base you will need to provide both:\n* `related` parameter, listing the related invoices\n* `invoiceType` of the new invoice we wish to create\n\nThe return object will be a temporary invoice object you may further extend before saving it.\n\nMissing, permanently deleted and other-company invoices return 404 NOT_FOUND with a generic message. Own soft-deleted invoices return 404 NOT_FOUND with \"Invoice has been deleted\" and no invoice data. This applies to ref and related lookups. For CORRECTION, rows come from the referenced document, without applying later corrections automatically. Reference the previous correction to use its stored after-correction state.",
                 "parameters": [
                     {
                         "schema": {
@@ -2397,6 +2489,21 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
+                                }
+                            }
+                        }
                     }
                 },
                 "operationId": "get-export",
@@ -2450,6 +2557,21 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
+                                }
+                            }
+                        }
                     }
                 },
                 "requestBody": {
@@ -2494,6 +2616,21 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
                                 }
                             }
                         }
@@ -2574,6 +2711,45 @@
                                 }
                             }
                         }
+                    },
+                    "409": {
+                        "description": "The invoice PDF is still being generated. Wait at least 2 seconds before retrying within a bounded budget.",
+                        "headers": {
+                            "Retry-After": {
+                                "description": "Minimum delay before retrying, in seconds.",
+                                "schema": {
+                                    "type": "integer",
+                                    "example": 2
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "PDF_NOT_READY",
+                                    "errorMessage": "Invoice PDF is not ready. Try again later."
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
+                                }
+                            }
+                        }
                     }
                 },
                 "requestBody": {
@@ -2610,7 +2786,7 @@
                 "tags": [
                     "Sales"
                 ],
-                "description": "Returns a pre-signed PDF download URL for one invoice, valid for 5 minutes. The PDF is generated asynchronously after saving: HTTP 400 with \"One or more selected invoices are unavailable for download\" can occur before it is ready. The same error can also mean an unavailable invoice; no fixed readiness time or Retry-After header is provided. A successful request changes an ISSUED sales document, including a pro forma, to SENT even if the URL is never downloaded. DRAFT remains DRAFT. SENT is not proof of email delivery."
+                "description": "Returns a pre-signed PDF URL for one invoice, valid for 5 minutes. A company-owned PDF still being generated returns 409 PDF_NOT_READY with Retry-After: 2; retry within a bounded budget. Invalid or unavailable invoice selection returns 400. Pending PDF requests do not change status. A successful request changes an ISSUED sales document, including a pro forma, to SENT even if the URL is never downloaded. DRAFT remains DRAFT. SENT is not proof of email delivery."
             }
         },
         "/expenses": {
@@ -2928,6 +3104,21 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
+                                }
+                            }
+                        }
                     }
                 },
                 "operationId": "get-expenses-list",
@@ -2991,6 +3182,21 @@
                                             }
                                         }
                                     }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
                                 }
                             }
                         }
@@ -3115,6 +3321,21 @@
                                             }
                                         }
                                     }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
                                 }
                             }
                         }
@@ -3283,6 +3504,21 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
+                                }
+                            }
+                        }
                     }
                 },
                 "tags": [
@@ -3377,6 +3613,21 @@
                                             }
                                         }
                                     }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
                                 }
                             }
                         }
@@ -3500,6 +3751,21 @@
                                             "data": []
                                         }
                                     }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
                                 }
                             }
                         }
@@ -3714,6 +3980,21 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
+                                }
+                            }
+                        }
                     }
                 },
                 "description": "",
@@ -3795,6 +4076,21 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
                                 }
                             }
                         }
@@ -4041,6 +4337,21 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -4098,6 +4409,10 @@
                                 }
                             }
                         }
+                    },
+                    "errorCode": {
+                        "type": "string",
+                        "description": "Machine-readable error code when available, including KEY_EXPIRED, NOT_FOUND or PDF_NOT_READY."
                     }
                 },
                 "description": "Default error message format in Altera API\nDepending on particular reason, different HTTP Status codes will be employed"
@@ -4284,7 +4599,7 @@
                                 "description": "Language of the invoice document: pl, en, de, es, en_pl or de_pl."
                             },
                             "isDeleted": {
-                                "description": "Soft-deletion marker. A company-owned soft-deleted invoice may still be returned by GET. Treat true or 1 as deleted.",
+                                "description": "Soft-deletion marker. Public GET excludes soft-deleted documents and returns 404 instead of their data.",
                                 "oneOf": [
                                     {
                                         "type": "boolean"
@@ -4917,8 +5232,8 @@
                                 "quantity": {
                                     "type": "number",
                                     "example": 14,
-                                    "exclusiveMinimum": 0,
-                                    "description": "Must be greater than zero, including for CORRECTION. For a full return keep the positive quantity and set the post-correction price to zero; see the correction guide."
+                                    "description": "Positive on ordinary invoices. Zero is accepted only for CORRECTION with a source invoice in basicInformation.relatedInvoicesIds, for the state after correction. Negative quantities are rejected.",
+                                    "minimum": 0
                                 },
                                 "unit": {
                                     "type": "string",
@@ -4990,7 +5305,7 @@
                             "Zwolnienie przedmiotowe z art. 43 ust. 1",
                             "Zwolnienie przedmiotowe z art. 82 ust. 3"
                         ],
-                        "description": "Provide the legal basis for invoices containing a zw VAT line. Current save validation accepts omission; new KSeF XML generation uses the invoice value, then the company default, and rejects generation if both are missing. The resolved basis is submitted as P_19A. Submission can reuse previously stored XML without rerunning the generation check."
+                        "description": "Legal basis for a zw line. Required before issuing a sales invoice unless a nonempty company default supplies the basis. Drafts may omit it. Missing basis returns validation code KSEF_VAT_EXEMPTION_LEGAL_BASIS_REQUIRED, which override cannot bypass. New XML uses P_19A. Submission also checks stored XML for P_19=1, exactly one nonempty P_19A/B/C, and no P_19N."
                     },
                     "vatExemptionReasonDetailed": {
                         "type": "string",

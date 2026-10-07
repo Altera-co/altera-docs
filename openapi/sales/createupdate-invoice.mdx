@@ -7,7 +7,7 @@ description: "Create or update a sales invoice in Altera via the OpenAPI. Set ba
 
 The current endpoint has no idempotency key or company-unique `externalId`. The input validator rejects the unknown top-level field `externalId`. A timeout or lost response does not mean that saving failed: retrying creation can produce another invoice.
 
-Keep the returned `data.invoiceId`. To obtain the assigned number, call [Get invoice data](/openapi/sales/get-invoice-data) with `ref={invoiceId}` and read `data.invoice.basicInformation.invoiceNumber`. The save response does not include `invoiceNumber`.
+The response returns the full saved invoice in `data`, as in the application save flow. Keep `data.invoiceId` and read the assigned number from `data.basicInformation.invoiceNumber`. Other saved fields, including lines, totals and payment data, are returned in the same snapshot. There is no `data.invoice` wrapper in the save response. If reloading the saved document fails, the response uses the in-memory save result, as the application does.
 
 When the result of creation is unknown, reconcile existing invoices before issuing another creation request. [Sales search](/openapi/sales/list-available-invoices) includes `additionalDetails`, so an external reference stored there can help locate a document. It is substring search and does not enforce uniqueness or prevent concurrent duplicates.
 
@@ -32,7 +32,7 @@ Each correction is a separate invoice with its own identifier and invoice number
 
 For `basicInformation.invoiceType: "CORRECTION"`, supply line amounts representing the state after the correction, rather than the amount of the reduction. When no explicit before rows are supplied, Altera derives and subtracts the rows from the first invoice in `basicInformation.relatedInvoicesIds`.
 
-`quantity` must be greater than zero in OpenAPI, including on a correction. The application editor allows zero for an after-correction row with a source item; the current OpenAPI validator rejects it. For a full return, keep the original positive quantity and set the post-correction prices to zero. For example, a fully returned line that originally had quantity 1 has this post-correction state:
+`quantity` must be greater than zero on an ordinary invoice. On a `CORRECTION` that references a source invoice in `basicInformation.relatedInvoicesIds`, zero is accepted for the after-correction state, as in the application editor. Negative quantities are rejected. For a full return, set `quantity` to zero and keep the unit prices and VAT rate. For example, a fully returned line that originally had quantity 1 and a net unit price of 100 has this post-correction state:
 
 ```json
 {
@@ -40,9 +40,9 @@ For `basicInformation.invoiceType: "CORRECTION"`, supply line amounts representi
     {
       "positionType": "SERVICE",
       "productName": "Returned service",
-      "quantity": 1,
-      "unitNetPrice": 0,
-      "unitGrossPrice": 0,
+      "quantity": 0,
+      "unitNetPrice": 100,
+      "unitGrossPrice": 123,
       "vat": "23%"
     }
   ]
@@ -112,7 +112,9 @@ Validation errors include an English description in `errorMessage`, a Polish des
 
 If at least one invoice item uses the `"vat": "zw"` rate, provide `vatExemptionReason` at the top level of the request, alongside `invoicePosition`, `additionalDetails`, and `payments`.
 
-Current save validation accepts a `zw` line without this field. When generating new KSeF XML, Altera resolves the basis from `vatExemptionReason` on the invoice, then from the company's VAT-exemption setting. If both are missing, new XML generation fails validation before submission. Submission can reuse previously stored XML; that path does not run the generation check again. A successful save alone therefore does not confirm a successful KSeF submission. Providing the invoice basis explicitly makes the intended basis independent of the company default.
+Altera resolves the legal basis from `vatExemptionReason` on the invoice, then from the company's VAT-exemption setting. An `ISSUED` or `SENT` sales invoice containing a `zw` line requires a nonempty basis before it can be saved. Missing basis returns HTTP 400 with `validationErrors[].code = "KSEF_VAT_EXEMPTION_LEGAL_BASIS_REQUIRED"`. `override` does not bypass this check. A `DRAFT` can remain incomplete. Providing the invoice basis explicitly makes it independent of the company default.
+
+KSeF submission checks generated XML and previously stored XML. Exempt invoices require `P_19 = 1` and exactly one nonempty `P_19A`, `P_19B` or `P_19C`, without the no-exemption marker `P_19N`. Newly generated Altera XML uses `P_19A` for the selected basis. A successful save alone does not confirm acceptance by KSeF.
 
 The field accepts exactly one of these three values:
 

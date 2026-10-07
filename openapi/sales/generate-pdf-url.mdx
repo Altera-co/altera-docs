@@ -16,9 +16,17 @@ The response contains the URL as the string `data`. The URL expires after **5 mi
 
 ## PDF readiness
 
-Altera generates the PDF asynchronously after saving. A newly created invoice can initially return HTTP `400` with `"One or more selected invoices are unavailable for download"`. There is no guaranteed one-second readiness window or `Retry-After` header.
+Altera generates the PDF asynchronously after saving. When the invoice belongs to the API key's company and its PDF is still being prepared, the endpoint returns HTTP `409` with `errorCode: "PDF_NOT_READY"` and `Retry-After: 2`. Wait at least the indicated number of seconds before retrying. Use a bounded retry budget; there is no fixed readiness deadline.
 
-The same error can also indicate a document that is unavailable in the API key's company. Retry with bounded backoff only when you know that the invoice was just saved in this company. If it remains unavailable, investigate the document instead of retrying indefinitely.
+```json
+{
+  "result": "Error",
+  "errorCode": "PDF_NOT_READY",
+  "errorMessage": "Invoice PDF is not ready. Try again later."
+}
+```
+
+HTTP `400` still indicates invalid input or an invoice unavailable in the API key's company. Do not retry that response as a PDF-readiness signal. The document status does not change while the PDF is pending.
 
 ## Status change
 

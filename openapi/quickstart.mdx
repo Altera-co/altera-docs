@@ -24,11 +24,13 @@ All endpoints require authentication with the API key generated in the previous 
 </Note>
 ## Key expiration and authorization errors
 
-The application currently defaults a new key to 30 days and requires an expiration date in its key dialog. Record the selected date and rotate the key before it expires. The backend supports keys without expiration, but the current application dialog does not expose that option; coordinate this requirement with Altera support.
+The application defaults a new key to 30 days. Record the selected date and rotate the key before it expires. To use a key without expiration, select that option and explicitly confirm that API keys should be changed regularly. The form requires this confirmation when creating or editing a key without expiration.
 
-Expired and invalid keys are rejected by the gateway with HTTP `403` and `{"message":"Forbidden"}`. The response does not provide `KEY_EXPIRED` or distinguish expiration from other authorization failures. The company also needs access to the OpenAPI feature in its subscription. An API key cannot manage API keys itself. Automatic expiration reminder emails are not currently available.
+A verified expired key returns HTTP `401` with `errorCode: "KEY_EXPIRED"`, provided that its company still has OpenAPI access. Unknown or invalid keys and companies without OpenAPI access remain rejected by the gateway with HTTP `403` and `{"message":"Forbidden"}`. An API key cannot manage API keys itself.
 
-Authorization decisions can be cached for up to 10 minutes, so expiry and revocation may not take effect immediately for a cached key. Treat the configured expiration time as the deadline for rotation, rather than waiting for a failed request.
+Active company administrators receive email reminders 7 days and 1 day before a key's expiration date. Keys without expiration do not produce these reminders. QA blocks external email delivery.
+
+Authorization decisions are checked on each request, without the previous 10-minute cache. Expiry and revocation take effect on the next request. Rotate the key before the configured date instead of waiting for a failed request.
 
 ## Base URL and QA access
 
@@ -59,7 +61,7 @@ This way the system will be able to properly aggregate your sales based on above
 ## So I've issued an invoice. What can I do next?
 
 ### Downloading the source file
-Using [POST /sales/pdfUrl](/openapi/sales/generate-pdf-url) endpoint you can retrieve a pre-signed url that gives you access to the file for 5 minutes. PDF generation is asynchronous, so a newly saved invoice may initially return HTTP `400`. A successful URL request also changes `ISSUED` to `SENT`; see the endpoint documentation before using it to check readiness.
+Using [POST /sales/pdfUrl](/openapi/sales/generate-pdf-url) endpoint you can retrieve a pre-signed url that gives you access to the file for 5 minutes. PDF generation is asynchronous, so a newly saved invoice may initially return HTTP `409` with `PDF_NOT_READY` and `Retry-After: 2`. A successful URL request also changes `ISSUED` to `SENT`; see the endpoint documentation before using it to check readiness.
 
 ### Sending my invoice to recipient
 Using [POST /sales/invoice/send](/openapi/sales/send-invoice-email-to-contractor) endpoint you can order an e-mail to be sent to your contractor using either the data saved in the system (Contractor info saved along with the invoice) or using an e-mail address of your choice directly.

@@ -4,9 +4,11 @@ openapi: get /sales/invoice
 
 ## Missing and deleted invoices
 
-Retrieve a saved invoice with `ref={invoiceId}`. An invoice that is absent from the API key's company currently returns HTTP `403` with `UNAUTHORIZED`. This does not distinguish an unknown invoice from one belonging to another company. Do not interpret it as a reliable deletion check.
+Retrieve a saved invoice with `ref={invoiceId}`. Unknown, permanently deleted and other-company invoices return HTTP `404` with `errorCode: "NOT_FOUND"` and the same generic message. This does not disclose whether another company has the document.
 
-A soft-deleted invoice from the company can still be returned. Inspect `data.invoice.basicInformation.isDeleted`; `true` or `1` means deleted. Drafts removed permanently cannot be retrieved. HTTP `404` is not currently the contract for missing or deleted documents.
+A soft-deleted invoice owned by the API key's company also returns HTTP `404`, with `errorMessage: "Invoice has been deleted"`. Its data is not returned. This message can distinguish your company's soft-deleted document from an unknown identifier. A permanently deleted draft no longer has a record, so its response remains generic.
+
+These checks also apply to documents referenced through `related` when preparing another invoice.
 
 ## Correction prefill
 
