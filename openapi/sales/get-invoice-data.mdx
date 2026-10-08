@@ -1,3 +1,15 @@
 ---
 openapi: get /sales/invoice
 ---
+
+## Missing and deleted invoices
+
+Retrieve a saved invoice with `ref={invoiceId}`. Unknown, permanently deleted and other-company invoices return HTTP `404` with `errorCode: "NOT_FOUND"` and the same generic message. This does not disclose whether another company has the document.
+
+A soft-deleted invoice owned by the API key's company also returns HTTP `404`, with `errorMessage: "Invoice has been deleted"`. Its data is not returned. This message can distinguish your company's soft-deleted document from an unknown identifier. A permanently deleted draft no longer has a record, so its response remains generic.
+
+These checks also apply to documents referenced through `related` when preparing another invoice.
+
+## Correction prefill
+
+`related={originalId}&invoiceType=CORRECTION` prepares a correction from the referenced invoice. The returned rows are copied from that invoice, without applying earlier corrections to calculate an effective balance. To correct a previous correction, reference that correction: its stored rows represent its after-correction state, while its totals represent the financial difference. See [correction input and full returns](/openapi/sales/createupdate-invoice).

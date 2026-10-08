@@ -1,3 +1,63 @@
 ---
 openapi: post /sales/invoice/send
+description: "Queue an invoice email, configure the company template and reply-to address, and verify delivery in QA."
 ---
+
+## Required configuration and recipients
+
+Configure the global reply-to address in **Settings > Sales > E-mail messages**. This address is used for replies to the email. It does not select the recipients or confirm delivery.
+
+Provide the invoice ID and one of the following:
+
+- A nonempty `recipient` array containing email addresses.
+- `recipientFromSystem: true` to load the contractor email addresses saved on the invoice.
+
+When `recipientFromSystem` is `true`, contractor addresses take precedence over `recipient`. A contractor without an email address causes HTTP `400`. Passing only `invoiceId` is insufficient.
+
+## Company email template and subject
+
+If `content` is omitted, empty or whitespace-only, Altera loads the company invoice-send email template configured in **Settings > Sales > E-mail messages** and fills its placeholders:
+
+| Placeholder | Inserted invoice data |
+| --- | --- |
+| `%N` | Invoice number. |
+| `%D` | Invoice number, gross amount, currency and due date in Polish. |
+| `%EN` | Invoice number, gross amount, currency and due date in English. |
+
+Configure the template before omitting `content`. Without a configured template, the endpoint returns HTTP `400`. To supply a different body for a single request, provide nonblank plain text or HTML in `content`.
+
+If `topic` is omitted, empty or whitespace-only, the standard subject is `Faktura numer {invoiceNumber}`. It is generated from the invoice number, independently of the company body template and the invoice document language. A nonblank `topic` overrides the standard subject.
+
+<Warning>
+This subject behavior requires the subject fallback fix to be deployed to the target environment. Older versions may return HTTP `500` when `topic` is omitted and replace a supplied nonblank `topic` with the standard subject. Until that environment is updated, supply a nonblank `topic` even when using the company body template; custom subjects are not preserved by the older version.
+</Warning>
+
+For example, after configuring reply-to and the invoice-send template, request the saved contractor recipients with this payload:
+
+```json
+{
+  "invoiceId": 12345,
+  "recipientFromSystem": true
+}
+```
+
+The resulting body uses the configured template, and the subject uses the standard format above. To override either value, supply `content`, `topic` or both. The fields are resolved independently.
+
+## Queue acceptance and QA delivery
+
+HTTP `200` with `"result": "OK"` confirms that the email was accepted into the sending queue. Delivery runs asynchronously. The public API currently exposes no email-send history or delivery-status endpoint. The response and the invoice's `SENT` status do not confirm receipt in the recipient mailbox.
+
+QA uses sandbox email routing: external recipient addresses are removed, so an address outside `@altera.co` does not receive the invoice. Configuring an external reply-to address does not bypass this rule. If there is no remaining Altera recipient, sandbox routing uses an Altera reply-to address when available, otherwise the technical sender address.
+
+To verify actual receipt and the attached invoice in QA, coordinate a test recipient address in the `@altera.co` domain with Altera support and supply it in `recipient`:
+
+```json
+{
+  "invoiceId": 12345,
+  "recipient": ["qa-tester@altera.co"],
+  "topic": "QA invoice test",
+  "content": "<p>Please verify the attached test invoice.</p>"
+}
+```
+
+Replace the illustrative address with the address agreed with support. Omit `recipientFromSystem` or set it to `false` so the explicit recipient is used. QA can verify request validation, queue acceptance and delivery to the agreed Altera address. It cannot verify delivery to an external recipient; that requires a separately coordinated production test.

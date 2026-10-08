@@ -1,3 +1,13 @@
 ---
 openapi: get /sales
 ---
+
+## Free-text search
+
+`searchPhrase` performs case-insensitive substring search across invoice number, buyer and seller names and tax identifiers, registration plate, `additionalDetails` and line product names. Internal debit-note metadata is excluded.
+
+An external order reference saved in `additionalDetails` can help reconcile an ambiguous creation response. The field is not unique: search does not replace an idempotency key or prevent concurrent creation of duplicate invoices. Verify the matching invoice data and paginate the results.
+
+## Cleaning up test drafts
+
+Use the existing [POST /sales/delete](/openapi/sales/delete-invoice) endpoint to remove a draft. There is no `DELETE /sales/invoice` route.
