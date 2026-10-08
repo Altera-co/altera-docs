@@ -30,7 +30,7 @@ A verified expired key returns HTTP `401` with `errorCode: "KEY_EXPIRED"`, provi
 
 Active company administrators receive email reminders 7 days and 1 day before a key's expiration date. Keys without expiration do not produce these reminders. QA blocks external email delivery.
 
-Authorization decisions are checked on each request, without the previous 10-minute cache. Expiry and revocation take effect on the next request. Rotate the key before the configured date instead of waiting for a failed request.
+Authorization decisions are cached for up to 5 minutes. After a key expires or is revoked, a previously cached authorization decision can continue to allow requests until the cache expires. Rotate the key before the configured date instead of waiting for a failed request.
 
 ## Base URL and QA access
 
