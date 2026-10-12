@@ -28,7 +28,7 @@ A permanently deleted draft returns:
 }
 ```
 
-`fullDelete` counts removed invoice records, not related rows. A zero count means that no invoice was removed by the mutation. Verify cleanup using the company sales list. A later GET by identifier currently returns `403` for an absent invoice.
+`fullDelete` counts removed invoice records, not related rows. A zero count means that no invoice was removed by the mutation. Verify cleanup using the company sales list. A later GET by identifier for a permanently deleted draft returns HTTP `404` with `errorCode: "NOT_FOUND"`.
 
 ## Restrictions and issued invoices
 
