@@ -3,6 +3,46 @@ title: EN - Changelog
 description: Track every Altera release with detailed notes on new features, improvements, KSeF updates, and bug fixes shipped across web and mobile apps.
 ---
 
+### 2.36.0 - 2026-10-05 - Tasks, office review and the company event log
+We introduce Tasks to organize work in your company. This release also adds office review, a company event log and fixes for invoices, expense approvals and navigation between companies.
+
+- New Tasks module
+    - You can create tasks with a responsible person, a priority, a deadline and a planned date.
+    - Tasks has My day, All and Calendar views. You can search the list and use filters. The calendar shows a week, a month and the tasks for the selected day.
+    - My day separates today's tasks from tasks that need attention and upcoming tasks. Completed tasks stay visible until you refresh, so you can undo a mistake.
+    - Pick for today adds a task to your personal list and sets its planned date to today. It keeps the deadline. You can also move a task to another day or remove it from today's list.
+    - Task details show the description, comments, attachments and change history. You can copy a task link. The form warns you before you close it with unsaved changes.
+    - You can create recurring task series with a preview of future dates. You can edit, pause and resume a series.
+
+- My Office: items that need review
+    - Office owners and administrators can use Needs review. The shared list shows items that need attention, their category, company, reason and reference date or time.
+    - You can search, use filters and open item details. The view shows when data is incomplete or unavailable. Missing data does not mean that there are no problems.
+    - You can review access requests with their scope, submission date and reason.
+    - Companies and Team lists now show the main information first. You can enable other columns as needed.
+
+- Company event log
+    - Company Settings now has an event log. Users with the required permissions can check actions on documents and settings, with the person and date.
+    - You can search and filter by date, person and event type to find a specific change.
+    - Event details open in a side panel. Automatic actions show System as the person. Event names and results use clear descriptions.
+
+- Sales and contractors
+    - The final invoice form now calculates advance payments and their corrections correctly. A change to the selected advances refreshes the calculation. Removal of an advance also removes its corrections from the selection.
+    - A final invoice takes the payment method, bank account and split payment setting from its source advance invoice. If the payment method is missing, the form uses the company default.
+    - Additional invoice parties now save correctly. Empty rows do not enter the invoice. Partial details stay in the draft, and removal of the last party clears its saved details.
+    - Greek VAT IDs now keep the EL prefix. The old GR prefix changes to EL. The address country remains separate.
+    - The descriptions of np I and np II now show the correct information. The old np rate is absent from new item and product choices. Existing documents keep that rate.
+    - A debit note item now takes the new name when you change the reason for the note.
+
+- Expenses and document approvals
+    - You can approve workflow steps, including payment approval, for invoices with confirmed accounting data. Actions use your permissions. The accounting data stays protected from edits.
+    - The Dashboard again shows approval tasks for these expenses.
+
+- Navigation and daily work
+    - Notifications and links to another company now switch the company once. The app opens the correct screen and selected document.
+    - A link to a company that you can no longer access shows a clear message and opens the start screen.
+    - The Back button returns to the previous screen after a company change. An invalid address no longer leaves a blank screen.
+    - Tables now refresh faster, and their headers stay in place when a side panel opens. Character counters are easier to read on dark backgrounds.
+
 ### 2.35.3 - 2026-09-14 - Invoice, reconciliation, and payment fixes
 This maintenance release focuses on correct document reconciliation, reliable data saving, and easier daily work.
 

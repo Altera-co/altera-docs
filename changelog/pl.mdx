@@ -3,6 +3,46 @@ title: PL - Dziennik Zmian
 description: "Pełna historia wydań Altera: nowe funkcje, usprawnienia KSeF, integracje bankowe, poprawki w aplikacji webowej i mobilnej. Sprawdź, co się zmieniło."
 ---
 
+### 2.36.0 - 2026-10-05 - Zadania, kontrola pracy biura i dziennik zdarzeń
+Udostępniamy moduł Zadania do organizowania pracy w firmie. Dodajemy widok „Do kontroli” w Moim Biurze, dziennik zdarzeń firmy oraz poprawki faktur, akceptacji kosztów i przechodzenia między firmami.
+
+- Nowy moduł Zadania
+    - Udostępniliśmy tworzenie zadań z osobą odpowiedzialną, priorytetem, terminem wykonania i datą planowania.
+    - Dodaliśmy widoki „Mój dzień”, „Wszystkie” i „Kalendarz”. Listę można przeszukiwać i zawężać filtrami, a kalendarz pokazuje tydzień lub miesiąc oraz zadania wybranego dnia.
+    - „Mój dzień” oddziela zadania na dziś od spraw wymagających uwagi i zadań nadchodzących. Wykonane zadanie pozostaje widoczne do odświeżenia, aby można było łatwo cofnąć pomyłkę.
+    - Akcja „Weź na dzisiaj” dodaje zadanie do osobistej listy i ustawia datę planowania na dziś, bez zmiany terminu wykonania. Zadanie można też przełożyć lub zdjąć z dzisiejszej listy.
+    - Szczegóły zadania pokazują opis, komentarze, załączniki i historię zmian. Dodaliśmy kopiowanie linku do zadania oraz ostrzeżenie przed zamknięciem formularza z niezapisanymi zmianami.
+    - Udostępniliśmy cykliczne serie zadań z podglądem kolejnych dat, edycją oraz możliwością wstrzymania i wznowienia serii.
+
+- Moje Biuro: sprawy wymagające kontroli
+    - Udostępniliśmy właścicielom i administratorom biura widok „Do kontroli”. Wspólna lista pokazuje sprawy wymagające uwagi, ich kategorię, firmę, przyczynę oraz czas lub datę odniesienia.
+    - Dodaliśmy wyszukiwanie, filtry i podgląd szczegółów sprawy. Widok wskazuje również, kiedy dane są niepełne lub niedostępne, zamiast przedstawiać brak danych jako brak problemów.
+    - Umożliwiliśmy rozpatrywanie wniosków o dostęp z podglądem ich zakresu, daty złożenia i powodu.
+    - Uporządkowaliśmy listy Firmy i Zespół. Najważniejsze dane są widoczne od razu, a pozostałe kolumny można włączyć według potrzeb.
+
+- Dziennik zdarzeń firmy
+    - Dodaliśmy dziennik zdarzeń w Ustawieniach firmy. Osoby z odpowiednimi uprawnieniami mogą sprawdzić czynności dotyczące dokumentów i ustawień wraz z wykonawcą i datą.
+    - Udostępniliśmy wyszukiwanie oraz filtry dat, osób i rodzajów zdarzeń, aby łatwiej znaleźć konkretną zmianę.
+    - Szczegóły wpisu otwierają się w panelu bocznym. Czynności automatyczne mają oznaczenie „System”, a nazwy zdarzeń i wyniki są opisane czytelnym językiem.
+
+- Sprzedaż i kontrahenci
+    - Poprawiliśmy rozliczanie zaliczek i korekt w formularzu faktury końcowej. Zmiana wybranych zaliczek odświeża rozliczenie, a odłączenie zaliczki usuwa z wyboru także jej korekty.
+    - Faktura końcowa przejmuje formę płatności, rachunek bankowy i oznaczenie podzielonej płatności z zaliczki, z której jest wystawiana. Gdy brakuje formy płatności, formularz korzysta z ustawień firmy.
+    - Naprawiliśmy zapis dodatkowych kontrahentów na fakturze. Puste wiersze są pomijane, częściowo wpisane dane pozostają w szkicu, a usunięcie ostatniego podmiotu czyści zapisane dane.
+    - Poprawiliśmy obsługę greckiego VAT ID: prefiks „EL” jest zachowywany, a starszy „GR” zamieniany na „EL”. Kraj adresu pozostaje osobną informacją.
+    - Poprawiliśmy opisy stawek „np I” i „np II”. Historyczna stawka „np” nie pojawia się już przy nowych pozycjach i produktach, ale pozostaje na dokumentach, które już jej używają.
+    - Naprawiliśmy zmianę nazwy pozycji noty obciążeniowej po zmianie powodu jej wystawienia.
+
+- Koszty i akceptacja dokumentów
+    - Przywróciliśmy akceptację etapów e-Obiegu, w tym akceptację do płatności, dla zadekretowanych faktur. Dostępne akcje uwzględniają uprawnienia, a dane księgowe pozostają chronione przed edycją.
+    - Zadania akceptacji takich kosztów są ponownie dostępne na Pulpicie.
+
+- Nawigacja i codzienna praca
+    - Poprawiliśmy otwieranie powiadomień i linków prowadzących do innej firmy. Aplikacja przełącza firmę raz i otwiera właściwy ekran oraz wybrany dokument.
+    - Link do firmy, do której użytkownik utracił dostęp, pokazuje czytelny komunikat i prowadzi na ekran startowy.
+    - Przycisk Wstecz po zmianie firmy wraca do poprzedniego ekranu. Poprawiliśmy również otwieranie nieistniejących adresów, aby aplikacja nie pozostawiała pustego ekranu.
+    - Przyspieszyliśmy odświeżanie tabel i poprawiliśmy położenie nagłówków po otwarciu panelu bocznego. Liczniki znaków w polach są czytelniejsze na ciemnym tle.
+
 ### 2.35.3 - 2026-09-14 - Poprawki faktur, rozrachunków i płatności
 Wydanie poprawkowe skupione na prawidłowym rozliczaniu dokumentów, zapisywaniu danych i wygodniejszej codziennej pracy.
 
