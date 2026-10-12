@@ -1,3 +1,35 @@
 ---
 openapi: post /sales/pdfUrl
 ---
+
+## Request one invoice
+
+Send the singular `invoiceId` field, rather than an `invoiceIds` array:
+
+```json
+{
+  "invoiceId": 12345
+}
+```
+
+The response contains the URL as the string `data`. The URL expires after **5 minutes**.
+
+## PDF readiness
+
+Altera generates the PDF asynchronously after saving. When the invoice belongs to the API key's company and its PDF is still being prepared, the endpoint returns HTTP `409` with `errorCode: "PDF_NOT_READY"` and `Retry-After: 2`. Wait at least the indicated number of seconds before retrying. Use a bounded retry budget; there is no fixed readiness deadline.
+
+```json
+{
+  "result": "Error",
+  "errorCode": "PDF_NOT_READY",
+  "errorMessage": "Invoice PDF is not ready. Try again later."
+}
+```
+
+HTTP `400` still indicates invalid input or an invoice unavailable in the API key's company. Do not retry that response as a PDF-readiness signal. The document status does not change while the PDF is pending.
+
+## Status change
+
+A successful call changes an `ISSUED` sales document to `SENT`, including pro formas. The status changes when the URL is returned, even if nobody downloads it. A `DRAFT` remains `DRAFT`.
+
+`SENT` does not prove an email was sent or received. The public endpoint currently has no option to suppress this status change, and no separate mark-as-sent endpoint is exposed.

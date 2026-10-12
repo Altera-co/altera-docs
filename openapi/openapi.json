@@ -1750,6 +1750,21 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
+                                }
+                            }
+                        }
                     }
                 },
                 "tags": [
@@ -1814,7 +1829,7 @@
                         },
                         "in": "query",
                         "name": "searchPhrase",
-                        "description": "Freetext search over concatenated fields InvoiceNumber, ContractorName, ContractorTIN and ContractorCity"
+                        "description": "Case-insensitive substring search over invoice number, buyer and seller names and tax IDs, registration plate, additionalDetails and invoice line product names. Internal debit-note metadata is excluded. This is free-text search, without external-reference uniqueness or an idempotency guarantee."
                     },
                     {
                         "schema": {
@@ -1871,29 +1886,66 @@
                                             "type": "object",
                                             "properties": {
                                                 "data": {
-                                                    "type": "object",
-                                                    "x-stoplight": {
-                                                        "id": "81aw0gcdvcsye"
-                                                    },
-                                                    "properties": {
-                                                        "invoiceId": {
-                                                            "type": "number",
-                                                            "x-stoplight": {
-                                                                "id": "ng63zj0yg4qvv"
+                                                    "allOf": [
+                                                        {
+                                                            "$ref": "#/components/schemas/Invoice"
+                                                        },
+                                                        {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "invoiceId": {
+                                                                    "type": "number",
+                                                                    "x-stoplight": {
+                                                                        "id": "ng63zj0yg4qvv"
+                                                                    },
+                                                                    "example": 12413
+                                                                },
+                                                                "ksefWarning": {
+                                                                    "type": "string",
+                                                                    "description": "Optional warning when immediate KSeF submission returns an unsuccessful result after the invoice was saved."
+                                                                },
+                                                                "ksefErrorMessage": {
+                                                                    "type": "string",
+                                                                    "description": "Optional KSeF failure details. The invoice identified by invoiceId is already saved."
+                                                                },
+                                                                "ksefReason": {
+                                                                    "type": "string",
+                                                                    "description": "Optional machine-readable reason, for example KSEF_SUBMISSION_FAILED or KSEF_PRIVATE_PERSON_SEND_DISABLED. Treat this as an open set of values."
+                                                                },
+                                                                "statusId": {
+                                                                    "type": "string",
+                                                                    "description": "Current invoice status, also available in basicInformation.statusId."
+                                                                },
+                                                                "ksefProcessing": {
+                                                                    "type": "object",
+                                                                    "description": "Optional KSeF processing result, as in the application save response.",
+                                                                    "additionalProperties": true
+                                                                }
                                                             },
-                                                            "example": 12413
-                                                        },
-                                                        "ksefWarning": {
-                                                            "type": "string",
-                                                            "description": "Optional warning when immediate KSeF submission returns an unsuccessful result after the invoice was saved."
-                                                        },
-                                                        "ksefErrorMessage": {
-                                                            "type": "string",
-                                                            "description": "Optional KSeF failure details. The invoice identified by invoiceId is already saved."
-                                                        },
-                                                        "ksefReason": {
-                                                            "type": "string",
-                                                            "description": "Optional machine-readable reason, for example KSEF_SUBMISSION_FAILED or KSEF_PRIVATE_PERSON_SEND_DISABLED. Treat this as an open set of values."
+                                                            "required": [
+                                                                "invoiceId"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                "warnings": {
+                                                    "type": "array",
+                                                    "description": "Optional non-blocking validation warnings.",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "field": {
+                                                                "type": "string"
+                                                            },
+                                                            "code": {
+                                                                "type": "string"
+                                                            },
+                                                            "message": {
+                                                                "type": "string"
+                                                            },
+                                                            "messagePL": {
+                                                                "type": "string"
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -1933,6 +1985,21 @@
                                             ]
                                         }
                                     }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
                                 }
                             }
                         }
@@ -2018,7 +2085,8 @@
                             }
                         }
                     }
-                }
+                },
+                "description": "Create or update a sales invoice. No idempotency key or company-unique externalId is supported. A timed-out request can already have saved the invoice; do not blindly repeat creation. The response returns the full saved invoice in data, including data.invoiceId and data.basicInformation.invoiceNumber, as in the application. It has no data.invoice wrapper. If reloading fails, the in-memory save result is returned."
             },
             "parameters": [],
             "get": {
@@ -2299,12 +2367,47 @@
                                 }
                             }
                         }
+                    },
+                    "403": {
+                        "description": "Gateway authorization failure. Invalid keys or companies without OpenAPI access may return {\"message\":\"Forbidden\"}.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT_FOUND. Generic for missing, permanently deleted or other-company invoices; \"Invoice has been deleted\" only for a soft-deleted invoice owned by the key company.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
+                                }
+                            }
+                        }
                     }
                 },
                 "tags": [
                     "Sales"
                 ],
-                "description": "Retrieve data for a particular invoice available in the system\n\nThis endpoint may be used as a base for new invoice data that we wish to create based on a set of related invoices\n\nIf you wish to generate such object base you will need to provide both:\n* `related` parameter, listing the related invoices\n* `invoiceType` of the new invoice we wish to create\n\nThe return object will be a temporary invoice object you may further extend before saving it.",
+                "description": "Retrieve data for a particular invoice available in the system\n\nThis endpoint may be used as a base for new invoice data that we wish to create based on a set of related invoices\n\nIf you wish to generate such object base you will need to provide both:\n* `related` parameter, listing the related invoices\n* `invoiceType` of the new invoice we wish to create\n\nThe return object will be a temporary invoice object you may further extend before saving it.\n\nMissing, permanently deleted and other-company invoices return 404 NOT_FOUND with a generic message. Own soft-deleted invoices return 404 NOT_FOUND with \"Invoice has been deleted\" and no invoice data. This applies to ref and related lookups. For CORRECTION, rows come from the referenced document, without applying later corrections automatically. Reference the previous correction to use its stored after-correction state.",
                 "parameters": [
                     {
                         "schema": {
@@ -2323,7 +2426,7 @@
                         },
                         "in": "query",
                         "name": "related",
-                        "description": "Comma delimited list of related invoices we wish to create a reference from",
+                        "description": "Comma delimited list of related invoices we wish to create a reference from. For CORRECTION this copies the referenced invoice, not the cumulative state after previous corrections. For a correction of a correction, pass the previous correction identifier.",
                         "style": "pipeDelimited"
                     },
                     {
@@ -2386,6 +2489,21 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
+                                }
+                            }
+                        }
                     }
                 },
                 "operationId": "get-export",
@@ -2439,6 +2557,21 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
+                                }
+                            }
+                        }
                     }
                 },
                 "requestBody": {
@@ -2483,6 +2616,21 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
                                 }
                             }
                         }
@@ -2533,7 +2681,7 @@
                                     "x-examples": {
                                         "Example 1": {
                                             "result": "OK",
-                                            "data": "https://lktest-altera-stack-altera-alterabucket37643c33-axr9boaxgar9.s3.eu-central-1.amazonaws.com/invoices/1/2022/10/2_10_2022_2023-02-22_MnWik8jH.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAX3I6YW7PAKM4ZRXF%2F20230309%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20230309T145540Z&X-Amz-Expires=900&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDGV1LWNlbnRyYWwtMSJHMEUCID32SnOp8c%2BI4NMSYO1LA35rWmPMP%2BbYQFKkh%2FsB%2BbQCAiEAkGnjB2nnTDq%2FsFyUxQBCBVEBHHb6MueQDTsrIOxoecIqzAMIYBACGgw1Mzk2MTk4MDEwNTQiDJWRiVUudt3EHu82jiqpA055tr2WUzmbdUV3hLu8kzVdBgNNx9j8upu4hWFIpAFVpMnVPnV%2Fx8wz9Bqhxi8xs%2B5x5Vg9DhETz7lug%2FiXz08EA1FSW6hWsgJbOxAzkYa2qjKefqR4gtfAeapn2tK9NNSPlFUqflsMccVz6W60UG6zQRYvgiTf%2F73wuXXt%2FFG%2B1h3S7faNs7gJrf9t3T0yibkJIUG98q9UM9m%2FVd2huBAeFGj%2F%2BOfTs9YPRKnIWArHNQ7BLoMqJn9rWzytKooefvLZghJFnfjZEQnqFDSBX0O4%2BwHvamqEAG%2BdjBr97BEY78Ka2s1bjCcGBJFk3bDDyOys9WIvd1U5ainhZUw1kvdMe7RmOQhJSgbdBh%2FFCITRWLrWWYnDKAC%2BpvufUlhmhKOXgXr7ynrKo9A%2FM7%2BVFkMaSi9Lgg%2Fn9ciQbSbLA18U0f68u6xYorNDptbeKAGh3d5io1%2Fl5w9ZtFEXZiHaqaKCtbU%2FOvvM%2BOSTNqCpdFJ6Nf%2BZIJakqLjomyRpJ7dsOdi1bx9JmLGqSnLSohXW8SdY9ybmzpgSQCCz6ACjqAgLzYxMTC3eyPEWMOrmp6AGOp4B9J1z1YEjLTRWZitjoCkQfXZu3Z5IeMGJ8YgxY80X%2FD3QUcXANhrPbyifL7xJMKRguCv8WNpmMlWxtk0zYSs9UAeCNp%2BnqwGi6%2BdgpnT2Pcob%2BQs2ZUqG0OINMMopNo7qB60YV2UGDW4VQTsp%2FQY6Qvi%2B26hGmGmnK2mcImgu%2FWKPXQJ35gdsiOLclIYOLXvDw1%2BM%2FoCTebeVPs0hi84%3D&X-Amz-Signature=0239d7c52e906edf2140684e2092e7adeadb1b8ca2c2daf4217ccfade00fc2ae&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%2A%3DUTF-8%27%272%252F10%252F2022.pdf&response-content-type=application%2Fpdf&x-amz-user-agent=aws-sdk-js%2F3.197.0&x-id=GetObject"
+                                            "data": "https://example-bucket.s3.eu-central-1.amazonaws.com/invoices/example.pdf?X-Amz-Expires=300&X-Amz-Signature=example"
                                         }
                                     },
                                     "properties": {
@@ -2547,9 +2695,58 @@
                                         },
                                         "data": {
                                             "type": "string",
-                                            "description": "Pre-signed url to download invoice PDF copy"
+                                            "description": "Pre-signed invoice PDF download URL, valid for 5 minutes."
                                         }
                                     }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "The invoice PDF is still being generated. Wait at least 2 seconds before retrying within a bounded budget.",
+                        "headers": {
+                            "Retry-After": {
+                                "description": "Minimum delay before retrying, in seconds.",
+                                "schema": {
+                                    "type": "integer",
+                                    "example": 2
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "PDF_NOT_READY",
+                                    "errorMessage": "Invoice PDF is not ready. Try again later."
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
                                 }
                             }
                         }
@@ -2562,24 +2759,34 @@
                                 "type": "object",
                                 "x-examples": {
                                     "Example 1": {
-                                        "invoiceIds": [
-                                            12679
-                                        ]
+                                        "invoiceId": 12679
                                     }
                                 },
                                 "properties": {
                                     "invoiceId": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "minimum": 1
+                                    }
+                                },
+                                "required": [
+                                    "invoiceId"
+                                ]
+                            },
+                            "examples": {
+                                "One invoice": {
+                                    "value": {
+                                        "invoiceId": 12679
                                     }
                                 }
                             }
                         }
-                    }
+                    },
+                    "required": true
                 },
                 "tags": [
                     "Sales"
                 ],
-                "description": "Requests a PDF copy of selected invoice\nA pre-signed URL, valid for up to 10 minutes will be generated that allows the user to download the file"
+                "description": "Returns a pre-signed PDF URL for one invoice, valid for 5 minutes. A company-owned PDF still being generated returns 409 PDF_NOT_READY with Retry-After: 2; retry within a bounded budget. Invalid or unavailable invoice selection returns 400. Pending PDF requests do not change status. A successful request changes an ISSUED sales document, including a pro forma, to SENT even if the URL is never downloaded. DRAFT remains DRAFT. SENT is not proof of email delivery."
             }
         },
         "/expenses": {
@@ -2897,6 +3104,21 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
+                                }
+                            }
+                        }
                     }
                 },
                 "operationId": "get-expenses-list",
@@ -2960,6 +3182,21 @@
                                             }
                                         }
                                     }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
                                 }
                             }
                         }
@@ -3084,6 +3321,21 @@
                                             }
                                         }
                                     }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
                                 }
                             }
                         }
@@ -3252,6 +3504,21 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
+                                }
+                            }
+                        }
                     }
                 },
                 "tags": [
@@ -3346,6 +3613,21 @@
                                             }
                                         }
                                     }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
                                 }
                             }
                         }
@@ -3469,6 +3751,21 @@
                                             "data": []
                                         }
                                     }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
                                 }
                             }
                         }
@@ -3683,6 +3980,21 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
+                                }
+                            }
+                        }
                     }
                 },
                 "description": "",
@@ -3727,7 +4039,61 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "Email accepted into the sending queue. This confirms enqueueing, not delivery to the recipient mailbox.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "result",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "result": {
+                                            "type": "string",
+                                            "enum": [
+                                                "OK"
+                                            ]
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "enum": [
+                                                "Ok"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "result": "OK",
+                                    "data": "Ok"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request, missing company reply-to, missing invoice or recipient, or omitted content without a configured invoice email template.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
+                                }
+                            }
+                        }
                     }
                 },
                 "operationId": "post-sales-invoice-send",
@@ -3739,7 +4105,7 @@
                         "Authorization": []
                     }
                 ],
-                "description": "This endpoint allows you to send an issued invoice to your contractor over email.\nIn order use the endpoint, proper configuration of global reply-to email is required (Settings > Sales > E-mail messages)",
+                "description": "Send an invoice to its contractor by email. Configure the company global reply-to address in Settings > Sales > E-mail messages before calling this endpoint. HTTP 200 with result OK confirms that the email was queued; it does not confirm mailbox delivery. In QA, external recipient addresses are filtered out by sandbox routing. To verify actual receipt in QA, coordinate a recipient address in the @altera.co domain with Altera support. See the endpoint guide for template requirements and testing.",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3750,7 +4116,9 @@
                                         "type": "integer",
                                         "x-stoplight": {
                                             "id": "t22p1bpr1btte"
-                                        }
+                                        },
+                                        "minimum": 1,
+                                        "description": "ID of an invoice belonging to the company identified by the API token."
                                     },
                                     "topic": {
                                         "type": "string",
@@ -3758,14 +4126,16 @@
                                             "id": "a5hpyzlc5tcfb"
                                         },
                                         "example": "New invoice #123",
-                                        "maxLength": 400
+                                        "maxLength": 400,
+                                        "description": "Optional email subject. If omitted, empty or whitespace-only, generates Faktura numer {invoiceNumber}, independently of the company body template and invoice document language. A nonblank topic overrides the standard subject. Requires the subject fallback fix in the target environment; see the endpoint guide for the older-version workaround."
                                     },
                                     "content": {
                                         "type": "string",
                                         "x-stoplight": {
                                             "id": "06p82inxcfrf4"
                                         },
-                                        "maxLength": 8000
+                                        "maxLength": 900000,
+                                        "description": "Optional email body as plain text or HTML. If omitted, empty or whitespace-only, uses the company invoice-send email template with invoice placeholders expanded. Configure that template in Settings > Sales > E-mail messages first; a missing template returns HTTP 400. A nonblank value overrides the company template."
                                     },
                                     "recipient": {
                                         "type": "array",
@@ -3778,22 +4148,211 @@
                                             },
                                             "type": "string",
                                             "format": "email"
-                                        }
+                                        },
+                                        "description": "Explicit email recipients. Required unless recipientFromSystem is true. Ignored when recipientFromSystem is true."
                                     },
                                     "recipientFromSystem": {
                                         "type": "boolean",
                                         "x-stoplight": {
                                             "id": "r5bq0s5y64yt5"
-                                        }
+                                        },
+                                        "default": false,
+                                        "description": "When true, load recipient addresses from the contractor saved on the invoice. Takes precedence over recipient. At least one contractor email address must exist."
                                     }
                                 },
                                 "required": [
                                     "invoiceId"
+                                ],
+                                "anyOf": [
+                                    {
+                                        "required": [
+                                            "recipient"
+                                        ],
+                                        "properties": {
+                                            "recipient": {
+                                                "minItems": 1
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "required": [
+                                            "recipientFromSystem"
+                                        ],
+                                        "properties": {
+                                            "recipientFromSystem": {
+                                                "enum": [
+                                                    true
+                                                ]
+                                            }
+                                        }
+                                    }
                                 ]
+                            },
+                            "examples": {
+                                "company-template": {
+                                    "summary": "Use the company body template and generated subject",
+                                    "value": {
+                                        "invoiceId": 12345,
+                                        "recipientFromSystem": true
+                                    }
+                                },
+                                "explicit-email": {
+                                    "summary": "Override the subject and body for explicit recipients",
+                                    "value": {
+                                        "invoiceId": 12345,
+                                        "recipient": [
+                                            "recipient@example.com"
+                                        ],
+                                        "topic": "Invoice 12345",
+                                        "content": "<p>Please find your invoice attached.</p>"
+                                    }
+                                }
                             }
                         }
                     },
-                    "description": "Either `recipient` array or `recipientFromSystem` is required in order to send the e-mail.\nIf not provided `topic` and/or `content` will be loaded dynamically from the company email configuration.\n\n`content` accepts both raw text as well as HTML data that will be parsed and cleaned up before being added to the email content."
+                    "description": "Provide invoiceId and either a nonempty recipient array or recipientFromSystem: true. If topic is omitted, empty or whitespace-only, Altera generates the standard subject from the invoice number. If content is omitted, empty or whitespace-only, configure the company invoice email template before sending. Explicit nonblank values override these defaults independently. content accepts plain text or HTML. The company template configures the body; the standard subject is generated separately. See the endpoint guide for the older-version subject fallback limitation.",
+                    "required": true
+                }
+            }
+        },
+        "/sales/delete": {
+            "post": {
+                "summary": "Delete a sales invoice",
+                "operationId": "post-sales-delete",
+                "tags": [
+                    "Sales"
+                ],
+                "description": "Existing removal endpoint, including test drafts. DRAFT is deleted permanently; an eligible issued invoice is soft-deleted. Related documents, read-only or accounting-approved documents, and invoices submitted to or accepted by KSeF cannot be deleted. fullDelete and softDelete count removed invoice records. This endpoint uses POST, not DELETE.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "invoiceId"
+                                ],
+                                "properties": {
+                                    "invoiceId": {
+                                        "type": "integer",
+                                        "minimum": 1
+                                    },
+                                    "reason": {
+                                        "type": "string",
+                                        "minLength": 5,
+                                        "maxLength": 400,
+                                        "description": "Optional deletion reason."
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "Delete test draft": {
+                                    "value": {
+                                        "invoiceId": 12345,
+                                        "reason": "Removing a QA test draft"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Removal processed. Inspect fullDelete and softDelete to determine how many invoice records were removed.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "result": {
+                                            "type": "string",
+                                            "enum": [
+                                                "OK"
+                                            ]
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "fullDelete": {
+                                                    "type": "integer",
+                                                    "minimum": 0,
+                                                    "description": "Permanently deleted invoice count."
+                                                },
+                                                "softDelete": {
+                                                    "type": "integer",
+                                                    "minimum": 0
+                                                },
+                                                "counterRollbackResult": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "OK",
+                                                        "NOK"
+                                                    ],
+                                                    "description": "Invoice-number counter rollback result for eligible issued invoices. Draft deletion returns NOK."
+                                                }
+                                            },
+                                            "required": [
+                                                "fullDelete",
+                                                "softDelete",
+                                                "counterRollbackResult"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "result",
+                                        "data"
+                                    ]
+                                },
+                                "examples": {
+                                    "Deleted draft": {
+                                        "value": {
+                                            "result": "OK",
+                                            "data": {
+                                                "fullDelete": 1,
+                                                "softDelete": 0,
+                                                "counterRollbackResult": "NOK"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request or document cannot be deleted due to relations, read-only/accounting state, prior deletion or KSeF submission.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invoice not found within the API key company, or authorization denied.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "KEY_EXPIRED: a verified API key has expired. This requires that the company still has OpenAPI access. Unknown/invalid keys can receive the gateway 403.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "example": {
+                                    "result": "Error",
+                                    "errorCode": "KEY_EXPIRED",
+                                    "errorMessage": "API key has expired"
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -3850,6 +4409,10 @@
                                 }
                             }
                         }
+                    },
+                    "errorCode": {
+                        "type": "string",
+                        "description": "Machine-readable error code when available, including KEY_EXPIRED, NOT_FOUND or PDF_NOT_READY."
                     }
                 },
                 "description": "Default error message format in Altera API\nDepending on particular reason, different HTTP Status codes will be employed"
@@ -3991,7 +4554,11 @@
                                 "type": "number"
                             },
                             "currency": {
-                                "type": "string"
+                                "type": "string",
+                                "minLength": 3,
+                                "maxLength": 3,
+                                "example": "EUR",
+                                "description": "Invoice currency stored as a three-letter code."
                             },
                             "exchangeRate": {
                                 "type": "number"
@@ -4016,6 +4583,35 @@
                             },
                             "priceTypeId": {
                                 "type": "string"
+                            },
+                            "language": {
+                                "type": "string",
+                                "enum": [
+                                    "pl",
+                                    "en",
+                                    "de",
+                                    "es",
+                                    "en_pl",
+                                    "de_pl"
+                                ],
+                                "default": "pl",
+                                "example": "en",
+                                "description": "Language of the invoice document: pl, en, de, es, en_pl or de_pl."
+                            },
+                            "isDeleted": {
+                                "description": "Soft-deletion marker. Public GET excludes soft-deleted documents and returns 404 instead of their data.",
+                                "oneOf": [
+                                    {
+                                        "type": "boolean"
+                                    },
+                                    {
+                                        "type": "integer",
+                                        "enum": [
+                                            0,
+                                            1
+                                        ]
+                                    }
+                                ]
                             }
                         },
                         "required": [
@@ -4186,7 +4782,8 @@
                                     "type": "integer"
                                 },
                                 "vat": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "VAT rate for this invoice line. np I and np II are distinct supported values and map to separate KSeF summary fields P_13_8 and P_13_9. The generic np value is retained for legacy invoices and maps to np I; use an explicit np I or np II value for new invoices."
                                 },
                                 "priceNet": {
                                     "type": "integer"
@@ -4204,7 +4801,13 @@
                                     "type": "string"
                                 },
                                 "gtu": {
-                                    "type": "string"
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "maxLength": 10,
+                                    "example": "2",
+                                    "description": "Optional GTU classification for this invoice line. Use a string from 1 to 13, for example \"2\"; zero-padded values such as \"02\" and KSeF values such as \"GTU_02\" are also supported. KSeF export converts the numeric value to GTU_01 through GTU_13. Omit, pass null or an empty string when no GTU applies."
                                 }
                             }
                         }
@@ -4485,7 +5088,7 @@
                             },
                             "relatedInvoicesIds": {
                                 "type": "array",
-                                "description": "Optional array of invoiceIds that should be related to the document we are creating; Rule of thumb if you wish to work with relatedInvoices (CORRECTION, INTERIM_FINAL) it is best to start from th pre-populated object retrieved via GET /sales/invoice with parameter `related` in use",
+                                "description": "Identifiers of documents related to this invoice. For CORRECTION, the first referenced invoice supplies the baseline rows. To correct a previous correction, reference that correction and provide the new after-correction state. GET /sales/invoice with related prepares a starting payload from the referenced document.",
                                 "items": {
                                     "type": "object"
                                 }
@@ -4509,6 +5112,27 @@
                                     "ISSUED"
                                 ],
                                 "default": "DRAFT"
+                            },
+                            "currency": {
+                                "type": "string",
+                                "minLength": 3,
+                                "maxLength": 3,
+                                "example": "EUR",
+                                "description": "Invoice currency as a three-letter code, for example PLN, EUR or USD. Input is trimmed and converted to uppercase. If omitted, Altera uses contractor.defaultCurrency, then PLN. Resend it on update to retain the invoice currency."
+                            },
+                            "language": {
+                                "type": "string",
+                                "enum": [
+                                    "pl",
+                                    "en",
+                                    "de",
+                                    "es",
+                                    "en_pl",
+                                    "de_pl"
+                                ],
+                                "default": "pl",
+                                "example": "en",
+                                "description": "Language of the invoice document: Polish, English, German, Spanish, English/Polish or German/Polish. Independent of the email content language. If omitted, defaults to pl, including on update."
                             }
                         }
                     },
@@ -4607,7 +5231,9 @@
                                 },
                                 "quantity": {
                                     "type": "number",
-                                    "example": 14
+                                    "example": 14,
+                                    "description": "Positive on ordinary invoices. Zero is accepted only for CORRECTION with a source invoice in basicInformation.relatedInvoicesIds, for the state after correction. Negative quantities are rejected.",
+                                    "minimum": 0
                                 },
                                 "unit": {
                                     "type": "string",
@@ -4615,13 +5241,15 @@
                                 },
                                 "unitNetPrice": {
                                     "type": "number",
-                                    "description": "Defines the net price per item",
-                                    "example": 100
+                                    "description": "Net price per item. Zero is accepted, including for the post-correction state of a fully returned line.",
+                                    "example": 100,
+                                    "minimum": 0
                                 },
                                 "unitGrossPrice": {
                                     "type": "number",
-                                    "description": "Defines the gross price per item ",
-                                    "example": 123
+                                    "description": "Gross price per item. Zero is accepted, including for the post-correction state of a fully returned line.",
+                                    "example": 123,
+                                    "minimum": 0
                                 },
                                 "vat": {
                                     "type": "string",
@@ -4630,11 +5258,13 @@
                                         "8%",
                                         "5%",
                                         "0%",
+                                        "np I",
+                                        "np II",
                                         "np",
                                         "zw"
                                     ],
                                     "example": "23%",
-                                    "description": "Defines the vat rate used for this product"
+                                    "description": "VAT rate for this invoice line. np I and np II are distinct supported values and map to separate KSeF summary fields P_13_8 and P_13_9. The generic np value is retained for legacy invoices and maps to np I; use an explicit np I or np II value for new invoices."
                                 },
                                 "pkwiu": {
                                     "type": "string"
@@ -4646,6 +5276,15 @@
                                 },
                                 "invoiceProductId": {
                                     "type": "integer"
+                                },
+                                "gtu": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "maxLength": 10,
+                                    "example": "2",
+                                    "description": "Optional GTU classification for this invoice line. Use a string from 1 to 13, for example \"2\"; zero-padded values such as \"02\" and KSeF values such as \"GTU_02\" are also supported. KSeF export converts the numeric value to GTU_01 through GTU_13. Omit, pass null or an empty string when no GTU applies."
                                 }
                             }
                         }
@@ -4666,7 +5305,7 @@
                             "Zwolnienie przedmiotowe z art. 43 ust. 1",
                             "Zwolnienie przedmiotowe z art. 82 ust. 3"
                         ],
-                        "description": "Required when at least one invoicePosition item uses the `zw` VAT rate. The selected value is used as the VAT exemption legal basis and is submitted to KSeF as P_19A."
+                        "description": "Legal basis for a zw line. Required before issuing a sales invoice unless a nonempty company default supplies the basis. Drafts may omit it. Missing basis returns validation code KSEF_VAT_EXEMPTION_LEGAL_BASIS_REQUIRED, which override cannot bypass. New XML uses P_19A. Submission also checks stored XML for P_19=1, exactly one nonempty P_19A/B/C, and no P_19N."
                     },
                     "vatExemptionReasonDetailed": {
                         "type": "string",
@@ -4699,7 +5338,8 @@
                                 "description": "Defines the bank account no. we wish to receive funds to"
                             },
                             "isSplitPayment": {
-                                "type": "boolean"
+                                "type": "boolean",
+                                "description": "Required whenever payments is provided. Pass false when split payment does not apply."
                             },
                             "paymentDate": {
                                 "type": "string",
@@ -4707,7 +5347,14 @@
                                 "description": "Payment date (optional) as a calendar date in YYYY-MM-DD format, without a time or time zone. Do not convert it to a UTC timestamp.",
                                 "example": "2026-09-14"
                             }
-                        }
+                        },
+                        "required": [
+                            "paymentMethod",
+                            "dueDate",
+                            "isSplitPayment",
+                            "isPaid"
+                        ],
+                        "description": "Required when statusId is not DRAFT. Whenever this object is supplied, include paymentMethod, dueDate, isSplitPayment and isPaid, including explicit false values for the booleans."
                     },
                     "additionalParties": {
                         "type": "array",
