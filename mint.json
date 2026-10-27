@@ -106,6 +106,8 @@
     {
       "group": "Integrations",
       "pages": [
+        "integrations/financial-mcp-pl",
+        "integrations/financial-mcp-en",
         "integrations/swift-settle",
         "integrations/symfonia-fk"
       ]
