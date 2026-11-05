@@ -1,0 +1,197 @@
+---
+title: "Altera MCP: połączenie i własne raporty"
+description: "Połącz asystenta AI z Altera, wybierz firmy i przygotowuj odpowiedzi, tabele lub raporty na podstawie dostępnych danych."
+---
+
+[Read in English](/integrations/financial-mcp-en)
+
+<Info>
+Integracja jest obecnie prywatnym pilotem na środowisku testowym DEV.
+Adres połączenia, dostęp do pilota i opcjonalny pakiet otrzymasz od zespołu Altera.
+Ten przewodnik nie oznacza dostępności produkcyjnej ani publikacji w katalogach aplikacji.
+</Info>
+
+Jedno połączenie pozwala zadawać pytania o dane Altera, tworzyć własne raporty
+lub otworzyć interaktywny widok. Widget i dodatkowe skills są opcjonalne.
+Do tabeli lub odpowiedzi liczbowej wystarcza samo MCP.
+
+## Przygotuj połączenie
+
+Potrzebujesz konta Altera z dostępem do wybranych firm, włączonej integracji MCP
+w tych firmach oraz klienta obsługującego zdalne MCP przez Streamable HTTP i OAuth.
+Dostępne dane zależą także od Twoich bieżących uprawnień i pakietu firmy.
+
+Połączenie należy do użytkownika i może obejmować kilka firm. Osoba z uprawnieniem
+do zarządzania integracjami firmy może włączyć lub wyłączyć MCP dla firmy.
+Każdy użytkownik zatwierdza następnie własne połączenie i wybiera udostępniane firmy.
+Samo włączenie integracji nie daje dostępu pozostałym osobom.
+
+Nie potrzebujesz klucza Open API ani hasła wklejanego do rozmowy. Logowanie
+odbywa się w przeglądarce, a zgodę zatwierdzasz w Altera. Upewnij się, że jest
+tam zalogowane właściwe konto Altera; może być inne niż konto używane w asystencie AI.
+
+## Wybierz klienta
+
+### ChatGPT
+
+Jeśli otrzymasz prywatny pakiet lub link Altera, zainstaluj go zgodnie z instrukcją
+pilota i wybierz połączenie z Altera. Nie dodawaj drugiej kopii tego samego serwera.
+
+Przy konfiguracji z samego adresu otwórz [Plugins](https://chatgpt.com/plugins),
+wybierz dodanie własnego serwera MCP (**Add custom MCP server**), podaj nazwę
+oraz otrzymany adres HTTPS zakończony `/mcp`. Wybierz OAuth i dokończ utworzenie
+oraz połączenie wtyczki. W nowej rozmowie wybierz ją przez `@`.
+Dostęp do własnych integracji może wymagać zgody administratora workspace.
+
+Nazwy ekranów zależą od wersji klienta. Aktualną ścieżkę opisuje
+[instrukcja OpenAI](https://developers.openai.com/plugins/deploy/connect-chatgpt).
+
+### Claude
+
+W **Customize → Connectors** dodaj własny konektor z adresem otrzymanym od Altera
+lub wybierz połączenie udostępnione przez administratora. Dla OAuth użyj
+opublikowanej tożsamości Claude, jeśli klient oferuje taki wybór. Nie wybieraj
+automatycznej rejestracji klienta: pilot Altera nie obsługuje DCR.
+Wybierz **Connect**, dokończ zgodę i włącz konektor w rozmowie.
+
+W organizacji dodanie konektora może należeć do właściciela lub uprawnionego
+administratora. Każdy użytkownik loguje się osobno.
+[Aktualna instrukcja Claude](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp).
+
+### Codex i Claude Code
+
+Jeśli połączenie jest już zainstalowane w aplikacji, użyj jego logowania lub
+ponownego połączenia. Przy konfiguracji CLI zastąp `MCP_URL_OD_ALTERA` dokładnym
+adresem otrzymanym dla pilota:
+
+```bash
+codex mcp add altera-financial-dev --url 'MCP_URL_OD_ALTERA'
+codex mcp login altera-financial-dev
+```
+
+Konfiguracja MCP jest współdzielona przez lokalne klienty Codex korzystające
+z tego samego hosta. Szczegóły opisuje [dokumentacja Codex](https://developers.openai.com/codex/mcp).
+
+W Claude Code:
+
+```bash
+claude mcp add --transport http --scope local altera-financial-dev 'MCP_URL_OD_ALTERA'
+```
+
+Następnie uruchom Claude Code i wybierz `/mcp`, aby się zalogować.
+[Dokumentacja Claude Code](https://code.claude.com/docs/en/mcp).
+
+Jeśli po autoryzacji przeglądarka pokazuje komunikat o zakończeniu logowania
+na lokalnym adresie `127.0.0.1` lub `localhost`, wróć do aplikacji lub terminala.
+Automatyczny powrót zależy od klienta. Nie przekazuj innym adresu callback
+z kodem autoryzacyjnym.
+
+### Inni agenci
+
+Podaj adres `/mcp`, wybierz Streamable HTTP i OAuth. Pilot akceptuje określone
+tożsamości klientów; sama obsługa MCP nie gwarantuje możliwości zalogowania.
+Przed dodaniem innego agenta uzgodnij z Altera obsługę jego klienta OAuth.
+Nie zastępuj tego ręcznie kopiowanym tokenem ani klientem testowym Inspector.
+
+## Zatwierdź dostęp i sprawdź firmę
+
+1. Rozpocznij połączenie w wybranym kliencie.
+2. Zaloguj właściwe konto na stronie Altera wskazanej w pilocie.
+3. Sprawdź nazwę aplikacji i żądany dostęp tylko do odczytu.
+4. Wyszukaj i zaznacz firmy, które chcesz udostępnić. Możesz wybrać więcej niż jedną.
+5. Jeśli MCP jest wyłączone, osoba z odpowiednim uprawnieniem może je włączyć
+   w udostępnionym ekranie. W przeciwnym razie poproś administratora firmy.
+6. Wybierz **Zezwól na odczyt** i wróć do klienta.
+7. Zapytaj: „Jakie firmy mam dostępne w Altera?”. Następnie wskaż firmę i okres raportu.
+
+Wybranie innej aktywnej firmy w aplikacji Altera nie zmienia automatycznie firmy
+w rozmowie. Możesz napisać „Teraz przygotuj to dla firmy B” albo jawnie poprosić
+o porównanie kilku autoryzowanych firm. Każda rozmowa ma własny kontekst.
+
+## Jakie dane można wykorzystać?
+
+| Dane | Dostępny zakres |
+| --- | --- |
+| Firmy | Nazwy firm objętych zgodą, do których nadal masz dostęp |
+| Podsumowanie miesięczne | Przychód netto, koszty netto i ich różnica z analityki Altera, w PLN |
+| Faktury sprzedaży | Numer, dostępny typ/status, daty, nazwa nabywcy, netto/VAT/brutto, waluta, termin i oznaczenie płatności |
+| Dokumenty kosztowe | Analogiczne dane dokumentu oraz nazwa sprzedawcy |
+| Szczegóły dokumentu | Nagłówek i maksymalnie 50 pozycji z dostępnymi nazwami, ilościami, jednostkami i kwotami |
+
+Listy dokumentów są filtrowane według daty wystawienia. Nie udostępniają skanów,
+PDF, rachunków bankowych, transakcji bankowych, danych KSeF ani pełnej księgi.
+Niektóre pola mogą być nieznane. MCP nie zmienia faktur ani nie wykonuje płatności.
+
+## Poproś o odpowiedź, raport lub widok
+
+Zastąp nazwy przykładowe własnymi firmami:
+
+> Podsumuj wrzesień 2026 dla firmy A. Pokaż trzy kwoty netto i krótkie wyjaśnienie.
+
+> Przygotuj tabelę dokumentów kosztowych firmy A wystawionych we wrześniu 2026.
+> Pokaż numer, datę, sprzedawcę, netto, VAT, brutto i walutę. Uwzględnij wszystkie dostępne strony.
+
+> Przygotuj XLSX na podstawie tych dokumentów, z podsumowaniem według sprzedawcy
+> i waluty. Dodaj informację o źródle, okresie i zakresie danych. Bez widgetu.
+
+> Porównaj miesięczne przychody netto firmy A i firmy B od lipca do września 2026.
+
+> Otwórz interaktywny widok kosztów firmy A za wrzesień 2026.
+
+Plik tworzy Twój klient AI, jeśli ma taką możliwość. W przeciwnym razie może
+zwrócić tabelę lub tekst CSV. To raport z odczytanych danych, a nie uruchomienie
+eksportu w Altera. Wysłanie raportu komuś lub do innej usługi wymaga osobnego polecenia.
+
+Opcjonalny pakiet pilota może zawierać skills ułatwiające raportowanie.
+Ich aktualizacja jest osobna od połączenia MCP i nie rozszerza zgód na dane.
+Własny raport można przygotować również bez skilla.
+
+## Jak czytać wyniki
+
+W raporcie sprawdź firmę, okres i jego podstawę, walutę, netto/brutto, czas pobrania
+oraz informację o kompletności odczytu. Dane mogą być ograniczone Twoimi uprawnieniami.
+
+<Accordion title="Zakres, aktualizacja i obliczenia">
+Listy mają do 50 dokumentów na stronę. Agent powinien pobierać kolejne strony,
+gdy raport wymaga całego dostępnego zbioru. Przerwany odczyt lub limit klienta
+oznacza raport częściowy. Szczegóły dokumentu zawierają maksymalnie 50 pozycji;
+pełna kwota nagłówka nie oznacza, że otrzymano wszystkie pozycje.
+
+Czas pobrania wskazuje odczyt danych. Podsumowanie analityczne może aktualizować
+się z opóźnieniem; czas odpowiedzi nie jest datą ostatniego przeliczenia agregatu.
+Osobne strony i wywołania nie są jednym zamrożonym stanem bazy.
+
+Kwoty w różnych walutach pozostają osobno. Suma dokumentów kosztowych może różnić
+się od kosztów analitycznych. Oznaczenie płatności pochodzi z dokumentu i nie
+potwierdza przelewu bankowego. Raport dostępnych dokumentów nie potwierdza
+kompletności księgowości ani wysokości podatku.
+</Accordion>
+
+## Zmień dostęp lub odłącz połączenie
+
+W panelu zarządzania połączeniami AI w Altera możesz odwołać własne połączenie.
+Osoba zarządzająca integracjami firmy może wyłączyć MCP dla całej firmy.
+Dodanie firm lub nowego zakresu danych wymaga ponownej zgody. Odwołaj stare
+połączenie, jeśli zastępujesz je nowym i nie chcesz zachować poprzedniego dostępu.
+
+Usunięcie wtyczki lub wylogowanie z przeglądarki nie zastępuje odwołania zgody
+w Altera. Odwołanie blokuje dalszy odczyt, ale nie usuwa wcześniej przekazanych
+danych z historii klienta ani pobranych raportów.
+
+## Rozwiązywanie problemów
+
+- **Brakuje firmy:** sprawdź konto zalogowane w Altera, wybrane firmy, dostęp
+  użytkownika i włączenie MCP. Poproś administratora o sprawdzenie uprawnień.
+- **Brakuje kosztów:** sprawdź, czy polityka firmy i zgoda obejmują odczyt kosztów.
+  Aktualizacja wtyczki sama nie dodaje tego zakresu.
+- **Zgoda wygasła lub logowanie nie kończy się:** rozpocznij nowe połączenie
+  w kliencie. Nie wracaj do starego linku zgody z historii przeglądarki.
+- **Dostęp został odrzucony:** nie traktuj braku wyniku jako zera. Sprawdź dostęp
+  w Altera; ponowne logowanie nie przywraca odebranych uprawnień.
+- **Brakuje nowych instrukcji lub narzędzi:** odśwież metadane połączenia
+  i rozpocznij nową rozmowę. Zainstalowany pakiet ze skills aktualizuje się osobno.
+- **Nie ma widgetu lub pliku:** klient może nie obsługiwać tej funkcji.
+  Odczyt danych i odpowiedź tekstowa nadal są osobną możliwością.
+
+Kontakt: [wsparcie@altera.co](mailto:wsparcie@altera.co).
+Podaj klienta, jego wersję i treść błędu. Nie przesyłaj haseł, tokenów ani pełnych linków OAuth.

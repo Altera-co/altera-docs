@@ -1,0 +1,195 @@
+---
+title: "Altera MCP: connect and build your own reports"
+description: "Connect an AI assistant to Altera, select companies and use available financial data for answers, tables and reports."
+---
+
+[Czytaj po polsku](/integrations/financial-mcp-pl)
+
+<Info>
+This integration is currently a private pilot on the DEV test environment.
+The Altera team provides pilot access, the connection URL and any optional package.
+This guide does not announce production availability or a public directory listing.
+</Info>
+
+One connection supports questions about Altera data, custom reports and an
+interactive view. The widget and additional skills are optional. MCP alone is
+enough for a table or a numerical answer.
+
+## Before connecting
+
+You need an Altera account with access to the selected companies, MCP enabled
+for those companies, and a client supporting remote Streamable HTTP MCP with OAuth.
+Available data also depends on your current permissions and the company's plan.
+
+A connection belongs to a user and can cover several companies. Someone with
+permission to manage company integrations can enable or disable MCP for that
+company. Each user then authorizes their own connection and selects companies.
+Enabling the integration does not grant other users access automatically.
+
+You do not need an Open API key or a password pasted into chat. Sign-in happens
+in the browser and consent is confirmed in Altera. Check which Altera account
+is signed in; it can differ from the account used for your AI assistant.
+
+## Choose your client
+
+### ChatGPT
+
+If Altera gives you a private package or link, install it using the pilot
+instructions and connect to Altera. Do not add a duplicate copy of that server.
+
+For a direct URL connection, open [Plugins](https://chatgpt.com/plugins), choose
+**Add custom MCP server**, and enter a name and the supplied HTTPS URL ending
+in `/mcp`. Select OAuth, finish creating the plugin and connect. In a new
+conversation, select the plugin with `@`. Custom integrations may require
+workspace administrator permission.
+
+Screen names vary by client version. See the
+[current OpenAI instructions](https://developers.openai.com/plugins/deploy/connect-chatgpt).
+
+### Claude
+
+Under **Customize → Connectors**, add a custom connector using the Altera URL
+or select the connector provided by your administrator. For OAuth, use Claude's
+published identity when offered. Do not choose automatic client registration:
+the Altera pilot does not support DCR. Select **Connect**, complete consent and
+enable the connector in your conversation.
+
+In an organization, adding a connector may require an owner or authorized
+administrator. Every user signs in separately.
+[Current Claude instructions](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp).
+
+### Codex and Claude Code
+
+If the connection is already installed in your app, use its sign-in or reconnect
+action. For CLI setup, replace `MCP_URL_FROM_ALTERA` with the exact pilot URL:
+
+```bash
+codex mcp add altera-financial-dev --url 'MCP_URL_FROM_ALTERA'
+codex mcp login altera-financial-dev
+```
+
+Local Codex clients on the same host share MCP configuration. See the
+[Codex documentation](https://developers.openai.com/codex/mcp).
+
+For Claude Code:
+
+```bash
+claude mcp add --transport http --scope local altera-financial-dev 'MCP_URL_FROM_ALTERA'
+```
+
+Then start Claude Code and use `/mcp` to sign in.
+[Claude Code documentation](https://code.claude.com/docs/en/mcp).
+
+If the browser ends on a local `127.0.0.1` or `localhost` page saying that
+authentication is complete, return to your app or terminal. Automatic return
+depends on the client. Do not share the callback URL containing an authorization code.
+
+### Other agents
+
+Use the `/mcp` URL, Streamable HTTP and OAuth. The pilot accepts specific client
+identities; MCP support alone does not guarantee sign-in compatibility. Ask
+Altera to confirm support for the client's OAuth identity before connecting.
+Do not substitute a copied token or the test Inspector client.
+
+## Authorize access and select a company
+
+1. Start the connection in your chosen client.
+2. Sign in to the correct account on the Altera site specified for the pilot.
+3. Check the application name and requested read-only access.
+4. Search for and select the companies to share. You can select more than one.
+5. If MCP is disabled, an authorized user can enable it in the provided screen.
+   Otherwise, contact the company administrator.
+6. Approve read access and return to the client.
+7. Ask: “Which companies can I access in Altera?” Then specify the company and reporting period.
+
+Changing the active company in the Altera app does not automatically change the
+company in a conversation. Say “Now prepare this for Company B” or explicitly
+request a comparison of several authorized companies. Each conversation has its own context.
+
+## Available data
+
+| Data | Available scope |
+| --- | --- |
+| Companies | Names of consented companies you can still access |
+| Monthly summary | Net revenue, net expenses and their difference from Altera analytics, in PLN |
+| Sales invoices | Number, available type/status, dates, buyer name, net/VAT/gross, currency, due date and document payment flag |
+| Cost documents | Equivalent document fields with the seller name |
+| Document details | Header and up to 50 lines with available names, quantities, units and amounts |
+
+Document lists filter by issue date. They do not expose scans, PDFs, bank accounts,
+bank transactions, KSeF data or a complete ledger. Some fields may be unknown.
+MCP does not modify invoices or execute payments.
+
+## Request an answer, report or interactive view
+
+Replace these example company names with your own:
+
+> Summarize September 2026 for Company A. Show the three net amounts and a short explanation.
+
+> Create a table of Company A's cost documents issued in September 2026. Include
+> number, date, seller, net, VAT, gross and currency. Retrieve all available pages.
+
+> Prepare an XLSX from these documents with totals by seller and currency.
+> Include the source, period and data coverage. Do not open a widget.
+
+> Compare monthly net revenue for Company A and Company B from July through September 2026.
+
+> Open the interactive cost overview for Company A in September 2026.
+
+Your AI client creates the file if it supports that capability. Otherwise, it
+can return a table or CSV text. This is a report derived from read data, not an
+Altera export job. Sending it to another person or service requires a separate request.
+
+The optional pilot package can include skills that guide reporting. Updating
+those skills is separate from the MCP connection and does not extend data consent.
+Custom reports can also be prepared without a skill.
+
+## Read the results
+
+Check the company, date basis and period, currency, net/gross basis, retrieval
+time and coverage. Your permissions may limit the available data.
+
+<Accordion title="Coverage, updates and calculations">
+Lists contain up to 50 documents per page. The agent should retrieve further
+pages when the report requires the full accessible set. An interrupted read or
+client limit makes the report partial. Document details contain at most 50 lines;
+a complete header total does not mean all lines were returned.
+
+Retrieval time identifies the read. Analytics summaries may update with a delay;
+response time is not the last aggregate recalculation time. Separate pages and
+calls do not form a single frozen database snapshot.
+
+Keep different currencies separate. Cost document totals may differ from analytics
+expenses. The payment flag comes from the document and does not confirm a bank
+transfer. A report of accessible documents does not establish accounting
+completeness or the tax amount.
+</Accordion>
+
+## Change access or disconnect
+
+Use Altera's AI connection management panel to revoke your own connection.
+A user managing company integrations can disable MCP for the entire company.
+Adding companies or a new data scope requires fresh consent. Revoke the old
+connection if a replacement should not leave the previous access in place.
+
+Removing a plugin or signing out of the browser does not replace revocation in
+Altera. Revocation blocks further reads but does not delete data already delivered
+to chat history or downloaded reports.
+
+## Troubleshooting
+
+- **Company missing:** check the Altera account, selected companies, user access
+  and MCP availability. Ask the company administrator to verify permissions.
+- **Costs unavailable:** check that company policy and consent cover cost reads.
+  A plugin update does not add that scope automatically.
+- **Consent expired or sign-in cannot finish:** start a new connection from the
+  client instead of reopening an old consent link from browser history.
+- **Access denied:** do not treat a missing result as zero. Check access in Altera;
+  signing in again does not restore permissions that were removed.
+- **New instructions or tools missing:** refresh connection metadata and start
+  a new conversation. Update an installed skills package separately.
+- **No widget or file:** the client may not support that feature. Data reads and
+  text answers are a separate capability.
+
+Contact [wsparcie@altera.co](mailto:wsparcie@altera.co) with the client, its version
+and the error message. Do not send passwords, tokens or full OAuth URLs.
