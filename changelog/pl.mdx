@@ -3,6 +3,71 @@ title: PL - Dziennik Zmian
 description: "Pełna historia wydań Altera: nowe funkcje, usprawnienia KSeF, integracje bankowe, poprawki w aplikacji webowej i mobilnej. Sprawdź, co się zmieniło."
 ---
 
+### 3.0.0 - Nowy wygląd, zadania i praca biura
+W Altera 3.0 odświeżamy wygląd aplikacji i łączymy codzienną pracę firmy z obsługą biura rachunkowego. Dodajemy zadania, harmonogramy, ewidencję czasu i fakturowanie usług biura. Usprawniamy też rozliczanie dokumentów, obsługę VAT i współpracę przy zamykaniu miesiąca.
+
+- Nowy wygląd i wygodniejsza nawigacja
+    - Ujednoliciliśmy pola, przyciski, listy wyboru i formularze w całej aplikacji. Błędy pojawiają się przy polach, których dotyczą, a nieudany zapis przenosi do pierwszego pola wymagającego poprawienia.
+    - Zmniejszyliśmy wysokość wierszy i uporządkowaliśmy nagłówki tabel na komputerze, aby na ekranie mieściło się więcej dokumentów. Panel boczny zajmuje mniej miejsca i pozwala na łatwe zarządzanie układem aplikacji (dostępny jest widok kompaktowy i wygodny) oraz stylem i językiem.
+    - Usprawniliśmy wypełnianie formularzy klawiszami Tab i „Dalej”. Listy wyboru mają wyszukiwanie, a okna chronią wpisane dane przed przypadkowym zamknięciem.
+
+- Zadania i terminy firmy
+    - Udostępniliśmy moduł Zadania z widokami „Mój dzień”, „Wszystkie” i „Kalendarz”. Zadanie może mieć osobę odpowiedzialną, priorytet, termin wykonania oraz osobną datę planowania.
+    - Dodaliśmy cykliczne serie zadań, komentarze, załączniki i historię zmian. Zadania można przełożyć, zablokować z podaniem powodu oraz wykonać lub anulować zbiorczo.
+    - „Mój dzień” oddziela zadania na dziś od spraw wymagających uwagi i zadań nadchodzących. Przełożenie planu pracy nie zmienia terminu wykonania zadania.
+    - Kalendarz i „Mój dzień” pokazują również potwierdzenia kompletności dokumentów oraz płatności podatków z kwotami. Ten sam obowiązek nie pojawia się drugi raz, gdy prowadzi do niego już otwarte zadanie.
+
+- Moja praca i obsługa firm
+    - Udostępniliśmy członkom biura księgowego osobistą kolejkę czynności: zadania, sprawy na dziś i zmiany dokumentów wymagające sprawdzenia. Każda czynność wskazuje firmę oraz okres, którego dotyczy.
+    - Uporządkowaliśmy widok Firmy: postęp obsługi, kwoty i kartoteka są dostępne w jednym module. Szczegóły firmy łączą pracę w okresie, harmonogram, wyniki i wykonaną pracę.
+    - Dodaliśmy podgląd brakujących potwierdzeń dokumentów za wybrany miesiąc. Biuro może też sprawdzić dokumenty dodane lub zmienione po wcześniejszym przeglądzie i zdecydować o dalszej obsłudze.
+    - Umożliwiliśmy przejmowanie i blokowanie okresów kilku firm naraz oraz zbiorcze uzupełnianie wykonanych usług i kwot. Wynik pokazuje osobno firmy zapisane poprawnie i te, które wymagają ponowienia.
+    - Dodaliśmy import podatków, przychodów i kosztów z CSV lub Excela z podglądem oraz potwierdzeniem zastępowanych kwot. Puste pola pozostawiają dane bez zmian, a wpisane zero zapisuje kwotę zerową.
+
+- Harmonogramy i nadzór biura
+    - Dodaliśmy szablony harmonogramów oraz plan obsługi dopasowany do firmy. Przed utworzeniem zadań można sprawdzić terminy i role osób odpowiedzialnych.
+    - W widoku „Do kontroli” w Nadzorze zebraliśmy zaległe zadania, blokady, braki i wnioski o dostęp. Filtry oraz odnośniki prowadzą do właściwej firmy, osoby i okresu.
+    - Zespół pokazuje portfel firm pracownika, opiekunów, zastępstwa i sprawy wymagające pomocy. Blokada usług jest widoczna osobno od etapu obsługi firmy.
+    - Dodaliśmy samouczki przy modułach i formularzach biura. Pracownik może przyjąć zaproszenie do biura i wejść do niego także przed przypisaniem pierwszej firmy.
+
+- Czas pracy
+    - Udostępniliśmy licznik czasu pracy oraz własną historię wpisów z podziałem na firmy i zadania. Można też dopisać czas ręcznie i poprawić wpis w otwartym okresie.
+    - Właściciel i administrator biura mogą sprawdzić czas zespołu, aktywne sesje oraz historię korekt. Korekta wymaga powodu i zachowuje poprzednie wartości.
+    - Dodaliśmy zamykanie miesiąca ewidencji czasu oraz obsługę jego ponownego otwarcia. Czas z zamkniętego miesiąca może zasilać rozliczenie usług biura.
+
+- Fakturowanie usług biura
+    - Udostępniliśmy katalog usług, szablony cenników i cenniki poszczególnych firm. Cennik ma historię wersji oraz miesiąc, od którego obowiązuje zmiana.
+    - Arkusz „Usługi do rozliczenia” pozwala wpisywać ilości i opisy dla wielu firm. Godziny z ewidencji, dane z importu i wpisy ręczne zachowują informację o źródle.
+    - Dodaliśmy podgląd i potwierdzenie stosowania cennika do wybranych firm i otwartych miesięcy. Lokalne korekty pozostają zachowane, dopóki użytkownik nie wybierze ich zastąpienia.
+    - Rozliczenie przelicza się po zmianie danych wejściowych. Widok odróżnia kwoty aktualne, oczekujące na obliczenie i wymagające ponowienia; zatwierdzone kwoty pozostają chronione.
+    - Umożliwiliśmy sprawdzanie i zbiorcze zatwierdzanie kwot do fakturowania. Samo przeliczenie nie zatwierdza rozliczenia ani nie wystawia faktury.
+
+- Sprzedaż, zamówienia i VAT
+    - Zamówienia pokazują kwoty „Zafakturowano” i „Pozostało”. Dodaliśmy akcje wystawienia faktury sprzedaży lub końcowej oraz zabezpieczenia przed ponownym zamknięciem zamówienia.
+    - Poprawiliśmy rozliczanie zaliczek i korekt w fakturze końcowej, w tym dobór powiązanych dokumentów i różnice zaokrągleń VAT. Formularz przejmuje właściwe ustawienia płatności i rachunku.
+    - Dodaliśmy ręczną edycję formatu numeracji oraz numerację dzienną obok miesięcznej i rocznej. Kreator pokazuje przykładowy numer i wskazuje brakujące elementy formatu.
+    - Zachowujemy źródłowe kwoty VAT z dokumentów importowanych z KSeF. W edycji kosztu można wskazać, czy VAT wynika z pozycji, czy z podsumowania dokumentu, i sprawdzić wpływ zmiany.
+    - Poprawiliśmy zapis dodatkowych podmiotów, obsługę zagranicznych identyfikatorów podatkowych i opisy stawek VAT. Każda zakładka Sprzedaży zapamiętuje własne sortowanie.
+
+- Koszty i KSeF
+    - Dodaliśmy pole SWIFT/BIC i zachowanie danych banku odczytanych z dokumentu. Błędy zatwierdzania wskazują pola wymagające poprawienia.
+    - Umożliwiliśmy ręczne potwierdzenie kosztu bez numeru rachunku oraz wyjaśniliśmy, kiedy trzeba go uzupełnić przed przygotowaniem płatności. Poprawiliśmy też zapis kosztu po dodaniu kontrahenta do zaufanych.
+    - Przywróciliśmy akceptację etapów e-Obiegu dla zadekretowanych faktur zgodnie z uprawnieniami. Dane księgowe pozostają chronione przed edycją.
+    - Poprawiliśmy odczyt statusu wysyłki do KSeF, odzyskiwanie metadanych dokumentu i rozliczanie zaliczek podczas importu. Uzupełniamy też rachunek płatności podany w stopce faktury.
+
+- Banki, rozrachunki i eksporty
+    - Poprawiliśmy pobieranie pełnej listy transakcji bankowych oraz zakresy dni w synchronizacji. Po powrocie z autoryzacji banku aplikacja odświeża stan połączenia i ważność zgody.
+    - Usprawniliśmy dopasowywanie transakcji do dokumentów już oznaczonych jako opłacone, bez ponownego zwiększania opłaconej kwoty. Nieaktualne dane mają czytelny komunikat i możliwość odświeżenia.
+    - Poprawiliśmy szczegóły i salda na wyciągach PDF, pliki płatności ISO 20022 oraz eksporty EDI++ z korektami, wierszami VAT i danymi KSeF.
+    - W kartotece klienta biuro może zarządzać pakietem Altera i pozwoleniem na połączenia bankowe na swój koszt. Przed autoryzacją banku aplikacja wyjaśnia brak wymaganego pozwolenia.
+
+- Komunikacja, dostęp i codzienna praca
+    - Licznik nieprzeczytanych wiadomości uwzględnia nowe wiadomości i odczyt w innej sesji bez ręcznego odświeżania strony. Powiadomienie push otwiera właściwą rozmowę lub dokument.
+    - Potwierdzenie przekazania dokumentów za miesiąc pokazuje komunikat biura i czytelne zakończenie operacji. Dziennik zdarzeń firmy pozwala sprawdzić wykonawcę, datę i szczegóły zmian.
+    - Dodaliśmy logowanie kontem Microsoft. Poprawiliśmy też przechodzenie z powiadomień między firmami i komunikaty po utracie dostępu.
+    - Wzmocniliśmy zabezpieczenia podglądu dokumentów i ograniczyliśmy dane w diagnostyce. Podział i scalanie kosztów zachowują poufność dokumentów.
+    - Poprawiliśmy podgląd zdjęć, pracę z dużymi obrazami na Androidzie oraz zgłaszanie problemów z dołączonym zrzutem ekranu na obsługiwanych telefonach.
+
 ### 2.35.3 - 2026-09-14 - Poprawki faktur, rozrachunków i płatności
 Wydanie poprawkowe skupione na prawidłowym rozliczaniu dokumentów, zapisywaniu danych i wygodniejszej codziennej pracy.
 
