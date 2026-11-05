@@ -3,6 +3,71 @@ title: EN - Changelog
 description: Track every Altera release with detailed notes on new features, improvements, KSeF updates, and bug fixes shipped across web and mobile apps.
 ---
 
+### 3.0.0 - A new look, tasks, and office work
+Altera 3.0 updates the app design and connects daily company work with accounting office services. We add tasks, schedules, time records, and office service billing. We also improve document settlement, VAT amounts, and cooperation at the end of each month.
+
+- A new look and easier navigation
+    - We standardized fields, buttons, selection lists, and forms across the app. Errors appear next to the affected fields. A failed save selects the first field that needs correction.
+    - We reduced row heights and organized table headers on desktop so that more documents fit on screen. The sidebar uses less space and makes it easy to change the app layout, appearance, and language. Compact and comfortable views are available.
+    - We improved form navigation with Tab and “Next”. Selection lists have search, and dialogs protect entered data from accidental closure.
+
+- Tasks and company deadlines
+    - We added the Tasks module with “My day”, “All”, and “Calendar” views. A task can have an assignee, priority, deadline, and a separate planned date.
+    - We added recurring task series, comments, attachments, and change history. You can reschedule tasks, block them with a reason, and complete or cancel them in bulk.
+    - “My day” separates tasks for today from items that need attention and upcoming tasks. A change to the planned date does not change the deadline.
+    - The calendar and “My day” also show document completeness confirmations and tax payments with amounts. An existing open task prevents a second entry for the same obligation.
+
+- My work and company service
+    - We added a personal action queue for accounting office members: tasks, work for today, and document changes that need review. Each action identifies its company and period.
+    - We organized the Companies module with service progress, amounts, and company records in one place. Company details combine period work, schedules, results, and completed work.
+    - We added a view of missing document confirmations for a selected month. The office can review documents added or changed after an earlier review and decide what to do next.
+    - You can claim or block periods for several companies at once and enter completed services and amounts in bulk. Results identify successful saves and companies that need another attempt.
+    - We added CSV and Excel imports for taxes, income, and expenses, with a preview and confirmation before existing amounts change. Empty fields keep existing data; an entered zero saves a zero amount.
+
+- Office schedules and oversight
+    - We added schedule templates and service plans for individual companies. You can check dates and responsible roles before you create tasks.
+    - The “To review” view in Oversight brings together overdue tasks, blocks, missing items, and access requests. Filters and links lead to the correct company, person, and period.
+    - Team shows each employee's company portfolio, caretakers, substitutes, and items that need help. Service blocks appear separately from the company service stage.
+    - We added tutorials beside office modules and forms. An employee can accept an office invitation and enter the office before the first company assignment.
+
+- Time records
+    - We added a work timer and personal time history by company and task. You can also enter time manually and correct an entry in an open period.
+    - Office owners and administrators can review team time, active sessions, and correction history. Each correction requires a reason and keeps the previous values.
+    - We added monthly closure for time records and support for periods that reopen. Time from a closed month can feed office service settlements.
+
+- Office service billing
+    - We added a service catalog, price list templates, and company price lists. Each company price list has version history and a month from which a change applies.
+    - The “Services to settle” sheet accepts quantities and descriptions for several companies. Time records, imports, and manual entries keep their source information.
+    - We added a preview and confirmation before price terms apply to selected companies and open months. Local corrections remain until the user explicitly chooses to replace them.
+    - Settlements recalculate after input data changes. The view distinguishes current amounts, pending calculations, and failures that need another attempt. Approved amounts remain protected.
+    - You can review and approve invoice amounts in bulk. A calculation alone does not approve a settlement or issue an invoice.
+
+- Sales, orders, and VAT
+    - Orders show “Invoiced” and “Remaining” amounts. We added actions to issue a sales or final invoice and checks that prevent a second order closure.
+    - We improved advance and correction settlement on final invoices, including related document selection and VAT rounding differences. The form uses the correct payment and bank account settings.
+    - We added manual invoice number format editing and daily numbering alongside monthly and yearly numbering. The editor shows an example number and identifies missing format elements.
+    - We preserve source VAT amounts from invoices imported from KSeF. The expense editor lets you choose VAT from line items or the document summary and preview the effect.
+    - We fixed additional party data, foreign tax identifiers, and VAT rate descriptions. Each Sales tab remembers its own sort order.
+
+- Expenses and KSeF
+    - We added a SWIFT/BIC field and preserve bank details extracted from documents. Confirmation errors identify the fields that need correction.
+    - You can manually confirm an expense without a bank account number. The app explains when you need that number before payment preparation. We also fixed expense saves after a contractor becomes trusted.
+    - We restored workflow stage approval for posted invoices, subject to permissions. Accounting data remains protected from editing.
+    - We improved KSeF submission status checks, document metadata recovery, and advance settlement during import. We also read payment accounts from invoice footers.
+
+- Banks, reconciliation, and exports
+    - We fixed complete bank transaction retrieval and date ranges during synchronization. After bank authorization, the app refreshes the connection status and consent expiry date.
+    - We improved transaction matches for documents already marked as paid, without increasing their paid amount again. Outdated data has a clear message and a refresh action.
+    - We improved PDF statement details and balances, ISO 20022 payment files, and EDI++ exports with corrections, VAT rows, and KSeF data.
+    - The office can manage a client's Altera plan and permission for bank connections at the office's expense. The app explains missing permission before bank authorization.
+
+- Communication, access, and daily work
+    - Unread message counts reflect new messages and reads in another session without a manual refresh. Push notifications open the correct conversation or document.
+    - Monthly document handover confirmation shows the office message and a clear completion result. The company event log shows who made a change, when, and what changed.
+    - We added Microsoft account sign-in. We also fixed company changes from notifications and messages after access loss.
+    - We strengthened document preview protection and reduced diagnostic data. Expense splits and merges preserve document confidentiality.
+    - We fixed image previews, improved large image handling on Android, and added problem reports with attached screenshots on supported phones.
+
 ### 2.35.3 - 2026-09-14 - Invoice, reconciliation, and payment fixes
 This maintenance release focuses on correct document reconciliation, reliable data saving, and easier daily work.
 
