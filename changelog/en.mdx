@@ -3,7 +3,46 @@ title: EN - Changelog
 description: Track every Altera release with detailed notes on new features, improvements, KSeF updates, and bug fixes shipped across web and mobile apps.
 ---
 
-### 3.0.0 - A new look, tasks, and office work
+### 3.1.0 - 2026-11-27 - Office Communication, flexible approval workflows, and unified VAT summaries
+In Altera 3.1, we introduce the Communication module for accounting offices and a flexible expense approval workflow configurator. We also unify VAT summary handling, improve batched KSeF submissions, and refine desktop navigation across the app.
+
+- New Communication module in My Office
+    - We launched the Communication module, bringing conversations from all serviced companies into one workspace. Work queues and status filters make daily client follow-ups easier.
+    - We added separate reply and internal-note modes visible only to the office team, with rich formatting, attachments, and `@` mentions.
+    - We enabled live message updates across the app and added built-in step-by-step tutorials.
+
+- Flexible expense approval workflow and background posting
+    - We introduced a new approval workflow configurator organized into process, categories, limits, and rules. Changes can be prepared in a draft, tested on sample invoices, and previewed for impact on open documents before publication.
+    - We added approval workflow export and import between companies, plus quicker access to payment authorization settings.
+    - We redesigned the workflow panel in expense details: decisions and stages sit at the top, and history appears as a timeline. Bulk accounting posting now runs in the background and sends a summary notification once finished.
+
+- Expenses, VAT summaries, and document extraction
+    - We replaced the VAT source toggle with a single, consistent “VAT summary” table across expenses, sales, and exports. Discrepancies highlight the exact rate and line item (clicking jumps straight to the row) and distinguish VAT rounding from line-item mismatches.
+    - We organized the “To review” panel and OCR warnings: repeated alerts are grouped by section, VAT and bank messages are clearer, and detected buyer mismatches can be reviewed and explicitly confirmed.
+    - We improved extraction for annotated zero-VAT codes, Polish receipts with deposits, duplicate scans, and EU non-VAT certificates. We also restored merging items by VAT rate without altering invoice totals and hid redundant “Issued” and “Sent” badges on expense lists.
+
+- Sales, KSeF, and accounting exports
+    - We improved KSeF submissions: larger sets of invoices are sent in batches with automatic retries, and validation error messages are shorter and clearer.
+    - We migrated Polish VAT whitelist checks to the new Ministry of Finance API host and added contractor lookup from the MF VAT register whenever GUS is temporarily unavailable.
+    - We replaced automatic sales draft saving with an explicit “Save draft” button and an unsaved-changes prompt. We also improved exchange-rate handling on foreign-currency corrections and final invoices and added external contractor IDs (`%CID`) to invoice numbering.
+    - We added Fakt XML exports for sales and purchase invoices, JPK_FA(4) company settings, post-transaction balances in CSV bank statements, and company pairing for enova365 and Comarch ERP Optima.
+
+- Reconciliation and payments
+    - We added bank-fee suggestions and marking taxes, social security, and internal transfers as “No invoice required” without creating an expense.
+    - We streamlined the Reconciliation view, added a tutorial, and introduced a 30-day option to remember manual payment-status confirmation.
+    - In Payments, ELIXIR file encoding is remembered per bank account, KSeF identifiers are supported in transfers, and company bank accounts suggest names from the bank catalog.
+
+- My Office and Tasks
+    - We unified the header and filters across the Companies module and added columns and filters for Altera plans and Open Banking consent.
+    - In Company Schedules, we added pausing, resuming, and archiving task cycles with an impact preview before saving.
+    - We refreshed Office Settings, the billing panel, the “Fill values” and “Documents and changes” dialogs, and the “Required tasks” section with direct task takeover and completion from company details.
+
+- Interface, accounts, and Open API
+    - On desktop, we introduced horizontal tabs above module tables and inside document dialogs, moved document navigation to the top bar, and added switching between multiple signed-in accounts on one device.
+    - We expanded the Open API with bulk project and cost-category assignment, plus reading assigned tags and OCR status.
+    - We unified notices and banners and fixed issues including Windows web drag-and-drop and action menus over PDF previews.
+
+### 3.0.0 - 2026-11-05 - A new look, tasks, and office work
 Altera 3.0 updates the app design and connects daily company work with accounting office services. We add tasks, schedules, time records, and office service billing. We also improve document settlement, VAT amounts, and cooperation at the end of each month.
 
 - A new look and easier navigation

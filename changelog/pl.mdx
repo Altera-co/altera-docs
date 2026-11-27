@@ -3,7 +3,46 @@ title: PL - Dziennik Zmian
 description: "Pełna historia wydań Altera: nowe funkcje, usprawnienia KSeF, integracje bankowe, poprawki w aplikacji webowej i mobilnej. Sprawdź, co się zmieniło."
 ---
 
-### 3.0.0 - Nowy wygląd, zadania i praca biura
+### 3.1.0 - 2026-11-27 - Komunikacja w Moim Biurze, nowy e-Obieg i czytelniejszy VAT
+W Altera 3.1 udostępniamy moduł Komunikacja dla biur rachunkowych oraz elastyczny konfigurator e-Obiegu kosztów. Ujednolicamy obsługę podsumowań VAT, usprawniamy wysyłkę paczek do KSeF i porządkujemy nawigację w całej aplikacji.
+
+- Nowy moduł Komunikacja w Moim Biurze
+    - Udostępniliśmy moduł Komunikacja, który zbiera rozmowy ze wszystkich obsługiwanych firm w jednym widoku. Kolejki spraw i filtry statusu ułatwiają codzienne pilnowanie odpowiedzi dla klientów.
+    - Dodaliśmy osobne tryby odpowiedzi i notatek wewnętrznych widocznych wyłącznie dla zespołu biura, z obsługą formatowania, załączników oraz oznaczania współpracowników przez `@`.
+    - Przyspieszyliśmy dostarczanie nowych wiadomości na żywo w całej aplikacji i dodaliśmy wbudowane samouczki krok po kroku.
+
+- Elastyczny e-Obieg kosztów i szybsza dekretacja
+    - Wprowadziliśmy nowy konfigurator e-Obiegu z podziałem na proces, kategorie, limity i zasady. Zmiany przygotujesz na szkicu, przetestujesz na przykładowej fakturze i sprawdzisz ich wpływ na otwarte dokumenty przed publikacją.
+    - Dodaliśmy eksport i import konfiguracji e-Obiegu między firmami oraz szybszy dostęp do ustawień autoryzacji płatności.
+    - Odświeżyliśmy panel e-Obiegu w szczegółach kosztu: decyzje i etapy są na górze, a historia ma postać osi czasu. Zbiorcza dekretacja kosztów działa teraz w tle i po zakończeniu wysyła powiadomienie z podsumowaniem.
+
+- Koszty, podsumowanie VAT i odczyt dokumentów
+    - Zastąpiliśmy przełącznik źródła VAT jedną, spójną tabelą „Podsumowanie VAT” w kosztach, sprzedaży i eksportach. Przy rozbieżnościach wskazujemy konkretną stawkę i pozycję (kliknięcie przenosi do wiersza) oraz odróżniamy zaokrąglenia VAT od niezgodności z pozycjami.
+    - Uporządkowaliśmy panel „Do sprawdzenia” i uwagi OCR. Powtarzające się ostrzeżenia są zgrupowane według sekcji, komunikaty o VAT i rachunkach są bardziej precyzyjne, a wykrytą niezgodność nabywcy można świadomie potwierdzić.
+    - Poprawiliśmy odczyt dokumentów ze stawkami zerowymi, paragonów z zaliczkami, duplikatów skanów oraz unijnych zaświadczeń bez VAT. Przywróciliśmy scalanie pozycji według stawek VAT bez zmiany kwot faktury i ukryliśmy zbędne etykiety „Wystawiona” oraz „Wysłana” na listach kosztów.
+
+- Sprzedaż, KSeF i eksporty księgowe
+    - Usprawniliśmy wysyłkę do KSeF: większe partie faktur trafiają w paczkach z automatycznym wznawianiem po błędach, a komunikaty błędów walidacji są krótsze i bardziej czytelne.
+    - Przełączyliśmy białą listę VAT na nowy adres Ministerstwa Finansów i dodaliśmy pobieranie danych kontrahenta z rejestru MF, gdy GUS jest chwilowo niedostępny.
+    - Zastąpiliśmy automatyczny zapis szkiców faktur sprzedaży przyciskiem „Zapisz szkic” z ostrzeżeniem o niezapisanych zmianach. Poprawiliśmy obsługę kursów walut w korektach i fakturach końcowych oraz dodaliśmy zewnętrzny identyfikator kontrahenta (`%CID`) w numeracji.
+    - Dodaliśmy eksport Fakt XML (sprzedaż i koszty), ustawienia JPK_FA(4), saldo po transakcji w wyciągach CSV oraz parowanie firmy z enova365 i Comarch ERP Optima.
+
+- Rozrachunki i płatności
+    - Dodaliśmy podpowiedzi opłat bankowych oraz oznaczanie podatków, ZUS i przelewów własnych jako „Nie wymaga faktury”, bez tworzenia osobnego kosztu.
+    - Uprościliśmy widok Rozrachunków, dodaliśmy samouczek oraz możliwość zapamiętania potwierdzenia zmiany ręcznego statusu płatności na 30 dni.
+    - W Płatnościach zapamiętujemy kodowanie plików ELIXIR dla wybranego rachunku i obsługujemy identyfikatory KSeF w przelewach, a przy rachunkach firmowych podpowiadamy nazwę banku z katalogu.
+
+- Moje Biuro i Zadania
+    - Ujednoliciliśmy nagłówek i filtry w module Firmy oraz dodaliśmy kolumny i filtry pakietu Altera oraz zgody na Open Banking.
+    - W Harmonogramie firmy dodaliśmy wstrzymywanie, wznawianie i archiwizację cykli zadań z podglądem skutków przed zapisem.
+    - Odświeżyliśmy Ustawienia biura, panel fakturowania, okna „Uzupełnij wartości” i „Dokumenty i zmiany” oraz sekcję „Zadania wymagane” z możliwością przejęcia i zakończenia zadania bezpośrednio z widoku firmy.
+
+- Interfejs, konta i Open API
+    - Na komputerze wprowadziliśmy poziome zakładki nad tabelami modułów i w oknach dokumentów, przenieśliśmy nawigację między dokumentami na górny pasek oraz dodaliśmy przełączanie między kilkoma zapisanymi kontami na jednym urządzeniu.
+    - Rozszerzyliśmy Open API o zbiorcze przypisywanie projektów i kategorii kosztów oraz odczyt przypisanych tagów i statusu OCR.
+    - Ujednoliciliśmy wygląd komunikatów i banerów oraz poprawiliśmy m.in. przeciąganie plików na Windows i działanie menu akcji nad podglądem PDF.
+
+### 3.0.0 - 2026-11-05 - Nowy wygląd, zadania i praca biura
 W Altera 3.0 odświeżamy wygląd aplikacji i łączymy codzienną pracę firmy z obsługą biura rachunkowego. Dodajemy zadania, harmonogramy, ewidencję czasu i fakturowanie usług biura. Usprawniamy też rozliczanie dokumentów, obsługę VAT i współpracę przy zamykaniu miesiąca.
 
 - Nowy wygląd i wygodniejsza nawigacja
