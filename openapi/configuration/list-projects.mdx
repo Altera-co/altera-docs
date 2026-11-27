@@ -1,6 +1,6 @@
 ---
 openapi: get /company/projects
-description: "List company projects and obtain the project object needed to assign a sales invoice."
+description: "List company projects for sales invoice and expense assignments."
 ---
 
 The endpoint returns projects for the company associated with your `Authorization` API key. You do not need to send a `companyId`.
@@ -10,6 +10,10 @@ The endpoint returns projects for the company associated with your `Authorizatio
 `GET /company/projects` returns active and disabled projects. Use `GET /company/projects?onlyActive=1` to return only active projects; omitting the filter or using `onlyActive=0` includes disabled projects.
 
 Each item in `data` contains `tagId`, `name`, `enabled` and `color`. `tagId` identifies the project, and `color` is its numeric ARGB value. When no projects match, the response is `{ "result": "OK", "data": [] }`.
+
+## Assign a project to existing documents
+
+Use the active project's `tagId` as `tag` in `POST /invoices/projects` for sales invoices or `POST /expenses/projects` for expenses. For example, `{"invoiceIds":[101,102],"tag":123}` assigns project `123` to both selected documents. Set `tag` to `null` to clear the project.
 
 ## Assign Grow to a draft invoice
 

@@ -2542,6 +2542,46 @@
             },
             "parameters": []
         },
+        "/invoices/projects": {
+            "post": {
+                "operationId": "updateSalesInvoiceProjects",
+                "summary": "Set the project on selected sales invoices",
+                "description": "Requires the projects entitlement. Sets the same project on every selected sales\ninvoice header and line item in a single transaction.\n",
+                "tags": [
+                    "Sales"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProjectBatchUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/InvoiceBatchUpdated"
+                    },
+                    "400": {
+                        "description": "Invalid input or a project outside the company's active catalog. The entire batch is rejected."
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/OpenApiAuthorizationRequired"
+                    },
+                    "402": {
+                        "description": "The company's subscription does not include projects."
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/OpenApiAccessDenied"
+                    },
+                    "404": {
+                        "description": "At least one ID does not identify an undeleted sales invoice in the API key's company."
+                    }
+                }
+            }
+        },
         "/sales/markPaid": {
             "parameters": [],
             "post": {
@@ -2796,6 +2836,24 @@
                     "Expenses"
                 ],
                 "parameters": [
+                    {
+                        "name": "costCenterIsEmpty",
+                        "in": "query",
+                        "description": "Filter to expense headers with neither a main category nor a subcategory.",
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    {
+                        "name": "projectIsEmpty",
+                        "in": "query",
+                        "description": "Filter to expense headers without a project.",
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
                     {
                         "schema": {
                             "type": "string",
@@ -3127,7 +3185,7 @@
                         "Authorization": []
                     }
                 ],
-                "description": "Gets a list of expense invoices imported into the system for your company."
+                "description": "Gets a list of expense invoices imported into the API key's company, including private expenses."
             },
             "parameters": []
         },
@@ -3274,6 +3332,328 @@
                 }
             },
             "parameters": []
+        },
+        "/expenses/tags/{invoiceId}": {
+            "get": {
+                "operationId": "getExpenseTags",
+                "summary": "Read an expense's OCR status and assigned tags",
+                "description": "Returns the latest OCR job status and the current category, subcategory and project from the expense header.",
+                "tags": [
+                    "Expenses"
+                ],
+                "parameters": [
+                    {
+                        "name": "invoiceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 9007199254740991
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OCR status and tag assignments.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "result",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "result": {
+                                            "type": "string",
+                                            "enum": [
+                                                "OK"
+                                            ]
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "required": [
+                                                "ocrStatus",
+                                                "costCenter",
+                                                "costCenter2",
+                                                "project"
+                                            ],
+                                            "properties": {
+                                                "ocrStatus": {
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Latest job status, or null when no OCR job exists for the expense.",
+                                                    "example": "COMPLETED"
+                                                },
+                                                "costCenter": {
+                                                    "$ref": "#/components/schemas/AssignedExpenseTag"
+                                                },
+                                                "costCenter2": {
+                                                    "$ref": "#/components/schemas/AssignedExpenseTag"
+                                                },
+                                                "project": {
+                                                    "$ref": "#/components/schemas/AssignedExpenseTag"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "result": "OK",
+                                    "data": {
+                                        "ocrStatus": "COMPLETED",
+                                        "costCenter": {
+                                            "tagId": 6,
+                                            "name": "Travel"
+                                        },
+                                        "costCenter2": null,
+                                        "project": {
+                                            "tagId": 9,
+                                            "name": "Field service"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid expense ID."
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/OpenApiAuthorizationRequired"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/OpenApiAccessDenied"
+                    },
+                    "404": {
+                        "description": "No expense with this ID in the API key's company, or the expense was deleted."
+                    }
+                }
+            }
+        },
+        "/expenses/costCenters": {
+            "post": {
+                "operationId": "updateExpenseCostCenters",
+                "summary": "Set the cost category on selected expenses",
+                "description": "Requires the advancedCostCenters entitlement. Sets the same main category and\noptional subcategory on every expense header and line item in a single transaction.\nCompanies with an active rules-based approval workflow are limited to 20 expenses per batch.\n",
+                "tags": [
+                    "Expenses"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                    "invoiceIds",
+                                    "tag"
+                                ],
+                                "properties": {
+                                    "invoiceIds": {
+                                        "type": "array",
+                                        "minItems": 1,
+                                        "maxItems": 100,
+                                        "items": {
+                                            "type": "integer",
+                                            "minimum": 1,
+                                            "maximum": 9007199254740991
+                                        }
+                                    },
+                                    "tag": {
+                                        "type": [
+                                            "integer",
+                                            "null"
+                                        ],
+                                        "minimum": 1,
+                                        "maximum": 9007199254740991,
+                                        "description": "Active main category ID. Set to null to clear both category levels."
+                                    },
+                                    "tag2": {
+                                        "type": [
+                                            "integer",
+                                            "null"
+                                        ],
+                                        "minimum": 1,
+                                        "maximum": 9007199254740991,
+                                        "default": null,
+                                        "description": "Active child of tag. Omit it or pass null to clear the subcategory."
+                                    },
+                                    "workflowEditConfirmations": {
+                                        "type": "object",
+                                        "description": "Map from invoice ID to confirmation returned in details.invoices when the category change needs approval to restart. Keys match `^[1-9][0-9]*$`, for example `\"101\"`.",
+                                        "propertyNames": {
+                                            "pattern": "^[1-9][0-9]*$"
+                                        },
+                                        "additionalProperties": {
+                                            "type": "string",
+                                            "pattern": "^[a-f0-9]{64}$"
+                                        }
+                                    }
+                                },
+                                "not": {
+                                    "type": "object",
+                                    "required": [
+                                        "tag2"
+                                    ],
+                                    "properties": {
+                                        "tag": {
+                                            "type": "null"
+                                        },
+                                        "tag2": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "setCategory": {
+                                    "value": {
+                                        "invoiceIds": [
+                                            101,
+                                            102
+                                        ],
+                                        "tag": 6,
+                                        "tag2": 7
+                                    }
+                                },
+                                "confirmWorkflowEdit": {
+                                    "value": {
+                                        "invoiceIds": [
+                                            101
+                                        ],
+                                        "tag": 6,
+                                        "tag2": 7,
+                                        "workflowEditConfirmations": {
+                                            "101": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/InvoiceBatchUpdated"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/InvalidExpenseClassification"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/OpenApiAuthorizationRequired"
+                    },
+                    "402": {
+                        "description": "The company's subscription does not include advancedCostCenters."
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/OpenApiAccessDenied"
+                    },
+                    "404": {
+                        "description": "At least one ID does not identify an expense in the company."
+                    },
+                    "409": {
+                        "description": "Workflow conflict. WORKFLOW_EDIT_CONFIRMATION_REQUIRED returns confirmation tokens\nin details.invoices. To confirm, retry the same batch with workflowEditConfirmations.\nWORKFLOW_BATCH_TOO_LARGE returns the allowed batch size in details.maximum.\nWORKFLOW_CONFIG_PENDING means a workflow configuration operation is processing an expense in the batch.\nRetry after the operation finishes. Confirmation tokens apply only to WORKFLOW_EDIT_CONFIRMATION_REQUIRED.\nOn WORKFLOW_CONFLICT, read the current expense state before retrying.\nThe transaction is rolled back on a conflict.\n",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExpenseClassificationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/expenses/projects": {
+            "post": {
+                "operationId": "updateExpenseProjects",
+                "summary": "Set the project on selected expenses",
+                "description": "Requires the projects entitlement. Sets the same project on every expense header\nand line item in a single transaction.\n",
+                "tags": [
+                    "Expenses"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProjectBatchUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/InvoiceBatchUpdated"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/InvalidExpenseClassification"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/OpenApiAuthorizationRequired"
+                    },
+                    "402": {
+                        "description": "The company's subscription does not include projects."
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/OpenApiAccessDenied"
+                    },
+                    "404": {
+                        "description": "At least one ID does not identify an expense in the company."
+                    }
+                }
+            }
+        },
+        "/company/costCenters": {
+            "get": {
+                "operationId": "listActiveCostCenters",
+                "summary": "List active cost categories",
+                "description": "Returns the company's active main categories and subcategories under active parents.",
+                "tags": [
+                    "Configuration"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Active cost categories, including an empty list when none exist.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "required": [
+                                        "result",
+                                        "data"
+                                    ],
+                                    "properties": {
+                                        "result": {
+                                            "type": "string",
+                                            "enum": [
+                                                "OK"
+                                            ]
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ActiveCostCenter"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/OpenApiAuthorizationRequired"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/OpenApiAccessDenied"
+                    }
+                }
+            }
         },
         "/company/contractors": {
             "parameters": [],
@@ -4359,6 +4739,177 @@
     },
     "components": {
         "schemas": {
+            "ProjectBatchUpdate": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "invoiceIds",
+                    "tag"
+                ],
+                "properties": {
+                    "invoiceIds": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 100,
+                        "items": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 9007199254740991
+                        }
+                    },
+                    "tag": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "minimum": 1,
+                        "maximum": 9007199254740991,
+                        "description": "Active project ID from GET /company/projects?onlyActive=1. Set to null to clear the project."
+                    }
+                },
+                "example": {
+                    "invoiceIds": [
+                        101,
+                        102
+                    ],
+                    "tag": 9
+                }
+            },
+            "InvoiceBatchResult": {
+                "type": "object",
+                "required": [
+                    "result",
+                    "data"
+                ],
+                "properties": {
+                    "result": {
+                        "type": "string",
+                        "enum": [
+                            "OK"
+                        ]
+                    },
+                    "data": {
+                        "type": "object",
+                        "required": [
+                            "processed",
+                            "rejected"
+                        ],
+                        "properties": {
+                            "processed": {
+                                "type": "array",
+                                "description": "Each processed invoice ID appears once, in the order of its first occurrence in the request.",
+                                "uniqueItems": true,
+                                "items": {
+                                    "type": "integer",
+                                    "minimum": 1
+                                }
+                            },
+                            "rejected": {
+                                "type": "array",
+                                "maxItems": 0,
+                                "items": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ExpenseClassificationError": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string",
+                        "enum": [
+                            "Error"
+                        ]
+                    },
+                    "errorCode": {
+                        "type": "string"
+                    },
+                    "errorMessage": {
+                        "type": "string"
+                    },
+                    "errorMessagePL": {
+                        "type": "string"
+                    },
+                    "details": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "properties": {
+                            "invoices": {
+                                "type": "array",
+                                "description": "Present when the category change needs explicit workflow confirmation.",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "invoiceId",
+                                        "confirmation"
+                                    ],
+                                    "properties": {
+                                        "invoiceId": {
+                                            "type": "integer",
+                                            "minimum": 1
+                                        },
+                                        "confirmation": {
+                                            "type": "string",
+                                            "pattern": "^[a-f0-9]{64}$"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ActiveCostCenter": {
+                "type": "object",
+                "required": [
+                    "tagId",
+                    "name",
+                    "parentId"
+                ],
+                "properties": {
+                    "tagId": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "parentId": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "minimum": 1
+                    }
+                }
+            },
+            "AssignedExpenseTag": {
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "description": "Null when unassigned. Existing assignments can refer to archived tags.",
+                "required": [
+                    "tagId",
+                    "name"
+                ],
+                "properties": {
+                    "tagId": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "name": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Null when the assigned ID has no matching entry in the company's catalog."
+                    }
+                }
+            },
             "ErrorResponse": {
                 "type": "object",
                 "x-examples": {
@@ -5666,6 +6217,34 @@
                 ],
                 "title": "",
                 "description": ""
+            }
+        },
+        "responses": {
+            "OpenApiAuthorizationRequired": {
+                "description": "The Authorization header is missing, or a verified key has expired (KEY_EXPIRED)."
+            },
+            "OpenApiAccessDenied": {
+                "description": "The API key is invalid or the company does not have OpenAPI access."
+            },
+            "InvoiceBatchUpdated": {
+                "description": "Every selected document was updated.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/InvoiceBatchResult"
+                        }
+                    }
+                }
+            },
+            "InvalidExpenseClassification": {
+                "description": "Invalid input, unavailable classification, or a locked expense. The entire batch is rejected.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/ExpenseClassificationError"
+                        }
+                    }
+                }
             }
         },
         "securitySchemes": {
